@@ -6,98 +6,59 @@
 /*   By: rgermain <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/11/11 15:09:25 by rgermain     #+#   ##    ##    #+#       */
-/*   Updated: 2018/11/16 09:25:32 by rgermain    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/11/20 16:54:39 by rgermain    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int		*ft_main_params2(t_valst *lst_va, char *str, int *tab_i, int index)
+int		ft_dprintf(int fd, const char *format, ...)
 {
-	int t_index;
-
-	t_index = index;
-	if (str[tab_i[0] + index] == '+' || str[tab_i[0] + index] == '-')
-		index++;
-	else if (str[tab_i[0] + index] == '.')
-		index++;
-	else if (str[tab_i[0] + index] == '#')
-		index++;
-	else if (str[tab_i[0] + index] == '$')
-		index++;
-	else if (str[tab_i[0] + index] == '*')
-		index++;
-	else if (str[tab_i[0] + index] == ' ')
-		index++;
-	while (ft_isdigit(str[tab_i[0] + index]))
-		index++;
-	if (t_index != index)
-		tab_i = (ft_main_params(lst_va, str, tab_i, index));
-	else if (t_index == index)
-		tab_i[0] += index;
-	return (tab_i);
-}
-
-int		*ft_main_params(t_valst *lst_va, char *str, int *tab_i, int index)
-{
-	if (str[tab_i[0] + index] == 'd' || str[tab_i[0] + index] == 'i' || str[tab_i[0] + index] == 'I')
-		tab_i = ft_params_d(lst_va, str, tab_i, index);
-	else if (str[tab_i[0] + index] == 'D')
-		tab_i = ft_params_d2(lst_va, str, tab_i, index);
-	else if (str[tab_i[0] + index] == 'o'|| str[tab_i[0] + index] == 'O')
-		tab_i = ft_params_o(lst_va, str, tab_i, index);
-	else if (str[tab_i[0] + index] == 'c'|| str[tab_i[0] + index] == 'C')
-		tab_i = ft_params_c(lst_va, str, tab_i, index);
-	else if (str[tab_i[0] + index] == 's'|| str[tab_i[0] + index] == 'S')
-		tab_i = ft_params_s(lst_va, str, tab_i, index);
-	else if (str[tab_i[0] + index] == 'p'|| str[tab_i[0] + index] == 'P')
-		tab_i = ft_params_p(lst_va, str, tab_i, index);
-	else if (str[tab_i[0] + index] == 'x'|| str[tab_i[0] + index] == 'X')
-		tab_i = ft_params_x(lst_va, str, tab_i, index);
-	else if (str[tab_i[0] + index] == 'u')
-		tab_i = ft_params_u(lst_va, str, tab_i, index);
-	else if (str[tab_i[0] + index] == 'U')
-		tab_i = ft_params_u2(lst_va, str, tab_i, index);
-	else if (str[tab_i[0] + index] == '%')
-		tab_i = ft_params_perc(lst_va, str, tab_i, index);
-	else if (str[tab_i[0] + index] == 'l' && str[tab_i[0] + index + 1] == 'd')
-		tab_i = ft_params_d2(lst_va, str, tab_i, index + 1);
-	else if (str[tab_i[0] + index] == 'l' && str[tab_i[0] + index + 1] == 'i')
-		tab_i = ft_params_d2(lst_va, str, tab_i, index + 1);
-	else if (str[tab_i[0] + index] == 'l' && str[tab_i[0] + index + 1] == 'u')
-		tab_i = ft_params_u2(lst_va, str, tab_i, index + 1);
-	else if (str[tab_i[0] + index] == 'l' && str[tab_i[0] + index + 1] == 'o')
-		tab_i = ft_params_o2(lst_va, str, tab_i, index + 1);
-	else if (str[tab_i[0] + index] == 'l' && (str[tab_i[0] + index + 1] == 'x' ||
-				str[tab_i[0] + index + 1] == 'X'))
-		tab_i = ft_params_x2(lst_va, str, tab_i, index + 1);
-	else
-		tab_i = ft_main_params2(lst_va, str, tab_i, index);
-	return (tab_i);
-}
-
-int		ft_printf(const char *format, ...)
-{
-	va_list		l_va;
 	t_valst		*lst_va;
 	int			*tab_i;
 
-	va_start(l_va, format);
-	lst_va = malloc(sizeof(t_valst));
-	va_copy(lst_va->lst_va, l_va);
-	lst_va = ft_lst_init2(lst_va, 0, 0);
-	tab_i = tab_2_init();
+	if (!(lst_va = malloc(sizeof(t_valst))))
+		return (0);
+	va_start(lst_va->lst_va, format);
+	lst_va = lst_init2(lst_va, 0, 0);
+	lst_va->fd = fd;
+	tab_i = init_tab2();
 	while (format[tab_i[0]] != '\0')
 	{
 		if (format[tab_i[0]] == '%')
-			tab_i = ft_main_params(lst_va, (char*)format, tab_i, 1);
+			tab_i = ft_conv(lst_va, (char*)format, tab_i, 1);
 		else
 		{
 			ft_putchar(format[tab_i[0]++]);
 			tab_i[1]++;
 		}
 	}
-	va_end(l_va);
+	va_end(lst_va->lst_va);
+	return (tab_i[1]);
+}
+
+int		ft_printf(const char *format, ...)
+{
+	t_valst		*lst_va;
+	int			*tab_i;
+
+	if (!(lst_va = malloc(sizeof(t_valst))))
+		return (0);
+	va_start(lst_va->lst_va, format);
+	lst_va = lst_init2(lst_va, 0, 0);
+	lst_va->fd = 1;
+	tab_i = init_tab2();
+	while (format[tab_i[0]] != '\0')
+	{
+		if (format[tab_i[0]] == '%')
+			tab_i = ft_conv(lst_va, (char*)format, tab_i, 1);
+		else
+		{
+			ft_putchar(format[tab_i[0]++]);
+			tab_i[1]++;
+		}
+	}
+	va_end(lst_va->lst_va);
 	return (tab_i[1]);
 }

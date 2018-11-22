@@ -1,52 +1,40 @@
 /* ************************************************************************** */
 /*                                                          LE - /            */
 /*                                                              /             */
-/*   main.c                                           .::    .:/ .      .::   */
+/*   utils.c                                          .::    .:/ .      .::   */
 /*                                                 +:+:+   +:    +:  +:+:+    */
 /*   By: rgermain <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
-/*   Created: 2018/11/09 15:39:07 by rgermain     #+#   ##    ##    #+#       */
-/*   Updated: 2018/11/20 22:11:46 by rgermain    ###    #+. /#+    ###.fr     */
+/*   Created: 2018/11/12 12:39:33 by rgermain     #+#   ##    ##    #+#       */
+/*   Updated: 2018/11/20 21:50:23 by rgermain    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int		main(int argc, char **argv)
+int			*init_tab2(void)
 {
-	int		a;
-	int		i;
-	int		j;
-	char	*s;
+	int	*total;
 
-	i = 5236;
-	j = 5236;
-	s = "coucou c4est moi";
-	if (argc == 2)
-	{
-		a = printf("pf %.4s\n", s);
-		printf("pf %d\n", a);
-		a = ft_printf("ft %.4s\n", s);
-		printf("ft %d\n", a);
-//		a = printf("pf %-03d, %-08.25d\n", 0, j);
-//		a = printf("pf = %d\n", a);
-//		a = ft_printf("ft %-03d, %-08.25d\n", 0, j);
-//		a = printf("ft = %d\n", a);
-	}
-	return (0);
+	if (!(total = (int*)malloc(sizeof(int) * 2)))
+		exit(0);
+	total[0] = 0;
+	total[1] = 0;
+	return (total);
 }
 
-/*		
-a = ft_printf("%.59d, %059d\n", i, j);
+t_valst		*lst_init2(t_valst *lst_va, int nb, int index)
+{
+	int		count;
 
-
-
-
-
-
-
-
-
-
-*/
+	count = 0;
+	if (index == 0)
+		va_copy(lst_va->lst_copy, lst_va->lst_va);
+	while (count < (nb - 1))
+	{
+		va_arg(lst_va->lst_copy, int);
+		count++;
+	}
+	return (lst_va);
+}
