@@ -6,54 +6,60 @@
 /*   By: rgermain <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/11/12 12:38:05 by rgermain     #+#   ##    ##    #+#       */
-/*   Updated: 2018/11/23 22:17:53 by rgermain    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/11/20 22:05:37 by rgermain    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
+static int	ft_prefix(int len, int nb, int point)
+{
+	int count;
+
+	count = 0;
+	while (len < nb)
+	{
+		if (point == 1)
+			ft_putchar('0');
+		else
+			ft_putchar(' ');
+		count++;
+		nb--;
+	}
+	return (count);
+}
+
 static int	ft_option_neg(t_option *lst, char *new, int count)
 {
 	int len;
-	int max;
-	int min;
 
 	len = ft_strlen(new);
-	max = ft_max2(len, lst->af_nb);
-	min = ft_min2(len, lst->af_nb);
-	if (lst->point == 1)
-	{
-		count += ft_putnstr(new, lst->af_nb);
-		count += ft_print_prefix(min, lst->bf_nb, 0);
-	}
-	else
-	{
+	if (lst->point == 0)
 		count += ft_putstr(new);
-		count += ft_print_prefix(max, lst->bf_nb, 0);
-	}
+	else
+		count += ft_putnstr(new, lst->af_nb);
+	len = ft_strlen(new);
+	if (lst->point == 1)
+		count += ft_prefix(ft_nbmin(lst->af_nb, len), lst->bf_nb, 0);
+	else
+		count += ft_prefix(ft_nbmax(lst->af_nb, len), lst->bf_nb, 0);
 	return (count);
 }
 
 static int	ft_option_pos(t_option *lst, char *new, int count)
 {
 	int len;
-	int max;
-	int min;
 
 	len = ft_strlen(new);
-	max = ft_max2(len, lst->af_nb);
-	min = ft_min2(len, lst->af_nb);
 	if (lst->point == 1)
-	{
-		count += ft_print_prefix(min, lst->bf_nb, lst->bf_zero);
-		count += ft_putnstr(new, lst->af_nb);
-	}
+		count += ft_prefix(ft_nbmin(lst->af_nb, len), lst->bf_nb, lst->bf_zero);
 	else
-	{
-		count += ft_print_prefix(max, lst->bf_nb, lst->bf_zero);
+		count += ft_prefix(ft_nbmax(lst->af_nb, len), lst->bf_nb, lst->bf_zero);
+	if (lst->point == 0)
 		count += ft_putstr(new);
-	}
+	else
+		count += ft_putnstr(new, lst->af_nb);
 	return (count);
 }
 
@@ -61,33 +67,27 @@ int			ft_option_s(t_valst *lst_va, char *str, int count, int index)
 {
 	t_option	*lst;
 	char		*new;
-	int			len;
+	int			nb;
 
-	len = 0;
 	lst = ft_put_option(str, count, index);
+	count = 0;
 	if (lst->dollar == 1)
-		lst_va = lst_init2(lst_va, lst->dollar_nb, 0);
-	ft_option_star(lst_va, lst);
-	new = va_arg(lst_va->lst_copy, char*);
+		lst_va = ft_lst_init2(lst_va, lst->dollar_nb, 0);
 	if (lst->space == 1 && lst->sign == 0
-			&& lst->af_nb == 0 && lst->af_nb == 0)
+			&& lst->af_nb == 0 && lst->bf_nb == 0)
+		count += ft_prefix(0, 1, 0);
+	if (lst->star == 1)
 	{
-		lst->bf_nb--;
-		len += ft_print_prefix(0, 1, 0);
+		nb = va_arg(lst_va->lst_copy, int);
+		if (nb > lst->bf_nb && nb != 0)
+			lst->bf_nb = nb;
 	}
-	lst->af_nb = ft_abs(lst->af_nb);
+	new = va_arg(lst_va->lst_copy, char*);
 	if (new == NULL)
 		new = "(null)";
 	if (lst->sign != '-')
-		len += ft_option_pos(lst, new, 0);
+		count += ft_option_pos(lst, new, 0);
 	else
-		len += ft_option_neg(lst, new, 0);
-	return (len);
-}
-
-int			*ft_params_s(t_valst *lst_va, char *str, int *tab_i, int index)
-{
-	tab_i[1] += ft_option_s(lst_va, str, tab_i[0], index);
-	tab_i[0] = ((tab_i[0] + index) + 1);
-	return (tab_i);
+		count += ft_option_neg(lst, new, 0);
+	return (count);
 }

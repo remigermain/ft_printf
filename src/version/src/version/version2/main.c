@@ -6,55 +6,34 @@
 /*   By: rgermain <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/11/09 15:39:07 by rgermain     #+#   ##    ##    #+#       */
-/*   Updated: 2018/11/23 22:08:03 by rgermain    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/11/13 22:14:52 by rgermain    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
+#include <stdio.h>
 #include "ft_printf.h"
 
 int		main(int argc, char **argv)
 {
-	int		a;
-	int		i;
-	int		j;
-	char	*s;
+	int a;
 
-	i = 5236;
-	j = 5236;
-	s = "coucou c4est moi";
+	a = 0;
+	ft_atoi(argv[0]);
+	//argv[1] = NULL;
 	if (argc == 2)
 	{
-//		a = printf("pf %.5p\n", 0);
-//		a = printf("pf %.0p, %.p\n", 0, 0);
-//		a = printf("pf {%3*p}\n", 10, 0);		
-//		a = printf("pf %2.9p\n", 123458888);
-		a = printf("pf %9.2p\n", 1234);
-		printf("pf %d\n", a);
-//		a = ft_printf("ft %.5p\n", 0);
-//		a = ft_printf("ft %.0p, %.p\n", 0, 0);
-//		a = ft_printf("ft %2.9p\n", 123458888);
-		a = ft_printf("ft %9.2p\n",1234);
-//		a = ft_printf("ft {%3*p}\n", 10, 0);		
-		printf("ft %d\n", a);
-//		a = printf("pf %-03d, %-08.25d\n", 0, j);
-//		a = printf("pf = %d\n", a);
-//		a = ft_printf("ft %-03d, %-08.25d\n", 0, j);
-//		a = printf("ft = %d\n", a);
+	//	a = printf("bonjour %d  %3$d  %1$s  %d pop\n", 90, 42, 48);
+	//	printf("%d\n", a);
+		//a = ft_printf("bonjour  % d   pop\n", 90);
+		a = ft_printf("bonjour %d  %d  %d pop\n", 90, 4, 48);
+	//	printf("%d\n", a);
+	//	a = ft_printf("bonjour  %- 199.d   pop\n", -4299);
+	//	printf("%d\n", a);
+//		a = printf("bonjour  %-d   pop\n", -4299);
+//		printf("%d\n", a);
+	//	a = ft_printf("bonjour  % d   pop\n", 4299);
+	//	ft_printf("%d\n", a);
 	}
 	return (0);
 }
-
-/*		
-a = ft_printf("%.59d, %059d\n", i, j);
-
-
-
-
-
-
-
-
-
-
-*/
