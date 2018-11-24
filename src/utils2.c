@@ -6,7 +6,7 @@
 /*   By: rgermain <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/11/20 16:06:08 by rgermain     #+#   ##    ##    #+#       */
-/*   Updated: 2018/11/23 20:39:26 by rgermain    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/11/24 12:08:05 by rgermain    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -28,6 +28,14 @@ int		ft_print_prefix(int len, int nb, int point)
 		nb--;
 	}
 	return (count);
+}
+
+void	ft_print_lsign(long nb, int sign)
+{
+	if (nb < 0)
+		ft_putchar('-');
+	else if (nb >= 0 && sign == '+')
+		ft_putchar('+');
 }
 
 void	ft_print_sign(int nb, int sign)

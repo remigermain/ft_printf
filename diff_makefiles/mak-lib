@@ -6,7 +6,7 @@
 #    By: rgermain <marvin@le-101.fr>                +:+   +:    +:    +:+      #
 #                                                  #+#   #+    #+    #+#       #
 #    Created: 2018/10/01 15:39:03 by rgermain     #+#   ##    ##    #+#        #
-#    Updated: 2018/11/23 21:06:50 by rgermain    ###    #+. /#+    ###.fr      #
+#    Updated: 2018/11/24 10:48:24 by rgermain    ###    #+. /#+    ###.fr      #
 #                                                          /                   #
 #                                                         /                    #
 # **************************************************************************** #
@@ -20,8 +20,10 @@ INCLUDE = -Iincludes
 
 CINC = includes/ft_printf.h libft/includes/libft.h
 
-SRC = ft_printf.c ft_conv.c utils.c utils2.c utils3.c \
-	ft_option_s.c ft_option_c.c ft_option_p.c ft_option_d.c
+SRC = 	ft_conv.c ft_option_lo.c ft_option_o.c ft_option_x.c utils.c \
+	ft_option_c.c ft_option_lu.c ft_option_p.c ft_option_xmaj.c utils2.c \
+	ft_option_d.c ft_option_lx.c ft_option_s.c ft_printf.c utils3.c \
+	ft_option_dl.c ft_option_lxmaj.c ft_option_u.c main.c 
 
 OBJ = $(SRC:.c=.o)
 
