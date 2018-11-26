@@ -6,7 +6,7 @@
 /*   By: rgermain <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/11/09 15:34:47 by rgermain     #+#   ##    ##    #+#       */
-/*   Updated: 2018/11/26 18:31:16 by rgermain    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/11/26 18:46:14 by rgermain    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -127,6 +127,9 @@ int		ft_option_llx(t_valst *lst_va, char *str, int count, int index);
 
 int		*ft_params_llxmaj(t_valst *lst_va, char *str, int *tab_i, int index);
 int		ft_option_llxmaj(t_valst *lst_va, char *str, int count, int index);
+
+int		*ft_params_no(t_valst *lst_va, char *str, int *tab_i, int index);
+int		ft_option_no(t_valst *lst_va, char *str, int count, int index);
 
 
 

@@ -6,7 +6,7 @@
 /*   By: rgermain <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/11/09 15:39:07 by rgermain     #+#   ##    ##    #+#       */
-/*   Updated: 2018/11/26 18:35:56 by rgermain    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/11/26 19:18:57 by rgermain    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -25,7 +25,14 @@ int		main(int argc, char **argv)
 	s = "coucou c4est moi";
 	if (argc == 2)
 	{
-		a = printf("pf Le fichier {cyan}%s{eoc} contient : {red}%s{eoc}\n", "coucou", "salut");
+		a = printf("pf %o, %ho, %hho\n", -42, -42, -42);
+//		a = printf("pf %#.o, %#.0o\n", 0, 0);
+//		a = printf("pf %#.3o\n", 1);
+//		a = printf("pf %#x\n", 42);
+//		a = printf("pf {%#.5x}\n", 1);
+//		a = printf("%");
+//		a = printf("pf {%-15Z}\n", 123);
+//		a = printf("pf Le fichier {cyan}%s{eoc} contient : {red}%s{eoc}\n", "coucou", "salut");
 //		a = printf("pf {%05.Z}\n", 0);
 //		a = printf("pf %lc, %lc\n", L'ÊM-^ZM-^V', L'ÿ≠');
 //		a = printf("pf %llD, %llD\n", 0, USHRT_MAX);
@@ -55,7 +62,15 @@ int		main(int argc, char **argv)
 //		a = printf("pf %9.2p\n", 1234);
 		printf("pf %d\n", a);
 /////////////////////////////
-		a = ft_printf("ft Le fichier {jaune}%s{eoc} {blue}c'est bleu{eoc} {green} cest vert{eoc} {purple} c'est violet {eoc}  {yellow} cest jaune {eoc} contient : {red}%s{eoc}\n", "coucou", "salut");
+
+		a = ft_printf("ft %o, %ho, %hho\n", -42, -42, -42);
+//		a = ft_printf("ft %#.o, %#.0o\n", 0, 0);
+//		a = ft_printf("ft %#.3o\n", 1);
+//		a = ft_printf("ft %#x\n", 42);
+//		a = ft_printf("ft {%#.5x}\n", 1);
+//		a = ft_printf("%");
+//		a = ft_printf("ft {%-15Z}\n", 123);
+//		a = ft_printf("ft Le fichier {yellow}%s{eoc} {blue}c'est bleu{eoc} {green} cest vert{eoc} {purple} c'est violet {eoc}  {yellow} cest jaune {eoc} contient : {red}%s{eoc}\n", "coucou", "salut");
 //		a = ft_printf("ft {%05.Z}\n", 0)eoc;
 //		a = ft_printf("ft %lc, %lc\n", L'ÊM-^ZM-^V', L'ÿ≠');
 //		a = ft_printf("ft %llD, %llD\n", 0, USHRT_MAX);

@@ -6,7 +6,7 @@
 /*   By: rgermain <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/11/11 15:09:25 by rgermain     #+#   ##    ##    #+#       */
-/*   Updated: 2018/11/26 17:28:41 by rgermain    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/11/26 18:57:12 by rgermain    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -35,7 +35,7 @@ int	*ft_conv3(t_valst *lst_va, char *str, int *tab_i, int index)
 	if (t_index != index)
 		tab_i = (ft_conv(lst_va, str, tab_i, index));
 	else if (t_index == index)
-		tab_i[0] += index;
+		tab_i = ft_params_no(lst_va, str, tab_i, index);
 	return (tab_i);
 }
 
@@ -91,7 +91,9 @@ int	*ft_conv2(t_valst *lst_va, char *str, int *tab_i, int index)
 
 int	*ft_conv(t_valst *lst_va, char *str, int *tab_i, int index)
 {
-	if (str[tab_i[0] + index] == 'd' || str[tab_i[0] + index] == 'i'
+	if (str[tab_i[0] + index] == '\0')
+		tab_i[0] += index;
+	else if (str[tab_i[0] + index] == 'd' || str[tab_i[0] + index] == 'i'
 			|| str[tab_i[0] + index] == 'I')
 		tab_i = ft_params_d(lst_va, str, tab_i, index);
 	else if (str[tab_i[0] + index] == 'D')

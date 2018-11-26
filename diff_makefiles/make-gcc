@@ -6,7 +6,7 @@
 #    By: rgermain <marvin@le-101.fr>                +:+   +:    +:    +:+      #
 #                                                  #+#   #+    #+    #+#       #
 #    Created: 2018/10/01 15:39:03 by rgermain     #+#   ##    ##    #+#        #
-#    Updated: 2018/11/26 18:30:28 by rgermain    ###    #+. /#+    ###.fr      #
+#    Updated: 2018/11/26 18:45:58 by rgermain    ###    #+. /#+    ###.fr      #
 #                                                          /                   #
 #                                                         /                    #
 # **************************************************************************** #
@@ -25,7 +25,7 @@ SRC = main.c ft_conv.c ft_option_lo.c ft_option_o.c ft_option_x.c utils.c \
 	  ft_option_d.c ft_option_lx.c ft_option_s.c ft_printf.c utils3.c \
 	  ft_option_ld.c ft_option_lxmaj.c ft_option_u.c ft_option_cmaj.c \
 	  ft_option_lld.c ft_option_llo.c ft_option_llx.c ft_option_llxmaj.c ft_option_llu.c \
-	  ft_printcolor.c
+	  ft_printcolor.c ft_option_no.c
 
 OBJ = $(SRC:.c=.o)
 
