@@ -6,7 +6,7 @@
 /*   By: rgermain <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/11/12 12:38:05 by rgermain     #+#   ##    ##    #+#       */
-/*   Updated: 2018/11/24 09:45:26 by rgermain    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/11/26 15:10:38 by rgermain    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -57,7 +57,7 @@ static int	ft_option_pos(t_option *lst, long nb, int count)
 	return (count + len + sign);
 }
 
-int			ft_option_dl(t_valst *lst_va, char *str, int count, int index)
+int			ft_option_ld(t_valst *lst_va, char *str, int count, int index)
 {
 	t_option	*lst;
 	long		nb;
@@ -83,9 +83,9 @@ int			ft_option_dl(t_valst *lst_va, char *str, int count, int index)
 	return (len);
 }
 
-int			*ft_params_dl(t_valst *lst_va, char *str, int *tab_i, int index)
+int			*ft_params_ld(t_valst *lst_va, char *str, int *tab_i, int index)
 {
-	tab_i[1] += ft_option_dl(lst_va, str, tab_i[0], index);
+	tab_i[1] += ft_option_ld(lst_va, str, tab_i[0], index);
 	tab_i[0] = ((tab_i[0] + index) + 1);
 	return (tab_i);
 }

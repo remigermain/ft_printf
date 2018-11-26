@@ -6,7 +6,7 @@
 /*   By: rgermain <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/11/11 15:09:25 by rgermain     #+#   ##    ##    #+#       */
-/*   Updated: 2018/11/24 12:15:59 by rgermain    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/11/26 17:28:41 by rgermain    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -47,8 +47,33 @@ int	*ft_conv2(t_valst *lst_va, char *str, int *tab_i, int index)
 		tab_i = ft_params_lu(lst_va, str, tab_i, index);
 	else if (str[tab_i[0] + index] == '%')
 		tab_i = ft_params_perc(lst_va, str, tab_i, index);
-	else if (str[tab_i[0] + index] == 'l' && str[tab_i[0] + index + 1] == 'd')
-		tab_i = ft_params_dl(lst_va, str, tab_i, index + 1);
+	else if (str[tab_i[0] + index] == 'l' && str[tab_i[0] + index + 1] == 'l' &&
+			(str[tab_i[0] + index + 2] == 'd' || str[tab_i[0] + index + 2] == 'i'||
+			 str[tab_i[0] + index + 2] == 'I' || str[tab_i[0] + index + 2] == 'D'))
+		tab_i = ft_params_lld(lst_va, str, tab_i, index + 2);
+	else if (str[tab_i[0] + index] == 'l' && str[tab_i[0] + index + 1] == 'l' &&
+			str[tab_i[0] + index + 2] == 'o')
+		tab_i = ft_params_llo(lst_va, str, tab_i, index + 2);
+	else if (str[tab_i[0] + index] == 'l' && str[tab_i[0] + index + 1] == 'l' &&
+			str[tab_i[0] + index + 2] == 'O')
+		tab_i = ft_params_llo(lst_va, str, tab_i, index + 2);
+	else if (str[tab_i[0] + index] == 'l' && str[tab_i[0] + index + 1] == 'l' &&
+		str[tab_i[0] + index + 2] == 'x')
+		tab_i = ft_params_llx(lst_va, str, tab_i, index + 2);
+	else if (str[tab_i[0] + index] == 'l' && str[tab_i[0] + index + 1] == 'l' &&
+		str[tab_i[0] + index + 2] == 'X')
+		tab_i = ft_params_llxmaj(lst_va, str, tab_i, index + 2);
+	else if (str[tab_i[0] + index] == 'l' && str[tab_i[0] + index + 1] == 'l' &&
+		str[tab_i[0] + index + 2] == 'u')
+		tab_i = ft_params_llu(lst_va, str, tab_i, index + 2);
+	else if (str[tab_i[0] + index] == 'l' && str[tab_i[0] + index + 1] == 'l' &&
+		str[tab_i[0] + index + 2] == 'U')
+		tab_i = ft_params_llu(lst_va, str, tab_i, index + 2);
+	else if ((str[tab_i[0] + index] == 'l' && str[tab_i[0] + index + 1] == 'd') || 
+	   	(str[tab_i[0] + index] == 'l' && str[tab_i[0] + index + 1] == 'i'))
+		tab_i = ft_params_ld(lst_va, str, tab_i, index + 1);
+	else if (str[tab_i[0] + index] == 'l' && str[tab_i[0] + index + 1] == 'c')
+		tab_i = ft_params_c(lst_va, str, tab_i, index + 1);
 	else if (str[tab_i[0] + index] == 'l' && str[tab_i[0] + index + 1] == 'u')
 		tab_i = ft_params_lu(lst_va, str, tab_i, index + 1);
 	else if (str[tab_i[0] + index] == 'l' && str[tab_i[0] + index + 1] == 'U')
@@ -56,9 +81,9 @@ int	*ft_conv2(t_valst *lst_va, char *str, int *tab_i, int index)
 	else if (str[tab_i[0] + index] == 'l' && str[tab_i[0] + index + 1] == 'o')
 		tab_i = ft_params_lo(lst_va, str, tab_i, index + 1);
 	else if (str[tab_i[0] + index] == 'l' && str[tab_i[0] + index + 1] == 'x')
-		tab_i = ft_params_x(lst_va, str, tab_i, index + 1);
+		tab_i = ft_params_lx(lst_va, str, tab_i, index + 1);
 	else if (str[tab_i[0] + index] == 'l' && str[tab_i[0] + index + 1] == 'X')
-		tab_i = ft_params_lx_maj(lst_va, str, tab_i, index + 1);
+		tab_i = ft_params_lxmaj(lst_va, str, tab_i, index + 1);
 	else
 		tab_i = ft_conv3(lst_va, str, tab_i, index);
 	return (tab_i);
@@ -70,13 +95,15 @@ int	*ft_conv(t_valst *lst_va, char *str, int *tab_i, int index)
 			|| str[tab_i[0] + index] == 'I')
 		tab_i = ft_params_d(lst_va, str, tab_i, index);
 	else if (str[tab_i[0] + index] == 'D')
-		tab_i = ft_params_dl(lst_va, str, tab_i, index);
+		tab_i = ft_params_ld(lst_va, str, tab_i, index);
 	else if (str[tab_i[0] + index] == 'o')
 		tab_i = ft_params_o(lst_va, str, tab_i, index);
 	else if (str[tab_i[0] + index] == 'O')
 		tab_i = ft_params_lo(lst_va, str, tab_i, index);
-	else if (str[tab_i[0] + index] == 'c' || str[tab_i[0] + index] == 'C')
+	else if (str[tab_i[0] + index] == 'c')
 		tab_i = ft_params_c(lst_va, str, tab_i, index);
+	else if (str[tab_i[0] + index] == 'C')
+		tab_i = ft_params_cmaj(lst_va, str, tab_i, index);
 	else if (str[tab_i[0] + index] == 's' || str[tab_i[0] + index] == 'S')
 		tab_i = ft_params_s(lst_va, str, tab_i, index);
 	else if (str[tab_i[0] + index] == 'p' || str[tab_i[0] + index] == 'P')

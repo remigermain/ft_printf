@@ -6,7 +6,7 @@
 /*   By: rgermain <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/11/09 15:34:47 by rgermain     #+#   ##    ##    #+#       */
-/*   Updated: 2018/11/24 11:11:54 by rgermain    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/11/26 18:31:16 by rgermain    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -73,11 +73,23 @@ int		ft_option_s(t_valst *lst_va, char *str, int count, int index);
 int		*ft_params_c(t_valst *lst_va, char *str, int *tab_i, int index);
 int		ft_option_c(t_valst *lst_va, char *str, int count, int index);
 
+int		*ft_params_cmaj(t_valst *lst_va, char *str, int *tab_i, int index);
+int		ft_option_cmaj(t_valst *lst_va, char *str, int count, int index);
+
 int		*ft_params_p(t_valst *lst_va, char *str, int *tab_i, int index);
 int		ft_option_p(t_valst *lst_va, char *str, int count, int index);
 
-int		*ft_params_dl(t_valst *lst_va, char *str, int *tab_i, int index);
-int		ft_option_dl(t_valst *lst_va, char *str, int count, int index);
+int		*ft_params_ld(t_valst *lst_va, char *str, int *tab_i, int index);
+int		ft_option_ld(t_valst *lst_va, char *str, int count, int index);
+
+int		*ft_params_lld(t_valst *lst_va, char *str, int *tab_i, int index);
+int		ft_option_lld(t_valst *lst_va, char *str, int count, int index);
+
+int		*ft_params_llo(t_valst *lst_va, char *str, int *tab_i, int index);
+int		ft_option_llo(t_valst *lst_va, char *str, int count, int index);
+
+int		*ft_params_llu(t_valst *lst_va, char *str, int *tab_i, int index);
+int		ft_option_llu(t_valst *lst_va, char *str, int count, int index);
 
 int		*ft_params_o(t_valst *lst_va, char *str, int *tab_i, int index);
 int		ft_option_o(t_valst *lst_va, char *str, int count, int index);
@@ -97,6 +109,9 @@ int		ft_option_x(t_valst *lst_va, char *str, int count, int index);
 int		*ft_params_lx(t_valst *lst_va, char *str, int *tab_i, int index);
 int		ft_option_lx(t_valst *lst_va, char *str, int count, int index);
 
+int		*ft_params_lxmaj(t_valst *lst_va, char *str, int *tab_i, int index);
+int		ft_option_lxmaj(t_valst *lst_va, char *str, int count, int index);
+
 int		*ft_params_x_maj(t_valst *lst_va, char *str, int *tab_i, int index);
 int		ft_option_x_maj(t_valst *lst_va, char *str, int count, int index);
 
@@ -107,8 +122,12 @@ int		ft_option_lu_maj(t_valst *lst_va, char *str, int count, int index);
 int		*ft_params_x_maj(t_valst *lst_va, char *str, int *tab_i, int index);
 int		ft_option_x_maj(t_valst *lst_va, char *str, int count, int index);
 
-int		*ft_params_lx_maj(t_valst *lst_va, char *str, int *tab_i, int index);
-int		ft_option_lx_maj(t_valst *lst_va, char *str, int count, int index);
+int		*ft_params_llx(t_valst *lst_va, char *str, int *tab_i, int index);
+int		ft_option_llx(t_valst *lst_va, char *str, int count, int index);
+
+int		*ft_params_llxmaj(t_valst *lst_va, char *str, int *tab_i, int index);
+int		ft_option_llxmaj(t_valst *lst_va, char *str, int count, int index);
+
 
 
 
@@ -134,6 +153,8 @@ t_option		*lst_init(void);
 int				ft_put_digit(t_option *lst_option, char *str, int count);
 void			ft_put_star(t_option *lst_option);
 t_option		*ft_put_option(char *str, int count, int index);
+int				ft_printcolor(char *str, int i);
+void			ft_printcolor2(int i);
 
 
 #endif

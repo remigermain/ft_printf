@@ -6,7 +6,7 @@
 /*   By: rgermain <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/11/09 15:39:07 by rgermain     #+#   ##    ##    #+#       */
-/*   Updated: 2018/11/24 12:01:41 by rgermain    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/11/26 18:10:24 by rgermain    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -25,12 +25,19 @@ int		main(int argc, char **argv)
 	s = "coucou c4est moi";
 	if (argc == 2)
 	{
+		a = printf("pf Le fichier {cyan}%s{eoc} contient : {red}%s{eoc}\n", "coucou", "salut");
+//		a = printf("pf {%05.Z}\n", 0);
+//		a = printf("pf %lc, %lc\n", L'ÊM-^ZM-^V', L'ÿ≠');
+//		a = printf("pf %llD, %llD\n", 0, USHRT_MAX);
+//		a = printf("pf %llx ffff\n", ULLONG_MAX);
+//		a = printf("pf %lc, %lc\n", L'ÊM-^ZM-^V', L'ÿ≠');
+//		a = printf("pf %lx, %lx\n", 0, ULONG_MAX);
+//		a = printf("pf %S\n", L"Á±≥");
+//		a = printf("pf %C\n", L'ÁM-^L´');
 //		a = printf("pf {%05.%}\n", 0);
-		a = printf("pf %#x\n", 42);
-		printf("pf %d\n", a);
-		a = printf("pf %#x\n", 0);
-		printf("pf %d\n", a);
-		a = printf("pf %#.x, %#.0x\n", 0, 0);
+//		a = printf("pf %#x\n", 42);
+//		a = printf("pf %#x\n", 0);
+//		a = printf("pf %#.x, %#.0x\n", 0, 0);
 //		a = printf("pf % S\n", L"(null)");
 //		a = printf("pf % s\n", NULL);
 //		a = printf("pf %03c\n", 0);
@@ -47,12 +54,20 @@ int		main(int argc, char **argv)
 //		a = printf("pf %2.9p\n", 123458888);
 //		a = printf("pf %9.2p\n", 1234);
 		printf("pf %d\n", a);
+/////////////////////////////
+		a = ft_printf("ft Le fichier {cyan}%s{eoc} {blue}c'est bleu{eoc} {green} cest vert{eoc} {purple} c'est violet {eoc}  {yellow} cest jaune {eoc} contient : {red}%s{eoc}\n", "coucou", "salut");
+//		a = ft_printf("ft {%05.Z}\n", 0)eoc;
+//		a = ft_printf("ft %lc, %lc\n", L'ÊM-^ZM-^V', L'ÿ≠');
+//		a = ft_printf("ft %llD, %llD\n", 0, USHRT_MAX);
+//		a = ft_printf("ft %llx ffff\n", ULLONG_MAX);
+//		a = ft_printf("ft %lc, %lc\n", L'ÊM-^ZM-^V', L'ÿ≠');
+//		a = ft_printf("ft %lx, %lx\n", 0, ULONG_MAX);
+//		a = ft_printf("ft %S\n", L"Á±≥");
 //		a = ft_printf("ft {%05.%}\n", 0);
-		a = ft_printf("ft %#x\n", 42);
-		printf("ft %d\n", a);
-		a = ft_printf("ft %#x\n", 0);
-		printf("ft %d\n", a);
-		a = ft_printf("ft %#.x, %#.0x\n", 0, 0);
+//		a = ft_printf("ft %#x\n", 42);
+//		a = ft_printf("ft %C\n", L'ÁM-^L´');
+//		a = ft_printf("ft %#x\n", 0);
+//		a = ft_printf("ft %#.x, %#.0x\n", 0, 0);
 //		a = ft_printf("ft % s\n", L"(null)");
 //		a = ft_printf("ft % s\n", NULL);
 //		a = ft_printf("ft %03c\n", 0);
