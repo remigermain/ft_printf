@@ -6,7 +6,7 @@
 /*   By: rgermain <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/11/11 15:09:25 by rgermain     #+#   ##    ##    #+#       */
-/*   Updated: 2018/11/26 18:28:35 by rgermain    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/11/26 18:37:15 by rgermain    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -52,7 +52,7 @@ int		ft_printf(const char *format, ...)
 	while (format[tab_i[0]] != '\0')
 	{
 		if (format[tab_i[0]] == '{')
-			tab_i[0] += ft_printcolor((char*)format, tab_i[0]);
+			tab_i[0] = ft_printcolor((char*)format, tab_i[0]);
 		if (format[tab_i[0]] == '%')
 			tab_i = ft_conv(lst_va, (char*)format, tab_i, 1);
 		else

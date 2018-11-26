@@ -6,7 +6,7 @@
 /*   By: rgermain <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/11/11 15:09:25 by rgermain     #+#   ##    ##    #+#       */
-/*   Updated: 2018/11/26 18:30:44 by rgermain    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/11/26 18:38:43 by rgermain    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -51,7 +51,7 @@ int		ft_printcolor(char *str, int i)
 	if (a < 10)
 	{
 		ft_printcolor2(a);
-		return (ft_strlen(tab[a]) + 1);
+		return (i + (ft_strlen(tab[a]) + 1));
 	}
 	return (i);
 }

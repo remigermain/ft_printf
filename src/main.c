@@ -6,7 +6,7 @@
 /*   By: rgermain <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/11/09 15:39:07 by rgermain     #+#   ##    ##    #+#       */
-/*   Updated: 2018/11/26 18:10:24 by rgermain    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/11/26 18:35:56 by rgermain    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -55,7 +55,7 @@ int		main(int argc, char **argv)
 //		a = printf("pf %9.2p\n", 1234);
 		printf("pf %d\n", a);
 /////////////////////////////
-		a = ft_printf("ft Le fichier {cyan}%s{eoc} {blue}c'est bleu{eoc} {green} cest vert{eoc} {purple} c'est violet {eoc}  {yellow} cest jaune {eoc} contient : {red}%s{eoc}\n", "coucou", "salut");
+		a = ft_printf("ft Le fichier {jaune}%s{eoc} {blue}c'est bleu{eoc} {green} cest vert{eoc} {purple} c'est violet {eoc}  {yellow} cest jaune {eoc} contient : {red}%s{eoc}\n", "coucou", "salut");
 //		a = ft_printf("ft {%05.Z}\n", 0)eoc;
 //		a = ft_printf("ft %lc, %lc\n", L'ÊM-^ZM-^V', L'ÿ≠');
 //		a = ft_printf("ft %llD, %llD\n", 0, USHRT_MAX);
