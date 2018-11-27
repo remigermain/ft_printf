@@ -6,7 +6,7 @@
 /*   By: rgermain <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/11/12 12:38:05 by rgermain     #+#   ##    ##    #+#       */
-/*   Updated: 2018/11/26 14:37:52 by rgermain    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/11/27 19:50:17 by rgermain    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -24,6 +24,8 @@ int	ft_option_cmaj(t_valst *lst_va, char *str, int count, int index)
 		lst_va = lst_init2(lst_va, lst->dollar_nb, 0);
 	ft_option_star(lst_va, lst);
 	new = va_arg(lst_va->lst_copy, unsigned int);
+	if (new > 0x7FF)
+		exit (0);
 	if (lst->bf_nb < 0 || lst->sign == '-')
 	{
 		ft_putwchar(new);

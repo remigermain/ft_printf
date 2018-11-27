@@ -6,7 +6,7 @@
 /*   By: rgermain <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/11/09 15:39:07 by rgermain     #+#   ##    ##    #+#       */
-/*   Updated: 2018/11/27 19:01:22 by rgermain    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/11/27 20:24:39 by rgermain    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -25,8 +25,13 @@ int		main(int argc, char **argv)
 	s = "coucou c4est moi";
 	if (argc == 2)
 	{
-		a = printf("pf titi%#012o\n", -874);
-	//	a = printf("pf coco et %-#-#--24O titi%#012o\n", 12, -874);
+		a = printf("pf %#7.5X%0006.2x et %lX!\n", 0xab, 0x876, 0xff11ff11ff1);
+//		a = printf("pf test%#.4o et %02o %#14.o!!\n", 012, 036, 12587499);
+//		a = printf("ft %C, 0x6f\n");
+//		a = printf("pf %lc\n", 0x4e6);
+//		a = printf("%C", 0x6f);
+//		a = printf("pf titi%#012o\n", -874);
+//		a = printf("pf coco et %-#-#--24O titi%#012o\n", 12, -874);
 //		a = printf("pf %lld\n", LLONG_MIN);
 //		a = printf("pf s: %s, p: d:%d\n", "a string", 42);
 //		a = printf("pf s: %s, p: %p, d:%d\n", "a string", &ft_strlen, 42);
@@ -70,8 +75,13 @@ int		main(int argc, char **argv)
 		printf("pf %d\n", a);
 /////////////////////////////
 
+		a = ft_printf("ft %#7.5X%0006.2x et %lX!\n", 0xab, 0x876, 0xff11ff11ff1);
+
+//a = ft_printf("ft test%#.4o et %02o %#14.o!!\n", 012, 036, 12587499);
+//		a = ft_printf("ft %C, 0x6f\n");
+//		a = ft_printf("ft %lc\n", 0x4e6);
 //		a = ft_printf("ft coco et %-#-#--240 \n", 12);
-		a = ft_printf("ft titi%#012o\n", -874);
+//		a = ft_printf("ft titi%#012o\n", -874);
 //		a = ft_printf("ft coco et %-#-#--24O titi%#012o\n", 12, -874);
 //		a = ft_printf("ft %lld\n", LLONG_MIN);
 //		a = ft_printf("ft %D\n", LONG_MIN);

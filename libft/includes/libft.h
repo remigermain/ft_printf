@@ -6,7 +6,7 @@
 /*   By: rgermain <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/10/07 18:10:38 by rgermain     #+#   ##    ##    #+#       */
-/*   Updated: 2018/11/27 18:50:29 by rgermain    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/11/27 20:03:02 by rgermain    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -154,5 +154,9 @@ int				ft_ulllen(unsigned long long nb);
 int				ft_ulllen_base(unsigned long long nb, unsigned long base);
 int				ft_lllen(long long nb);
 void			ft_putwchar(unsigned int c);
+void			ft_putwchar2(unsigned int c);
+int				ft_putnstr_w(const char *str, int len);
+int				ft_putstr_w(const char *str);
+
 
 #endif

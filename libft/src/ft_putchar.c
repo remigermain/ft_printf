@@ -6,7 +6,7 @@
 /*   By: rgermain <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/10/04 14:24:30 by rgermain     #+#   ##    ##    #+#       */
-/*   Updated: 2018/11/27 18:12:02 by rgermain    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/11/27 20:02:34 by rgermain    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -28,6 +28,23 @@ int		ft_max2(int nb1, int nb2)
 	return (nb1);
 }
 
+void	ft_putwchar2(unsigned int c)
+{
+	char new[4];
+	int a;
+
+	a = 0;
+	if (c <= 0x7F)
+		new[a++] = c;
+	else if (c <= 0x7FF)
+		new[a++] = 192 + (c / 64);
+	else
+		exit (0);
+	if (c > 0x7F)
+		new[a++] = 128 + (c % 64);
+	write(1, new, a);
+}
+
 void	ft_putwchar(unsigned int c)
 {
 	char new[4];
@@ -36,19 +53,21 @@ void	ft_putwchar(unsigned int c)
 	a = 0;
 	if (c <= 0x7F)
 		new[a++] = c;
-	else if (c > 0xFFFF)
+	else if (c <= 0x7FF)
+		new[a++] = 192 + (c / 64);
+	else
 	{
-		if (c > 0x10FFFF)
+		if (c > 0xFFFF)
 		{
-			new[a++] = (240 + c) / 262144;
-			new[a++] = ((128 + c) / 4096) % 64;
+			new[a++] = 240 + (c / 262144);
+			new[a++] = 128 + ((c / 4096) % 64);
 		}
-		else if (c < 0xFFFF)
-			new[a++] = (224 + c) / 4096;
-		new[a++] = ((128 + c) / 64) % 64;
+		else
+			new[a++] = 224 + (c / 4096);
+		new[a++] = 128 + ((c / 64) % 64);
 	}
 	if (c > 0x7F)
-		new[a++] = (128 + c) % 64;
+		new[a++] = 128 + (c % 64);
 	write(1, new, a);
 }
 

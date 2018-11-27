@@ -6,7 +6,7 @@
 /*   By: rgermain <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/11/12 12:38:05 by rgermain     #+#   ##    ##    #+#       */
-/*   Updated: 2018/11/24 12:14:11 by rgermain    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/11/27 20:30:29 by rgermain    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -65,8 +65,11 @@ int			ft_option_x_maj(t_valst *lst_va, char *str, int count, int index)
 		lst->bf_nb--;
 		len += ft_print_prefix(0, 1, 0);
 	}
-	if (lst->point == 0 && lst->hash == 1 && (index > 2 || nb != 0))
+	if (lst->point == 1 && lst->hash == 1 && (index > 2 || nb != 0))
+	{
+		lst->bf_nb -= 2;
 		len += ft_putstr("0X");
+	}
 	if ((lst->sign != '-') &&
 			(!(lst->point == 1 && lst->af_nb == 0 && nb == 0)))
 		len += ft_option_pos(lst, nb, 0);
