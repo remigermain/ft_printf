@@ -6,7 +6,7 @@
 /*   By: rgermain <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/10/07 18:10:38 by rgermain     #+#   ##    ##    #+#       */
-/*   Updated: 2018/11/27 17:35:21 by rgermain    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/11/27 18:50:29 by rgermain    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -148,11 +148,11 @@ int				ft_uintlen_base(unsigned int nb, unsigned int base);
 int				ft_max2(int nb1, int nb2);
 int				ft_min2(int nb1, int nb2);
 void			ft_putllnbr(long long nb);
-void			ft_putnbr_base_llmaj(long long nb, int base, int maj);
+void			ft_putnbr_base_llmaj(unsigned long long nb, unsigned long  base, int maj);
 void			ft_putunbr_base_maj(unsigned int nb, int base, int maj);
 int				ft_ulllen(unsigned long long nb);
 int				ft_ulllen_base(unsigned long long nb, unsigned long base);
 int				ft_lllen(long long nb);
-void			ft_putwchar(char c);
+void			ft_putwchar(unsigned int c);
 
 #endif

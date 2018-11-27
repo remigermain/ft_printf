@@ -6,7 +6,7 @@
 /*   By: rgermain <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/11/09 15:39:07 by rgermain     #+#   ##    ##    #+#       */
-/*   Updated: 2018/11/26 19:18:57 by rgermain    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/11/27 19:01:22 by rgermain    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -25,7 +25,14 @@ int		main(int argc, char **argv)
 	s = "coucou c4est moi";
 	if (argc == 2)
 	{
-		a = printf("pf %o, %ho, %hho\n", -42, -42, -42);
+		a = printf("pf titi%#012o\n", -874);
+	//	a = printf("pf coco et %-#-#--24O titi%#012o\n", 12, -874);
+//		a = printf("pf %lld\n", LLONG_MIN);
+//		a = printf("pf s: %s, p: d:%d\n", "a string", 42);
+//		a = printf("pf s: %s, p: %p, d:%d\n", "a string", &ft_strlen, 42);
+//		a = printf("pf {%0-3d}\n", 0);
+//		a = printf("pf %-2d\n", -7);
+//		a = printf("pf %o, %ho, %hho\n", -42, -42, -42);
 //		a = printf("pf %#.o, %#.0o\n", 0, 0);
 //		a = printf("pf %#.3o\n", 1);
 //		a = printf("pf %#x\n", 42);
@@ -63,7 +70,15 @@ int		main(int argc, char **argv)
 		printf("pf %d\n", a);
 /////////////////////////////
 
-		a = ft_printf("ft %o, %ho, %hho\n", -42, -42, -42);
+//		a = ft_printf("ft coco et %-#-#--240 \n", 12);
+		a = ft_printf("ft titi%#012o\n", -874);
+//		a = ft_printf("ft coco et %-#-#--24O titi%#012o\n", 12, -874);
+//		a = ft_printf("ft %lld\n", LLONG_MIN);
+//		a = ft_printf("ft %D\n", LONG_MIN);
+//		a = ft_printf("ft s: %s, p: %p, d:%d\n", "a string", &ft_strlen, 42);
+//		a = ft_printf("ft {%0-3d}\n", 0);
+//		a = ft_printf("ft %-2d\n", -7);
+//		a = ft_printf("ft %o, %ho, %hho\n", -42, -42, -42);
 //		a = ft_printf("ft %#.o, %#.0o\n", 0, 0);
 //		a = ft_printf("ft %#.3o\n", 1);
 //		a = ft_printf("ft %#x\n", 42);

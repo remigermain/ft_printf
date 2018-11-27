@@ -6,7 +6,7 @@
 /*   By: rgermain <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/10/04 13:38:11 by rgermain     #+#   ##    ##    #+#       */
-/*   Updated: 2018/11/27 17:31:51 by rgermain    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/11/27 18:52:09 by rgermain    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -30,22 +30,10 @@ void	ft_putunbr_base_maj(unsigned int n, int base, int maj)
 		ft_putchar_fd((n + 87), 1);
 }
 
-void	ft_putnbr_base_llmaj(long long n, int base, int maj)
+void	ft_putnbr_base_llmaj(unsigned long long n, unsigned long base, int maj)
 {
 	if (base > 16 || base < 2)
 		return ;
-	if (n == -2147483648 && base == 10)
-	{
-		ft_putchar_fd('-', 1);
-		ft_putchar_fd('2', 1);
-		n = 147483648;
-	}
-	if (n < 0 && base == 10)
-	{
-		ft_putchar_fd('-', 1);
-		n = n * -1;
-	}
-	ft_abs(n);
 	if (n >= base)
 	{
 		ft_putnbr_base_llmaj((n / base), base, maj);
@@ -61,7 +49,10 @@ void	ft_putnbr_base_llmaj(long long n, int base, int maj)
 
 void	ft_putllnbr(long long nb)
 {
-	ft_putnbr_base_llmaj(nb, 10, 1);
+	if (nb < 0)
+		ft_putnbr_base_llmaj(-nb, 10, 1);
+	else
+		ft_putnbr_base_llmaj(nb, 10, 1);
 }
 
 

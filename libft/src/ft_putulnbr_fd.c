@@ -6,7 +6,7 @@
 /*   By: rgermain <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/10/04 13:38:11 by rgermain     #+#   ##    ##    #+#       */
-/*   Updated: 2018/11/16 09:00:55 by rgermain    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/11/27 18:31:01 by rgermain    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -15,7 +15,7 @@
 
 void	ft_putulnbr_base(unsigned long int nb, unsigned long int base)
 {
-	if (nb > base)
+	if (nb >= base)
 	{
 		ft_putulnbr_base((nb / base), base);
 		ft_putulnbr_base((nb % base), base);
