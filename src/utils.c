@@ -6,7 +6,7 @@
 /*   By: rgermain <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/11/12 12:39:33 by rgermain     #+#   ##    ##    #+#       */
-/*   Updated: 2018/11/30 20:35:08 by rgermain    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/11/30 22:14:50 by rgermain    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -31,7 +31,7 @@ void		lst_init2(t_option *lst_option)
 
 t_option	*lst_init(void)
 {
-	t_option*lst_option;
+	t_option	*lst_option;
 
 	if (!(lst_option = malloc(sizeof(t_option))))
 		exit(0);
@@ -49,6 +49,7 @@ t_option	*lst_init(void)
 	lst_option->fd = 0;
 	lst_option->sign = 0;
 	lst_option->zero = 0;
+	lst_init2(lst_option);
 	return (lst_option);
 }
 
