@@ -6,7 +6,7 @@
 #    By: rgermain <marvin@le-101.fr>                +:+   +:    +:    +:+      #
 #                                                  #+#   #+    #+    #+#       #
 #    Created: 2018/10/01 15:39:03 by rgermain     #+#   ##    ##    #+#        #
-#    Updated: 2018/11/30 19:33:36 by rgermain    ###    #+. /#+    ###.fr      #
+#    Updated: 2018/11/30 21:18:17 by rgermain    ###    #+. /#+    ###.fr      #
 #                                                          /                   #
 #                                                         /                    #
 # **************************************************************************** #
@@ -35,11 +35,11 @@ COBJ = $(addprefix $(DOBJ),$(OBJ))
 all: $(NAME)
 
 $(NAME): $(COBJ)
+	@make -C libft/ all
 	@echo "Compilation de l'executable" $(NAME)
 	@gcc $? libft/libft.a -o $(NAME)
 
 $(DOBJ)%.o : $(DSRC)%.c $(CINC)
-	@make -C libft/ all
 	@mkdir -p $(DOBJ)
 	@gcc $(CFLAGS) $(INCLUDE) -c $< -o $@
 	@echo "Compilation de la fonction "$<
