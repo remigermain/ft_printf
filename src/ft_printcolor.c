@@ -6,14 +6,14 @@
 /*   By: rgermain <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/11/11 15:09:25 by rgermain     #+#   ##    ##    #+#       */
-/*   Updated: 2018/11/26 18:40:24 by rgermain    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/11/30 12:06:49 by rgermain    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-void	ft_printcolor2(int i)
+void	ft_printcolor2(int i, int fd)
 {
 	char	*tab[10];
 
@@ -27,10 +27,10 @@ void	ft_printcolor2(int i)
 	tab[7] = "\033[36m";
 	tab[8] = "\033[37m";
 	tab[9] = "\033[0m";
-	ft_putstr(tab[i]);
+	ft_putstr_fd(tab[i], fd);
 }
 
-int		ft_printcolor(char *str, int i)
+int		ft_printcolor(char *str, int i, int fd)
 {
 	char	*tab[10];
 	int		a;
@@ -50,7 +50,7 @@ int		ft_printcolor(char *str, int i)
 		a++;
 	if (a < 10)
 	{
-		ft_printcolor2(a);
+		ft_printcolor2(a, fd);
 		return (i + (ft_strlen(tab[a]) + 1));
 	}
 	return (i);

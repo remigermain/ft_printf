@@ -6,7 +6,7 @@
 /*   By: rgermain <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/11/20 16:06:08 by rgermain     #+#   ##    ##    #+#       */
-/*   Updated: 2018/11/30 15:26:12 by rgermain    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/11/30 14:52:53 by rgermain    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -65,7 +65,7 @@ void	ft_init_unb(t_option *lst, t_valst *lst_va)
 	if (lst->flag_h == 1)
 		nb = va_arg(lst_va->lst_copy, int);
 	else if (lst->flag_h == 2)
-		nb = va_arg(lst_va->lst_copy, int);
+		nb = va_arg(lst_va->lst_copy, char);
 	else if (lst->flag_l == 1 && lst->conv_u == 0)
 		nb = va_arg(lst_va->lst_copy, long);
 	else if (lst->flag_l == 2 || lst->conv_u > 0)
@@ -87,9 +87,9 @@ void	ft_init_snb(t_option *lst, t_valst *lst_va)
 
 	nb = 0;
 	if (lst->flag_h == 1)
-		nb = (long)va_arg(lst_va->lst_copy, int);
+		nb = (long)va_arg(lst_va->lst_copy, short);
 	else if (lst->flag_h == 2)
-		nb = (long)va_arg(lst_va->lst_copy, int);
+		nb = (long)va_arg(lst_va->lst_copy, char);
 	else if (lst->flag_l == 1 && lst->conv_u == 0)
 		nb = (long)va_arg(lst_va->lst_copy, long);
 	else if (lst->flag_l == 2 || lst->conv_u > 0)

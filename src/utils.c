@@ -6,7 +6,7 @@
 /*   By: rgermain <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/11/12 12:39:33 by rgermain     #+#   ##    ##    #+#       */
-/*   Updated: 2018/11/20 21:53:12 by rgermain    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/11/30 15:22:47 by rgermain    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -19,6 +19,18 @@ t_option	*lst_init(void)
 
 	if (!(lst_option = malloc(sizeof(t_option))))
 		exit(0);
+	lst_option->flag_h = 0;
+	lst_option->flag_l = 0;
+	lst_option->flag_j = 0;
+	lst_option->flag_z = 0;
+	lst_option->conv_d = 0;
+	lst_option->conv_o = 0;
+	lst_option->conv_u = 0;
+	lst_option->conv_x = 0;
+	lst_option->nb = 0;
+	lst_option->nb2 = 0;
+	lst_option->psign = 0;
+	lst_option->base = 0;
 	lst_option->fd = 0;
 	lst_option->sign = 0;
 	lst_option->zero = 0;
@@ -75,28 +87,74 @@ void		ft_put_star(t_option *lst_option)
 		lst_option->star_bf = 1;
 }
 
+void		ft_putflags(t_option *lst, char *str, int count)
+{
+	if (str[count] == 'h')
+		lst->flag_h++;
+	else if (str[count] == 'l')
+		lst->flag_l++;
+	else if (str[count] == 'j')
+		lst->flag_j++;
+	else if (str[count] == 'z')
+		lst->flag_z++;
+	else if (str[count] == 'x' || str[count] == 'X')
+	{
+		if (str[count] == 'X')
+		{
+			lst->conv_x++;
+			lst->maj = 1;
+		}
+		lst->conv_x++;
+		lst->base = 16;
+	}
+	else if (str[count] == 'o' || str[count] == 'O')
+	{
+		if (str[count] == 'O')
+			lst->conv_o++;
+		lst->conv_o++;
+		lst->base = 8;
+	}
+	else if (str[count] == 'd'|| str[count] == 'i')
+	{
+		lst->conv_d = 1;
+		lst->base = 10;
+	}
+	else if (str[count] == 'D'|| str[count] == 'I')
+	{
+		lst->conv_d = 2;
+		lst->base = 10;
+	}
+	else if (str[count] == 'u'|| str[count] == 'U')
+	{
+		lst->conv_u = 1;
+		lst->base = 10;
+	}
+}
+
 t_option	*ft_put_option(char *str, int count, int index)
 {
 	t_option	*lst_option;
 
 	lst_option = lst_init();
-	while (index--)
+	while (index > 0)
 	{
 		lst_option->zero = 0;
 		if (str[count] == '+' || str[count] == '-')
 			lst_option->sign = str[count];
-		if (str[count] == '.')
+		else if (str[count] == '.')
 			lst_option->point = 1;
-		if (str[count] == '#')
+		else if (str[count] == '#')
 			lst_option->hash = 1;
-		if (str[count] == '*')
+		else if (str[count] == '*')
 			ft_put_star(lst_option);
-		if (str[count] == ' ')
+		else if (str[count] == ' ')
 			lst_option->space = 1;
 		if (ft_isdigit(str[count]))
 			count = ft_put_digit(lst_option, str, count);
 		else
 			count++;
+		ft_putflags(lst_option, str, count);
+		index--;
 	}
 	return (lst_option);
 }

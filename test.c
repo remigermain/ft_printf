@@ -1,21 +1,20 @@
 /* ************************************************************************** */
 /*                                                          LE - /            */
 /*                                                              /             */
-/*   ft_params.c                                      .::    .:/ .      .::   */
+/*   test.c                                           .::    .:/ .      .::   */
 /*                                                 +:+:+   +:    +:  +:+:+    */
 /*   By: rgermain <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
-/*   Created: 2018/11/13 20:25:54 by rgermain     #+#   ##    ##    #+#       */
-/*   Updated: 2018/11/13 22:12:53 by rgermain    ###    #+. /#+    ###.fr     */
+/*   Created: 2018/11/27 22:15:31 by rgermain     #+#   ##    ##    #+#       */
+/*   Updated: 2018/11/27 22:23:51 by rgermain    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include <stdio.h>
+#include <limits.h>
 
-int	*ft_params_d(va_list lst_va, char *str, int *tab_i, int index)
+int main()
 {
-	tab_i[1] += ft_option_d(lst_va, str, tab_i[0], index);
-	tab_i[0] = ((tab_i[0] + index) + 1);
-	return (tab_i);
+	printf("long max= %ld int max = %d", LONG_MAX, LONG_MAX);
 }
