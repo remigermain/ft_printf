@@ -6,7 +6,7 @@
 /*   By: rgermain <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/11/09 15:39:07 by rgermain     #+#   ##    ##    #+#       */
-/*   Updated: 2018/11/30 15:19:39 by rgermain    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/11/30 18:11:39 by rgermain    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -25,6 +25,8 @@ int		main(int argc, char **argv)
 	s = "coucou c4est moi";
 	if (argc == 2)
 	{
+		a = ft_printf("pf %\n");
+//		a = printf("\npf toto et %09U %-2lu mimi et titi%--14u\n", 0, (unsigned long)14, 200);
 //		a = printf("pf %#7.5X%0006.2x et %lX!\n", 0xab, 0x876, 0xff11ff11ff1);
 //		a = printf("pf test%#.4o et %02o %#14.o!!\n", 012, 036, 12587499);
 //		a = printf("ft %C, 0x6f\n");
@@ -58,7 +60,6 @@ int		main(int argc, char **argv)
 //		a = printf("pf %#x\n", 0);
 //		a = printf("pf %#.x, %#.0x\n", 0, 0);
 //		a = printf("pf % S\n", L"(null)");
-//		a = printf("pf % s\n", NULL);
 //		a = printf("pf %03c\n", 0);
 //		a = printf("pf %.x, %.0x\n", 0, 0);
 //		a = printf("pf %#.O\n", 0);
@@ -72,14 +73,15 @@ int		main(int argc, char **argv)
 //		a = printf("pf {%3*p}\n", 10, 0);		
 //		a = printf("pf %2.9p\n", 123458888);
 //		a = printf("pf %9.2p\n", 1234);
-		a = printf("pf m%#.9od\nee", 123456789);
-//		a = printf("pf %lu\n", (unsigned long long)-12345612220);
-		printf("pf %d\n", a);
-/////////////////////////////
+//		a = printf("pf %+.i\n", 0);
+//		a = printf("pf %p  \n", &ft_strlen);
+//		printf("pf %d\n", a);
+//////////////////////////////
 
+//		a = ft_printf("\nft toto et %00009U %-2lu mimi et titi%--14u\n", 0, (unsigned long)14, 200);
 //		a = ft_printf("ft %#7.5X%0006.2x et %lX!\n", 0xab, 0x876, 0xff11ff11ff1);
 //		a = ft_printf("ft %lu\n", (unsigned long long)-12345612220);
-		a = ft_printf("ft m%#.9od\nee", 123456789);
+//		a = ft_printf("ft %p  \n", &ft_strlen);
 
 //a = ft_printf("ft test%#.4o et %02o %#14.o!!\n", 012, 036, 12587499);
 //		a = ft_printf("ft %C, 0x6f\n");
@@ -127,7 +129,7 @@ int		main(int argc, char **argv)
 //		a = ft_printf("ft %2.9p\n", 123458888);
 //		a = ft_printf("ft %9.2p\n",1234);
 //		a = ft_printf("ft {%3*p}\n", 10, 0);		
-		printf("ft %d\n", a);
+//		printf("ft %d\n", a);
 //		a = printf("pf %-03d, %-08.25d\n", 0, j);
 //		a = printf("pf = %d\n", a);
 //		a = ft_printf("ft %-03d, %-08.25d\n", 0, j);

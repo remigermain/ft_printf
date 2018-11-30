@@ -6,7 +6,7 @@
 /*   By: rgermain <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/11/09 15:34:47 by rgermain     #+#   ##    ##    #+#       */
-/*   Updated: 2018/11/30 15:01:43 by rgermain    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/11/30 17:26:01 by rgermain    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -37,6 +37,7 @@ typedef struct s_option
 	int		flag_j;
 	int		flag_z;
 	int		conv_d;
+	int		conv_p;
 	int		conv_o;
 	int		conv_u;
 	int		conv_x;
@@ -81,17 +82,19 @@ int		*ft_conv3(t_valst *lst_va, char *str, int *tab_i, int index);
 int		*ft_params_d(t_valst *lst_va, char *str, int *tab_i, int index);
 int		ft_option_d(t_option *lst, int index);
 
-int		*ft_params_no(t_valst *lst_va, char *str, int *tab_i, int index);
-int		ft_option_no(t_valst *lst_va, char *str, int count, int index);
+int		*ft_params_s(t_valst *lst_va, char *str, int *tab_i, int index);
 
 int		*ft_params_perc(t_valst *lst_va, char *str, int *tab_i, int index);
+int		*ft_params_no(t_valst *lst_va, char *str, int *tab_i, int index);
+int		*ft_params_c(t_valst *lst_va, char *str, int *tab_i, int index);
+int		*ft_params_cmaj(t_valst *lst_va, char *str, int *tab_i, int index);
 
 /****************************************
 **   utils
 **/
 
 int		ft_print_prefix(int len, int nb, int point, int fd);
-void	ft_print_sign(t_option *lst);
+int		ft_print_sign(t_option *lst);
 void	ft_option_star(t_valst *lst_va, t_option *lst);
 void	ft_option_star2(t_option *lst, int nb);
 
@@ -100,7 +103,7 @@ t_valst 		*lst_init2(t_valst *lst_va, int nb, int index);
 t_option		*lst_init(void);
 int				ft_put_digit(t_option *lst_option, char *str, int count);
 void			ft_put_star(t_option *lst_option);
-t_option		*ft_put_option(char *str, int count, int index);
+t_option		*ft_put_option(t_valst *lst_va, char *str, int count, int index);
 int				ft_printcolor(char *str, int i, int fd);
 void			ft_printcolor2(int i, int fd);
 int				ft_prefmax(t_option *lst);
@@ -112,5 +115,9 @@ int			ft_ulen_base(unsigned long nb, unsigned int base);
 int			ft_ulen(unsigned long nb);
 
 void		ft_init_nb(t_option *lst, t_valst *lst_va);
+
+
+int		ft_print_c(t_option *lst, unsigned int c, int index);
+void	ft_init_sd(t_valst *lst_va, t_option *lst);
 
 #endif

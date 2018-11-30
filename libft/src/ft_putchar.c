@@ -6,7 +6,7 @@
 /*   By: rgermain <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/10/04 14:24:30 by rgermain     #+#   ##    ##    #+#       */
-/*   Updated: 2018/11/27 20:02:34 by rgermain    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/11/30 17:45:53 by rgermain    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -28,7 +28,7 @@ int		ft_max2(int nb1, int nb2)
 	return (nb1);
 }
 
-void	ft_putwchar2(unsigned int c)
+int		ft_putwchar2(unsigned int c)
 {
 	char new[4];
 	int a;
@@ -43,9 +43,14 @@ void	ft_putwchar2(unsigned int c)
 	if (c > 0x7F)
 		new[a++] = 128 + (c % 64);
 	write(1, new, a);
+	return (a);
+}
+int		ft_putwchar(unsigned int c)
+{
+	return (ft_putwchar_fd(c, 1));
 }
 
-void	ft_putwchar(unsigned int c)
+int		ft_putwchar_fd(unsigned int c, int fd)
 {
 	char new[4];
 	int a;
@@ -68,10 +73,12 @@ void	ft_putwchar(unsigned int c)
 	}
 	if (c > 0x7F)
 		new[a++] = 128 + (c % 64);
-	write(1, new, a);
+	write(fd, new, a);
+	return (a);
 }
 
-void	ft_putchar(char c)
+int	ft_putchar(char c)
 {
 	write(1, &c, sizeof(c));
+	return (1);
 }

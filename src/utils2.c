@@ -6,7 +6,7 @@
 /*   By: rgermain <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/11/20 16:06:08 by rgermain     #+#   ##    ##    #+#       */
-/*   Updated: 2018/11/30 15:26:12 by rgermain    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/11/30 16:49:42 by rgermain    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -30,12 +30,22 @@ int		ft_print_prefix(int len, int nb, int point, int fd)
 	return (count);
 }
 
-void	ft_print_sign(t_option *lst)
+int	ft_print_sign(t_option *lst)
 {
-	if (lst->psign == 1)
-		ft_putchar('-');
-	else if (lst->psign == 2)
-		ft_putchar('+');
+	int len;
+
+	len = 0;
+	if (lst->psign != 0)
+	{
+		if (lst->psign == 1)
+			ft_putchar('-');
+		else if (lst->psign == 2)
+			ft_putchar('+');
+		else if (lst->psign == 3)
+			ft_putstr_fd("0x", lst->fd);
+		len++;
+	}
+	return (len);
 }
 
 void	ft_init_nb2(t_option *lst, t_valst *lst_va)
@@ -110,6 +120,8 @@ void	ft_init_nb(t_option *lst, t_valst *lst_va)
 		ft_init_snb(lst, lst_va);
 	else
 		ft_init_unb(lst, lst_va);
+	if (lst->conv_p == 1)
+		lst->psign = 3;
 }
 
 void	ft_option_star2(t_option *lst, int nb)

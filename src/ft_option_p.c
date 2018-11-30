@@ -6,7 +6,7 @@
 /*   By: rgermain <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/11/12 12:38:05 by rgermain     #+#   ##    ##    #+#       */
-/*   Updated: 2018/11/30 17:21:56 by rgermain    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/11/30 16:31:47 by rgermain    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -24,8 +24,6 @@ static int	ft_option_neg(t_option *lst, int count)
 	max = ft_prefmax(lst);
 	if (lst->psign == 1)
 		sign = 1;
-	if (lst->conv_p)
-		sign = 2;
 	ft_print_sign(lst);
 	if (lst->point == 1 || lst->af_nb == 0)
 		count += ft_print_prefix(len, lst->af_nb, 1, lst->fd);
@@ -48,8 +46,6 @@ static int	ft_option_pos(t_option *lst, int count)
 	max = ft_prefmax(lst);
 	if (lst->psign == 1 || (lst->sign == '+' && lst->psign != 1))
 		sign++;
-	if (lst->conv_p)
-		sign = 2;
 	if (lst->bf_zero != 1 || lst->point == 1)
 		count += ft_print_prefix(max + sign, lst->bf_nb, 0, lst->fd);
 	ft_print_sign(lst);

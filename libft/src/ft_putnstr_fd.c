@@ -6,14 +6,14 @@
 /*   By: rgermain <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/10/04 16:24:32 by rgermain     #+#   ##    ##    #+#       */
-/*   Updated: 2018/11/15 19:51:19 by rgermain    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/11/30 16:56:58 by rgermain    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int		ft_putnstr_fd(char const *str, int fd, int len)
+int		ft_putnstr_fd(char const *str, int len, int fd)
 {
 	int count;
 

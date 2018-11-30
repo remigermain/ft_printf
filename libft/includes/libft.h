@@ -6,7 +6,7 @@
 /*   By: rgermain <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/10/07 18:10:38 by rgermain     #+#   ##    ##    #+#       */
-/*   Updated: 2018/11/27 20:03:02 by rgermain    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/11/30 17:46:41 by rgermain    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -51,8 +51,8 @@ void			*ft_memcpy(void *dest, const void *src, size_t n);
 void			*ft_memalloc(size_t size);
 void			ft_bzero(void *s, size_t n);
 void			ft_memdel(void **ap);
-void			ft_putchar(char c);
-void			ft_putchar_fd(char c, int fd);
+int				ft_putchar(char c);
+int				ft_putchar_fd(char c, int fd);
 void			ft_putendl(char const *s);
 void			ft_putendl_fd(char const *s, int fd);
 void			ft_putnbr(int n);
@@ -153,8 +153,9 @@ void			ft_putunbr_base_maj(unsigned int nb, int base, int maj);
 int				ft_ulllen(unsigned long long nb);
 int				ft_ulllen_base(unsigned long long nb, unsigned long base);
 int				ft_lllen(long long nb);
-void			ft_putwchar(unsigned int c);
-void			ft_putwchar2(unsigned int c);
+int				ft_putwchar(unsigned int c);
+int				ft_putwchar_fd(unsigned int c, int fd);
+int				ft_putwchar2(unsigned int c);
 int				ft_putnstr_w(const char *str, int len);
 int				ft_putstr_w(const char *str);
 

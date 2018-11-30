@@ -6,7 +6,7 @@
 /*   By: rgermain <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/11/11 15:09:25 by rgermain     #+#   ##    ##    #+#       */
-/*   Updated: 2018/11/30 12:06:42 by rgermain    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/11/30 17:29:37 by rgermain    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -35,6 +35,8 @@ int		ft_printf(const char *format, ...)
 			ft_putchar_fd(format[tab_i[0]++], lst_va->fd);
 			tab_i[1]++;
 		}
+		if (tab_i[1] == -1)
+			break;
 	}
 	va_end(lst_va->lst_va);
 	return (tab_i[1]);

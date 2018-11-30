@@ -6,12 +6,20 @@
 /*   By: rgermain <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/11/12 12:39:33 by rgermain     #+#   ##    ##    #+#       */
-/*   Updated: 2018/11/30 15:22:47 by rgermain    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/11/30 16:44:46 by rgermain    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
+
+void		ft_init_sd(t_valst *lst_va, t_option *lst)
+{
+	lst->fd = lst_va->fd;
+	if (lst->dollar == 1)
+		lst_va = lst_init2(lst_va, lst->dollar_nb, 0);
+	ft_option_star(lst_va, lst);
+}
 
 t_option	*lst_init(void)
 {
@@ -24,6 +32,7 @@ t_option	*lst_init(void)
 	lst_option->flag_j = 0;
 	lst_option->flag_z = 0;
 	lst_option->conv_d = 0;
+	lst_option->conv_p = 0;
 	lst_option->conv_o = 0;
 	lst_option->conv_u = 0;
 	lst_option->conv_x = 0;
@@ -124,6 +133,11 @@ void		ft_putflags(t_option *lst, char *str, int count)
 		lst->conv_d = 2;
 		lst->base = 10;
 	}
+	else if (str[count] == 'p')
+	{
+		lst->conv_p = 1;
+		lst->base = 16;
+	}
 	else if (str[count] == 'u'|| str[count] == 'U')
 	{
 		lst->conv_u = 1;
@@ -131,7 +145,7 @@ void		ft_putflags(t_option *lst, char *str, int count)
 	}
 }
 
-t_option	*ft_put_option(char *str, int count, int index)
+t_option	*ft_put_option(t_valst *lst_va, char *str, int count, int index)
 {
 	t_option	*lst_option;
 
@@ -156,5 +170,6 @@ t_option	*ft_put_option(char *str, int count, int index)
 		ft_putflags(lst_option, str, count);
 		index--;
 	}
+	ft_init_sd(lst_va, lst_option);
 	return (lst_option);
 }
