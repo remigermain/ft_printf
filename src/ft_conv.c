@@ -6,7 +6,7 @@
 /*   By: rgermain <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/11/11 15:09:25 by rgermain     #+#   ##    ##    #+#       */
-/*   Updated: 2018/11/30 18:12:22 by rgermain    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/11/30 19:14:04 by rgermain    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -20,23 +20,14 @@ int	*ft_conv2(t_valst *lst_va, char *str, int *tab_i, int index)
 	t_index = index;
 	if (str[tab_i[0] + index] == '+' || str[tab_i[0] + index] == '-')
 		index++;
-	else if (str[tab_i[0] + index] == ' ')
+	else if (str[tab_i[0] + index] == ' ' || str[tab_i[0] + index] == '.')
 		index++;
-	else if (str[tab_i[0] + index] == '.')
+	else if (str[tab_i[0] + index] == '#' || str[tab_i[0] + index] == '$' ||
+			str[tab_i[0] + index] == '*')
 		index++;
-	else if (str[tab_i[0] + index] == '#')
+	else if (str[tab_i[0] + index] == 'l' || str[tab_i[0] + index] == 'h')
 		index++;
-	else if (str[tab_i[0] + index] == '$')
-		index++;
-	else if (str[tab_i[0] + index] == '*')
-		index++;
-	else if (str[tab_i[0] + index] == 'l')
-		index++;
-	else if (str[tab_i[0] + index] == 'h')
-		index++;
-	else if (str[tab_i[0] + index] == 'j')
-		index++;
-	else if (str[tab_i[0] + index] == 'z')
+	else if (str[tab_i[0] + index] == 'j' || str[tab_i[0] + index] == 'z')
 		index++;
 	while (ft_isdigit(str[tab_i[0] + index]))
 		index++;

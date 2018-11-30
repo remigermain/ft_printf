@@ -6,7 +6,7 @@
 /*   By: rgermain <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/11/09 15:39:07 by rgermain     #+#   ##    ##    #+#       */
-/*   Updated: 2018/11/30 18:11:39 by rgermain    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/11/30 19:38:59 by rgermain    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -25,7 +25,7 @@ int		main(int argc, char **argv)
 	s = "coucou c4est moi";
 	if (argc == 2)
 	{
-		a = ft_printf("pf %\n");
+//		a = printf("pf %hhd\n", 128);
 //		a = printf("\npf toto et %09U %-2lu mimi et titi%--14u\n", 0, (unsigned long)14, 200);
 //		a = printf("pf %#7.5X%0006.2x et %lX!\n", 0xab, 0x876, 0xff11ff11ff1);
 //		a = printf("pf test%#.4o et %02o %#14.o!!\n", 012, 036, 12587499);
@@ -33,7 +33,7 @@ int		main(int argc, char **argv)
 //		a = printf("pf %lc\n", 0x4e6);
 //		a = printf("%C", 0x6f);
 //		a = printf("pf titi%#012o\n", -874);
-//		a = printf("pf coco et %-#-#--24O titi%#012o\n", 12, -874);
+		a = printf("pf coco et %-#-#--24O titi%#012o\n", 12, -874);
 //		a = printf("pf %lld\n", LLONG_MIN);
 //		a = printf("pf s: %s, p: d:%d\n", "a string", 42);
 //		a = printf("pf s: %s, p: %p, d:%d\n", "a string", &ft_strlen, 42);
@@ -75,9 +75,10 @@ int		main(int argc, char **argv)
 //		a = printf("pf %9.2p\n", 1234);
 //		a = printf("pf %+.i\n", 0);
 //		a = printf("pf %p  \n", &ft_strlen);
-//		printf("pf %d\n", a);
+		printf("pf %d\n", a);
 //////////////////////////////
 
+//		a = ft_printf("%hhd", 128);
 //		a = ft_printf("\nft toto et %00009U %-2lu mimi et titi%--14u\n", 0, (unsigned long)14, 200);
 //		a = ft_printf("ft %#7.5X%0006.2x et %lX!\n", 0xab, 0x876, 0xff11ff11ff1);
 //		a = ft_printf("ft %lu\n", (unsigned long long)-12345612220);
@@ -88,7 +89,7 @@ int		main(int argc, char **argv)
 //		a = ft_printf("ft %lc\n", 0x4e6);
 //		a = ft_printf("ft coco et %-#-#--240 \n", 12);
 //		a = ft_printf("ft titi%#012o\n", -874);
-//		a = ft_printf("ft coco et %-#-#--24O titi%#012o\n", 12, -874);
+		a = ft_printf("ft coco et %-#-#--24O titi%#012o\n", 12, -874);
 //		a = ft_printf("ft %lld\n", LLONG_MIN);
 //		a = ft_printf("ft %D\n", LONG_MIN);
 //		a = ft_printf("ft s: %s, p: %p, d:%d\n", "a string", &ft_strlen, 42);
@@ -133,7 +134,7 @@ int		main(int argc, char **argv)
 //		a = printf("pf %-03d, %-08.25d\n", 0, j);
 //		a = printf("pf = %d\n", a);
 //		a = ft_printf("ft %-03d, %-08.25d\n", 0, j);
-//		a = printf("ft = %d\n", a);
+		a = printf("ft %d\n", a);
 	}
 	return (0);
 }

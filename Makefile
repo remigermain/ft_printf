@@ -6,13 +6,13 @@
 #    By: rgermain <marvin@le-101.fr>                +:+   +:    +:    +:+      #
 #                                                  #+#   #+    #+    #+#       #
 #    Created: 2018/10/01 15:39:03 by rgermain     #+#   ##    ##    #+#        #
-#    Updated: 2018/11/30 16:54:59 by rgermain    ###    #+. /#+    ###.fr      #
+#    Updated: 2018/11/30 19:34:06 by rgermain    ###    #+. /#+    ###.fr      #
 #                                                          /                   #
 #                                                         /                    #
 # **************************************************************************** #
 
 
-NAME = libftprintf.a
+NAME = ./a.out
 
 //CFLAGS = -Wall -Werror -Wextra
 
@@ -20,9 +20,9 @@ INCLUDE = -Iincludes
 
 CINC = includes/ft_printf.h libft/includes/libft.h
 
-SRC = ft_printf.c ft_conv.c utils.c utils2.c utils3.c utils4.c\
-	ft_option_d.c ft_option_c.c ft_option_s.c\
-	ft_printcolor.c 
+SRC = main.c ft_printf.c ft_conv.c utils.c utils2.c utils_print.c\
+	  ft_option_d.c ft_option_c.c ft_option_s.c\
+	  lst_init.c lst_init2.c lst_initnb.c
 
 OBJ = $(SRC:.c=.o)
 
@@ -36,8 +36,7 @@ all: $(NAME)
 
 $(NAME): $(COBJ)
 	@echo "Compilation de l'executable" $(NAME)
-	@ar ru $(NAME) $? libft/obj/*.o
-	@ranlib $(NAME)
+	@gcc $? libft/libft.a -o $(NAME)
 
 $(DOBJ)%.o : $(DSRC)%.c $(CINC)
 	@make -C libft/ all
@@ -46,16 +45,12 @@ $(DOBJ)%.o : $(DSRC)%.c $(CINC)
 	@echo "Compilation de la fonction "$<
 
 clean:
-	@make -C libft/ clean
 	@mkdir -p $(DOBJ)
 	@rm -rf $(DOBJ)
 	@echo "Suppresion des objects"
 
 fclean: clean
-	@make -C libft/ fclean
 	@rm -f $(NAME)
 	@echo "Suppresion de la library "$(NAME)
 
-re: fclean all
-
-.PHONY: all clean fclean re
+.PHONY: all clean fclean

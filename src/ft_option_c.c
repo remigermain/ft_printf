@@ -6,14 +6,14 @@
 /*   By: rgermain <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/11/12 12:38:05 by rgermain     #+#   ##    ##    #+#       */
-/*   Updated: 2018/11/30 18:25:25 by rgermain    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/11/30 19:08:22 by rgermain    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int 		ft_print_c(t_option *lst, unsigned int c, int index)
+int		ft_print_c(t_option *lst, unsigned int c, int index)
 {
 	int count;
 
@@ -37,10 +37,10 @@ int 		ft_print_c(t_option *lst, unsigned int c, int index)
 	return (count);
 }
 
-int			*ft_params_perc(t_valst *lst_va, char *str, int *tab_i, int index)
+int		*ft_params_perc(t_valst *lst_va, char *str, int *tab_i, int index)
 {
 	t_option		*lst;
-	unsigned		int c;
+	unsigned int	c;
 
 	c = '%';
 	lst = ft_put_option(lst_va, str, tab_i[0], index);
@@ -49,25 +49,25 @@ int			*ft_params_perc(t_valst *lst_va, char *str, int *tab_i, int index)
 	return (tab_i);
 }
 
-int			*ft_params_cmaj(t_valst *lst_va, char *str, int *tab_i, int index)
+int		*ft_params_cmaj(t_valst *lst_va, char *str, int *tab_i, int index)
 {
 	t_option		*lst;
-	unsigned		int c;
+	unsigned int	c;
 
 	lst = ft_put_option(lst_va, str, tab_i[0], index);
 	c = (unsigned int)va_arg(lst_va->lst_copy, int);
 	if (c > 0x7FF)
-		exit (0);
+		exit(0);
 	else
 		tab_i[1] += ft_print_c(lst, c, 1);
 	tab_i[0] = ((tab_i[0] + index) + 1);
 	return (tab_i);
 }
 
-int			*ft_params_c(t_valst *lst_va, char *str, int *tab_i, int index)
+int		*ft_params_c(t_valst *lst_va, char *str, int *tab_i, int index)
 {
 	t_option		*lst;
-	unsigned		int c;
+	unsigned int	c;
 
 	lst = ft_put_option(lst_va, str, tab_i[0], index);
 	c = (unsigned int)va_arg(lst_va->lst_copy, int);
@@ -79,10 +79,10 @@ int			*ft_params_c(t_valst *lst_va, char *str, int *tab_i, int index)
 	return (tab_i);
 }
 
-int			*ft_params_no(t_valst *lst_va, char *str, int *tab_i, int index)
+int		*ft_params_no(t_valst *lst_va, char *str, int *tab_i, int index)
 {
 	t_option		*lst;
-	unsigned		int c;
+	unsigned int	c;
 	int				count;
 
 	count = 0;

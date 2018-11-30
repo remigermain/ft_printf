@@ -6,12 +6,47 @@
 /*   By: rgermain <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/11/11 15:09:25 by rgermain     #+#   ##    ##    #+#       */
-/*   Updated: 2018/11/30 12:06:49 by rgermain    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/11/30 19:24:57 by rgermain    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
+
+int		ft_print_prefix(int len, int nb, int point, int fd)
+{
+	int count;
+
+	count = 0;
+	while (len < nb)
+	{
+		if (point == 1)
+			ft_putchar_fd('0', fd);
+		else
+			ft_putchar_fd(' ', fd);
+		count++;
+		nb--;
+	}
+	return (count);
+}
+
+int		ft_print_sign(t_option *lst)
+{
+	int len;
+
+	len = 0;
+	if (lst->psign != 0)
+	{
+		if (lst->psign == 1)
+			ft_putchar('-');
+		else if (lst->psign == 2)
+			ft_putchar('+');
+		else if (lst->psign == 3)
+			ft_putstr_fd("0x", lst->fd);
+		len++;
+	}
+	return (len);
+}
 
 void	ft_printcolor2(int i, int fd)
 {

@@ -6,7 +6,7 @@
 /*   By: rgermain <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/11/11 15:09:25 by rgermain     #+#   ##    ##    #+#       */
-/*   Updated: 2018/11/30 17:29:37 by rgermain    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/11/30 19:34:30 by rgermain    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -21,7 +21,7 @@ int		ft_printf(const char *format, ...)
 	if (!(lst_va = malloc(sizeof(t_valst))))
 		return (0);
 	va_start(lst_va->lst_va, format);
-	lst_va = lst_init2(lst_va, 0, 0);
+	lst_va = lst_initva(lst_va, 0, 0);
 	lst_va->fd = 1;
 	tab_i = init_tab2();
 	while (format[tab_i[0]] != '\0')
@@ -36,7 +36,7 @@ int		ft_printf(const char *format, ...)
 			tab_i[1]++;
 		}
 		if (tab_i[1] == -1)
-			break;
+			return (-1);
 	}
 	va_end(lst_va->lst_va);
 	return (tab_i[1]);

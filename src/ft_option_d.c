@@ -6,7 +6,7 @@
 /*   By: rgermain <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/11/12 12:38:05 by rgermain     #+#   ##    ##    #+#       */
-/*   Updated: 2018/11/30 17:21:56 by rgermain    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/11/30 19:25:38 by rgermain    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -60,14 +60,11 @@ static int	ft_option_pos(t_option *lst, int count)
 	ft_putnbr_ulm(lst->nb, lst->base, lst->maj, lst->fd);
 	return (count + len + sign);
 }
-	
-int			ft_option_d(t_option *lst, int index)
-{
-	int			len;
 
-	len = 0;	
+static int	ft_option_pref(t_option *lst, int len)
+{
 	if (lst->space == 1 && lst->psign != 1 && lst->sign == 0
-			&& lst->af_nb == 0 && lst->af_nb == 0)
+			&& lst->af_nb == 0 && lst->af_nb == 0 && lst->conv_d == 1)
 	{
 		lst->bf_nb--;
 		len += ft_print_prefix(0, 1, 0, lst->fd);
@@ -85,6 +82,14 @@ int			ft_option_d(t_option *lst, int index)
 		else
 			len += ft_putstr("0x");
 	}
+	return (len);
+}
+
+static int	ft_option_d(t_option *lst, int index)
+{
+	int len;
+
+	len = ft_option_pref(lst, 0);
 	if ((lst->sign != '-') &&
 			(!(lst->point == 1 && lst->af_nb == 0 && lst->nb == 0)))
 		len += ft_option_pos(lst, 0);
@@ -103,7 +108,7 @@ int			*ft_params_d(t_valst *lst_va, char *str, int *tab_i, int index)
 
 	len = 0;
 	lst = ft_put_option(lst_va, str, tab_i[0], index);
-	ft_init_nb(lst, lst_va);
+	ft_initnb(lst, lst_va);
 	tab_i[1] += ft_option_d(lst, index);
 	tab_i[0] = ((tab_i[0] + index) + 1);
 	return (tab_i);
