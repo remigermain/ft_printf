@@ -6,7 +6,7 @@
 #    By: rgermain <marvin@le-101.fr>                +:+   +:    +:    +:+      #
 #                                                  #+#   #+    #+    #+#       #
 #    Created: 2018/10/01 15:39:03 by rgermain     #+#   ##    ##    #+#        #
-#    Updated: 2018/11/16 09:21:08 by rgermain    ###    #+. /#+    ###.fr      #
+#    Updated: 2018/11/30 21:04:22 by rgermain    ###    #+. /#+    ###.fr      #
 #                                                          /                   #
 #                                                         /                    #
 # **************************************************************************** #
@@ -29,8 +29,7 @@ SRC = ft_atoi.c ft_bzero.c ft_isalnum.c ft_isalpha.c ft_isascii.c ft_isdigit.c f
 	  ft_lstnew.c ft_find_next_prime.c ft_is_prime.c ft_iterative_factorial.c ft_iterative_power.c ft_recursive_factorial.c \
 	  ft_recursive_power.c ft_sort_integer_table.c ft_sqrt.c ft_strlcpy.c ft_strrev.c ft_swap.c ft_match.c ft_str_is_alpha.c \
 	  ft_str_is_lowercase.c ft_str_is_numeric.c  ft_str_is_printable.c ft_str_is_uppercase.c ft_strcapitalize.c ft_strlowcase.c \
-	  ft_itoa_base.c ft_isspace.c ft_isblank.c ft_iscntrl.c ft_isgraph.c ft_isxdigit.c ft_strupcase.c get_next_line.c ft_printtab.c ft_strncpychr.c ft_strcpychr.c ft_intlen.c ft_createtab.c ft_abs.c ft_putnbr_base_long.c ft_putnstr.c ft_putnstr_fd.c ft_nbmax.c ft_nbmin.c ft_putnbr_base_lmaj.c ft_putunbr.c ft_putunbr_fd.c ft_putulnbr.c ft_putulnbr_fd.c ft_ullen.c ft_putlnbr.c ft_putnbr_base_ulmaj.c
-
+	  ft_itoa_base.c ft_isspace.c ft_isblank.c ft_iscntrl.c ft_isgraph.c ft_isxdigit.c ft_strupcase.c get_next_line.c ft_printtab.c ft_strncpychr.c ft_minmax.c
 
 OBJ = $(SRC:.c=.o)
 

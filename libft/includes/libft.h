@@ -6,7 +6,7 @@
 /*   By: rgermain <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/10/07 18:10:38 by rgermain     #+#   ##    ##    #+#       */
-/*   Updated: 2018/11/30 17:46:41 by rgermain    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/11/30 21:10:15 by rgermain    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -53,13 +53,21 @@ void			ft_bzero(void *s, size_t n);
 void			ft_memdel(void **ap);
 int				ft_putchar(char c);
 int				ft_putchar_fd(char c, int fd);
+int				ft_putwchar(unsigned int c);
+int				ft_putwchar_fd(unsigned int c, int fd);
 void			ft_putendl(char const *s);
 void			ft_putendl_fd(char const *s, int fd);
 void			ft_putnbr(int n);
 void			ft_putnbr_base(int n, int base);
 void			ft_putnbr_fd(int n, int fd);
 int				ft_putstr(char const *str);
+int				ft_putnstr(char const *str, int len);
 int				ft_putstr_fd(char const *s, int fd);
+int				ft_putnstr_fd(char const *s, int len, int fd);
+int				ft_putstrw(char const *str);
+int				ft_putnstrw(char const *str, int len);
+int				ft_putstrw_fd(char const *s, int fd);
+int				ft_putnstrw_fd(char const *s, int len, int fd);
 void			ft_strclr(char *s);
 void			ft_strdel(char **as);
 void			ft_striter(char *s, void (*f)(char *));
@@ -107,7 +115,7 @@ int				ft_str_is_uppercase(char *str);
 char			*ft_strcapitalize(char *str);
 char			*ft_strlowcase(char *str);
 char			*ft_strupcase(char *str);
-char			*ft_itoa_base(long n, int base, int maj);
+char			*ft_itoa_base(int n, int base);
 int				ft_isspace(char c);
 int				ft_isblank(int i);
 int				ft_iscntrl(char c);
@@ -117,47 +125,11 @@ void			ft_printtab(char **tab);
 char			*ft_strncpychr(const char *str, int c);
 char			*ft_strcpychr(const char *str, int c);
 int				ft_intlen_base(int nb, int base);
-int				ft_intlen2(int nb);
-int				ft_intlen2_base(int nb, int base);
-int				ft_intlen(long nb);
+int				ft_intlen(int nb);
 char			**ft_createtab(int nb, char c);
 int				ft_abs(int nb);
 long int		ft_labs(long int nb);
-void			ft_putnbr_base_long(long nb, int base);
-void			ft_putnbr_base_lmaj(long nb, int base, int maj);
-void			ft_putnbr_base_ulmaj(unsigned long nb, unsigned long base, int maj);
-int				ft_putnstr(char const *s, int len);
-int				ft_putnstr_fd(char const *s, int fd, int len);
-int				ft_nbmax(int nb1, int nb2);
-int				ft_nbmin(int nb1, int nb2);
-void			ft_putunbr(unsigned int);
-void			ft_putnbr2_fd(int nb, int fd);
-void			ft_putnbr2(int nb);
-void			ft_putunbr_fd(unsigned int, int fd);
-void			ft_putulnbr(unsigned long int nb);
-void			ft_putulnbr_base(unsigned long int nb, unsigned long int base);
-void			ft_putulnbr_fd(unsigned long int nb, int fd);
-int 			ft_ullen(unsigned long int nb);
-int 			ft_ullen_base(unsigned long int nb, unsigned long int base);
-int 			ft_llen_base(long int nb, int base);
-int	 			ft_llen(long int nb);
-void			ft_putlnbr(long int nb);
-void			ft_putlnbr_fd(long int nb, int fd);
-int				ft_uintlen(unsigned int nb);
-int				ft_uintlen_base(unsigned int nb, unsigned int base);
 int				ft_max2(int nb1, int nb2);
 int				ft_min2(int nb1, int nb2);
-void			ft_putllnbr(long long nb);
-void			ft_putnbr_base_llmaj(unsigned long long nb, unsigned long  base, int maj);
-void			ft_putunbr_base_maj(unsigned int nb, int base, int maj);
-int				ft_ulllen(unsigned long long nb);
-int				ft_ulllen_base(unsigned long long nb, unsigned long base);
-int				ft_lllen(long long nb);
-int				ft_putwchar(unsigned int c);
-int				ft_putwchar_fd(unsigned int c, int fd);
-int				ft_putwchar2(unsigned int c);
-int				ft_putnstr_w(const char *str, int len);
-int				ft_putstr_w(const char *str);
-
 
 #endif

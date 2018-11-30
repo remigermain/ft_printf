@@ -6,12 +6,51 @@
 /*   By: rgermain <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/11/12 12:39:33 by rgermain     #+#   ##    ##    #+#       */
-/*   Updated: 2018/11/30 19:31:27 by rgermain    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/11/30 20:35:08 by rgermain    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
+
+void		lst_init2(t_option *lst_option)
+{
+	lst_option->point = 0;
+	lst_option->hash = 0;
+	lst_option->space = 0;
+	lst_option->af_nb = 0;
+	lst_option->nb_tmp = 0;
+	lst_option->bf_nb = 0;
+	lst_option->bf_zero = 0;
+	lst_option->star = 0;
+	lst_option->star_bf = 0;
+	lst_option->star_pos = 0;
+	lst_option->dollar = 0;
+	lst_option->dollar_nb = 0;
+}
+
+t_option	*lst_init(void)
+{
+	t_option*lst_option;
+
+	if (!(lst_option = malloc(sizeof(t_option))))
+		exit(0);
+	lst_option->flag_h = 0;
+	lst_option->flag_l = 0;
+	lst_option->flag_j = 0;
+	lst_option->flag_z = 0;
+	lst_option->conv_d = 0;
+	lst_option->conv_p = 0;
+	lst_option->conv_u = 0;
+	lst_option->nb = 0;
+	lst_option->nb2 = 0;
+	lst_option->psign = 0;
+	lst_option->base = 0;
+	lst_option->fd = 0;
+	lst_option->sign = 0;
+	lst_option->zero = 0;
+	return (lst_option);
+}
 
 int			*init_tab2(void)
 {

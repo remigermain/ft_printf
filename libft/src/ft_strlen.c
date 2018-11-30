@@ -6,7 +6,7 @@
 /*   By: rgermain <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/10/02 17:17:10 by rgermain     #+#   ##    ##    #+#       */
-/*   Updated: 2018/10/05 14:31:39 by rgermain    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/11/13 10:33:25 by alepercq    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -18,7 +18,7 @@ size_t	ft_strlen(const char *s)
 	size_t count;
 
 	count = 0;
-	while (s[count] != (char)NULL)
+	while (s[count] != '\0')
 		count++;
 	return (count);
 }
