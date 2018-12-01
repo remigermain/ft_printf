@@ -6,7 +6,7 @@
 /*   By: rgermain <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/11/09 15:34:47 by rgermain     #+#   ##    ##    #+#       */
-/*   Updated: 2018/12/01 15:48:23 by rgermain    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/12/01 16:42:11 by rgermain    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -66,6 +66,7 @@ typedef	struct	s_option
 */
 int			main(int argc, char **argv);
 int			ft_printf(const char *str, ...);
+int			ft_dprintf(int fd, const char *str, ...);
 int			*ft_conv(t_valst *lst_va, char *str, int *tab_i, int index);
 int			*ft_conv2(t_valst *lst_va, char *str, int *tab_i, int index);
 int			*ft_conv3(t_valst *lst_va, char *str, int *tab_i, int index);

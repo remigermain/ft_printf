@@ -6,7 +6,7 @@
 /*   By: rgermain <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/10/04 14:07:14 by rgermain     #+#   ##    ##    #+#       */
-/*   Updated: 2018/11/30 21:11:36 by rgermain    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/12/01 16:48:03 by rgermain    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -16,7 +16,7 @@
 
 int	ft_putchar_fd(char c, int fd)
 {
-	write(fd, &c, fd);
+	write(fd, &c, 1);
 	return (1);
 }
 

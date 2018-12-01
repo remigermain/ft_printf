@@ -6,7 +6,7 @@
 /*   By: rgermain <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/11/12 12:38:05 by rgermain     #+#   ##    ##    #+#       */
-/*   Updated: 2018/12/01 16:05:06 by rgermain    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/12/01 16:32:53 by rgermain    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -22,7 +22,7 @@ static int	ft_option_neg(t_option *lst, int count)
 	sign = 0;
 	len = ft_ulen_base(lst->nb, lst->base);
 	max = ft_prefmax(lst);
-		if (lst->psign == 1 && lst->base == 10)
+	if (lst->psign == 1 && lst->base == 10)
 		sign = 1;
 	if (lst->conv_p)
 		sign = 2;
@@ -46,7 +46,7 @@ static int	ft_option_pos(t_option *lst, int count)
 	sign = 0;
 	len = ft_ulen_base(lst->nb, lst->base);
 	max = ft_prefmax(lst);
-	if ((lst->psign == 1 || (lst->sign == '+' && lst->psign != 1)) 
+	if ((lst->psign == 1 || (lst->sign == '+' && lst->psign != 1))
 			&& lst->base == 10)
 		sign++;
 	if (lst->conv_p)
@@ -70,7 +70,8 @@ static int	ft_option_pref(t_option *lst, int len, int index)
 		lst->bf_nb--;
 		len += ft_print_prefix(0, 1, 0, lst->fd);
 	}
-	if (lst->hash == 1 && lst->nb != 0 && lst->conv_d == 0)
+	if (lst->hash == 1 && lst->nb != 0 && lst->conv_d == 0
+			&& lst->bf_nb < ft_ulen_base(lst->nb, lst->base))
 	{
 		if (lst->af_nb > 0 && lst->base != 16)
 			lst->af_nb--;

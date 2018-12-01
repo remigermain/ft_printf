@@ -6,7 +6,7 @@
 /*   By: rgermain <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/11/20 16:06:08 by rgermain     #+#   ##    ##    #+#       */
-/*   Updated: 2018/12/01 15:49:25 by rgermain    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/12/01 16:37:17 by rgermain    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -33,8 +33,8 @@ void	ft_init_nb2(t_option *lst, t_valst *lst_va)
 
 void	ft_init_unb(t_option *lst, t_valst *lst_va)
 {
-	if (lst->flag_h == 1 || ( lst->flag_h == 2 && (lst->conv_o == 2 || lst->conv_u == 2
-			|| lst->conv_d == 2)))
+	if (lst->flag_h == 1 || (lst->flag_h == 2 && (lst->conv_o == 2
+					|| lst->conv_u == 2 || lst->conv_d == 2)))
 		lst->nb = (unsigned short)va_arg(lst_va->lst_copy, int);
 	else if (lst->flag_h == 2)
 		lst->nb = (unsigned char)va_arg(lst_va->lst_copy, int);
@@ -55,7 +55,7 @@ void	ft_init_unb(t_option *lst, t_valst *lst_va)
 
 void	ft_init_snb(t_option *lst, t_valst *lst_va)
 {
-	if (lst->flag_h == 1)
+	if (lst->flag_h == 1 || (lst->flag_h == 2 && lst->conv_d == 2))
 	{
 		if (lst->conv_d == 2)
 			lst->nb2 = (unsigned short)va_arg(lst_va->lst_copy, int);
@@ -63,12 +63,7 @@ void	ft_init_snb(t_option *lst, t_valst *lst_va)
 			lst->nb2 = (short)va_arg(lst_va->lst_copy, int);
 	}
 	else if (lst->flag_h == 2)
-	{
-		if (lst->conv_d == 2)
-			lst->nb2 = (unsigned short)va_arg(lst_va->lst_copy, int);
-		else
-			lst->nb2 = (char)va_arg(lst_va->lst_copy, int);
-	}
+		lst->nb2 = (char)va_arg(lst_va->lst_copy, int);
 	else if (lst->flag_l == 1 && lst->conv_u == 0)
 		lst->nb2 = va_arg(lst_va->lst_copy, long);
 	else if (lst->flag_l == 2 || lst->conv_u > 0)
