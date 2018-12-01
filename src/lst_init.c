@@ -6,7 +6,7 @@
 /*   By: rgermain <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/11/12 12:39:33 by rgermain     #+#   ##    ##    #+#       */
-/*   Updated: 2018/11/30 20:37:40 by rgermain    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/12/01 15:08:19 by rgermain    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -49,7 +49,12 @@ void		ft_put_star(t_option *lst_option)
 void		ft_putflags2(t_option *lst, char *str, int count)
 {
 	if (str[count] == 'o' || str[count] == 'O')
+	{
+		if (str[count] == 'O')
+			lst->conv_o++;
+		lst->conv_o++;
 		lst->base = 8;
+	}
 	else if (str[count] == 'd' || str[count] == 'i' ||
 			str[count] == 'D' || str[count] == 'I')
 	{
@@ -60,7 +65,9 @@ void		ft_putflags2(t_option *lst, char *str, int count)
 	}
 	else if (str[count] == 'u' || str[count] == 'U')
 	{
-		lst->conv_u = 1;
+		if (str[count] == 'U')
+			lst->conv_u++;
+		lst->conv_u++;
 		lst->base = 10;
 	}
 }

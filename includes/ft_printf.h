@@ -6,7 +6,7 @@
 /*   By: rgermain <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/11/09 15:34:47 by rgermain     #+#   ##    ##    #+#       */
-/*   Updated: 2018/11/30 21:07:54 by rgermain    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/12/01 15:48:23 by rgermain    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -31,6 +31,7 @@ typedef	struct	s_option
 	unsigned long	nb;
 	long			nb2;
 	int				unb;
+	int				nbflag;
 	int				flag_h;
 	int				flag_l;
 	int				flag_j;
@@ -74,6 +75,7 @@ int			*ft_conv3(t_valst *lst_va, char *str, int *tab_i, int index);
 */
 int			*ft_params_d(t_valst *lst_va, char *str, int *tab_i, int index);
 int			*ft_params_s(t_valst *lst_va, char *str, int *tab_i, int index);
+int			*ft_params_smaj(t_valst *lst_va, char *str, int *tab_i, int index);
 int			*ft_params_perc(t_valst *lst_va, char *str, int *tab_i, int index);
 int			*ft_params_no(t_valst *lst_va, char *str, int *tab_i, int index);
 int			*ft_params_c(t_valst *lst_va, char *str, int *tab_i, int index);
@@ -115,5 +117,6 @@ void		ft_init_nb2(t_option *lst, t_valst *lst_va);
 void		ft_init_snb(t_option *lst, t_valst *lst_va);
 void		ft_init_unb(t_option *lst, t_valst *lst_va);
 int			ft_print_c(t_option *lst, unsigned int c, int index);
+void		ft_modspec(t_option *lst);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: rgermain <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/11/12 12:38:05 by rgermain     #+#   ##    ##    #+#       */
-/*   Updated: 2018/11/30 19:08:22 by rgermain    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/12/01 13:30:32 by rgermain    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -56,10 +56,7 @@ int		*ft_params_cmaj(t_valst *lst_va, char *str, int *tab_i, int index)
 
 	lst = ft_put_option(lst_va, str, tab_i[0], index);
 	c = (unsigned int)va_arg(lst_va->lst_copy, int);
-	if (c > 0x7FF)
-		exit(0);
-	else
-		tab_i[1] += ft_print_c(lst, c, 1);
+	tab_i[1] += ft_print_c(lst, c, 1);
 	tab_i[0] = ((tab_i[0] + index) + 1);
 	return (tab_i);
 }

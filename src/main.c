@@ -6,7 +6,7 @@
 /*   By: rgermain <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/11/09 15:39:07 by rgermain     #+#   ##    ##    #+#       */
-/*   Updated: 2018/11/30 20:22:11 by rgermain    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/12/01 16:05:05 by rgermain    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -25,9 +25,9 @@ int		main(int argc, char **argv)
 	s = "coucou c4est moi";
 	if (argc == 2)
 	{
-		a = printf("pf coco et %-#-#--24O titi%#012o\n", 12, -874);
+		a = printf("pf {%#.3o}\n", 1);
 		printf("pf %d\n", a);
-		a = ft_printf("ft coco et %-#-#--24O titi%#012o\n", 12, -874);
+		a = ft_printf("ft {%#.3o}\n", 1);
 		a = printf("ft %d\n", a);
 	}
 	return (0);

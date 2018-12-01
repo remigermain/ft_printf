@@ -6,12 +6,28 @@
 /*   By: rgermain <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/11/20 16:06:08 by rgermain     #+#   ##    ##    #+#       */
-/*   Updated: 2018/11/30 19:38:20 by rgermain    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/12/01 15:52:33 by rgermain    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
+
+void	ft_modspec(t_option *lst)
+{
+	if (lst->hash == 1 && lst->point == 1 && lst->af_nb == 0
+			&& lst->bf_nb == 0 && lst->conv_o >= 1 && lst->nb == 0)
+		lst->point = 0;
+}
+
+void	ft_nbflag(t_option *lst)
+{
+	if (lst->flag_h == 0 && lst->flag_l == 0
+			&& lst->flag_j == 0 && lst->flag_z == 0)
+		lst->nbflag = 0;
+	else
+		lst->nbflag = 1;
+}
 
 void	ft_option_star2(t_option *lst, int nb)
 {
@@ -53,4 +69,5 @@ void	ft_option_star(t_valst *lst_va, t_option *lst)
 		if (nb < 0 && lst->point == 1 && lst->zero == 0 && lst->bf_nb == 0)
 			lst->af_nb = 0;
 	}
+	ft_nbflag(lst);
 }
