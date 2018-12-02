@@ -6,7 +6,7 @@
 /*   By: rgermain <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/11/11 15:09:25 by rgermain     #+#   ##    ##    #+#       */
-/*   Updated: 2018/12/01 15:43:34 by rgermain    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/12/02 17:24:25 by rgermain    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -42,6 +42,8 @@ int	*ft_conv(t_valst *lst_va, char *str, int *tab_i, int index)
 {
 	if (str[tab_i[0] + index] == '\0')
 		tab_i[0] += index;
+	else if (str[tab_i[0] + index] == 't' || str[tab_i[0] + index] == 's')
+		tab_i = ft_params_ts(lst_va, str, tab_i, index);
 	else if (str[tab_i[0] + index] == 'd' || str[tab_i[0] + index] == 'i' ||
 			str[tab_i[0] + index] == 'D' || str[tab_i[0] + index] == 'I' ||
 			str[tab_i[0] + index] == 'x' || str[tab_i[0] + index] == 'X' ||
@@ -49,6 +51,8 @@ int	*ft_conv(t_valst *lst_va, char *str, int *tab_i, int index)
 			str[tab_i[0] + index] == 'u' || str[tab_i[0] + index] == 'U' ||
 			str[tab_i[0] + index] == 'p')
 		tab_i = ft_params_d(lst_va, str, tab_i, index);
+	else if (str[tab_i[0] + index] == 'n')
+		tab_i = ft_params_n(lst_va, str, tab_i, index);
 	else if (str[tab_i[0] + index] == 'c')
 		tab_i = ft_params_c(lst_va, str, tab_i, index);
 	else if (str[tab_i[0] + index] == 'C')

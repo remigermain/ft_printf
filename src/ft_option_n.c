@@ -1,37 +1,24 @@
 /* ************************************************************************** */
 /*                                                          LE - /            */
 /*                                                              /             */
-/*   main.c                                           .::    .:/ .      .::   */
+/*   ft_option_d.c                                    .::    .:/ .      .::   */
 /*                                                 +:+:+   +:    +:  +:+:+    */
 /*   By: rgermain <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
-/*   Created: 2018/11/09 15:39:07 by rgermain     #+#   ##    ##    #+#       */
-/*   Updated: 2018/12/02 20:56:58 by rgermain    ###    #+. /#+    ###.fr     */
+/*   Created: 2018/11/12 12:38:05 by rgermain     #+#   ##    ##    #+#       */
+/*   Updated: 2018/12/02 17:23:41 by rgermain    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int		main(int argc, char **argv)
+int		*ft_params_n(t_valst *lst_va, char *str, int *tab_i, int index)
 {
-	int		a;
-	int b = 0;
-	int		i;
-	int		j;
-	char	*s;
+	int	*nb;
 
-	i = 5236;
-	j = 5236;
-	s = "coucou c4est moi";
-	if (argc >= 2)
-	{
-		a = ft_printf("%ts\n", argv);
-		printf("b = %d\n", b);
-//		a = printf("pf test%#.4o et %02o %0#14.o!!\n", 012, 036, 12587499);
-//		a = ft_printf("ft test%#.4o et %02o %0#14.o!!\n", 012, 036, 12587499);
-//		a = ft_printf("ft {blue}%C{eoc} {red}%s{eoc}\n", 0xbffe, "c'est rouge");
-		a = printf("ft %d\n", a);
-	}
-	return (0);
+	nb = va_arg(lst_va->lst_copy, int*);
+	*nb = tab_i[1];
+	tab_i[0] = ((tab_i[0] + index) + 1);
+	return (tab_i);
 }
