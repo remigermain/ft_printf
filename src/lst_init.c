@@ -6,7 +6,7 @@
 /*   By: rgermain <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/11/12 12:39:33 by rgermain     #+#   ##    ##    #+#       */
-/*   Updated: 2018/12/01 15:08:19 by rgermain    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/12/03 15:02:30 by rgermain    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -91,6 +91,8 @@ void		ft_putflags(t_option *lst, char *str, int count)
 			lst->maj = 1;
 		lst->base = 16;
 	}
+	else if (str[count] == 'b' || str[count] == 'B')
+		lst->base = 2;
 	else
 		ft_putflags2(lst, str, count);
 }

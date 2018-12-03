@@ -6,7 +6,7 @@
 /*   By: rgermain <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/11/11 15:09:25 by rgermain     #+#   ##    ##    #+#       */
-/*   Updated: 2018/12/03 13:55:07 by rgermain    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/12/03 16:17:19 by rgermain    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -48,6 +48,8 @@ int	*ft_conv1(t_valst *lst_va, char *str, int *tab_i, int index)
 		*nb = tab_i[1];
 		tab_i[0] += index + 1;
 	}
+	else if (str[tab_i[0] + index] == 'k')
+		tab_i = ft_params_k(lst_va, str, tab_i, index);
 	else if (str[tab_i[0] + index] == 'c')
 		tab_i = ft_params_c(lst_va, str, tab_i, index);
 	else if (str[tab_i[0] + index] == 'C')
@@ -74,7 +76,8 @@ int	*ft_conv(t_valst *lst_va, char *str, int *tab_i, int index)
 			str[tab_i[0] + index] == 'x' || str[tab_i[0] + index] == 'X' ||
 			str[tab_i[0] + index] == 'o' || str[tab_i[0] + index] == 'O' ||
 			str[tab_i[0] + index] == 'u' || str[tab_i[0] + index] == 'U' ||
-			str[tab_i[0] + index] == 'p')
+			str[tab_i[0] + index] == 'p' || str[tab_i[0] + index] == 'b' ||
+			str[tab_i[0] + index] == 'B')
 		tab_i = ft_params_d(lst_va, str, tab_i, index);
 	else
 		tab_i = ft_conv1(lst_va, str, tab_i, index);

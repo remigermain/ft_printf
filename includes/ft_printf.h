@@ -6,7 +6,7 @@
 /*   By: rgermain <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/11/09 15:34:47 by rgermain     #+#   ##    ##    #+#       */
-/*   Updated: 2018/12/03 13:58:13 by rgermain    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/12/03 15:49:07 by rgermain    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -61,6 +61,16 @@ typedef	struct	s_option
 	int				nb_tmp;
 }				t_option;
 
+typedef struct	s_time
+{
+	int	da;
+	int	h;
+	int	mi;
+	int	d;
+	int	mo;
+	int	y;
+}				t_time;
+
 /*
 **  main
 */
@@ -84,6 +94,7 @@ int			*ft_params_cmaj(t_valst *lst_va, char *str, int *tab_i, int index);
 int			*ft_params_n(t_valst *lst_va, char *str, int *tab_i, int index);
 int			*ft_params_ts(t_valst *lst_va, char *str, int *tab_i, int index);
 int			*ft_params_ti(t_valst *lst_va, char *str, int *tab_i, int index);
+int			*ft_params_k(t_valst *lst_va, char *str, int *tab_i, int index);
 
 /*
 **   utils
