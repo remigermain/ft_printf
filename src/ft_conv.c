@@ -6,7 +6,7 @@
 /*   By: rgermain <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/11/11 15:09:25 by rgermain     #+#   ##    ##    #+#       */
-/*   Updated: 2018/12/02 17:24:25 by rgermain    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/12/03 12:58:46 by rgermain    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -38,12 +38,35 @@ int	*ft_conv2(t_valst *lst_va, char *str, int *tab_i, int index)
 	return (tab_i);
 }
 
+int	*ft_conv1(t_valst *lst_va, char *str, int *tab_i, int index)
+{
+	int *nb;
+
+	if (str[tab_i[0] + index] == 'n')
+	{
+		nb = va_arg(lst_va->lst_copy, int*);
+		*nb = tab_i[1];
+		tab_i[0] += index + 1;
+	}
+	else if (str[tab_i[0] + index] == 'c')
+		tab_i = ft_params_c(lst_va, str, tab_i, index);
+	else if (str[tab_i[0] + index] == '%')
+		tab_i = ft_params_perc(lst_va, str, tab_i, index);
+	else if (str[tab_i[0] + index] == 's')
+		tab_i = ft_params_s(lst_va, str, tab_i, index);
+	else
+		tab_i = ft_conv2(lst_va, str, tab_i, index);
+	return (tab_i);
+}
+
 int	*ft_conv(t_valst *lst_va, char *str, int *tab_i, int index)
 {
 	if (str[tab_i[0] + index] == '\0')
 		tab_i[0] += index;
-	else if (str[tab_i[0] + index] == 't' || str[tab_i[0] + index] == 's')
-		tab_i = ft_params_ts(lst_va, str, tab_i, index);
+	else if (str[tab_i[0] + index] == 't' && str[tab_i[0] + index + 1] == 's')
+		tab_i = ft_params_ts(lst_va, str, tab_i, index + 1);
+	else if (str[tab_i[0] + index] == 't' && str[tab_i[0] + index + 1] == 'i')
+		tab_i = ft_params_ti(lst_va, str, tab_i, index + 1);
 	else if (str[tab_i[0] + index] == 'd' || str[tab_i[0] + index] == 'i' ||
 			str[tab_i[0] + index] == 'D' || str[tab_i[0] + index] == 'I' ||
 			str[tab_i[0] + index] == 'x' || str[tab_i[0] + index] == 'X' ||
@@ -51,19 +74,7 @@ int	*ft_conv(t_valst *lst_va, char *str, int *tab_i, int index)
 			str[tab_i[0] + index] == 'u' || str[tab_i[0] + index] == 'U' ||
 			str[tab_i[0] + index] == 'p')
 		tab_i = ft_params_d(lst_va, str, tab_i, index);
-	else if (str[tab_i[0] + index] == 'n')
-		tab_i = ft_params_n(lst_va, str, tab_i, index);
-	else if (str[tab_i[0] + index] == 'c')
-		tab_i = ft_params_c(lst_va, str, tab_i, index);
-	else if (str[tab_i[0] + index] == 'C')
-		tab_i = ft_params_cmaj(lst_va, str, tab_i, index);
-	else if (str[tab_i[0] + index] == '%')
-		tab_i = ft_params_perc(lst_va, str, tab_i, index);
-	else if (str[tab_i[0] + index] == 's')
-		tab_i = ft_params_s(lst_va, str, tab_i, index);
-	else if (str[tab_i[0] + index] == 'S')
-		tab_i = ft_params_smaj(lst_va, str, tab_i, index);
 	else
-		tab_i = ft_conv2(lst_va, str, tab_i, index);
+		tab_i = ft_conv1(lst_va, str, tab_i, index);
 	return (tab_i);
 }

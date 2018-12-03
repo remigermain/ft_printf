@@ -6,7 +6,7 @@
 /*   By: rgermain <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/10/07 18:10:38 by rgermain     #+#   ##    ##    #+#       */
-/*   Updated: 2018/11/30 21:10:15 by rgermain    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/12/03 12:06:18 by rgermain    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -122,6 +122,8 @@ int				ft_iscntrl(char c);
 int				ft_isgraph(char c);
 int				ft_isxdigit(char c);
 void			ft_printtab(char **tab);
+void			ft_printtab_fd(char **tab, int fd);
+int				ft_maxlen_tab(char **tab, int index);
 char			*ft_strncpychr(const char *str, int c);
 char			*ft_strcpychr(const char *str, int c);
 int				ft_intlen_base(int nb, int base);
