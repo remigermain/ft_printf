@@ -6,7 +6,7 @@
 /*   By: rgermain <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/11/12 12:39:33 by rgermain     #+#   ##    ##    #+#       */
-/*   Updated: 2018/12/01 14:18:35 by rgermain    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/12/05 12:44:30 by rgermain    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -21,7 +21,6 @@ void		lst_init2(t_option *lst_option)
 	lst_option->af_nb = 0;
 	lst_option->nb_tmp = 0;
 	lst_option->bf_nb = 0;
-	lst_option->bf_zero = 0;
 	lst_option->star = 0;
 	lst_option->star_bf = 0;
 	lst_option->star_pos = 0;

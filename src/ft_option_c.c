@@ -6,7 +6,7 @@
 /*   By: rgermain <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/11/12 12:38:05 by rgermain     #+#   ##    ##    #+#       */
-/*   Updated: 2018/12/03 14:03:55 by rgermain    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/12/05 12:45:02 by rgermain    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -28,7 +28,7 @@ int		ft_print_c(t_option *lst, unsigned int c, int index)
 	}
 	else
 	{
-		count += ft_print_prefix(1, lst->bf_nb, lst->bf_zero, lst->fd);
+		count += ft_print_prefix(1, lst->bf_nb, lst->zero, lst->fd);
 		if (index == 0)
 			count += ft_putchar_fd(c, lst->fd);
 		else

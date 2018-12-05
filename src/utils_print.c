@@ -6,7 +6,7 @@
 /*   By: rgermain <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/11/11 15:09:25 by rgermain     #+#   ##    ##    #+#       */
-/*   Updated: 2018/12/01 14:22:21 by rgermain    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/12/05 15:05:57 by rgermain    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -38,9 +38,9 @@ int		ft_print_sign(t_option *lst)
 	if (lst->psign != 0)
 	{
 		if (lst->psign == 1)
-			len = ft_putchar('-');
+			len = ft_putchar_fd('-', lst->fd);
 		else if (lst->psign == 2)
-			len = ft_putchar('+');
+			len = ft_putchar_fd('+', lst->fd);
 		else if (lst->psign == 3)
 			len = ft_putstr_fd("0x", lst->fd);
 	}

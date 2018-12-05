@@ -6,7 +6,7 @@
 /*   By: rgermain <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/11/12 12:38:05 by rgermain     #+#   ##    ##    #+#       */
-/*   Updated: 2018/12/01 16:32:53 by rgermain    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/12/05 12:44:12 by rgermain    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -51,10 +51,10 @@ static int	ft_option_pos(t_option *lst, int count)
 		sign++;
 	if (lst->conv_p)
 		sign = 2;
-	if (lst->bf_zero != 1 || lst->point == 1)
+	if (lst->zero != 1 || lst->point == 1)
 		count += ft_print_prefix(max + sign, lst->bf_nb, 0, lst->fd);
 	count += ft_print_sign(lst);
-	if (lst->bf_zero != 1 || lst->point == 1)
+	if (lst->zero != 1 || lst->point == 1)
 		count += ft_print_prefix(len, lst->af_nb, 1, lst->fd);
 	else
 		count += ft_print_prefix(len + sign, lst->bf_nb, 1, lst->fd);

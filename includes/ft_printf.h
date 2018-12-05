@@ -6,7 +6,7 @@
 /*   By: rgermain <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/11/09 15:34:47 by rgermain     #+#   ##    ##    #+#       */
-/*   Updated: 2018/12/03 15:49:07 by rgermain    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/12/05 16:23:33 by rgermain    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -30,6 +30,7 @@ typedef	struct	s_option
 {
 	unsigned long	nb;
 	long			nb2;
+	long double		nb3;
 	int				unb;
 	int				nbflag;
 	int				flag_h;
@@ -56,7 +57,6 @@ typedef	struct	s_option
 	int				dollar;
 	int				dollar_nb;
 	int				bf_nb;
-	int				bf_zero;
 	int				af_nb;
 	int				nb_tmp;
 }				t_option;
@@ -95,6 +95,8 @@ int			*ft_params_n(t_valst *lst_va, char *str, int *tab_i, int index);
 int			*ft_params_ts(t_valst *lst_va, char *str, int *tab_i, int index);
 int			*ft_params_ti(t_valst *lst_va, char *str, int *tab_i, int index);
 int			*ft_params_k(t_valst *lst_va, char *str, int *tab_i, int index);
+int			*ft_params_f(t_valst *lst_va, char *str, int *tab_i, int index);
+int			*ft_params_fe(t_valst *lst_va, char *str, int *tab_i, int index);
 
 /*
 **   utils
@@ -103,6 +105,7 @@ int			*init_tab2(void);
 t_valst		*lst_initva(t_valst *lst_va, int nb, int index);
 int			ft_prefmax(t_option *lst);
 void		ft_putnbr_ulm(unsigned long nb, unsigned int base, int maj, int fd);
+int			ft_putnbr_dlm(t_option *lst);
 void		ft_putnbr_ul(unsigned long nb, int fd);
 int			ft_ulen_base(unsigned long nb, unsigned int base);
 int			ft_ulen(unsigned long nb);
