@@ -6,13 +6,25 @@
 /*   By: rgermain <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/10/04 14:07:14 by rgermain     #+#   ##    ##    #+#       */
-/*   Updated: 2018/12/01 16:48:03 by rgermain    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/12/05 18:37:01 by rgermain    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
 #include "libft.h"
 #include <unistd.h>
+
+int	ft_putpchar_fd(char c, int fd)
+{
+	if (ft_isprint(c) || (c >= 9 && c <= 13))
+		return (ft_putchar_fd(c, fd));
+	else
+	{
+		ft_putchar_fd('^', fd);
+		ft_putchar_fd(c + 64, fd);
+		return (2);
+	}
+}
 
 int	ft_putchar_fd(char c, int fd)
 {

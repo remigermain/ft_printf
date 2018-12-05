@@ -6,7 +6,7 @@
 /*   By: rgermain <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/11/09 15:34:47 by rgermain     #+#   ##    ##    #+#       */
-/*   Updated: 2018/12/05 17:50:14 by rgermain    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/12/05 18:42:36 by rgermain    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -86,6 +86,7 @@ int			*ft_conv3(t_valst *lst_va, char *str, int *tab_i, int index);
 */
 int			*ft_params_d(t_valst *lst_va, char *str, int *tab_i, int index);
 int			*ft_params_s(t_valst *lst_va, char *str, int *tab_i, int index);
+int			*ft_params_r(t_valst *lst_va, char *str, int *tab_i, int index);
 int			*ft_params_smaj(t_valst *lst_va, char *str, int *tab_i, int index);
 int			*ft_params_perc(t_valst *lst_va, char *str, int *tab_i, int index);
 int			*ft_params_no(t_valst *lst_va, char *str, int *tab_i, int index);
@@ -96,7 +97,6 @@ int			*ft_params_ts(t_valst *lst_va, char *str, int *tab_i, int index);
 int			*ft_params_ti(t_valst *lst_va, char *str, int *tab_i, int index);
 int			*ft_params_k(t_valst *lst_va, char *str, int *tab_i, int index);
 int			*ft_params_f(t_valst *lst_va, char *str, int *tab_i, int index);
-int			*ft_params_fe(t_valst *lst_va, char *str, int *tab_i, int index);
 
 /*
 **   utils
@@ -127,6 +127,8 @@ void		ft_printcolor2(int i, int fd);
 t_option	*ft_put_option(t_valst *lst_va, char *str, int count, int index);
 void		ft_putflags(t_option *lst, char *str, int count);
 void		ft_putflags2(t_option *lst, char *str, int count);
+void		ft_putflags3(t_option *lst, char *str, int count);
+void		ft_putflags4(t_option *lst, char *str, int count);
 void		ft_put_star(t_option *lst_option);
 int			ft_put_digit(t_option *lst_option, char *str, int count);
 void		lst_init2(t_option *lst);

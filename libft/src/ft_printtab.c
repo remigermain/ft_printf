@@ -6,7 +6,7 @@
 /*   By: rgermain <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/11/01 13:42:29 by rgermain     #+#   ##    ##    #+#       */
-/*   Updated: 2018/12/03 12:08:38 by rgermain    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/12/05 18:43:56 by rgermain    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -39,7 +39,7 @@ int		ft_maxlen_tab(char **tab, int index)
 
 	a = 0;
 	len = 0;
-	while(tab[a] != NULL)
+	while (tab[a] != NULL)
 		len = ft_max2(len, ft_strlen(tab[a++]));
 	if (index == 1)
 		return (len);

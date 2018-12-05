@@ -6,12 +6,31 @@
 /*   By: rgermain <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/11/12 12:39:33 by rgermain     #+#   ##    ##    #+#       */
-/*   Updated: 2018/12/05 17:55:21 by rgermain    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/12/05 18:43:13 by rgermain    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
+
+void		ft_putflags4(t_option *lst, char *str, int count)
+{
+	if (str[count] == 'u' || str[count] == 'U' ||
+			str[count] == 'f' || str[count] == 'F')
+	{
+		if (str[count] == 'U')
+			lst->conv_u++;
+		lst->conv_u++;
+		lst->base = 10;
+	}
+	else if (str[count] == 'e' || str[count] == 'E')
+	{
+		if (str[count] == 'E')
+			lst->maj = 1;
+		lst->conv_o++;
+		lst->base = 10;
+	}
+}
 
 void		ft_putflags3(t_option *lst, char *str, int count)
 {
@@ -34,14 +53,8 @@ void		ft_putflags3(t_option *lst, char *str, int count)
 		lst->conv_d++;
 		lst->base = 10;
 	}
-	else if (str[count] == 'u' || str[count] == 'U' ||
-			str[count] == 'f' || str[count] == 'F')
-	{
-		if (str[count] == 'U')
-			lst->conv_u++;
-		lst->conv_u++;
-		lst->base = 10;
-	}
+	else
+		ft_putflags4(lst, str, count);
 }
 
 void		ft_putflags2(t_option *lst, char *str, int count)
@@ -59,13 +72,6 @@ void		ft_putflags2(t_option *lst, char *str, int count)
 			lst->maj = 1;
 		lst->conv_p++;
 		lst->base = 16;
-	}
-	else if (str[count] == 'e' || str[count] == 'E')
-	{
-		if (str[count] == 'E')
-			lst->maj = 1;
-		lst->conv_o++;
-		lst->base = 10;
 	}
 	else
 		ft_putflags3(lst, str, count);

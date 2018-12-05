@@ -6,7 +6,7 @@
 /*   By: rgermain <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/10/07 18:10:38 by rgermain     #+#   ##    ##    #+#       */
-/*   Updated: 2018/12/03 12:06:18 by rgermain    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/12/05 18:24:55 by rgermain    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -53,6 +53,7 @@ void			ft_bzero(void *s, size_t n);
 void			ft_memdel(void **ap);
 int				ft_putchar(char c);
 int				ft_putchar_fd(char c, int fd);
+int				ft_putpchar_fd(char c, int fd);
 int				ft_putwchar(unsigned int c);
 int				ft_putwchar_fd(unsigned int c, int fd);
 void			ft_putendl(char const *s);
@@ -64,6 +65,8 @@ int				ft_putstr(char const *str);
 int				ft_putnstr(char const *str, int len);
 int				ft_putstr_fd(char const *s, int fd);
 int				ft_putnstr_fd(char const *s, int len, int fd);
+int				ft_putpstr_fd(char const *s, int fd);
+int				ft_putpnstr_fd(char const *s, int len, int fd);
 int				ft_putstrw(char const *str);
 int				ft_putnstrw(char const *str, int len);
 int				ft_putstrw_fd(char const *s, int fd);
