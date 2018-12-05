@@ -6,7 +6,7 @@
 /*   By: rgermain <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/11/09 15:39:07 by rgermain     #+#   ##    ##    #+#       */
-/*   Updated: 2018/12/05 18:37:50 by rgermain    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/12/05 18:58:22 by rgermain    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -29,7 +29,7 @@ int		main(int argc, char **argv)
 	//if (argc >= 2)
 	a = 0;
 //	while (a < 128)
-		ft_printf("%r\n", "\3");
-		ft_printf("%c\n", 3);
+	ft_printf("%'d\n", 32);
+	printf("%'5d%d\n", 42235, -42);
 	return (0);
 }

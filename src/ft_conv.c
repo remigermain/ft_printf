@@ -6,7 +6,7 @@
 /*   By: rgermain <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/11/11 15:09:25 by rgermain     #+#   ##    ##    #+#       */
-/*   Updated: 2018/12/05 18:31:34 by rgermain    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/12/05 18:58:10 by rgermain    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -29,7 +29,7 @@ int	*ft_conv2(t_valst *lst_va, char *str, int *tab_i, int index)
 		index++;
 	else if (str[tab_i[0] + index] == 'j' || str[tab_i[0] + index] == 'z')
 		index++;
-	else if (str[tab_i[0] + index] == 'L')
+	else if (str[tab_i[0] + index] == 'L' || str[tab_i[0] + index] == 39 )
 		index++;
 	while (ft_isdigit(str[tab_i[0] + index]))
 		index++;
