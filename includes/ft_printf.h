@@ -6,7 +6,7 @@
 /*   By: rgermain <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/11/09 15:34:47 by rgermain     #+#   ##    ##    #+#       */
-/*   Updated: 2018/12/05 18:42:36 by rgermain    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/12/05 20:09:16 by rgermain    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -125,10 +125,10 @@ void		ft_printcolor2(int i, int fd);
 **	lst_init
 */
 t_option	*ft_put_option(t_valst *lst_va, char *str, int count, int index);
-void		ft_putflags(t_option *lst, char *str, int count);
-void		ft_putflags2(t_option *lst, char *str, int count);
-void		ft_putflags3(t_option *lst, char *str, int count);
-void		ft_putflags4(t_option *lst, char *str, int count);
+int		ft_putflags(t_option *lst, char *str, int count);
+int		ft_putflags2(t_option *lst, char *str, int count);
+int		ft_putflags3(t_option *lst, char *str, int count);
+int		ft_putflags4(t_option *lst, char *str, int count);
 void		ft_put_star(t_option *lst_option);
 int			ft_put_digit(t_option *lst_option, char *str, int count);
 void		lst_init2(t_option *lst);

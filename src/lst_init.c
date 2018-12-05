@@ -6,7 +6,7 @@
 /*   By: rgermain <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/11/12 12:39:33 by rgermain     #+#   ##    ##    #+#       */
-/*   Updated: 2018/12/05 17:53:38 by rgermain    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/12/05 20:09:53 by rgermain    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -18,9 +18,9 @@ int			ft_put_digit(t_option *lst_option, char *str, int count)
 	if (str[count] == '0')
 		lst_option->zero = 1;
 	lst_option->nb_tmp = 0;
-	while (ft_isdigit(str[count]))
+	while (ft_isdigit(str[count]) && *index >= 0)
 		lst_option->nb_tmp = ((lst_option->nb_tmp * 10) + (str[count++] - '0'));
-	if (str[count] == '$')
+	if (str[count] == '$' && *index >= 0)
 	{
 		count++;
 		lst_option->dollar = 1;
@@ -42,7 +42,7 @@ void		ft_put_star(t_option *lst_option)
 		lst_option->star_bf = 1;
 }
 
-void		ft_putflags(t_option *lst, char *str, int count)
+int		ft_putflags(t_option *lst, char *str, int count)
 {
 	if (str[count] == 'h')
 		lst->flag_h++;
@@ -64,15 +64,18 @@ void		ft_putflags(t_option *lst, char *str, int count)
 	else if (str[count] == 'b' || str[count] == 'B')
 		lst->base = 2;
 	else
-		ft_putflags2(lst, str, count);
+		return (ft_putflags2(lst, str, count));
+	return (1);
 }
 
 t_option	*ft_put_option(t_valst *lst_va, char *str, int count, int index)
 {
 	t_option	*lst_option;
+	int			count2;
 
+	count2 = count;
 	lst_option = lst_init();
-	while (index > 0)
+	while (count <= (count2 + index))
 	{
 		if (str[count] == '+' || str[count] == '-')
 			lst_option->sign = str[count];
@@ -86,10 +89,10 @@ t_option	*ft_put_option(t_valst *lst_va, char *str, int count, int index)
 			lst_option->space = 1;
 		if (ft_isdigit(str[count]))
 			count = ft_put_digit(lst_option, str, count);
+		else if (str[count] >= 'a' && str[count] <= 'z')
+			count += ft_putflags(lst_option, str, count);
 		else
 			count++;
-		ft_putflags(lst_option, str, count);
-		index--;
 	}
 	ft_option_star(lst_va, lst_option);
 	return (lst_option);

@@ -6,7 +6,7 @@
 /*   By: rgermain <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/11/11 15:09:25 by rgermain     #+#   ##    ##    #+#       */
-/*   Updated: 2018/12/05 18:58:10 by rgermain    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/12/05 19:04:19 by rgermain    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -42,12 +42,12 @@ int	*ft_conv2(t_valst *lst_va, char *str, int *tab_i, int index)
 
 int	*ft_conv1(t_valst *lst_va, char *str, int *tab_i, int index)
 {
-	int *nb;
+	int nb;
 
 	if (str[tab_i[0] + index] == 'n')
 	{
-		nb = va_arg(lst_va->lst_copy, int*);
-		*nb = tab_i[1];
+		nb = va_arg(lst_va->lst_copy, int);
+		nb = tab_i[1];
 		tab_i[0] += index + 1;
 	}
 	else if (str[tab_i[0] + index] == 'k')

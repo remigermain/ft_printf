@@ -6,7 +6,7 @@
 /*   By: rgermain <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/11/12 12:38:05 by rgermain     #+#   ##    ##    #+#       */
-/*   Updated: 2018/12/05 12:44:12 by rgermain    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/12/05 20:14:06 by rgermain    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -64,8 +64,8 @@ static int	ft_option_pos(t_option *lst, int count)
 
 static int	ft_option_pref(t_option *lst, int len, int index)
 {
-	if (lst->space == 1 && lst->sign == 0 && lst->psign == 0
-			&& lst->af_nb <= ft_ulen(lst->nb) && lst->conv_d != 0)
+	if (lst->space == 1 && lst->psign != 1
+			&& lst->conv_d != 0)
 	{
 		lst->bf_nb--;
 		len += ft_print_prefix(0, 1, 0, lst->fd);

@@ -6,20 +6,20 @@
 /*   By: rgermain <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/11/01 15:05:08 by rgermain     #+#   ##    ##    #+#       */
-/*   Updated: 2018/11/30 20:53:07 by rgermain    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/12/05 19:09:31 by rgermain    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	ft_intlen_base(int n, int base)
+int	ft_intlen_base(int nb, int base)
 {
-	int count;
+	int 	count;
+	long	n;
 
 	count = 0;
-	if (n == -2147483648 && base == 10)
-		return (11);
+	n = (long)nb;
 	if (n < 0 && base == 10)
 	{
 		n = n * -1;

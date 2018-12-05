@@ -6,14 +6,14 @@
 /*   By: rgermain <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/11/12 12:39:33 by rgermain     #+#   ##    ##    #+#       */
-/*   Updated: 2018/12/05 18:43:13 by rgermain    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/12/05 20:04:02 by rgermain    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-void		ft_putflags4(t_option *lst, char *str, int count)
+int		ft_putflags4(t_option *lst, char *str, int count)
 {
 	if (str[count] == 'u' || str[count] == 'U' ||
 			str[count] == 'f' || str[count] == 'F')
@@ -30,9 +30,12 @@ void		ft_putflags4(t_option *lst, char *str, int count)
 		lst->conv_o++;
 		lst->base = 10;
 	}
+	else
+		return (0);
+	return (1);
 }
 
-void		ft_putflags3(t_option *lst, char *str, int count)
+int		ft_putflags3(t_option *lst, char *str, int count)
 {
 	if (str[count] == 'g' || str[count] == 'G')
 	{
@@ -54,10 +57,11 @@ void		ft_putflags3(t_option *lst, char *str, int count)
 		lst->base = 10;
 	}
 	else
-		ft_putflags4(lst, str, count);
+		return (ft_putflags4(lst, str, count));
+	return (1);
 }
 
-void		ft_putflags2(t_option *lst, char *str, int count)
+int		ft_putflags2(t_option *lst, char *str, int count)
 {
 	if (str[count] == 'o' || str[count] == 'O')
 	{
@@ -74,5 +78,6 @@ void		ft_putflags2(t_option *lst, char *str, int count)
 		lst->base = 16;
 	}
 	else
-		ft_putflags3(lst, str, count);
+		return (ft_putflags3(lst, str, count));
+	return (1);
 }
