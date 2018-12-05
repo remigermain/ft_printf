@@ -6,7 +6,7 @@
 /*   By: rgermain <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/11/09 15:34:47 by rgermain     #+#   ##    ##    #+#       */
-/*   Updated: 2018/12/05 16:23:33 by rgermain    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/12/05 17:50:14 by rgermain    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -106,9 +106,12 @@ t_valst		*lst_initva(t_valst *lst_va, int nb, int index);
 int			ft_prefmax(t_option *lst);
 void		ft_putnbr_ulm(unsigned long nb, unsigned int base, int maj, int fd);
 int			ft_putnbr_dlm(t_option *lst);
+int			ft_putnbr_dlm2(t_option *lst, int count, int base);
+int			ft_putnbr_dlm3(t_option *lst, int count, int base);
 void		ft_putnbr_ul(unsigned long nb, int fd);
 int			ft_ulen_base(unsigned long nb, unsigned int base);
 int			ft_ulen(unsigned long nb);
+int			ft_print_end(t_option *lst);
 
 /*
 ** utils print

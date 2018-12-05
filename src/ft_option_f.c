@@ -6,42 +6,12 @@
 /*   By: rgermain <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/11/12 12:38:05 by rgermain     #+#   ##    ##    #+#       */
-/*   Updated: 2018/12/05 16:22:46 by rgermain    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/12/05 17:44:29 by rgermain    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-
-int		ft_putnbr_dlm(t_option *lst)
-{
-	int	count;
-
-	count = 0;
-	if (lst->af_nb > 18)
-	{
-		while (count < lst->af_nb)
-		{
-			lst->nb3 = (lst->nb3 - (long)lst->nb3) * 10;
-			ft_putnbr_ulm((unsigned long)lst->nb3, 10, 0, lst->fd);
-			count++;
-		}
-	}
-	else
-	{
-		while (count < (lst->af_nb + 1))
-		{
-			count++;
-			lst->nb3 *= 10;
-		}
-		lst->nb3++;
-		lst->nb3 /= 10;
-		ft_putnbr_ulm((unsigned long)lst->nb3, 10, 0, lst->fd);
-		count--;
-	}
-	return (count);
-}
-
 
 static int	ft_calcul_len2(t_option *lst, int len, int index)
 {
@@ -75,7 +45,7 @@ static int	ft_option_neg(t_option *lst, int count)
 	int max;
 
 	sign = 0;
-	len = ft_ulen(lst->nb);
+	len = ft_ulen_base(lst->nb, lst->base);
 	max = ft_calcul_len2(lst, len, 1);
 	sign = ft_calcul_len2(lst, len, 0);
 	count += ft_print_sign(lst);
@@ -103,7 +73,7 @@ static int	ft_option_pos(t_option *lst, int count)
 	int max;
 
 	sign = 0;
-	len = ft_ulen(lst->nb);
+	len = ft_ulen_base(lst->nb, lst->base);
 	max = ft_calcul_len2(lst, len, 1);
 	sign = ft_calcul_len2(lst, len, 0);
 	if ((lst->point == 1 || lst->point == 0) && lst->zero == 0)
@@ -149,10 +119,13 @@ int			*ft_params_f(t_valst *lst_va, char *str, int *tab_i, int index)
 	lst = ft_put_option(lst_va, str, tab_i[0], index);
 	count = 0;
 	ft_init_double(lst, lst_va);
+	if (lst->base == 16)
+		lst->psign = 3;
 	if (lst->sign != '-')
 		count = ft_option_pos(lst, count);
 	else
 		count = ft_option_neg(lst, count);
+	count += ft_print_end(lst);
 	tab_i[1] += count;
 	tab_i[0] += (index + 1);
 	return (tab_i);

@@ -6,7 +6,7 @@
 /*   By: rgermain <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/11/12 12:39:33 by rgermain     #+#   ##    ##    #+#       */
-/*   Updated: 2018/12/05 16:29:15 by rgermain    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/12/05 17:53:38 by rgermain    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -40,33 +40,6 @@ void		ft_put_star(t_option *lst_option)
 		lst_option->star_pos = 1;
 	if (lst_option->bf_nb != 0)
 		lst_option->star_bf = 1;
-}
-
-void		ft_putflags2(t_option *lst, char *str, int count)
-{
-	if (str[count] == 'o' || str[count] == 'O')
-	{
-		if (str[count] == 'O')
-			lst->conv_o++;
-		lst->conv_o++;
-		lst->base = 8;
-	}
-	else if (str[count] == 'd' || str[count] == 'i' ||
-			str[count] == 'D' || str[count] == 'I')
-	{
-		if (str[count] == 'D' || str[count] == 'I')
-			lst->conv_d++;
-		lst->conv_d++;
-		lst->base = 10;
-	}
-	else if (str[count] == 'u' || str[count] == 'U' ||
-			str[count] == 'f' || str[count] == 'F' || str[count] == 'e')
-	{
-		if (str[count] == 'U')
-			lst->conv_u++;
-		lst->conv_u++;
-		lst->base = 10;
-	}
 }
 
 void		ft_putflags(t_option *lst, char *str, int count)
