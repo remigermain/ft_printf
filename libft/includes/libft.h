@@ -6,7 +6,7 @@
 /*   By: rgermain <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/10/07 18:10:38 by rgermain     #+#   ##    ##    #+#       */
-/*   Updated: 2018/12/05 19:09:33 by rgermain    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/12/06 14:08:08 by rgermain    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -111,6 +111,8 @@ int				ft_match(char *s1, char *s2);
 size_t			ft_strlcpy(char *s1, const char *s2, size_t size);
 int				ft_str_is_alpha(char *str);
 int				ft_str_is_lowercase(char *str);
+int				ft_islowercase(char c);
+int				ft_isuppercase(char c);
 int				ft_str_is_numeric(char *str);
 int				ft_str_is_printable(char *str);
 int				ft_str_is_uppercase(char *str);
@@ -135,5 +137,6 @@ int				ft_abs(int nb);
 long int		ft_labs(long int nb);
 int				ft_max2(int nb1, int nb2);
 int				ft_min2(int nb1, int nb2);
+size_t			ft_strnlen(const char *str, size_t max);
 
 #endif

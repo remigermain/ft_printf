@@ -1,99 +1,133 @@
 /* ************************************************************************** */
 /*                                                          LE - /            */
 /*                                                              /             */
-/*   utils.c                                          .::    .:/ .      .::   */
+/*   lst_init.c                                       .::    .:/ .      .::   */
 /*                                                 +:+:+   +:    +:  +:+:+    */
 /*   By: rgermain <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
-/*   Created: 2018/11/12 12:39:33 by rgermain     #+#   ##    ##    #+#       */
-/*   Updated: 2018/12/05 20:09:53 by rgermain    ###    #+. /#+    ###.fr     */
+/*   Created: 2018/12/06 13:27:18 by rgermain     #+#   ##    ##    #+#       */
+/*   Updated: 2018/12/06 20:18:07 by rgermain    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int			ft_put_digit(t_option *lst_option, char *str, int count)
+void	ft_init_base(t_pf *lst)
 {
-	if (str[count] == '0')
-		lst_option->zero = 1;
-	lst_option->nb_tmp = 0;
-	while (ft_isdigit(str[count]) && *index >= 0)
-		lst_option->nb_tmp = ((lst_option->nb_tmp * 10) + (str[count++] - '0'));
-	if (str[count] == '$' && *index >= 0)
-	{
-		count++;
-		lst_option->dollar = 1;
-		lst_option->dollar_nb = lst_option->nb_tmp;
-	}
-	else if (lst_option->point == 0)
-		lst_option->bf_nb = lst_option->nb_tmp;
+	if (lst->conv == 'x' || lst->conv == 'X' || lst->conv == 'p' ||
+			lst->conv == 'a' || lst->conv == 'A' ||
+			lst->conv == 'e' || lst->conv == 'E')
+		lst->base = 16;
+	else if (lst->conv == 'u' || lst->conv == 'U' ||
+			lst->conv == 'f' || lst->conv == 'F' ||
+			lst->conv == 'i' || lst->conv == 'I' ||
+			lst->conv == 'd' || lst->conv == 'D' ||
+			lst->conv == 'g' || lst->conv == 'G')
+		lst->base = 10;
+	else if (lst->conv == 'o' || lst->conv == 'O')
+		lst->base = 8;
+	else if (lst->conv == 'b' || lst->conv == 'B')
+		lst->base = 2;
+	if (!ft_islowercase(lst->conv))
+		lst->maj = 1;
+}
+
+void	ft_putflag_conv(t_pf *lst, char *str, int count)
+{
+	if (str[count] == 'h')
+		lst->lenght++;
+	else if (str[count] == 'l' || str[count] == 'L')
+		lst->lenght += 10;
+	else if (str[count] == 'j')
+		lst->lenght += 100;
+	else if (str[count] == 'z')
+		lst->lenght += 1000;
+	else if (str[count] == 't')
+		lst->lenght += 10000;
 	else
-		lst_option->af_nb = lst_option->nb_tmp;
+		lst->conv = str[count];
+	if (lst->sign == '+')
+		lst->space = 0;
+}
+
+int		lst_putdigit2(t_valst *lst_va, t_pf *lst, char *str, int count)
+{
+	int nb_temp;
+
+	if (ft_isdigit(str[count]))
+	{
+		nb_temp = ft_atoi(str + count);
+		count += ft_intlen(nb_temp);
+	}
+	else if (str[count] == '*' || str[count] == '$')
+	{
+		if (str[count] == '$')
+		{
+			nb_temp = ft_atoi(str + count + 1);
+			lstva_digit(lst_va, nb_temp, 1, 0);
+			count += ft_intlen(nb_temp);
+		}
+		nb_temp = va_arg(lst_va->copy, int);
+		count++;
+	}
+	if (lst->point == 0)
+		lst->field = (nb_temp * lst->nb_tmp);
+	else if (lst->point == 1)
+		lst->preci = (nb_temp * lst->nb_tmp);
 	return (count);
 }
 
-void		ft_put_star(t_option *lst_option)
+int		lst_putdigit(t_valst *lst_va, t_pf *lst, char *str, int count)
 {
-	lst_option->star++;
-	if (lst_option->point == 1)
-		lst_option->star_pos = 1;
-	if (lst_option->bf_nb != 0)
-		lst_option->star_bf = 1;
-}
-
-int		ft_putflags(t_option *lst, char *str, int count)
-{
-	if (str[count] == 'h')
-		lst->flag_h++;
-	else if (str[count] == 'l' || str[count] == 'L')
-		lst->flag_l++;
-	else if (str[count] == 'j')
-		lst->flag_j++;
-	else if (str[count] == 'z')
-		lst->flag_z++;
-	else if (str[count] == 'x' || str[count] == 'X' ||
-			str[count] == 'p')
+	if (((str[count] == '+' || str[count] == '-') && (ft_isdigit(str[count + 1])
+				|| str[count + 1] == '*' || str[count + 1] == '$')) ||
+			ft_isdigit(str[count]) || str[count] == '*' || str[count] == '$')
 	{
-		if (str[count] == 'p')
-			lst->conv_p = 1;
-		else if (str[count] == 'X')
-			lst->maj = 1;
-		lst->base = 16;
-	}
-	else if (str[count] == 'b' || str[count] == 'B')
-		lst->base = 2;
-	else
-		return (ft_putflags2(lst, str, count));
-	return (1);
-}
-
-t_option	*ft_put_option(t_valst *lst_va, char *str, int count, int index)
-{
-	t_option	*lst_option;
-	int			count2;
-
-	count2 = count;
-	lst_option = lst_init();
-	while (count <= (count2 + index))
-	{
-		if (str[count] == '+' || str[count] == '-')
-			lst_option->sign = str[count];
-		else if (str[count] == '.')
-			lst_option->point = 1;
-		else if (str[count] == '#')
-			lst_option->hash = 1;
-		else if (str[count] == '*')
-			ft_put_star(lst_option);
-		else if (str[count] == ' ')
-			lst_option->space = 1;
-		if (ft_isdigit(str[count]))
-			count = ft_put_digit(lst_option, str, count);
-		else if (str[count] >= 'a' && str[count] <= 'z')
-			count += ft_putflags(lst_option, str, count);
-		else
+		lst->nb_tmp = 1;
+		if (str[count] == '0')
+		{
+			if (lst->sign == '-')
+				lst->zero = 1;
 			count++;
+		}
+		if (str[count] == '-' || str[count] == '+')
+		{
+			if (str[count] == '-')
+				lst->nb_tmp = -1;
+			count++;
+		}
+		count = lst_putdigit2(lst_va, lst, str, count);
 	}
-	ft_option_star(lst_va, lst_option);
-	return (lst_option);
+	else
+		count++;
+	return (count);
+}
+
+t_pf	*lst_initoption(t_valst *lst_va, char *str, int i, int index)
+{
+	t_pf	*lst;
+	int		count;
+
+	lst = ft_initpf(lst_va);
+	count = i + 1;
+	while (count <= (i + index))
+	{
+		if (((str[count] == '+' || str[count] == '-')
+				&& !ft_isdigit(str[count + 1])) && lst->sign == 0)
+			lst->sign = str[count];
+		else if (str[count] == '.')
+			lst->point = 1;
+		else if (str[count] == 39)
+			lst->local = 1;
+		else if (str[count] == '#')
+			lst->hash = 1;
+		else if (str[count] == ' ')
+			lst->space = 1;
+		else if (ft_isalpha(str[count]))
+			ft_putflag_conv(lst, str, count);
+		count = lst_putdigit(lst_va, lst, str, count);
+	}
+	ft_init_base(lst);
+	return (lst);
 }

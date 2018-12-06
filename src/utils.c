@@ -6,75 +6,59 @@
 /*   By: rgermain <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/11/12 12:39:33 by rgermain     #+#   ##    ##    #+#       */
-/*   Updated: 2018/12/05 12:44:30 by rgermain    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/12/06 20:29:27 by rgermain    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-void		lst_init2(t_option *lst_option)
+t_pf	*ft_initpf(t_valst *lst_va)
 {
-	lst_option->point = 0;
-	lst_option->hash = 0;
-	lst_option->space = 0;
-	lst_option->af_nb = 0;
-	lst_option->nb_tmp = 0;
-	lst_option->bf_nb = 0;
-	lst_option->star = 0;
-	lst_option->star_bf = 0;
-	lst_option->star_pos = 0;
-	lst_option->dollar = 0;
-	lst_option->dollar_nb = 0;
+	t_pf *lst;
+
+	if (!(lst = (t_pf*)malloc(sizeof(t_pf))))
+		return (NULL);
+	lst->ul_nb = 0;
+	lst->fl_nb = 0;
+	lst->hash = 0;
+	lst->space = 0;
+	lst->zero = 0;
+	lst->sign = 0;
+	lst->local = 0;
+	lst->field = 0;
+	lst->point = 0;
+	lst->preci = 0;
+	lst->maj = 0;
+	lst->psign = 0;
+	lst->base = 0;
+	lst->lenght = 0;
+	lst->conv = 0;
+	lst->fd = lst_va->fd;
+	return (lst);
 }
 
-t_option	*lst_init(void)
+t_valst	*lstva_init(int fd)
 {
-	t_option	*lst_option;
+	t_valst *lst_va;
 
-	if (!(lst_option = malloc(sizeof(t_option))))
+	if (!(lst_va = (t_valst*)malloc(sizeof(t_valst))))
 		exit(0);
-	lst_option->unb = 0;
-	lst_option->flag_h = 0;
-	lst_option->flag_l = 0;
-	lst_option->flag_j = 0;
-	lst_option->flag_z = 0;
-	lst_option->conv_d = 0;
-	lst_option->conv_p = 0;
-	lst_option->conv_u = 0;
-	lst_option->nb = 0;
-	lst_option->nb2 = 0;
-	lst_option->psign = 0;
-	lst_option->base = 0;
-	lst_option->fd = 0;
-	lst_option->sign = 0;
-	lst_option->zero = 0;
-	lst_init2(lst_option);
-	return (lst_option);
+	lst_va->count = 0;
+	lst_va->fd = fd;
+	return (lst_va);
 }
 
-int			*init_tab2(void)
-{
-	int	*total;
-
-	if (!(total = (int*)malloc(sizeof(int) * 2)))
-		exit(0);
-	total[0] = 0;
-	total[1] = 0;
-	return (total);
-}
-
-t_valst		*lst_initva(t_valst *lst_va, int nb, int index)
+void	lstva_digit(t_valst *lst_va, int nb, int index, int fd)
 {
 	int		count;
 
 	count = 0;
 	if (index == 0)
-		va_copy(lst_va->lst_copy, lst_va->lst_va);
+		va_copy(lst_va->copy, lst_va->lst_va);
 	while (count < (nb - 1))
 	{
-		va_arg(lst_va->lst_copy, int);
+		va_arg(lst_va->copy, int);
 		count++;
 	}
-	return (lst_va);
 }

@@ -6,24 +6,14 @@
 /*   By: rgermain <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/11/27 20:49:03 by rgermain     #+#   ##    ##    #+#       */
-/*   Updated: 2018/12/05 19:54:39 by rgermain    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/12/06 18:14:07 by rgermain    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int		ft_prefmax(t_option *lst)
-{
-	int	len;
-
-	len = ft_ulen_base(lst->nb, lst->base);
-	if (len > lst->af_nb)
-		return (len);
-	return (lst->af_nb);
-}
-
-void	ft_putnbr_ulm(unsigned long nb, unsigned int base, int maj, int fd)
+void	ft_putnbr_ulm(unsigned long nb, size_t base, size_t maj, size_t fd)
 {
 	if (nb >= base)
 	{
@@ -38,12 +28,12 @@ void	ft_putnbr_ulm(unsigned long nb, unsigned int base, int maj, int fd)
 		ft_putchar_fd(nb + 87, fd);
 }
 
-void	ft_putnbr_ul(unsigned long nb, int fd)
+void	ft_putnbr_ul(unsigned long nb, size_t fd)
 {
 	ft_putnbr_ulm(nb, 10, 1, fd);
 }
 
-int		ft_ulen_base(unsigned long nb, unsigned int base)
+int		ft_ulen_base(unsigned long nb, size_t base)
 {
 	int count;
 

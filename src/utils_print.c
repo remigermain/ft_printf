@@ -6,7 +6,7 @@
 /*   By: rgermain <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/11/11 15:09:25 by rgermain     #+#   ##    ##    #+#       */
-/*   Updated: 2018/12/05 17:15:30 by rgermain    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/12/06 19:28:20 by rgermain    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -30,7 +30,7 @@ int		ft_print_prefix(int len, int nb, int point, int fd)
 	return (count);
 }
 
-int		ft_print_sign(t_option *lst)
+int		ft_print_sign(t_pf *lst)
 {
 	int len;
 
@@ -45,6 +45,14 @@ int		ft_print_sign(t_option *lst)
 			len = ft_putstr_fd("0X", lst->fd);
 		else if (lst->psign == 3 && lst->maj == 0)
 			len = ft_putstr_fd("0x", lst->fd);
+		else if (lst->psign == 4 && lst->maj == 0)
+			len = ft_putstr_fd("e+00", lst->fd);
+		else if (lst->psign == 4 && lst->maj == 1)
+			len = ft_putstr_fd("E+00", lst->fd);
+		else if (lst->psign == 5 && lst->maj == 1)
+			len = ft_putstr_fd("p+0", lst->fd);
+		else if (lst->psign == 5 && lst->maj == 1)
+			len = ft_putstr_fd("P+0", lst->fd);
 	}
 	return (len);
 }

@@ -6,86 +6,74 @@
 /*   By: rgermain <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/11/20 16:06:08 by rgermain     #+#   ##    ##    #+#       */
-/*   Updated: 2018/12/01 16:37:17 by rgermain    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/12/06 21:04:17 by rgermain    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-void	ft_init_nb2(t_option *lst, t_valst *lst_va)
+void	ft_signprefix(t_pf *lst)
 {
-	if (lst->unb == 0)
-	{
-		if (lst->nb2 < 0)
-		{
-			lst->psign = 1;
-			lst->nb = -lst->nb2;
-		}
-		else
-			lst->nb = lst->nb2;
-		if (lst->nb2 >= 0 && lst->sign == '+')
-			lst->psign = 2;
-	}
-	else
-		lst->psign = 0;
+	if (lst->conv == 'p')
+		lst->psign = 3;
+	else if (lst->conv == 'e' || lst->conv == 'E')
+		lst->psign = 4;
+	else if (lst->conv == 'a' || lst->conv == 'A')
+		lst->psign = 5;
 }
 
-void	ft_init_unb(t_option *lst, t_valst *lst_va)
+void	ft_init_unb(t_pf *lst, t_valst *lst_va)
 {
-	if (lst->flag_h == 1 || (lst->flag_h == 2 && (lst->conv_o == 2
-					|| lst->conv_u == 2 || lst->conv_d == 2)))
-		lst->nb = (unsigned short)va_arg(lst_va->lst_copy, int);
-	else if (lst->flag_h == 2)
-		lst->nb = (unsigned char)va_arg(lst_va->lst_copy, int);
-	else if (lst->flag_l == 1 && lst->conv_u == 0)
-		lst->nb = va_arg(lst_va->lst_copy, long);
-	else if (lst->flag_l == 2 || lst->conv_u > 0)
-		lst->nb = va_arg(lst_va->lst_copy, unsigned long);
-	else if (lst->flag_j == 1)
-		lst->nb = va_arg(lst_va->lst_copy, intmax_t);
-	else if (lst->flag_z == 1)
-		lst->nb = va_arg(lst_va->lst_copy, size_t);
-	else if (lst->conv_o == 1)
-		lst->nb = va_arg(lst_va->lst_copy, unsigned int);
+	if (lst->lenght == 1 || (lst->lenght == 2 && (lst->conv == 'd'
+					|| lst->conv == 'U' || lst->conv == 'D')))
+		lst->ul_nb = (unsigned short)va_arg(lst_va->copy, int);
+	else if (lst->lenght == 2)
+		lst->ul_nb = (unsigned char)va_arg(lst_va->copy, int);
+	else if (lst->lenght == 10 && (lst->conv != 'u' || lst->conv != 'U'))
+		lst->ul_nb = va_arg(lst_va->copy, long);
+	else if (lst->lenght == 20 && (lst->conv == 'u' || lst->conv == 'U'))
+		lst->ul_nb = va_arg(lst_va->copy, unsigned long);
+	else if (lst->lenght == 100)
+		lst->ul_nb = va_arg(lst_va->copy, intmax_t);
+	else if (lst->lenght == 1000)
+		lst->ul_nb = va_arg(lst_va->copy, size_t);
+	else if (lst->conv == 'o')
+		lst->ul_nb = va_arg(lst_va->copy, unsigned int);
 	else
-		lst->nb = va_arg(lst_va->lst_copy, unsigned long);
-	lst->unb = 1;
+		lst->ul_nb = va_arg(lst_va->copy, unsigned long);
+	lst->psign = (lst->sign == '+' ? 2 : 0);
 }
 
-void	ft_init_snb(t_option *lst, t_valst *lst_va)
+void	ft_init_snb(t_pf *lst, t_valst *lst_va)
 {
-	if (lst->flag_h == 1 || (lst->flag_h == 2 && lst->conv_d == 2))
-	{
-		if (lst->conv_d == 2)
-			lst->nb2 = (unsigned short)va_arg(lst_va->lst_copy, int);
-		else
-			lst->nb2 = (short)va_arg(lst_va->lst_copy, int);
-	}
-	else if (lst->flag_h == 2)
-		lst->nb2 = (char)va_arg(lst_va->lst_copy, int);
-	else if (lst->flag_l == 1 && lst->conv_u == 0)
-		lst->nb2 = va_arg(lst_va->lst_copy, long);
-	else if (lst->flag_l == 2 || lst->conv_u > 0)
-		lst->nb2 = va_arg(lst_va->lst_copy, long);
-	else if (lst->flag_j == 1)
-		lst->nb2 = va_arg(lst_va->lst_copy, intmax_t);
-	else if (lst->flag_z == 1)
-		lst->nb2 = va_arg(lst_va->lst_copy, size_t);
-	else if (lst->conv_d == 2)
-		lst->nb2 = va_arg(lst_va->lst_copy, long);
+	if (lst->lenght == 1 || (lst->lenght == 2 && lst->conv == 'd'))
+		lst->nb_tmp = (short)va_arg(lst_va->copy, int);
+	else if (lst->lenght == 2)
+		lst->nb_tmp = (char)va_arg(lst_va->copy, int);
+	else if (lst->lenght == 10 && (lst->conv != 'u' || lst->conv != 'U'))
+		lst->nb_tmp = va_arg(lst_va->copy, long);
+	else if (lst->lenght == 20 && (lst->conv == 'u' || lst->conv == 'U'))
+		lst->nb_tmp = va_arg(lst_va->copy, long);
+	else if (lst->lenght == 100)
+		lst->nb_tmp = va_arg(lst_va->copy, intmax_t);
+	else if (lst->lenght == 1000)
+		lst->nb_tmp = va_arg(lst_va->copy, size_t);
+	else if (lst->conv == 'D' || lst->conv == 'I')
+		lst->nb_tmp = va_arg(lst_va->copy, long);
 	else
-		lst->nb2 = va_arg(lst_va->lst_copy, int);
+		lst->nb_tmp = va_arg(lst_va->copy, int);
+	lst->psign = (lst->nb_tmp < 0 ? 1 : 0);
+	if (lst->sign == '+' && lst->nb_tmp >= 0)
+		lst->psign = 2;
+	lst->ul_nb = (lst->nb_tmp < 0 ? -lst->nb_tmp : lst->nb_tmp);
 }
 
-void	ft_initnb(t_option *lst, t_valst *lst_va)
+void	ft_initnb(t_pf *lst, t_valst *lst_va)
 {
-	if (lst->conv_d >= 1)
+	if ((lst->conv == 'd' || lst->conv == 'D') || (lst->lenght == 0 && lst->conv == 'i'))
 		ft_init_snb(lst, lst_va);
 	else
 		ft_init_unb(lst, lst_va);
-	ft_init_nb2(lst, lst_va);
-	ft_modspec(lst);
-	if (lst->conv_p == 1)
-		lst->psign = 3;
+	ft_signprefix(lst);
 }

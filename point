@@ -1,0 +1,56 @@
+	lst->ul_nb = 0;
+	lst->fl_nb = 0;
+	lst->hash = 0;
+	lst->space = 0;
+	lst->zero = 0;
+	lst->sign = 0;
+	lst->local = 0;
+	lst->field = 0;
+	lst->point = 0;
+	lst->preci = 0;
+	lst->maj = 0;
+	lst->psign = 0;
+	lst->base = 0;
+	lst->lenght = 0;
+	lst->conv = 0;
+	lst->fd = lst_va->fd;
+	if (lst->conv == 'x' || lst->conv == 'X' || lst->conv == 'p' ||
+			lst->conv == 'a' || lst->conv == 'A' ||
+			lst->conv == 'e' || lst->conv == 'E')
+		lst->base = 16;
+	else if (lst->conv == 'u' || lst->conv == 'U' ||
+			lst->conv == 'f' || lst->conv == 'F' ||
+			lst->conv == 'i' || lst->conv == 'I' ||
+			lst->conv == 'd' || lst->conv == 'D' ||
+			lst->conv == 'g' || lst->conv == 'G')
+		lst->base = 10;
+	else if (lst->conv == 'o' || lst->conv == 'O')
+		lst->base = 8;
+	else if (lst->conv == 'b' || lst->conv == 'B')
+		lst->base = 2;
+	if (!ft_islowercase(lst->conv))
+		lst->maj = 1;
+		lst->lenght++;
+		lst->lenght += 10;
+		lst->lenght += 100;
+		lst->lenght += 1000;
+		lst->lenght += 10000;
+		lst->conv = str[count];
+			lst->zero = 1;
+		if (lst->point == 0)
+			lst->field = ft_atoi(str + count);
+			count += ft_intlen(lst->field);
+		else if (lst->point == 1)
+			lst->preci = ft_atoi(str + count);
+			count += ft_intlen(lst->preci);
+	if (lst->point == 0)
+		lst->field = nb_temp;
+	else if (lst->point == 1)
+		lst->preci = nb_temp;
+	printf("point =%d count = %c\n", lst->point, str[count + 1]);
+			lst->sign = str[count];
+			lst->point = 1;
+			lst->local = 1;
+			lst->hash = 1;
+			lst->space = 1;
+	printf("point =%d count = %c\n", lst->point, str[count]);
