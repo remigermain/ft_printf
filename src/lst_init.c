@@ -6,7 +6,7 @@
 /*   By: rgermain <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/12/06 13:27:18 by rgermain     #+#   ##    ##    #+#       */
-/*   Updated: 2018/12/06 20:18:07 by rgermain    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/12/07 13:39:12 by rgermain    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -47,14 +47,13 @@ void	ft_putflag_conv(t_pf *lst, char *str, int count)
 		lst->lenght += 10000;
 	else
 		lst->conv = str[count];
-	if (lst->sign == '+')
-		lst->space = 0;
 }
 
 int		lst_putdigit2(t_valst *lst_va, t_pf *lst, char *str, int count)
 {
 	int nb_temp;
 
+	nb_temp = 0;
 	if (ft_isdigit(str[count]))
 	{
 		nb_temp = ft_atoi(str + count);
@@ -85,9 +84,9 @@ int		lst_putdigit(t_valst *lst_va, t_pf *lst, char *str, int count)
 			ft_isdigit(str[count]) || str[count] == '*' || str[count] == '$')
 	{
 		lst->nb_tmp = 1;
-		if (str[count] == '0')
+		if (str[count] == '0' && lst->point == 0)
 		{
-			if (lst->sign == '-')
+			if (lst->sign != '+')
 				lst->zero = 1;
 			count++;
 		}
@@ -113,8 +112,8 @@ t_pf	*lst_initoption(t_valst *lst_va, char *str, int i, int index)
 	count = i + 1;
 	while (count <= (i + index))
 	{
-		if (((str[count] == '+' || str[count] == '-')
-				&& !ft_isdigit(str[count + 1])) && lst->sign == 0)
+		if (str[count] == '+' || (str[count] == '-' &&
+					!ft_isdigit(str[count + 1])))
 			lst->sign = str[count];
 		else if (str[count] == '.')
 			lst->point = 1;

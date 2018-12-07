@@ -6,7 +6,7 @@
 /*   By: rgermain <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/11/09 15:39:07 by rgermain     #+#   ##    ##    #+#       */
-/*   Updated: 2018/12/06 21:06:33 by rgermain    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/12/07 16:07:34 by rgermain    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -29,9 +29,15 @@ int		main(int argc, char **argv)
 	//if (argc >= 2)
 	a = 0;
 //	while (a < 128)
-	a= ft_printf("ft %20.ld et %.4hhi !\n", 0x11ffaa147, (signed char)-8);
+	a = ft_printf("ft t%#04.2O %#2Oet %#-8.3O titi\n", 40, 23, 24);
+	a = ft_printf("ft t%#04.2O %#2Oet %#-8.3O titi\n", 5, 1, 1);
+	a = ft_printf("ft t%4.2O %2Oet %-8.3O titi\n", 40, 23, 24);
+	a = ft_printf("ft t%4.2O %2Oet %-8.3O titi\n", 1, 1, 1);
 	a = printf("ft = %d\n", a);
-	a= printf("ft %20.ld et %.4hhi !\n", 0x11ffaa147, (signed char)-8);
+	a = printf("pf t%#04.2O %#2Oet %#-8.3O titi\n", 40, 23, 24);
+	a = printf("pf t%#04.2O %#2Oet %#-8.3O titi\n", 1, 1, 1);
+	a = printf("pf t%4.2O %2Oet %-8.3O titi\n", 40, 23, 24);
+	a = printf("pf t%4.2O %2Oet %-8.3O titi\n", 1, 1, 1);
 	a = printf("pf = %d\n", a);
 //	a= printf("ft % #+-58.*hhD   \n", 42, 51, 23);
 //	printf("ft = %d\n", a);

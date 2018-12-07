@@ -6,7 +6,7 @@
 /*   By: rgermain <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/11/20 16:06:08 by rgermain     #+#   ##    ##    #+#       */
-/*   Updated: 2018/12/06 21:04:17 by rgermain    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/12/06 22:47:11 by rgermain    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -15,7 +15,8 @@
 
 void	ft_signprefix(t_pf *lst)
 {
-	if (lst->conv == 'p')
+	if (lst->conv == 'p' || ((lst->conv == 'x' || lst->conv == 'X') 
+				&& lst->hash == 1 && lst->ul_nb != 0))
 		lst->psign = 3;
 	else if (lst->conv == 'e' || lst->conv == 'E')
 		lst->psign = 4;
@@ -32,7 +33,7 @@ void	ft_init_unb(t_pf *lst, t_valst *lst_va)
 		lst->ul_nb = (unsigned char)va_arg(lst_va->copy, int);
 	else if (lst->lenght == 10 && (lst->conv != 'u' || lst->conv != 'U'))
 		lst->ul_nb = va_arg(lst_va->copy, long);
-	else if (lst->lenght == 20 && (lst->conv == 'u' || lst->conv == 'U'))
+	else if (lst->lenght == 20 || (lst->conv == 'u' || lst->conv == 'U'))
 		lst->ul_nb = va_arg(lst_va->copy, unsigned long);
 	else if (lst->lenght == 100)
 		lst->ul_nb = va_arg(lst_va->copy, intmax_t);
@@ -71,7 +72,8 @@ void	ft_init_snb(t_pf *lst, t_valst *lst_va)
 
 void	ft_initnb(t_pf *lst, t_valst *lst_va)
 {
-	if ((lst->conv == 'd' || lst->conv == 'D') || (lst->lenght == 0 && lst->conv == 'i'))
+	if (lst->conv == 'd' || lst->conv == 'D' ||  (lst->conv == 'i' && lst->lenght != 20)
+			|| lst->conv == 'I')
 		ft_init_snb(lst, lst_va);
 	else
 		ft_init_unb(lst, lst_va);
