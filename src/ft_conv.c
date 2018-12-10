@@ -6,7 +6,7 @@
 /*   By: rgermain <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/11/11 15:09:25 by rgermain     #+#   ##    ##    #+#       */
-/*   Updated: 2018/12/06 20:26:24 by rgermain    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/12/10 16:46:47 by rgermain    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -35,8 +35,8 @@ int	ft_conv2(t_valst *lst_va, char *str, int i, int index)
 		index++;
 	if (t_index != index)
 		i = (ft_conv(lst_va, str, i, index));
-	else
-		return (i + index);
+	else if (t_index == index)
+		i += ft_params_no(lst_va, str, i, index);
 	return (i);
 }
 
@@ -52,6 +52,12 @@ int	ft_conv(t_valst *lst_va, char *str, int i, int index)
 			str[i + index] == 'p' || str[i + index] == 'b' ||
 			str[i + index] == 'B')
 		i += ft_params_nb(lst_va, str, i, index);
+	else if (str[i + index] == 'c')
+		i += ft_params_char(lst_va, str, i, index);
+	else if (str[i + index] == '%')
+		i += ft_params_perc(lst_va, str, i, index);
+	else if (str[i + index] == 's')
+		i += ft_params_string(lst_va, str, i, index);
 	else
 		i = ft_conv2(lst_va, str, i, index);
 	return (i);

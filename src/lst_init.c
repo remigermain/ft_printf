@@ -6,7 +6,7 @@
 /*   By: rgermain <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/12/06 13:27:18 by rgermain     #+#   ##    ##    #+#       */
-/*   Updated: 2018/12/07 13:39:12 by rgermain    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/12/10 16:18:27 by rgermain    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -31,6 +31,8 @@ void	ft_init_base(t_pf *lst)
 		lst->base = 2;
 	if (!ft_islowercase(lst->conv))
 		lst->maj = 1;
+	if (lst->point == 1)
+		lst->zero = 0;
 }
 
 void	ft_putflag_conv(t_pf *lst, char *str, int count)
@@ -55,10 +57,7 @@ int		lst_putdigit2(t_valst *lst_va, t_pf *lst, char *str, int count)
 
 	nb_temp = 0;
 	if (ft_isdigit(str[count]))
-	{
-		nb_temp = ft_atoi(str + count);
-		count += ft_intlen(nb_temp);
-	}
+		nb_temp = ft_atoi2(str + count, &count);
 	else if (str[count] == '*' || str[count] == '$')
 	{
 		if (str[count] == '$')

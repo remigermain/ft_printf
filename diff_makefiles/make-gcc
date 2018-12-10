@@ -6,7 +6,7 @@
 #    By: rgermain <marvin@le-101.fr>                +:+   +:    +:    +:+      #
 #                                                  #+#   #+    #+    #+#       #
 #    Created: 2018/10/01 15:39:03 by rgermain     #+#   ##    ##    #+#        #
-#    Updated: 2018/12/06 20:39:39 by rgermain    ###    #+. /#+    ###.fr      #
+#    Updated: 2018/12/10 16:12:54 by rgermain    ###    #+. /#+    ###.fr      #
 #                                                          /                   #
 #                                                         /                    #
 # **************************************************************************** #
@@ -22,8 +22,9 @@ CINC = includes/ft_printf.h libft/includes/libft.h
 
 SRC = main.c ft_printf.c ft_conv.c utils.c utils2.c utils_print.c\
 	  ft_params_nb.c \
-	  lst_init.c lst_initnb.c \
-	  debug.c
+	  lst_init.c lst_init2.c lst_initnb.c \
+	  debug.c \
+	  ft_atoi.c
 
 OBJ = $(SRC:.c=.o)
 

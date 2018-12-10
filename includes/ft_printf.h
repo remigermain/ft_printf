@@ -6,7 +6,7 @@
 /*   By: rgermain <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/11/09 15:34:47 by rgermain     #+#   ##    ##    #+#       */
-/*   Updated: 2018/12/06 20:04:21 by rgermain    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/12/10 16:46:58 by rgermain    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -73,6 +73,10 @@ int			ft_conv3(t_valst *lst_va, char *str, int i, int index);
 */
 
 int		ft_params_nb(t_valst *lst_va, char *str, int i, int index);
+int		ft_params_char(t_valst *lst_va, char *str, int i, int index);
+int		ft_params_perc(t_valst *lst_va, char *str, int i, int index);
+int		ft_params_no(t_valst *lst_va, char *str, int i, int index);
+int		ft_params_string(t_valst *lst_va, char *str, int i, int index);
 
 /*
 **   utils
@@ -83,10 +87,11 @@ t_pf		*lst_initoption(t_valst *lst_va, char *str, int i, int index);
 int			lst_putstar_doll(t_valst *lst_va, t_pf *lst, char *str, int count);
 t_pf		*ft_initpf(t_valst *lst);
 
-void		ft_putnbr_ulm(unsigned long nb, size_t base, size_t maj, size_t fd);
-void		ft_putnbr_ul(unsigned long nb, size_t fd);
+int			ft_putnbr_ulm(unsigned long nb, size_t base, size_t maj, size_t fd);
+int			ft_putnbr_ul(unsigned long nb, size_t fd);
 int			ft_ulen_base(unsigned long nb, size_t base);
 int			ft_ulen(unsigned long nb);
+int			ft_atoi2(const char *str, int *count);
 
 /*
 ** utils print
@@ -105,4 +110,8 @@ void		ft_initnb(t_pf *lst, t_valst *lst_va);
 void		ft_init_snb(t_pf *lst, t_valst *lst_va);
 void		ft_init_unb(t_pf *lst, t_valst *lst_va);
 void		ft_signprefix(t_pf *lst);
+int			ft_signcalc(t_pf *lst);
+int			ft_hashcalc(t_pf *lst, int index, int len);
+int			ft_spacecalc(t_pf *lst, int len, int i);
+
 #endif

@@ -6,7 +6,7 @@
 /*   By: rgermain <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/11/20 16:06:08 by rgermain     #+#   ##    ##    #+#       */
-/*   Updated: 2018/12/06 22:47:11 by rgermain    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/12/10 16:20:30 by rgermain    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -15,7 +15,7 @@
 
 void	ft_signprefix(t_pf *lst)
 {
-	if (lst->conv == 'p' || ((lst->conv == 'x' || lst->conv == 'X') 
+	if (lst->conv == 'p' || ((lst->conv == 'x' || lst->conv == 'X')
 				&& lst->hash == 1 && lst->ul_nb != 0))
 		lst->psign = 3;
 	else if (lst->conv == 'e' || lst->conv == 'E')
@@ -72,8 +72,8 @@ void	ft_init_snb(t_pf *lst, t_valst *lst_va)
 
 void	ft_initnb(t_pf *lst, t_valst *lst_va)
 {
-	if (lst->conv == 'd' || lst->conv == 'D' ||  (lst->conv == 'i' && lst->lenght != 20)
-			|| lst->conv == 'I')
+	if (lst->conv == 'd' || lst->conv == 'D' || lst->conv == 'I' ||
+			(lst->conv == 'i' && lst->lenght != 20))
 		ft_init_snb(lst, lst_va);
 	else
 		ft_init_unb(lst, lst_va);

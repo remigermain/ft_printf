@@ -6,7 +6,7 @@
 /*   By: rgermain <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/11/11 15:09:25 by rgermain     #+#   ##    ##    #+#       */
-/*   Updated: 2018/12/06 22:41:08 by rgermain    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/12/10 12:31:47 by rgermain    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -52,7 +52,9 @@ int		ft_print_sign(t_pf *lst)
 		else if (lst->psign == 5 && lst->maj == 1)
 			len = ft_putstr_fd("p+0", lst->fd);
 		else if (lst->psign == 5 && lst->maj == 1)
-			len = ft_putstr_fd("P+0", lst->fd);
+			len = ft_putstr_fd("0", lst->fd);
+		else if (lst->psign == 6)
+			len = ft_putstr_fd("0", lst->fd);
 	}
 	return (len);
 }

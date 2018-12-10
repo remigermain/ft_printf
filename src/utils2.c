@@ -6,34 +6,38 @@
 /*   By: rgermain <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/11/27 20:49:03 by rgermain     #+#   ##    ##    #+#       */
-/*   Updated: 2018/12/06 18:14:07 by rgermain    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/12/10 16:20:02 by rgermain    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-void	ft_putnbr_ulm(unsigned long nb, size_t base, size_t maj, size_t fd)
+int	ft_putnbr_ulm(unsigned long nb, size_t base, size_t maj, size_t fd)
 {
+	int i;
+
+	i = 0;
 	if (nb >= base)
 	{
-		ft_putnbr_ulm((nb / base), base, maj, fd);
-		ft_putnbr_ulm((nb % base), base, maj, fd);
+		i += ft_putnbr_ulm((nb / base), base, maj, fd);
+		i += ft_putnbr_ulm((nb % base), base, maj, fd);
 	}
 	else if (nb < 10)
-		ft_putchar_fd(nb + '0', fd);
+		i += ft_putchar_fd(nb + '0', fd);
 	else if (maj == 1)
-		ft_putchar_fd(nb + 55, fd);
+		i += ft_putchar_fd(nb + 55, fd);
 	else
-		ft_putchar_fd(nb + 87, fd);
+		i += ft_putchar_fd(nb + 87, fd);
+	return (i);
 }
 
-void	ft_putnbr_ul(unsigned long nb, size_t fd)
+int	ft_putnbr_ul(unsigned long nb, size_t fd)
 {
-	ft_putnbr_ulm(nb, 10, 1, fd);
+	return (ft_putnbr_ulm(nb, 10, 1, fd));
 }
 
-int		ft_ulen_base(unsigned long nb, size_t base)
+int	ft_ulen_base(unsigned long nb, size_t base)
 {
 	int count;
 
@@ -46,7 +50,7 @@ int		ft_ulen_base(unsigned long nb, size_t base)
 	return (count + 1);
 }
 
-int		ft_ulen(unsigned long nb)
+int	ft_ulen(unsigned long nb)
 {
 	return (ft_ulen_base(nb, 10));
 }

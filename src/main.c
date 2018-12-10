@@ -5,8 +5,8 @@
 /*                                                 +:+:+   +:    +:  +:+:+    */
 /*   By: rgermain <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
-/*   Created: 2018/11/09 15:39:07 by rgermain     #+#   ##    ##    #+#       */
-/*   Updated: 2018/12/07 16:07:34 by rgermain    ###    #+. /#+    ###.fr     */
+/*   CreateO: 2018/11/09 15:39:07 by rgermain     #+#   ##    ##    #+#       */
+/*   UpOateO: 2018/12/10 12:43:44 by rgermain    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -20,30 +20,71 @@ int		main(int argc, char **argv)
 	int		i;
 	int		j;
 	char	*s;
-	long double	ff = 81256.99;
-	float	ff2 = 5934.166161;
-	double  dd = 1.42;
 	i = 5236;
 	j = 5236;
 	s = "coucou c4est moi";
-	//if (argc >= 2)
-	a = 0;
-//	while (a < 128)
-	a = ft_printf("ft t%#04.2O %#2Oet %#-8.3O titi\n", 40, 23, 24);
-	a = ft_printf("ft t%#04.2O %#2Oet %#-8.3O titi\n", 5, 1, 1);
-	a = ft_printf("ft t%4.2O %2Oet %-8.3O titi\n", 40, 23, 24);
-	a = ft_printf("ft t%4.2O %2Oet %-8.3O titi\n", 1, 1, 1);
-	a = printf("ft = %d\n", a);
-	a = printf("pf t%#04.2O %#2Oet %#-8.3O titi\n", 40, 23, 24);
-	a = printf("pf t%#04.2O %#2Oet %#-8.3O titi\n", 1, 1, 1);
-	a = printf("pf t%4.2O %2Oet %-8.3O titi\n", 40, 23, 24);
-	a = printf("pf t%4.2O %2Oet %-8.3O titi\n", 1, 1, 1);
-	a = printf("pf = %d\n", a);
-//	a= printf("ft % #+-58.*hhD   \n", 42, 51, 23);
-//	printf("ft = %d\n", a);
-//	printf("ft = %d\n", a);
-//	printf("ft = %d\n", a);
-//	a = printf("pf %+-15d\n", -2004662592);
-//	printf("pf = %d\n", a);
+	a = 0;/*
+	printf("conv 0\n");
+	a = printf("pf t%#04.2O %#02Oet %#0-8.3O titi\n", 0, 0, 0);
+	a = printf("pf t%04.2O %02Oet %0-8.3O titi\n", 0, 0, 0);
+	a = printf("pf t%#4.2O %#2Oet %#-8.3O titi\n", 0, 0, 0);
+	a = printf("pf t%4.2O %2Oet %-8.3O titi\n", 0, 0, 0);
+	printf("\n");
+	printf("conv x\n");
+	a = printf("pf t%#04.2x %#02xet %#0-8.3x titi\n", 0, 0, 0);
+	a = printf("pf t%04.2x %02xet %0-8.3x titi\n", 0, 0, 0);
+	a = printf("pf t%#4.2x %#2xet %#-8.3x titi\n", 0, 0, 0);
+	a = printf("pf t%4.2x %2xet %-8.3x titi\n", 0, 0, 0);
+	printf("\n");
+	printf("conv u\n");
+	a = printf("pf t%#04.2u %#02uet %#0-8.3u titi\n", 0, 0, 0);
+	a = printf("pf t%04.2u %02uet %0-8.3u titi\n", 0, 0, 0);
+	a = printf("pf t%#4.2u %#2uet %#-8.3u titi\n", 0, 0, 0);
+	a = printf("pf t%4.2u %2uet %-8.3u titi\n", 0, 0, 0);
+	printf("\n");
+	printf("conv d\n");
+	a = printf("pf t%#04.2d %#02det %#0-8.3d titi\n", 0, 0, 0);
+	a = printf("pf t%04.2d %02det %0-8.3d titi\n", 0, 0, 0);
+	a = printf("pf t%#4.2d %#2det %#-8.3d titi\n", 0, 0, 0);
+	a = printf("pf t%4.2d %2det %-8.3d titi\n", 0, 0, 0);
+	printf("\n");
+	printf("\n");
+	printf("\n");
+
+	printf("conv 0\n");
+	a = ft_printf("pf t%#04.2O %#02Oet %#0-8.3O titi\n", 0, 0, 0);
+	a = ft_printf("pf t%04.2O %02Oet %0-8.3O titi\n", 0, 0, 0);
+	a = ft_printf("pf t%#4.2O %#2Oet %#-8.3O titi\n", 0, 0, 0);
+	a = ft_printf("pf t%4.2O %2Oet %-8.3O titi\n", 0, 0, 0);
+	printf("\n");
+	printf("conv x\n");
+	a = ft_printf("pf t%#04.2x %#02xet %#0-8.3x titi\n", 0, 0, 0);
+	a = ft_printf("pf t%04.2x %02xet %0-8.3x titi\n", 0, 0, 0);
+	a = ft_printf("pf t%#4.2x %#2xet %#-8.3x titi\n", 0, 0, 0);
+	a = ft_printf("pf t%4.2x %2xet %-8.3x titi\n", 0, 0, 0);
+	printf("\n");
+	printf("conv u\n");
+	a = ft_printf("pf t%#04.2u %#02uet %#0-8.3u titi\n", 0, 0, 0);
+	a = ft_printf("pf t%04.2u %02uet %0-8.3u titi\n", 0, 0, 0);
+	a = ft_printf("pf t%#4.2u %#2uet %#-8.3u titi\n", 0, 0, 0);
+	a = ft_printf("pf t%4.2u %2uet %-8.3u titi\n", 0, 0, 0);
+	printf("\n");
+	printf("conv d\n");
+	a = ft_printf("pf t%#04.2d %#02det %#0-8.3d titi\n", 0, 0, 0);
+	a = ft_printf("pf t%04.2d %02det %0-8.3d titi\n", 0, 0, 0);
+	a = ft_printf("pf t%#4.2d %#2det %#-8.3d titi\n", 0, 0, 0);
+	a = ft_printf("pf t%4.2d %2det %-8.3d titi\n", 0, 0, 0);
+	printf("\n");*/
+/*
+	a = printf("pf test%#.4o et %02o %0#14.0o!!\n", 012, 036, 12587499);
+	printf("pf = %d\n", a);
+	a = ft_printf("pf test%#.4o et %02o %0#14.0o!!\n", 012, 036, 12587499);
+*/	a = printf("pf t%04.2o%#2oet %#-8.3o titi\n", 0, 0, 0);
+	printf("pf = %d\n", a);
+	a = ft_printf("ft t%04.2o%#2oet %#-8.3o titi\n", 0, 0, 0);
+	printf("ft = %d\n", a);
+
+
+
 	return (0);
 }
