@@ -6,7 +6,7 @@
 /*   By: rgermain <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/11/20 16:06:08 by rgermain     #+#   ##    ##    #+#       */
-/*   Updated: 2018/12/10 16:20:30 by rgermain    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/12/11 20:44:21 by rgermain    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -26,14 +26,15 @@ void	ft_signprefix(t_pf *lst)
 
 void	ft_init_unb(t_pf *lst, t_valst *lst_va)
 {
-	if (lst->lenght == 1 || (lst->lenght == 2 && (lst->conv == 'd'
-					|| lst->conv == 'U' || lst->conv == 'D')))
-		lst->ul_nb = (unsigned short)va_arg(lst_va->copy, int);
-	else if (lst->lenght == 2)
-		lst->ul_nb = (unsigned char)va_arg(lst_va->copy, int);
-	else if (lst->lenght == 10 && (lst->conv != 'u' || lst->conv != 'U'))
+	if (lst->lenght == 1 && lst->conv != 'O' && lst->conv != 'U'
+			&& lst->conv != 'D')
+		lst->ul_nb = (unsigned short)va_arg(lst_va->copy, unsigned long);
+	else if (lst->lenght == 2 && lst->conv != 'O' && lst->conv != 'U'
+			&& lst->conv != 'D')
+		lst->ul_nb = (unsigned char)va_arg(lst_va->copy, unsigned long);
+	else if (lst->lenght == 10)
 		lst->ul_nb = va_arg(lst_va->copy, long);
-	else if (lst->lenght == 20 || (lst->conv == 'u' || lst->conv == 'U'))
+	else if (lst->lenght == 20)
 		lst->ul_nb = va_arg(lst_va->copy, unsigned long);
 	else if (lst->lenght == 100)
 		lst->ul_nb = va_arg(lst_va->copy, intmax_t);
@@ -48,13 +49,13 @@ void	ft_init_unb(t_pf *lst, t_valst *lst_va)
 
 void	ft_init_snb(t_pf *lst, t_valst *lst_va)
 {
-	if (lst->lenght == 1 || (lst->lenght == 2 && lst->conv == 'd'))
+	if (lst->lenght == 1)
 		lst->nb_tmp = (short)va_arg(lst_va->copy, int);
 	else if (lst->lenght == 2)
 		lst->nb_tmp = (char)va_arg(lst_va->copy, int);
-	else if (lst->lenght == 10 && (lst->conv != 'u' || lst->conv != 'U'))
+	else if (lst->lenght == 10)
 		lst->nb_tmp = va_arg(lst_va->copy, long);
-	else if (lst->lenght == 20 && (lst->conv == 'u' || lst->conv == 'U'))
+	else if (lst->lenght == 20)
 		lst->nb_tmp = va_arg(lst_va->copy, long);
 	else if (lst->lenght == 100)
 		lst->nb_tmp = va_arg(lst_va->copy, intmax_t);
@@ -65,15 +66,15 @@ void	ft_init_snb(t_pf *lst, t_valst *lst_va)
 	else
 		lst->nb_tmp = va_arg(lst_va->copy, int);
 	lst->psign = (lst->nb_tmp < 0 ? 1 : 0);
-	if (lst->sign == '+' && lst->nb_tmp >= 0)
+	if (lst->sign == '+' && lst->nb_tmp >= 0 && (lst->conv == 'd' ||
+				lst->conv == 'D' || lst->conv == 'I' || lst->conv == 'i'))
 		lst->psign = 2;
 	lst->ul_nb = (lst->nb_tmp < 0 ? -lst->nb_tmp : lst->nb_tmp);
 }
 
 void	ft_initnb(t_pf *lst, t_valst *lst_va)
 {
-	if (lst->conv == 'd' || lst->conv == 'D' || lst->conv == 'I' ||
-			(lst->conv == 'i' && lst->lenght != 20))
+	if (lst->conv == 'd' || (lst->conv == 'i' && lst->lenght != 20))
 		ft_init_snb(lst, lst_va);
 	else
 		ft_init_unb(lst, lst_va);

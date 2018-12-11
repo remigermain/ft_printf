@@ -6,7 +6,7 @@
 /*   By: rgermain <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/11/09 15:34:47 by rgermain     #+#   ##    ##    #+#       */
-/*   Updated: 2018/12/10 16:46:58 by rgermain    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/12/11 16:20:03 by rgermain    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -77,12 +77,16 @@ int		ft_params_char(t_valst *lst_va, char *str, int i, int index);
 int		ft_params_perc(t_valst *lst_va, char *str, int i, int index);
 int		ft_params_no(t_valst *lst_va, char *str, int i, int index);
 int		ft_params_string(t_valst *lst_va, char *str, int i, int index);
+int		ft_params_k(t_valst *lst_va, char *str, int i, int index);
+int		ft_params_f(t_valst *lst_va, char *str, int i, int index);
+int		ft_params_ti(t_valst *lst_va, char *str, int i, int index);
+int		ft_params_ts(t_valst *lst_va, char *str, int i, int index);
 
 /*
 **   utils
 */
 t_valst		*lstva_init(int fd);
-void		lstva_digit(t_valst *lst_va, int nb, int index, int fd);
+void		lstva_digit(t_valst *lst_va, int nb, int index);
 t_pf		*lst_initoption(t_valst *lst_va, char *str, int i, int index);
 int			lst_putstar_doll(t_valst *lst_va, t_pf *lst, char *str, int count);
 t_pf		*ft_initpf(t_valst *lst);
@@ -100,6 +104,7 @@ int			ft_print_prefix(int len, int nb, int point, int fd);
 int			ft_print_sign(t_pf *lst);
 int			ft_printcolor(char *str, int i, int fd);
 void		ft_printcolor2(int i, int fd);
+int			ft_putnbr_dlm(t_pf *lst);
 
 void		debug(t_pf *lst);
 /*

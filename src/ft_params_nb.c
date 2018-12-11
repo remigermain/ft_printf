@@ -6,7 +6,7 @@
 /*   By: rgermain <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/12/06 14:31:36 by rgermain     #+#   ##    ##    #+#       */
-/*   Updated: 2018/12/10 16:21:11 by rgermain    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/12/11 20:44:41 by rgermain    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -25,8 +25,8 @@ int		ft_option_nb(t_pf *lst, int i)
 	if (lst->ul_nb == 0 && lst->point == 1 && lst->hash == 1 && lst->preci == 0)
 		len = 0;
 	index = ft_hashcalc(lst, 0, len);
-	max = ft_max2(len, lst->preci) + sign;
 	i = ft_spacecalc(lst, len, i);
+	max = ft_max2(len, lst->preci) + sign;
 	if (lst->zero == 1)
 		i += ft_print_sign(lst);
 	i += ft_print_prefix(max + index, lst->field, lst->zero, lst->fd);

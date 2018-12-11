@@ -6,7 +6,7 @@
 /*   By: rgermain <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/12/06 14:31:36 by rgermain     #+#   ##    ##    #+#       */
-/*   Updated: 2018/12/10 16:17:38 by rgermain    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/12/11 20:43:46 by rgermain    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -31,25 +31,17 @@ int	ft_hashcalc(t_pf *lst, int index, int len)
 {
 	if (lst->hash == 1 && lst->conv == 'u')
 		lst->hash = 0;
-	if (lst->hash == 1 && lst->conv != 'd' && lst->conv != 'x'
-			&& lst->conv != 'X')
+	if (lst->hash == 1 && (lst->conv == 'o' || lst->conv == 'O')
+			&& lst->ul_nb != 0)
 	{
-		lst->zero = 0;
-		if (lst->preci <= len || lst->ul_nb != 0)
+		index = 1;
+		if ((lst->point == 1 && lst->preci > len))
 		{
-			index = 1;
-			if (lst->point == 1 && lst->preci != 0)
+			if (lst->preci != 0)
 				lst->preci--;
-			else if (lst->point != 1)
-			{
-				if (lst->ul_nb == 0)
-					index = 0;
-				else if (lst->field > 0)
-					lst->field--;
-				else if (lst->field < 0)
-					lst->field++;
-			}
 		}
+		if (lst->field < 0)
+			lst->field++;
 	}
 	return (index);
 }

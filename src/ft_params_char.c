@@ -6,22 +6,40 @@
 /*   By: rgermain <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/12/10 16:21:44 by rgermain     #+#   ##    ##    #+#       */
-/*   Updated: 2018/12/10 16:40:22 by rgermain    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/12/11 20:47:29 by rgermain    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int		ft_option_char(t_pf *lst, size_t c)
+int		ft_countchar(size_t c)
+{
+	if (c <= 0x7F)
+		return (1);
+	if (c <= 0x7FF)
+		return (2);
+	if (c <= 0xFFFF)
+		return (3);
+	return (4);
+}
+
+int		ft_option_char(t_pf *lst, size_t c, int index)
 {
 	int count;
+	int max;
 
 	count = 0;
-	count += ft_print_prefix(1, lst->field, lst->zero, lst->fd);
-	count += ft_putchar_fd(c, lst->fd);
-	count += ft_print_prefix(1, -lst->field, 0, lst->fd);
-	return (count);
+	if (c > 0x10FFFF && index == 1)
+		return (-1);
+	max = ft_countchar(c);
+	count += ft_print_prefix(max, lst->field, lst->zero, lst->fd);
+	if (index == 0)
+		count += ft_putchar_fd(c, lst->fd);
+	else
+		count += ft_putwchar_fd(c, lst->fd);
+	count += ft_print_prefix(max, -lst->field, 0, lst->fd);
+	return (count + max);
 }
 
 int		ft_params_char(t_valst *lst_va, char *str, int i, int index)
@@ -32,8 +50,16 @@ int		ft_params_char(t_valst *lst_va, char *str, int i, int index)
 
 	count = 0;
 	lst = lst_initoption(lst_va, str, i, index);
-	c = (char)va_arg(lst_va->copy, int);
-	count = ft_option_char(lst, c);
+	if ((lst->lenght >= 10 && lst->lenght <= 20) || lst->conv == 'C')
+	{
+		c = va_arg(lst_va->copy, size_t);
+		count = ft_option_char(lst, c, 1);
+	}
+	else
+	{
+		c = (char)va_arg(lst_va->copy, size_t);
+		count = ft_option_char(lst, c, 0);
+	}
 	lst_va->count += count;
 	return (index + 1);
 }
@@ -47,7 +73,7 @@ int		ft_params_perc(t_valst *lst_va, char *str, int i, int index)
 	count = 0;
 	lst = lst_initoption(lst_va, str, i, index);
 	c = '%';
-	count = ft_option_char(lst, c);
+	count = ft_option_char(lst, c, 0);
 	lst_va->count += count;
 	return (index + 1);
 }
@@ -61,9 +87,7 @@ int		ft_params_no(t_valst *lst_va, char *str, int i, int index)
 	count = 0;
 	lst = lst_initoption(lst_va, str, i, index);
 	c = str[i + index];
-	count = ft_option_char(lst, c);
+	count = ft_option_char(lst, c, 0);
 	lst_va->count += count;
 	return (index + 1);
 }
-
-

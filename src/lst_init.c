@@ -6,7 +6,7 @@
 /*   By: rgermain <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/12/06 13:27:18 by rgermain     #+#   ##    ##    #+#       */
-/*   Updated: 2018/12/10 16:18:27 by rgermain    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/12/11 20:43:21 by rgermain    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -35,7 +35,7 @@ void	ft_init_base(t_pf *lst)
 		lst->zero = 0;
 }
 
-void	ft_putflag_conv(t_pf *lst, char *str, int count)
+int		ft_putflag_conv(t_pf *lst, char *str, int count)
 {
 	if (str[count] == 'h')
 		lst->lenght++;
@@ -49,56 +49,36 @@ void	ft_putflag_conv(t_pf *lst, char *str, int count)
 		lst->lenght += 10000;
 	else
 		lst->conv = str[count];
-}
-
-int		lst_putdigit2(t_valst *lst_va, t_pf *lst, char *str, int count)
-{
-	int nb_temp;
-
-	nb_temp = 0;
-	if (ft_isdigit(str[count]))
-		nb_temp = ft_atoi2(str + count, &count);
-	else if (str[count] == '*' || str[count] == '$')
-	{
-		if (str[count] == '$')
-		{
-			nb_temp = ft_atoi(str + count + 1);
-			lstva_digit(lst_va, nb_temp, 1, 0);
-			count += ft_intlen(nb_temp);
-		}
-		nb_temp = va_arg(lst_va->copy, int);
-		count++;
-	}
-	if (lst->point == 0)
-		lst->field = (nb_temp * lst->nb_tmp);
-	else if (lst->point == 1)
-		lst->preci = (nb_temp * lst->nb_tmp);
+	count++;
 	return (count);
 }
 
 int		lst_putdigit(t_valst *lst_va, t_pf *lst, char *str, int count)
 {
-	if (((str[count] == '+' || str[count] == '-') && (ft_isdigit(str[count + 1])
-				|| str[count + 1] == '*' || str[count + 1] == '$')) ||
-			ft_isdigit(str[count]) || str[count] == '*' || str[count] == '$')
+	int nb_tmp;
+
+	nb_tmp = 0;
+	if (str[count] == '+')
+		lst->sign = str[count++];
+	else if (str[count] == '-')
+		lst->nb_tmp = str[count++] - 46;
+	else if (ft_isdigit(str[count]) == 1 || str[count] == '*'
+			|| str[count] == '$')
 	{
-		lst->nb_tmp = 1;
-		if (str[count] == '0' && lst->point == 0)
+		if (ft_isdigit(str[count]) == 1)
+			nb_tmp = ft_atoi2(str + count, &count);
+		if (str[count] == '*' || str[count] == '$')
 		{
-			if (lst->sign != '+')
-				lst->zero = 1;
+			if (str[count] == '$')
+				lstva_digit(lst_va, nb_tmp, 0);
+			nb_tmp = va_arg(lst_va->copy, int);
 			count++;
 		}
-		if (str[count] == '-' || str[count] == '+')
-		{
-			if (str[count] == '-')
-				lst->nb_tmp = -1;
-			count++;
-		}
-		count = lst_putdigit2(lst_va, lst, str, count);
+		if (lst->point == 0)
+			lst->field = (nb_tmp * lst->nb_tmp);
+		else
+			lst->preci = nb_tmp;
 	}
-	else
-		count++;
 	return (count);
 }
 
@@ -111,20 +91,18 @@ t_pf	*lst_initoption(t_valst *lst_va, char *str, int i, int index)
 	count = i + 1;
 	while (count <= (i + index))
 	{
-		if (str[count] == '+' || (str[count] == '-' &&
-					!ft_isdigit(str[count + 1])))
-			lst->sign = str[count];
-		else if (str[count] == '.')
-			lst->point = 1;
+		if (str[count] == '.')
+			lst->point = str[count++] - 45;
 		else if (str[count] == 39)
-			lst->local = 1;
+			lst->local = str[count++] - 38;
 		else if (str[count] == '#')
-			lst->hash = 1;
+			lst->hash = str[count++] - 34;
 		else if (str[count] == ' ')
-			lst->space = 1;
-		else if (ft_isalpha(str[count]))
-			ft_putflag_conv(lst, str, count);
-		count = lst_putdigit(lst_va, lst, str, count);
+			lst->space = str[count++] - 31;
+		else if (ft_isalpha(str[count]) || str[count] == '%')
+			count = ft_putflag_conv(lst, str, count);
+		else
+			count = lst_putdigit(lst_va, lst, str, count);
 	}
 	ft_init_base(lst);
 	return (lst);

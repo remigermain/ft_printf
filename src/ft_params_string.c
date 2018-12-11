@@ -6,14 +6,14 @@
 /*   By: rgermain <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/12/10 16:21:44 by rgermain     #+#   ##    ##    #+#       */
-/*   Updated: 2018/12/10 16:51:00 by rgermain    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/12/10 20:36:42 by rgermain    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int		ft_option_string(t_pf *lst, char *str)
+int		ft_option_string(t_pf *lst, char *str, int index)
 {
 	int count;
 	int max;
@@ -26,10 +26,14 @@ int		ft_option_string(t_pf *lst, char *str)
 	else
 		max = lst->preci;
 	count += ft_print_prefix(max, lst->field, lst->zero, lst->fd);
-	if (lst->point == 0)
+	if (lst->point == 0 && index == 1)
 		count += ft_putstr_fd(str, lst->fd);
-	else
+	else if (index == 1)
 		count += ft_putnstr_fd(str, lst->preci, lst->fd);
+	else if (lst->point == 0 && index == 0)
+		count += ft_putpstr_fd(str, lst->fd);
+	else if (index == 0)
+		count += ft_putpnstr_fd(str, lst->preci, lst->fd);
 	count += ft_print_prefix(count, -lst->field, 0, lst->fd);
 	return (count);
 }
@@ -45,9 +49,10 @@ int		ft_params_string(t_valst *lst_va, char *str, int i, int index)
 	str2 = va_arg(lst_va->copy, char*);
 	if (str2 == NULL)
 		str2 = "(null)";
-	count = ft_option_string(lst, str2);
+	if (lst->conv == 'r')
+		count = ft_option_string(lst, str2, 0);
+	else
+		count = ft_option_string(lst, str2, 1);
 	lst_va->count += count;
 	return (index + 1);
 }
-
-

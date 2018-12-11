@@ -13,6 +13,7 @@
 
 #include "ft_printf.h"
 
+#include <wchar.h>
 int		main(int argc, char **argv)
 {
 	int		a;
@@ -78,11 +79,59 @@ int		main(int argc, char **argv)
 /*
 	a = printf("pf test%#.4o et %02o %0#14.0o!!\n", 012, 036, 12587499);
 	printf("pf = %d\n", a);
-	a = ft_printf("pf test%#.4o et %02o %0#14.0o!!\n", 012, 036, 12587499);
-*/	a = printf("pf t%04.2o%#2oet %#-8.3o titi\n", 0, 0, 0);
-	printf("pf = %d\n", a);
-	a = ft_printf("ft t%04.2o%#2oet %#-8.3o titi\n", 0, 0, 0);
+	a = ft_printf("pf test%#.4o et %02o %0#14.0o!!\n", 012, 036, 12587499);*/
+
+//	a = printf("pf %C\n", 524);
+//	printf("pf = %d\n", a);
+//	a = printf("pf %+-1$.*hi", 27, 42, 99);
+//	a = ft_printf("ft ^.^/%-#jo^.^/\n", 0);
+	
+	a = ft_printf("\\!/%23lc\\!/", (char)128150);
 	printf("ft = %d\n", a);
+	a = printf("\\!/%23lc\\!/", (char)128150);
+	printf("ft = %d\n", a);
+
+
+	a = ft_printf(">------------<%52.18hhX>------------<", -835167824);
+	printf("ft = %d\n", a);
+	a = printf(">------------<%52.18hhX>------------<", -835167824);
+	printf("ft = %d\n", a);
+
+	a = ft_printf("\\!/%#54.8ho\\!/", -857417474);
+	printf("ft = %d\n", a);
+	a = printf("\\!/%#54.8ho\\!/", -857417474);
+	printf("ft = %d\n", a);
+	
+	a = ft_printf("\\!/%-0#40.2zo\\!/", 0);
+	printf("ft = %d\n", a);
+	a = printf("\\!/%-0#40.2zo\\!/", 0);
+	printf("ft = %d\n", a);
+	
+	a = ft_printf("^.^/%-#58.2zo^.^/", 1229158158);
+	printf("ft = %d\n", a);
+	a = printf("^.^/%-#58.2zo^.^/", 1229158158);
+	printf("ft = %d\n", a);
+	
+	a = ft_printf("^.^/%#58.2zo^.^/", 1229158158);
+	printf("ft = %d\n", a);
+	a = printf("^.^/%#58.2zo^.^/", 1229158158);
+	printf("ft = %d\n", a);
+	a = ft_printf("%-#50.2zo", 1655987608);
+	printf("ft = %d\n", a);
+	a = printf("%-#50.2zo", 1655987608);
+	printf("pf = %d\n", a);
+	a = ft_printf("^.^/%-#56zo^.^/", 1655987608);
+	printf("ft = %d\n", a);
+	a = printf("^.^/%-#56zo^.^/", 1655987608);
+	printf("pf = %d\n", a);
+	a = ft_printf("ft 42%#-22ho42", 888888);
+	printf("ft = %d\n", a);
+	a = printf("pf 42%#-22ho42", 888888);
+	printf("pf = %d\n", a);
+	a = ft_printf("pf ^.^/%-#jo^.^/", 116);
+	printf("ft = %d\n", a);
+	a = printf("pf ^.^/%-#jo^.^/", 116);
+	printf("pf = %d\n", a);
 
 
 

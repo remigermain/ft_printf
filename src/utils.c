@@ -6,7 +6,7 @@
 /*   By: rgermain <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/11/12 12:39:33 by rgermain     #+#   ##    ##    #+#       */
-/*   Updated: 2018/12/06 20:29:27 by rgermain    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/12/11 16:30:14 by rgermain    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -34,6 +34,7 @@ t_pf	*ft_initpf(t_valst *lst_va)
 	lst->base = 0;
 	lst->lenght = 0;
 	lst->conv = 0;
+	lst->nb_tmp = 1;
 	lst->fd = lst_va->fd;
 	return (lst);
 }
@@ -49,7 +50,7 @@ t_valst	*lstva_init(int fd)
 	return (lst_va);
 }
 
-void	lstva_digit(t_valst *lst_va, int nb, int index, int fd)
+void	lstva_digit(t_valst *lst_va, int nb, int index)
 {
 	int		count;
 
