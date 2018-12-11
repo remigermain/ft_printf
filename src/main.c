@@ -84,10 +84,25 @@ int		main(int argc, char **argv)
 //	a = printf("pf %C\n", 524);
 //	printf("pf = %d\n", a);
 //	a = printf("pf %+-1$.*hi", 27, 42, 99);
-//	a = ft_printf("ft ^.^/%-#jo^.^/\n", 0);
-	
-	a = ft_printf("^.^/%022.56zi^.^/", 4397303616);
+//	a = ft_printf("ft ^.^/%-#jo^.^/\n", 0);*/
+
+	a = printf("%#o", 0);
+	printf("pf = %d\n", a);
+	a = ft_printf("%#o", 0);
 	printf("ft = %d\n", a);
+	
+	a = printf("t%04.2o%#2oet %#-8.3o titi", 0, 0, 0);
+	printf("pf = %d\n", a);
+	a = ft_printf("t%04.2o%#2oet %#-8.3o titi", 0, 0, 0);
+	printf("ft = %d\n", a);
+
+	printf("toto %###.0o%#.O et %#.1o !", 0, 0, 0);
+	printf("pf = %d\n", a);
+	ft_printf("toto %###.0o%#.O et %#.1o !", 0, 0, 0);
+	printf("ft = %d\n", a);
+
+	a = ft_printf("^.^/%022.56zi^.^/", 4397303616);
+	printf("pf = %d\n", a);
 	a = printf("^.^/%022.56zi^.^/", 4397303616);
 	printf("ft = %d\n", a);
 

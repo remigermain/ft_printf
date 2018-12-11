@@ -6,14 +6,14 @@
 /*   By: rgermain <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/12/10 16:21:44 by rgermain     #+#   ##    ##    #+#       */
-/*   Updated: 2018/12/11 20:52:36 by rgermain    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/12/11 22:23:57 by rgermain    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int		ft_countchar(size_t c)
+int		ft_countchar(char c)
 {
 	if (c <= 0x7F)
 		return (1);
@@ -24,7 +24,7 @@ int		ft_countchar(size_t c)
 	return (4);
 }
 
-int		ft_option_char(t_pf *lst, size_t c, int index)
+int		ft_option_char(t_pf *lst, char c, int index)
 {
 	int count;
 	int max;
@@ -32,21 +32,21 @@ int		ft_option_char(t_pf *lst, size_t c, int index)
 	count = 0;
 	if (c > 0x10FFFF && index == 1)
 		return (-1);
-	max = ft_countchar(c);
+	max = 1;
 	count += ft_print_prefix(max, lst->field, lst->zero, lst->fd);
 	if (index == 0)
 		count += ft_putchar_fd(c, lst->fd);
 	else
 		count += ft_putwchar_fd(c, lst->fd);
 	count += ft_print_prefix(max, -lst->field, 0, lst->fd);
-	return (count + max);
+	return (count);
 }
 
 int		ft_params_char(t_valst *lst_va, char *str, int i, int index)
 {
 	t_pf	*lst;
 	int		count;
-	size_t	c;
+	char	c;
 
 	count = 0;
 	lst = lst_initoption(lst_va, str, i, index);
@@ -57,7 +57,7 @@ int		ft_params_char(t_valst *lst_va, char *str, int i, int index)
 	}
 	else
 	{
-		c = (char)va_arg(lst_va->copy, size_t);
+		c = (char)va_arg(lst_va->copy, int);
 		count = ft_option_char(lst, c, 0);
 	}
 	lst_va->count += count;

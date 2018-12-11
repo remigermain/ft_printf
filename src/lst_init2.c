@@ -6,7 +6,7 @@
 /*   By: rgermain <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/12/06 14:31:36 by rgermain     #+#   ##    ##    #+#       */
-/*   Updated: 2018/12/11 20:43:46 by rgermain    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/12/11 22:47:23 by rgermain    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -31,9 +31,11 @@ int	ft_hashcalc(t_pf *lst, int index, int len)
 {
 	if (lst->hash == 1 && lst->conv == 'u')
 		lst->hash = 0;
-	if (lst->hash == 1 && (lst->conv == 'o' || lst->conv == 'O')
-			&& lst->ul_nb != 0)
+	if (lst->hash == 1 && (lst->conv == 'o' || lst->conv == 'O'))
 	{
+		if ((lst->ul_nb == 0 && lst->point == 1 && lst->preci > 0) ||
+				(lst->field >= 0 && lst->point == 0 && lst->ul_nb == 0))
+			return (0);
 		index = 1;
 		if ((lst->point == 1 && lst->preci > len))
 		{
