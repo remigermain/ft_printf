@@ -86,9 +86,9 @@ int		main(int argc, char **argv)
 //	a = printf("pf %+-1$.*hi", 27, 42, 99);
 //	a = ft_printf("ft ^.^/%-#jo^.^/\n", 0);
 	
-	a = ft_printf("\\!/%23lc\\!/", (char)128150);
+	a = ft_printf("^.^/%022.56zi^.^/", 4397303616);
 	printf("ft = %d\n", a);
-	a = printf("\\!/%23lc\\!/", (char)128150);
+	a = printf("^.^/%022.56zi^.^/", 4397303616);
 	printf("ft = %d\n", a);
 
 

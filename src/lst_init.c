@@ -6,7 +6,7 @@
 /*   By: rgermain <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/12/06 13:27:18 by rgermain     #+#   ##    ##    #+#       */
-/*   Updated: 2018/12/11 20:43:21 by rgermain    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/12/11 21:03:13 by rgermain    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -93,6 +93,8 @@ t_pf	*lst_initoption(t_valst *lst_va, char *str, int i, int index)
 	{
 		if (str[count] == '.')
 			lst->point = str[count++] - 45;
+		else if (str[count] == '0')
+			lst->zero = str[count++] - 47;
 		else if (str[count] == 39)
 			lst->local = str[count++] - 38;
 		else if (str[count] == '#')

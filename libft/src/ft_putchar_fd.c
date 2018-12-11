@@ -6,7 +6,7 @@
 /*   By: rgermain <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/10/04 14:07:14 by rgermain     #+#   ##    ##    #+#       */
-/*   Updated: 2018/12/10 13:44:03 by rgermain    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/12/11 20:52:58 by rgermain    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -34,8 +34,8 @@ int	ft_putchar_fd(char c, int fd)
 
 int	ft_putwchar_fd(unsigned int c, int fd)
 {
-	char	new[4];
-	int		a;
+	unsigned char	new[4];
+	int				a;
 
 	a = 0;
 	if (c <= 0x7F)
