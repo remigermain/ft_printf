@@ -86,6 +86,18 @@ int		main(int argc, char **argv)
 //	a = printf("pf %+-1$.*hi", 27, 42, 99);
 //	a = ft_printf("ft ^.^/%-#jo^.^/\n", 0);*/
 
+
+	a = printf("%0#10.0x", 0);
+	printf("pf = %d\n", a);
+	a = ft_printf("%0#10.0x", 0);
+	printf("ft = %d\n", a);
+
+
+	a = printf("\\!/%#-46o\\!/", 0);
+	printf("pf = %d\n", a);
+	a = ft_printf("\\!/%#-46o\\!/", 0);
+	printf("ft = %d\n", a);
+
 	a = printf("%#o", 0);
 	printf("pf = %d\n", a);
 	a = ft_printf("%#o", 0);
