@@ -86,6 +86,15 @@ int		main(int argc, char **argv)
 //	a = printf("pf %+-1$.*hi", 27, 42, 99);
 //	a = ft_printf("ft ^.^/%-#jo^.^/\n", 0);*/
 
+	a = dprintf(1, "%x", 4294967296);
+	dprintf(1, "pf = %d\n", a);
+	a = ft_printf("%x", 4294967296);
+	dprintf(1, "ft = %d\n", a);
+/*
+	a = printf("!% 04.2i!", -1474676432);
+	printf("pf = %d\n", a);
+	a = ft_printf("!% 04.2i!", -1474676432);
+	printf("ft = %d\n", a);
 
 	a = printf("%0#10.0x", 0);
 	printf("pf = %d\n", a);
@@ -160,7 +169,7 @@ int		main(int argc, char **argv)
 	a = printf("pf ^.^/%-#jo^.^/", 116);
 	printf("pf = %d\n", a);
 
-
+*/
 
 	return (0);
 }
