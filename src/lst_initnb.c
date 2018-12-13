@@ -6,7 +6,7 @@
 /*   By: rgermain <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/11/20 16:06:08 by rgermain     #+#   ##    ##    #+#       */
-/*   Updated: 2018/12/11 23:30:41 by rgermain    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/12/13 17:01:19 by rgermain    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -40,11 +40,14 @@ void	ft_init_unb(t_pf *lst, t_valst *lst_va)
 		lst->ul_nb = va_arg(lst_va->copy, intmax_t);
 	else if (lst->lenght == 1000)
 		lst->ul_nb = va_arg(lst_va->copy, size_t);
-	else if (lst->conv == 'o')
+	else if (lst->conv == 'o' || lst->conv == 'x' || lst->conv == 'X' ||
+			lst->conv == 'u' || lst->conv == 'X')
 		lst->ul_nb = va_arg(lst_va->copy, unsigned int);
 	else
 		lst->ul_nb = va_arg(lst_va->copy, unsigned long);
-	lst->psign = (lst->sign == '+' ? 2 : 0);
+	if (lst->sign == '+' && (lst->conv == 'd' || lst->conv == 'D' ||
+				lst->conv == 'I' || lst->conv == 'i'))
+		lst->psign = 2;
 }
 
 void	ft_init_snb(t_pf *lst, t_valst *lst_va)
@@ -61,7 +64,7 @@ void	ft_init_snb(t_pf *lst, t_valst *lst_va)
 		lst->nb_tmp = va_arg(lst_va->copy, intmax_t);
 	else if (lst->lenght == 1000)
 		lst->nb_tmp = va_arg(lst_va->copy, size_t);
-	else if (lst->conv == 'D' || lst->conv == 'I')
+	else if (lst->conv == 'D' || lst->conv == 'I' || lst->lenght != 0)
 		lst->nb_tmp = va_arg(lst_va->copy, long);
 	else
 		lst->nb_tmp = va_arg(lst_va->copy, int);

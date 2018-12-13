@@ -6,7 +6,7 @@
 /*   By: rgermain <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/12/06 14:31:36 by rgermain     #+#   ##    ##    #+#       */
-/*   Updated: 2018/12/11 23:27:41 by rgermain    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/12/13 16:32:33 by rgermain    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -51,14 +51,13 @@ int	ft_hashcalc(t_pf *lst, int index, int len)
 
 int	ft_spacecalc(t_pf *lst, int len, int i)
 {
-//	debug(lst);
-//	sleep(4);
-	if (lst->space == 1 && lst->sign != '+' && lst->psign == 0)
+	if (lst->space == 1 && lst->sign != '+' && lst->psign == 0 
+			&& lst->conv != 'u' && lst->conv != 'U')
 	{
 		i += ft_print_prefix(0, 1, 0, lst->fd);
 		if (lst->field > 0)
 			lst->field--;
-		else
+		else if (lst->field < 0)
 			lst->field++;
 	}
 	return (i);

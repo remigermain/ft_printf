@@ -6,7 +6,7 @@
 /*   By: rgermain <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/12/10 16:21:44 by rgermain     #+#   ##    ##    #+#       */
-/*   Updated: 2018/12/10 20:36:42 by rgermain    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/12/13 15:32:18 by rgermain    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -23,8 +23,10 @@ int		ft_option_string(t_pf *lst, char *str, int index)
 	len = ft_strlen(str);
 	if (lst->point == 0)
 		max = len;
-	else
+	else if (len != 0)
 		max = lst->preci;
+	else
+		max = 0;
 	count += ft_print_prefix(max, lst->field, lst->zero, lst->fd);
 	if (lst->point == 0 && index == 1)
 		count += ft_putstr_fd(str, lst->fd);

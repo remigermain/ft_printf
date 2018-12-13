@@ -6,7 +6,7 @@
 /*   By: rgermain <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/12/06 14:31:36 by rgermain     #+#   ##    ##    #+#       */
-/*   Updated: 2018/12/11 23:12:14 by rgermain    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/12/13 16:20:41 by rgermain    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -22,11 +22,13 @@ int		ft_option_nb(t_pf *lst, int i)
 
 	len = ft_ulen_base(lst->ul_nb, lst->base);
 	sign = ft_signcalc(lst);
-	if (lst->ul_nb == 0 && lst->point == 1 && lst->hash == 1 && lst->preci == 0)
+	if (lst->ul_nb == 0 && lst->point == 1 && lst->preci == 0)
 		len = 0;
 	index = ft_hashcalc(lst, 0, len);
 	i = ft_spacecalc(lst, len, i);
 	max = ft_max2(len, lst->preci) + sign;
+//	debug(lst);
+//		sleep(2);
 	if (lst->zero == 1)
 		i += ft_print_sign(lst);
 	i += ft_print_prefix(max + index, lst->field, lst->zero, lst->fd);
@@ -49,6 +51,7 @@ int		ft_params_nb(t_valst *lst_va, char *str, int i, int index)
 	lst = lst_initoption(lst_va, str, i, index);
 	ft_initnb(lst, lst_va);
 	ft_signprefix(lst);
+	//debug(lst);
 	count = ft_option_nb(lst, 0);
 	lst_va->count += count;
 	return (index + 1);

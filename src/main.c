@@ -85,11 +85,11 @@ int		main(int argc, char **argv)
 //	printf("pf = %d\n", a);
 //	a = printf("pf %+-1$.*hi", 27, 42, 99);
 //	a = ft_printf("ft ^.^/%-#jo^.^/\n", 0);*/
-
+/*
 	a = dprintf(1, "%x", 4294967296);
 	dprintf(1, "pf = %d\n", a);
 	a = ft_printf("%x", 4294967296);
-	dprintf(1, "ft = %d\n", a);
+	dprintf(1, "ft = %d\n", a);*/
 /*
 	a = printf("!% 04.2i!", -1474676432);
 	printf("pf = %d\n", a);
@@ -169,7 +169,117 @@ int		main(int argc, char **argv)
 	a = printf("pf ^.^/%-#jo^.^/", 116);
 	printf("pf = %d\n", a);
 
-*/
 
-	return (0);
+
+a = printf("%x", -42);                         
+	printf("pf = %d\n", a);
+a = ft_printf("%x", -42);                         
+	printf("ft = %d\n", a);
+
+a = printf("%X", -42);                         
+	printf("pf = %d\n", a);
+a = ft_printf("%X", -42);                         
+	printf("ft = %d\n", a);
+
+a =printf("%x", 4294967296);                  
+	printf("pf = %d\n", a);
+a =ft_printf("%x", 4294967296);                  
+	printf("ft = %d\n", a);
+
+a = printf("%X", 4294967296);                  
+	printf("pf = %d\n", a);
+a = ft_printf("%X", 4294967296);                  
+	printf("ft = %d\n", a);
+
+a = printf("@moulitest: %5.xT%5.0x", 0, 0);    
+	printf("pf = %d\n", a);
+a = ft_printf("@moulitest: %5.xT%5.0x", 0, 0);    
+	printf("ft = %d\n", a);
+
+a = printf("%5.2s is a string", "");          
+	printf("pf = %d\n", a);
+a = ft_printf("%5.2s is a string", "");          
+	printf("ft = %d\n", a);
+
+a  = printf("@moulitest: %5.oT%5.0o", 0, 0);    
+	printf("pf = %d\n", a);
+a = ft_printf("@moulitest: %5.oT%5.0o", 0, 0);    
+	printf("ft = %d\n", a);
+
+a = printf("@moulitest: %5.dT%5.0d", 0, 0);    
+	printf("pf = %d\n", a);
+a = ft_printf("@moulitest: %5.dT%5.0d", 0, 0);    
+	printf("ft = %d\n", a);
+
+a = printf("%u", -1);                          
+	printf("pf = %d\n", a);
+a = ft_printf("%u", -1);                          
+	printf("ft = %d\n", a);
+
+a = printf("%u", 4294967296);                  
+	printf("pf = %d\n", a);
+a = ft_printf("%u", 4294967296);                  
+	printf("ft = %d\n", a);
+
+a = printf("%+u", 4294967295);   
+	printf("pf = %d\n", a);
+a = ft_printf("%+u", 4294967295);   
+	printf("ft = %d\n", a);
+
+a = printf("toto%.0d et %+.i et  %   .0D !!!", 0, 0, 0);
+	printf("pf = %d\n", a);
+a = ft_printf("toto%.0d et %+.i et  %   .0D !!!", 0, 0, 0);
+	printf("ft = %d\n", a);
+
+a = printf("% u", 4294967295);
+	printf("pf = %d\n", a);
+a = ft_printf("% u", 4294967295);
+	printf("ft = %d\n", a);
+
+a = printf("@main_ftprintf: %###-#0000 33...12..#0+0d", 256);
+//a = printf("@main_ftprintf: %###-#0000 33.12+d", 256);
+	printf("pf = %d\n", a);
+a = ft_printf("@main_ftprintf: %###-#0000 33...12..#0+0d", 256);
+	printf("ft = %d\n", a);
+
+a = printf("% U", 4294967295);
+	printf("pf = %d\n", a);
+a = ft_printf("% u", 4294967295);
+	printf("ft = %d\n", a);
+
+	a = printf("%hhjd", 128);
+	printf("pf = %d\n", a);
+	a = ft_printf("%hhld", 128);
+	printf("ft = %d\n", a);
+
+	a = printf("@main_ftprintf: %####0000 33..1d", 256);
+	printf("pf = %d\n", a);
+	a = ft_printf("@main_ftprintf: %####0000 33..1d", 256);
+	printf("pf = %d\n", a);
+
+	a  = printf("@main_ftprintf: %####0000 33..1..#00d\\n", 256);
+	printf("pf = %d\n", a);
+	a = ft_printf("@main_ftprintf: %####0000 33..1..#00d\\n", 256);
+	printf("pf = %d\n", a);
+*/
+	a = printf("%0d", -579);
+	printf("pf = %d\n", a);
+	a = ft_printf("%0d", -579);
+	printf("ft = %d\n\n", a);
+
+	a =printf("%zhd", 4294967296);
+	printf("pf = %d\n", a);
+	a = ft_printf("%zhd", 4294967296);
+	printf("ft = %d\n", a);
+
+	a = printf("%jzd", 9223372036854775807);
+	printf("pf = %d\n", a);
+	a = ft_printf("%jzd", 9223372036854775807);
+	printf("ft = %d\n", a);
+
+	a = printf("%jhd", 9223372036854775807);
+	printf("pf = %d\n", a);
+	a = ft_printf("%jhd", 9223372036854775807);
+	printf("ft = %d\n", a);
+return (0);
 }
