@@ -24,7 +24,7 @@ int		main(int argc, char **argv)
 	i = 5236;
 	j = 5236;
 	s = "coucou c4est moi";
-	a = 0;/*
+	a = 0;
 	printf("conv 0\n");
 	a = printf("pf t%#04.2O %#02Oet %#0-8.3O titi\n", 0, 0, 0);
 	a = printf("pf t%04.2O %02Oet %0-8.3O titi\n", 0, 0, 0);
@@ -75,11 +75,11 @@ int		main(int argc, char **argv)
 	a = ft_printf("pf t%04.2d %02det %0-8.3d titi\n", 0, 0, 0);
 	a = ft_printf("pf t%#4.2d %#2det %#-8.3d titi\n", 0, 0, 0);
 	a = ft_printf("pf t%4.2d %2det %-8.3d titi\n", 0, 0, 0);
-	printf("\n");*/
-/*
+	printf("\n");
+
 	a = printf("pf test%#.4o et %02o %0#14.0o!!\n", 012, 036, 12587499);
 	printf("pf = %d\n", a);
-	a = ft_printf("pf test%#.4o et %02o %0#14.0o!!\n", 012, 036, 12587499);*/
+	a = ft_printf("pf test%#.4o et %02o %0#14.0o!!\n", 012, 036, 12587499);
 
 //	a = printf("pf %C\n", 524);
 //	printf("pf = %d\n", a);
@@ -90,7 +90,7 @@ int		main(int argc, char **argv)
 	dprintf(1, "pf = %d\n", a);
 	a = ft_printf("%x", 4294967296);
 	dprintf(1, "ft = %d\n", a);*/
-/*
+
 	a = printf("!% 04.2i!", -1474676432);
 	printf("pf = %d\n", a);
 	a = ft_printf("!% 04.2i!", -1474676432);
@@ -283,7 +283,6 @@ a = ft_printf("% u", 4294967295);
 	printf("ft = %d\n", a);
 
 
-	*/
 long double flo2 = 16665165.1561555555;
 double flo = 16665165.1561555555;
 

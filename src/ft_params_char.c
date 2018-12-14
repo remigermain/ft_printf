@@ -6,7 +6,7 @@
 /*   By: rgermain <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/12/10 16:21:44 by rgermain     #+#   ##    ##    #+#       */
-/*   Updated: 2018/12/11 22:23:57 by rgermain    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/12/14 14:39:53 by rgermain    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -61,6 +61,7 @@ int		ft_params_char(t_valst *lst_va, char *str, int i, int index)
 		count = ft_option_char(lst, c, 0);
 	}
 	lst_va->count += count;
+	free(lst);
 	return (index + 1);
 }
 
@@ -75,6 +76,7 @@ int		ft_params_perc(t_valst *lst_va, char *str, int i, int index)
 	c = '%';
 	count = ft_option_char(lst, c, 0);
 	lst_va->count += count;
+	free(lst);
 	return (index + 1);
 }
 
@@ -89,5 +91,6 @@ int		ft_params_no(t_valst *lst_va, char *str, int i, int index)
 	c = str[i + index];
 	count = ft_option_char(lst, c, 0);
 	lst_va->count += count;
+	free(lst);
 	return (index + 1);
 }

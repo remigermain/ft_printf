@@ -6,7 +6,7 @@
 /*   By: rgermain <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/12/10 16:21:44 by rgermain     #+#   ##    ##    #+#       */
-/*   Updated: 2018/12/13 15:32:18 by rgermain    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/12/14 14:40:27 by rgermain    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -56,5 +56,6 @@ int		ft_params_string(t_valst *lst_va, char *str, int i, int index)
 	else
 		count = ft_option_string(lst, str2, 1);
 	lst_va->count += count;
+	free(lst);
 	return (index + 1);
 }

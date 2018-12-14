@@ -6,7 +6,7 @@
 /*   By: rgermain <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/12/11 20:46:44 by rgermain     #+#   ##    ##    #+#       */
-/*   Updated: 2018/12/14 10:22:39 by rgermain    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/12/14 14:37:37 by rgermain    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -83,7 +83,21 @@ void		ft_init_double(t_pf *lst, t_valst *lst_va)
 	if (lst->point == 0)
 		lst->preci = 6;
 	lst->ul_nb = (unsigned long)nb;
-	lst->fl_nb = (nb - (long)nb);
+	unsigned long nb2 = lst->base;
+	if (lst->conv == 'a')
+	{
+		while (nb2 < lst->ul_nb)
+		{
+			nb2 *= lst->base;
+		//	printf("nb2 = %d ul_nb = %ld\n", nb2, lst->ul_nb);
+		}
+		nb2 /= lst->base;
+		lst->ul_nb = (long)nb / nb2;
+		lst->ul_nb = ((nb / nb2) - (long)(nb / nb2));
+		lst->fl_nb = (nb - (long)nb);
+	}
+	else
+		lst->fl_nb = (nb - (long)nb);
 }
 
 int			ft_params_f(t_valst *lst_va, char *str, int i, int index)
@@ -98,5 +112,6 @@ int			ft_params_f(t_valst *lst_va, char *str, int i, int index)
 		lst->psign = 3;
 	count += ft_pf_pos(lst, count);
 	lst_va->count += count;
+	free(lst);
 	return (index) + 1;
 }

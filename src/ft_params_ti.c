@@ -6,7 +6,7 @@
 /*   By: rgermain <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/12/11 20:45:34 by rgermain     #+#   ##    ##    #+#       */
-/*   Updated: 2018/12/11 20:46:00 by rgermain    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/12/14 14:40:36 by rgermain    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -80,5 +80,6 @@ int		ft_params_ti(t_valst *lst_va, char *str, int i, int index)
 	lst->preci = va_arg(lst_va->copy, int);
 	lst->field = va_arg(lst_va->copy, int);
 	lst_va->count += ft_pf_casei(lst, tab);
+	free(lst);
 	return (index + i);
 }

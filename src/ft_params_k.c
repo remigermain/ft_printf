@@ -6,7 +6,7 @@
 /*   By: rgermain <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/12/11 20:46:09 by rgermain     #+#   ##    ##    #+#       */
-/*   Updated: 2018/12/11 20:46:27 by rgermain    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/12/14 14:40:07 by rgermain    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -81,5 +81,6 @@ int		ft_params_k(t_valst *lst_va, char *str, int i, int index)
 		ft_dprintf(fd, "%s %d %s %d, %d:%d", da, t->d, mo, t->y, t->h, t->mi);
 	else
 		ft_dprintf(fd, "%s %d:%d ,%d %s %d", da, t->h, t->mi, t->d, mo, t->y);
+	free(lst);
 	return (index + 1);
 }

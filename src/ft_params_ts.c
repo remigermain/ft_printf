@@ -6,7 +6,7 @@
 /*   By: rgermain <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/12/11 20:45:01 by rgermain     #+#   ##    ##    #+#       */
-/*   Updated: 2018/12/11 20:45:22 by rgermain    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/12/14 14:40:47 by rgermain    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -108,5 +108,6 @@ int		ft_params_ts(t_valst *lst_va, char *str, int i, int index)
 	lst = lst_initoption(lst_va, str, i, index);
 	tab = va_arg(lst_va->copy, char**);
 	count = ft_pf_case(lst, tab);
+	free(lst);
 	return (index + 1);
 }
