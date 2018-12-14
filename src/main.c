@@ -261,7 +261,7 @@ a = ft_printf("% u", 4294967295);
 	printf("pf = %d\n", a);
 	a = ft_printf("@main_ftprintf: %####0000 33..1..#00d\\n", 256);
 	printf("pf = %d\n", a);
-*/
+
 	a = printf("%0d", -579);
 	printf("pf = %d\n", a);
 	a = ft_printf("%0d", -579);
@@ -281,5 +281,145 @@ a = ft_printf("% u", 4294967295);
 	printf("pf = %d\n", a);
 	a = ft_printf("%jhd", 9223372036854775807);
 	printf("ft = %d\n", a);
+
+
+	*/
+long double flo2 = 16665165.1561555555;
+double flo = 16665165.1561555555;
+
+printf("double\n");
+	a = printf("%f", flo);
+	printf("ft = %d\n", a);
+	a = ft_printf("%f", flo);
+	printf("pf = %d\n", a);
+	
+	a = printf("%.f", flo);
+	printf("ft = %d\n", a);
+	a = ft_printf("%.f", flo);
+	printf("pf = %d\n", a);
+	
+	a = printf("%.10f", flo);
+	printf("ft = %d\n", a);
+	a = ft_printf("%.10f", flo);
+	printf("pf = %d\n", a);
+
+	a = printf("%10f", flo);
+	printf("ft = %d\n", a);
+	a = ft_printf("%10f", flo);
+	printf("pf = %d\n", a);
+
+	a = printf("%10.10f", flo);
+	printf("ft = %d\n", a);
+	a = ft_printf("%10.10f", flo);
+	printf("pf = %d\n", a);
+
+printf("\nlong double\n");
+	a = printf("%Lf", flo2);
+	printf("ft = %d\n", a);
+	a = ft_printf("%Lf", flo2);
+	printf("pf = %d\n", a);
+	
+	a = printf("%.Lf", flo2);
+	printf("ft = %d\n", a);
+	a = ft_printf("%.Lf", flo2);
+	printf("pf = %d\n", a);
+	
+	a = printf("%.10Lf", flo2);
+	printf("ft = %d\n", a);
+	a = ft_printf("%.10Lf", flo2);
+	printf("pf = %d\n", a);
+
+	a = printf("%10Lf", flo2);
+	printf("ft = %d\n", a);
+	a = ft_printf("%10Lf", flo2);
+	printf("pf = %d\n", a);
+
+	a = printf("%10.10Lf", flo2);
+	printf("ft = %d\n", a);
+	a = ft_printf("%10.10Lf", flo2);
+	printf("pf = %d\n", a);
+
+printf("\nlong double a\n");
+	a = printf("%Laf", flo2);
+	printf("ft = %d\n", a);
+	a = ft_printf("%Laf", flo2);
+	printf("pf = %d\n", a);
+	
+	a = printf("%.Laf", flo2);
+	printf("ft = %d\n", a);
+	a = ft_printf("%.Laf", flo2);
+	printf("pf = %d\n", a);
+	
+	a = printf("%.10Laf", flo2);
+	printf("ft = %d\n", a);
+	a = ft_printf("%.10Laf", flo2);
+	printf("pf = %d\n", a);
+
+	a = printf("%10Laf", flo2);
+	printf("ft = %d\n", a);
+	a = ft_printf("%10Laf", flo2);
+	printf("pf = %d\n", a);
+
+	a = printf("%10.10Laf", flo2);
+	printf("ft = %d\n", a);
+	a = ft_printf("%10.10Laf", flo2);
+	printf("pf = %d\n", a);
+
+printf("\nlong double e\n");
+	a = printf("%Lef", flo2);
+	printf("ft = %d\n", a);
+	a = ft_printf("%Lef", flo2);
+	printf("pf = %d\n", a);
+	
+	a = printf("%.Lef", flo2);
+	printf("ft = %d\n", a);
+	a = ft_printf("%.Lef", flo2);
+	printf("pf = %d\n", a);
+	
+	a = printf("%.10Lef", flo2);
+	printf("ft = %d\n", a);
+	a = ft_printf("%.10Lef", flo2);
+	printf("pf = %d\n", a);
+
+	a = printf("%10Lef", flo2);
+	printf("ft = %d\n", a);
+	a = ft_printf("%10Lef", flo2);
+	printf("pf = %d\n", a);
+
+	a = printf("%10.10Lef", flo2);
+	printf("ft = %d\n", a);
+	a = ft_printf("%10.10Lef", flo2);
+	printf("pf = %d\n", a);
+
+printf("\nlong double g\n");
+	a = printf("%Lgf", flo2);
+	printf("ft = %d\n", a);
+	a = ft_printf("%Lgf", flo2);
+	printf("pf = %d\n", a);
+	
+	a = printf("%.Lgf", flo2);
+	printf("ft = %d\n", a);
+	a = ft_printf("%.Lgf", flo2);
+	printf("pf = %d\n", a);
+	
+	a = printf("%.10Lgf", flo2);
+	printf("ft = %d\n", a);
+	a = ft_printf("%.10Lgf", flo2);
+	printf("pf = %d\n", a);
+
+	a = printf("%10Lgf", flo2);
+	printf("ft = %d\n", a);
+	a = ft_printf("%10Lgf", flo2);
+	printf("pf = %d\n", a);
+
+	a = printf("%10.10Lgf", flo2);
+	printf("ft = %d\n", a);
+	a = ft_printf("%10.10Lgf", flo2);
+	printf("pf = %d\n", a);
+
+
+
+
+
 return (0);
 }

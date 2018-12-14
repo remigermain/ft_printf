@@ -6,7 +6,7 @@
 /*   By: rgermain <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/12/11 20:46:44 by rgermain     #+#   ##    ##    #+#       */
-/*   Updated: 2018/12/11 22:08:36 by rgermain    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/12/14 10:22:39 by rgermain    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -55,8 +55,10 @@ static int	ft_pf_pos(t_pf *lst, int count)
 		count += ft_print_sign(lst);
 	ft_putnbr_ulm(lst->ul_nb, lst->base, lst->maj, lst->fd);
 	if (lst->preci > 0 || lst->point == 0)
+	{
 		count += ft_putchar_fd('.', lst->fd);
-	count += ft_putnbr_dlm(lst);
+		count += ft_putnbr_dlm(lst);
+	}
 	count += ft_print_prefix(max + sign, -lst->field, 1, lst->fd);
 	return (count + len);
 }
@@ -67,7 +69,7 @@ void		ft_init_double(t_pf *lst, t_valst *lst_va)
 	long double nb;
 
 	a = 6;
-	if (lst->lenght == 'L')
+	if (lst->lenght == 10)
 		nb = va_arg(lst_va->copy, long double);
 	else
 		nb = (long double)va_arg(lst_va->copy, double);
