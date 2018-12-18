@@ -6,7 +6,7 @@
 /*   By: rgermain <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/12/11 20:46:44 by rgermain     #+#   ##    ##    #+#       */
-/*   Updated: 2018/12/18 15:08:49 by rgermain    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/12/18 16:09:09 by rgermain    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -44,23 +44,26 @@ static int	ft_calcul_len2(t_pf *lst, int len, int index)
 
 static int	ft_pf_pos2(t_pf *lst, int count)
 {
+	int preci;
+
+	preci = 0;
 	if (lst->preci > 0 || lst->point == 0)
 	{
 		count += ft_putchar_fd('.', lst->fd);
 		lst->hash = 1;
 		if (lst->point == 0)
 		{
-			if (lst->conv == 'a')
-				ft_putnbr_ulm(lst->ful_nb, lst->base, lst->maj, lst->fd);
-			if (lst->lenght != 0 || lst->conv == 'f')
-				ft_putnbr_dlm(lst);
+			count += ft_putnbr_ulm(lst->ful_nb, lst->base, lst->maj, lst->fd);
+			if (lst->lenght != 0)
+				count += ft_putnbr_dlm(lst);
 		}
 		else
 		{
-			if (lst->conv == 'a')
-				lst->preci -= ft_putnbr_ulm(lst->ful_nb, lst->base, lst->maj, lst->fd);
-			if (lst->lenght != 0 || lst->conv == 'f')
-				ft_putnbr_dlm(lst);
+			preci = ft_putnbr_ulm(lst->ful_nb, lst->base, lst->maj, lst->fd);
+			count += preci;
+			lst->preci -= preci;
+			if (lst->preci != 0)
+				count += ft_putnbr_dlm(lst);
 		}
 	}
 	return (count);
@@ -83,10 +86,10 @@ static int	ft_pf_pos(t_pf *lst, int count)
 	count += ft_print_prefix(max + sign, lst->field, lst->zero, lst->fd);
 	if (lst->zero == 0)
 		count += ft_print_sign(lst);
-	ft_putnbr_ulm(lst->ul_nb, lst->base, lst->maj, lst->fd);
+	count += ft_putnbr_ulm(lst->ul_nb, lst->base, lst->maj, lst->fd);
 	count = ft_pf_pos2(lst, count);
 	count += ft_print_prefix(max + sign, -lst->field, 1, lst->fd);
-	return (count + max);
+	return (count);
 }
 
 static void		ft_init_double2(t_pf *lst, t_valst *lst_va, long double nb)
@@ -135,8 +138,6 @@ static void		ft_init_double(t_pf *lst, t_valst *lst_va)
 		ft_init_double2(lst, lst_va, nb);
 	else
 		lst->fl_nb = (nb - (long)nb);
-//	debug(lst);
-//	sleep(2);
 }
 
 int			ft_params_a(t_valst *lst_va, char *str, int i, int index)

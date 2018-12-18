@@ -6,7 +6,7 @@
 /*   By: rgermain <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/12/11 20:46:44 by rgermain     #+#   ##    ##    #+#       */
-/*   Updated: 2018/12/18 15:45:27 by rgermain    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/12/18 16:09:50 by rgermain    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -83,7 +83,6 @@ void		ft_init_double(t_pf *lst, t_valst *lst_va)
 	if (lst->point == 0)
 		lst->preci = 6;
 	lst->ul_nb = (unsigned long)nb;
-	unsigned long nb2 = lst->base;
 	lst->fl_nb = (nb - (long)nb);
 }
 
