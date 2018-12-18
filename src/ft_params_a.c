@@ -6,7 +6,7 @@
 /*   By: rgermain <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/12/11 20:46:44 by rgermain     #+#   ##    ##    #+#       */
-/*   Updated: 2018/12/14 14:37:37 by rgermain    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/12/18 15:08:49 by rgermain    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -24,6 +24,10 @@ static int	ft_calcul_len2(t_pf *lst, int len, int index)
 	{
 		if (lst->point == 1)
 			max = len + lst->preci;
+		else if (lst->conv == 'a' && lst->point == 1)
+			max = len + lst->preci;
+		else if (lst->conv == 'a' && lst->point == 0)
+			max = 14;
 		else
 			max = len + 6;
 		return (max);
@@ -38,6 +42,30 @@ static int	ft_calcul_len2(t_pf *lst, int len, int index)
 	}
 }
 
+static int	ft_pf_pos2(t_pf *lst, int count)
+{
+	if (lst->preci > 0 || lst->point == 0)
+	{
+		count += ft_putchar_fd('.', lst->fd);
+		lst->hash = 1;
+		if (lst->point == 0)
+		{
+			if (lst->conv == 'a')
+				ft_putnbr_ulm(lst->ful_nb, lst->base, lst->maj, lst->fd);
+			if (lst->lenght != 0 || lst->conv == 'f')
+				ft_putnbr_dlm(lst);
+		}
+		else
+		{
+			if (lst->conv == 'a')
+				lst->preci -= ft_putnbr_ulm(lst->ful_nb, lst->base, lst->maj, lst->fd);
+			if (lst->lenght != 0 || lst->conv == 'f')
+				ft_putnbr_dlm(lst);
+		}
+	}
+	return (count);
+}
+
 static int	ft_pf_pos(t_pf *lst, int count)
 {
 	int len;
@@ -48,25 +76,45 @@ static int	ft_pf_pos(t_pf *lst, int count)
 	len = ft_ulen_base(lst->ul_nb, lst->base);
 	max = ft_calcul_len2(lst, len, 1);
 	sign = ft_calcul_len2(lst, len, 0);
+	if (lst->conv == 'a' && lst->point == 0)
+		lst->preci = 8;
 	if (lst->zero == 1)
 		count += ft_print_sign(lst);
 	count += ft_print_prefix(max + sign, lst->field, lst->zero, lst->fd);
 	if (lst->zero == 0)
 		count += ft_print_sign(lst);
 	ft_putnbr_ulm(lst->ul_nb, lst->base, lst->maj, lst->fd);
-	if (lst->preci > 0 || lst->point == 0)
-	{
-		count += ft_putchar_fd('.', lst->fd);
-		count += ft_putnbr_dlm(lst);
-	}
+	count = ft_pf_pos2(lst, count);
 	count += ft_print_prefix(max + sign, -lst->field, 1, lst->fd);
-	return (count + len);
+	return (count + max);
 }
 
-void		ft_init_double(t_pf *lst, t_valst *lst_va)
+static void		ft_init_double2(t_pf *lst, t_valst *lst_va, long double nb)
 {
-	int			a;
-	long double nb;
+	unsigned long	nb2;
+
+	nb2 = lst->base;
+	if (lst->lenght == 0)
+		nb *= 2;
+	while (nb2 < (nb))
+		nb2 *= lst->base;
+	nb2 /= lst->base;
+	lst->ul_nb = (unsigned long)nb / nb2;
+	lst->ful_nb = nb - (nb2 * ((unsigned long)nb / nb2));
+	if (lst->preci == 0 && lst->point == 1)
+	{
+		if (lst->ul_nb == 15)
+			lst->ul_nb = 0;
+		lst->ul_nb++;
+	}
+	lst->fl_nb = (nb - (long)nb);
+	lst->psign = 5;
+}
+
+static void		ft_init_double(t_pf *lst, t_valst *lst_va)
+{
+	int				a;
+	long double		nb;
 
 	a = 6;
 	if (lst->lenght == 10)
@@ -83,24 +131,15 @@ void		ft_init_double(t_pf *lst, t_valst *lst_va)
 	if (lst->point == 0)
 		lst->preci = 6;
 	lst->ul_nb = (unsigned long)nb;
-	unsigned long nb2 = lst->base;
 	if (lst->conv == 'a')
-	{
-		while (nb2 < lst->ul_nb)
-		{
-			nb2 *= lst->base;
-		//	printf("nb2 = %d ul_nb = %ld\n", nb2, lst->ul_nb);
-		}
-		nb2 /= lst->base;
-		lst->ul_nb = (long)nb / nb2;
-		lst->ul_nb = ((nb / nb2) - (long)(nb / nb2));
-		lst->fl_nb = (nb - (long)nb);
-	}
+		ft_init_double2(lst, lst_va, nb);
 	else
 		lst->fl_nb = (nb - (long)nb);
+//	debug(lst);
+//	sleep(2);
 }
 
-int			ft_params_f(t_valst *lst_va, char *str, int i, int index)
+int			ft_params_a(t_valst *lst_va, char *str, int i, int index)
 {
 	t_pf	*lst;
 	int		count;
@@ -111,6 +150,15 @@ int			ft_params_f(t_valst *lst_va, char *str, int i, int index)
 	if (lst->base == 16)
 		lst->psign = 3;
 	count += ft_pf_pos(lst, count);
+	if (lst->conv == 'a' && lst->lenght != 0)
+	{
+		if (lst->hash == 1)
+			count += ft_putstr_fd("p+20", lst->fd);
+		else
+			count += ft_putstr_fd("p+24", lst->fd);
+	}
+	else if (lst->conv == 'a' && lst->lenght == 0)
+		count += ft_putstr_fd("p+15", lst->fd);
 	lst_va->count += count;
 	free(lst);
 	return (index) + 1;

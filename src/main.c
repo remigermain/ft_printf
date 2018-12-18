@@ -283,9 +283,9 @@ a = ft_printf("% u", 4294967295);
 	printf("ft = %d\n", a);
 
 */
-long double flo2 = 16665165.15615;
-double flo = 16665165.1561555550005;
-/*
+long double flo2 = 16665165.15619999;
+double flo = 45893.1561165656;
+
 printf("double\n");
 	a = printf("%f", flo);
 	printf("ft = %d\n", a);
@@ -337,7 +337,7 @@ printf("\nlong double\n");
 	printf("ft = %d\n", a);
 	a = ft_printf("%10.10Lf", flo2);
 	printf("pf = %d\n", a);
-*/
+
 printf("\nlong double a\n");
 	a = printf("%La", flo2);
 	printf("ft = %d\n", a);
@@ -363,6 +363,35 @@ printf("\nlong double a\n");
 	printf("ft = %d\n", a);
 	a = ft_printf("%10.10La", flo2);
 	printf("pf = %d\n", a);
+
+printf("\ndouble 'a'\n");
+	a = printf("%a", flo);
+	printf("ft = %d\n", a);
+	a = ft_printf("%a", flo);
+	printf("pf = %d\n", a);
+	
+	a = printf("%.a", flo);
+	printf("ft = %d\n", a);
+	a = ft_printf("%.a", flo);
+	printf("pf = %d\n", a);
+	
+	a = printf("%.10a", flo);
+	printf("ft = %d\n", a);
+	a = ft_printf("%.10a", flo);
+	printf("pf = %d\n", a);
+
+	a = printf("%10a", flo);
+	printf("ft = %d\n", a);
+	a = ft_printf("%10a", flo);
+	printf("pf = %d\n", a);
+
+	a = printf("%10.18a", flo);
+	printf("ft = %d\n", a);
+	a = ft_printf("%10.18a", flo);
+	printf("pf = %d\n", a);
+
+
+	
 /*
 printf("\nlong double e\n");
 	a = printf("%Lef", flo2);
