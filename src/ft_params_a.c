@@ -6,7 +6,7 @@
 /*   By: rgermain <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/12/11 20:46:44 by rgermain     #+#   ##    ##    #+#       */
-/*   Updated: 2018/12/18 16:09:09 by rgermain    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/12/18 16:44:59 by rgermain    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -54,7 +54,8 @@ static int	ft_pf_pos2(t_pf *lst, int count)
 		if (lst->point == 0)
 		{
 			count += ft_putnbr_ulm(lst->ful_nb, lst->base, lst->maj, lst->fd);
-			if (lst->lenght != 0)
+			lst->preci++;
+			if (lst->lenght == 0)
 				count += ft_putnbr_dlm(lst);
 		}
 		else

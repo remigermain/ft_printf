@@ -6,7 +6,7 @@
 /*   By: rgermain <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/11/11 15:09:25 by rgermain     #+#   ##    ##    #+#       */
-/*   Updated: 2018/12/18 16:06:34 by rgermain    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/12/18 16:39:36 by rgermain    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -50,12 +50,12 @@ int	ft_conv2(t_valst *lst_va, char *str, int i, int index)
 		nb = lst_va->count;
 		i += index + 1;
 	}
-	else if (str[i + index] == 'f' || str[i + index] == 'F'
+	else if (str[i + index] == 'a' || str[i + index] == 'A'
 			|| str[i + index] == 'e' || str[i + index] == 'E'
 			|| str[i + index] == 'g' || str[i + index] == 'G')
-		i += ft_params_f(lst_va, str, i, index);
-	else if (str[i + index] == 'a' || str[i + index] == 'A')
 		i += ft_params_a(lst_va, str, i, index);
+	else if (str[i + index] == 'f' || str[i + index] == 'F')
+		i += ft_params_f(lst_va, str, i, index);
 	else
 		i = ft_conv3(lst_va, str, i, index);
 	return (i);

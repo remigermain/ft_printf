@@ -6,7 +6,7 @@
 /*   By: rgermain <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/11/11 15:09:25 by rgermain     #+#   ##    ##    #+#       */
-/*   Updated: 2018/12/18 16:10:49 by rgermain    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/12/18 17:00:13 by rgermain    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -72,6 +72,7 @@ int		ft_printf(const char *format, ...)
 			return (-1);
 		format += i;
 		lst_va->count += tmpi;
+		i = 0;
 	}
 	va_end(lst_va->lst_va);
 	free(lst_va);
