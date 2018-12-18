@@ -6,27 +6,12 @@
 /*   By: rgermain <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/12/06 13:27:18 by rgermain     #+#   ##    ##    #+#       */
-/*   Updated: 2018/12/18 17:13:42 by rgermain    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/12/13 17:03:44 by rgermain    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-
-void	ft_undefined(t_pf *lst)
-{
-	if (lst->point == 1)
-		lst->zero = 0;
-	if (lst->zero > 1 && lst->point > 1)
-		lst->zero = 0;
-	else if (lst->zero > 1)
-		lst->zero = 1;
-	if (lst->point > 1)
-	{
-		lst->point = 0;
-		lst->preci = 0;
-	}
-}
 
 void	ft_init_base(t_pf *lst)
 {
@@ -46,7 +31,18 @@ void	ft_init_base(t_pf *lst)
 		lst->base = 2;
 	if (!ft_islowercase(lst->conv))
 		lst->maj = 1;
-	ft_undefined(lst);
+	if (lst->point == 1)
+		lst->zero = 0;
+	if (lst->zero > 1 && lst->point > 1)
+		lst->zero = 0;
+	else if (lst->zero > 1)
+		lst->zero = 1;
+	if (lst->point > 1)
+	{
+		lst->point = 0;
+		lst->preci = 0;
+	}
+	
 }
 
 int		ft_putflag_conv(t_pf *lst, char *str, int count)

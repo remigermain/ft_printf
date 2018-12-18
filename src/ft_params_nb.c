@@ -6,7 +6,7 @@
 /*   By: rgermain <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/12/06 14:31:36 by rgermain     #+#   ##    ##    #+#       */
-/*   Updated: 2018/12/18 17:14:59 by rgermain    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/12/14 14:40:16 by rgermain    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -51,5 +51,6 @@ int		ft_params_nb(t_valst *lst_va, char *str, int i, int index)
 	ft_signprefix(lst);
 	count = ft_option_nb(lst, 0);
 	lst_va->count += count;
+	free(lst);
 	return (index + 1);
 }
