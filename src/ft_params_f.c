@@ -6,7 +6,7 @@
 /*   By: rgermain <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/12/11 20:46:44 by rgermain     #+#   ##    ##    #+#       */
-/*   Updated: 2018/12/14 14:37:37 by rgermain    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/12/14 18:41:30 by rgermain    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -24,6 +24,10 @@ static int	ft_calcul_len2(t_pf *lst, int len, int index)
 	{
 		if (lst->point == 1)
 			max = len + lst->preci;
+		else if (lst->conv == 'a' && lst->point == 1)
+			max = len + lst->preci;
+		else if (lst->conv == 'a' && lst->point == 0)
+			max = 14;
 		else
 			max = len + 6;
 		return (max);
@@ -60,7 +64,7 @@ static int	ft_pf_pos(t_pf *lst, int count)
 		count += ft_putnbr_dlm(lst);
 	}
 	count += ft_print_prefix(max + sign, -lst->field, 1, lst->fd);
-	return (count + len);
+	return (count + max);
 }
 
 void		ft_init_double(t_pf *lst, t_valst *lst_va)
@@ -83,21 +87,22 @@ void		ft_init_double(t_pf *lst, t_valst *lst_va)
 	if (lst->point == 0)
 		lst->preci = 6;
 	lst->ul_nb = (unsigned long)nb;
-	unsigned long nb2 = lst->base;
+	unsigned long nb2 = 10;
 	if (lst->conv == 'a')
 	{
 		while (nb2 < lst->ul_nb)
-		{
-			nb2 *= lst->base;
-		//	printf("nb2 = %d ul_nb = %ld\n", nb2, lst->ul_nb);
-		}
-		nb2 /= lst->base;
+			nb2 *= 10;
+		nb2 /= 10;
 		lst->ul_nb = (long)nb / nb2;
-		lst->ul_nb = ((nb / nb2) - (long)(nb / nb2));
-		lst->fl_nb = (nb - (long)nb);
+		lst->ful_nb = (long)nb / nb2;
+		lst->fl_nb =  (nb - (nb2 * ((long)nb / nb2)));
+		if (lst->point == 1 && lst->preci == 0)
+			lst->ul_nb = 1;
 	}
 	else
 		lst->fl_nb = (nb - (long)nb);
+	if (lst->conv == 'a')
+		lst->psign = 5;
 }
 
 int			ft_params_f(t_valst *lst_va, char *str, int i, int index)
@@ -111,6 +116,13 @@ int			ft_params_f(t_valst *lst_va, char *str, int i, int index)
 	if (lst->base == 16)
 		lst->psign = 3;
 	count += ft_pf_pos(lst, count);
+	if (lst->conv == 'a')
+	{
+		if (lst->point == 0)
+			count += ft_putstr("p+20");
+		else
+			count += ft_putstr("p+24");
+	}
 	lst_va->count += count;
 	free(lst);
 	return (index) + 1;

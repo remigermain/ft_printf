@@ -6,7 +6,7 @@
 /*   By: rgermain <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/11/09 15:34:47 by rgermain     #+#   ##    ##    #+#       */
-/*   Updated: 2018/12/11 22:11:36 by rgermain    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/12/14 18:39:11 by rgermain    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -30,6 +30,7 @@ typedef	struct	s_valist
 typedef	struct	s_printf
 {
 	unsigned long	ul_nb;
+	unsigned long	ful_nb;
 	long double		fl_nb;
 	size_t	hash;
 	size_t	space;
