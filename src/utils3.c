@@ -6,7 +6,7 @@
 /*   By: rgermain <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/11/12 12:38:05 by rgermain     #+#   ##    ##    #+#       */
-/*   Updated: 2018/12/18 14:13:57 by rgermain    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/12/18 15:46:22 by rgermain    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -15,15 +15,21 @@
 
 int		ft_putnbr_dlm2(t_pf *lst, int count, int base)
 {
+	int len;
+
+	len = 0;
 	while (count <= (lst->preci))
 	{
 		count++;
 		lst->fl_nb *= base;
+		if ((long)(lst->fl_nb * base) == 0 && count < (lst->preci))
+			len += ft_putchar_fd('0', lst->fd);
 	}
 	if (((long)lst->fl_nb % lst->base) >= (lst->base / 2))
 		lst->fl_nb += lst->base;
 	lst->fl_nb /= base;
-	ft_putnbr_ulm((unsigned long)lst->fl_nb, base, lst->maj, lst->fd);
+	if (len < count)
+		ft_putnbr_ulm((unsigned long)lst->fl_nb, base, lst->maj, lst->fd);
 	count--;
 	return (count);
 }

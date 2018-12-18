@@ -284,7 +284,8 @@ a = ft_printf("% u", 4294967295);
 
 */
 long double flo2 = 16665165.15619999;
-double flo = 45893.1561165656;
+//double flo = 45893.1561165656;
+double flo = 45893;
 
 printf("double\n");
 	a = printf("%f", flo);
