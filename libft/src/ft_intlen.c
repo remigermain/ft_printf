@@ -6,7 +6,7 @@
 /*   By: rgermain <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/11/01 15:05:08 by rgermain     #+#   ##    ##    #+#       */
-/*   Updated: 2018/12/06 14:08:40 by rgermain    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/12/18 17:20:41 by rgermain    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -15,7 +15,7 @@
 
 int	ft_intlen_base(int nb, int base)
 {
-	int 	count;
+	int		count;
 	long	n;
 
 	count = 0;

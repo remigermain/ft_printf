@@ -6,15 +6,18 @@
 /*   By: rgermain <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/11/11 15:09:25 by rgermain     #+#   ##    ##    #+#       */
-/*   Updated: 2018/12/18 17:00:13 by rgermain    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/12/18 17:14:28 by rgermain    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int		ft_strlen2(const char *str, int i)
+int		ft_strlen2(const char *str)
 {
+	int i;
+
+	i = 0;
 	while (str[i] != '\0' && str[i] != '%' && str[i] != '{')
 		i++;
 	return (i);
@@ -32,7 +35,7 @@ int		ft_dprintf(int fd, const char *format, ...)
 	i = 0;
 	while (format[i] != '\0')
 	{
-		i = ft_strlen2(format, 0);
+		i = ft_strlen2(format);
 		tmpi = i;
 		write(lst_va->fd, format, i);
 		if (format[i] == '{')
@@ -61,7 +64,7 @@ int		ft_printf(const char *format, ...)
 	i = 0;
 	while (format[i] != '\0')
 	{
-		i = ft_strlen2(format, 0);
+		i = ft_strlen2(format);
 		tmpi = i;
 		write(lst_va->fd, format, i);
 		if (format[i] == '{')
@@ -72,7 +75,6 @@ int		ft_printf(const char *format, ...)
 			return (-1);
 		format += i;
 		lst_va->count += tmpi;
-		i = 0;
 	}
 	va_end(lst_va->lst_va);
 	free(lst_va);

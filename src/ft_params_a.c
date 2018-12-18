@@ -6,43 +6,14 @@
 /*   By: rgermain <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/12/11 20:46:44 by rgermain     #+#   ##    ##    #+#       */
-/*   Updated: 2018/12/18 16:44:59 by rgermain    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/12/18 17:18:15 by rgermain    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-static int	ft_calcul_len2(t_pf *lst, int len, int index)
-{
-	int sign;
-	int max;
-
-	sign = 0;
-	max = 0;
-	if (index == 1)
-	{
-		if (lst->point == 1)
-			max = len + lst->preci;
-		else if (lst->conv == 'a' && lst->point == 1)
-			max = len + lst->preci;
-		else if (lst->conv == 'a' && lst->point == 0)
-			max = 14;
-		else
-			max = len + 6;
-		return (max);
-	}
-	else
-	{
-		if ((lst->point == 1 && lst->preci > 0) || lst->point == 0)
-			sign++;
-		if (lst->sign != 0)
-			sign++;
-		return (sign);
-	}
-}
-
-static int	ft_pf_pos2(t_pf *lst, int count)
+static int		ft_pf_pos2(t_pf *lst, int count)
 {
 	int preci;
 
@@ -70,7 +41,7 @@ static int	ft_pf_pos2(t_pf *lst, int count)
 	return (count);
 }
 
-static int	ft_pf_pos(t_pf *lst, int count)
+static int		ft_pf_pos(t_pf *lst, int count)
 {
 	int len;
 	int sign;
@@ -141,7 +112,7 @@ static void		ft_init_double(t_pf *lst, t_valst *lst_va)
 		lst->fl_nb = (nb - (long)nb);
 }
 
-int			ft_params_a(t_valst *lst_va, char *str, int i, int index)
+int				ft_params_a(t_valst *lst_va, char *str, int i, int index)
 {
 	t_pf	*lst;
 	int		count;
