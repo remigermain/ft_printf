@@ -6,7 +6,7 @@
 /*   By: rgermain <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/11/09 15:34:47 by rgermain     #+#   ##    ##    #+#       */
-/*   Updated: 2018/12/19 14:19:59 by rgermain    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/12/19 19:16:54 by rgermain    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -77,6 +77,7 @@ int			ft_params_char(t_valst *lst_va, char *str, int i, int index);
 int			ft_params_perc(t_valst *lst_va, char *str, int i, int index);
 int			ft_params_no(t_valst *lst_va, char *str, int i, int index);
 int			ft_params_string(t_valst *lst_va, char *str, int i, int index);
+int			ft_params_lstring(t_valst *lst_va, t_pf *lst);
 int			ft_params_k(t_valst *lst_va, char *str, int i, int index);
 int			ft_params_f(t_valst *lst_va, char *str, int i, int index);
 int			ft_params_a(t_valst *lst_va, char *str, int i, int index);
@@ -99,6 +100,7 @@ int			ft_ulen_base(unsigned long nb, size_t base);
 int			ft_ulen(unsigned long nb);
 int			ft_atoi2(const char *str, int *count);
 int			ft_calcul_len2(t_pf *lst, int len, int index);
+int			ft_countchar(wchar_t c);
 
 /*
 ** utils print

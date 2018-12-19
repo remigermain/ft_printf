@@ -6,7 +6,7 @@
 /*   By: rgermain <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/11/11 15:09:25 by rgermain     #+#   ##    ##    #+#       */
-/*   Updated: 2018/12/18 17:57:05 by rgermain    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/12/19 19:17:13 by rgermain    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -79,7 +79,8 @@ int	ft_conv(t_valst *lst_va, char *str, int i, int index)
 		i += ft_params_k(lst_va, str, i, index);
 	else if (str[i + index] == '%')
 		i += ft_params_perc(lst_va, str, i, index);
-	else if (str[i + index] == 's' || str[i + index] == 'r')
+	else if (str[i + index] == 's' || str[i + index] == 'r' ||
+			str[i + index] == 'S')
 		i += ft_params_string(lst_va, str, i, index);
 	else if (str[i + index] == 't' && str[i + index + 1] == 's')
 		i += ft_params_ts(lst_va, str, i, index);
