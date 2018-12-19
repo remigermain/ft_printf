@@ -6,7 +6,7 @@
 /*   By: rgermain <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/12/06 13:27:18 by rgermain     #+#   ##    ##    #+#       */
-/*   Updated: 2018/12/19 14:28:46 by rgermain    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/12/19 16:24:07 by rgermain    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -113,10 +113,11 @@ t_pf	*lst_initoption(t_valst *lst_va, char *str, int i, int index)
 			lst->hash = str[count++] - 34;
 		else if (str[count] == ' ')
 			lst->space = str[count++] - 31;
-		else if (ft_isalpha(str[count]) || str[count] == '%')
-			count = ft_putflag_conv(lst, str, count);
-		else
+		else if (ft_isdigit(str[count]) == 1 || str[count] == '+' ||
+				str[count] == '-' || str[count] == '*' || str[count] == '$')
 			count = lst_putdigit(lst_va, lst, str, count);
+		else
+			count = ft_putflag_conv(lst, str, count);
 	}
 	ft_init_base(lst);
 	return (lst);
