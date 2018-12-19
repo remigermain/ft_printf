@@ -6,7 +6,7 @@
 /*   By: rgermain <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/11/20 16:06:08 by rgermain     #+#   ##    ##    #+#       */
-/*   Updated: 2018/12/13 17:01:19 by rgermain    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/12/19 14:07:23 by rgermain    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -77,7 +77,8 @@ void	ft_init_snb(t_pf *lst, t_valst *lst_va)
 
 void	ft_initnb(t_pf *lst, t_valst *lst_va)
 {
-	if (lst->conv == 'd' || (lst->conv == 'i' && lst->lenght != 20))
+	if (lst->conv == 'd' || (lst->conv == 'i') ||
+			(lst->conv == 'D' && lst->lenght == 0))
 		ft_init_snb(lst, lst_va);
 	else
 		ft_init_unb(lst, lst_va);

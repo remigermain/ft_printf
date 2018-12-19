@@ -6,7 +6,7 @@
 /*   By: rgermain <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/11/09 15:34:47 by rgermain     #+#   ##    ##    #+#       */
-/*   Updated: 2018/12/18 17:19:51 by rgermain    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/12/19 14:19:59 by rgermain    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -39,7 +39,7 @@ typedef	struct	s_printf
 	size_t			local;
 	int				field;
 	size_t			point;
-	size_t			preci;
+	int				preci;
 	size_t			maj;
 	size_t			psign;
 	size_t			base;

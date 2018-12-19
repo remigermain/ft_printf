@@ -6,7 +6,7 @@
 /*   By: rgermain <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/12/11 20:48:22 by rgermain     #+#   ##    ##    #+#       */
-/*   Updated: 2018/12/18 12:53:50 by rgermain    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/12/19 14:20:22 by rgermain    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -29,7 +29,7 @@ void	debug(t_pf *lst)
 	printf("lst->local = %zu\n", lst->local);
 	printf("lst->field = %d\n", lst->field);
 	printf("lst->point = %zu\n", lst->point);
-	printf("lst->preci = %zu\n", lst->preci);
+	printf("lst->preci = %d\n", lst->preci);
 	printf("lst->maj = %zu\n", lst->maj);
 	printf("lst->psign = %zu\n", lst->psign);
 	printf("lst->base = %zu\n", lst->base);
