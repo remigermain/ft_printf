@@ -6,12 +6,25 @@
 /*   By: rgermain <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/12/10 16:21:44 by rgermain     #+#   ##    ##    #+#       */
-/*   Updated: 2018/12/19 14:18:56 by rgermain    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/12/19 14:59:04 by rgermain    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
+
+int		ft_refoption(t_pf *lst, int len, char *str)
+{
+	len = ft_strlen(str);
+	if (lst->preci < 0)
+	{
+		lst->field = ft_abs(lst->preci);
+		lst->preci = 0;
+		lst->zero = 0;
+		len = 0;
+	}
+	return (len);
+}
 
 int		ft_option_string(t_pf *lst, char *str, int index)
 {
@@ -20,7 +33,7 @@ int		ft_option_string(t_pf *lst, char *str, int index)
 	int len;
 
 	count = 0;
-	len = ft_strlen(str);
+	len = ft_refoption(lst, len, str);
 	if (lst->point == 1)
 		max = ft_min2(lst->preci, len);
 	else
@@ -46,7 +59,6 @@ int		ft_params_string(t_valst *lst_va, char *str, int i, int index)
 
 	count = 0;
 	lst = lst_initoption(lst_va, str, i, index);
-	lst->preci = ft_abs(lst->preci);
 	str2 = va_arg(lst_va->copy, char*);
 	if (str2 == NULL)
 		str2 = "(null)";

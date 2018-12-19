@@ -6,15 +6,27 @@
 /*   By: rgermain <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/12/06 13:27:18 by rgermain     #+#   ##    ##    #+#       */
-/*   Updated: 2018/12/19 14:28:46 by rgermain    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/12/19 15:16:30 by rgermain    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-void	ft_undefined(t_pf *lst)
+void	ft_init_base(t_pf *lst)
 {
+	if (lst->conv == 'x' || lst->conv == 'X' || lst->conv == 'p' ||
+			lst->conv == 'a' || lst->conv == 'A' ||
+			lst->conv == 'e' || lst->conv == 'E')
+		lst->base = 16;
+	else if (lst->conv == 'o' || lst->conv == 'O')
+		lst->base = 8;
+	else if (lst->conv == 'b' || lst->conv == 'B')
+		lst->base = 2;
+	else
+		lst->base = 10;
+	if (!ft_islowercase(lst->conv))
+		lst->maj = 1;
 	if (lst->zero > 1 && lst->point > 1)
 		lst->zero = 0;
 	else if (lst->zero > 1)
@@ -24,27 +36,6 @@ void	ft_undefined(t_pf *lst)
 		lst->point = 0;
 		lst->preci = 0;
 	}
-}
-
-void	ft_init_base(t_pf *lst)
-{
-	if (lst->conv == 'x' || lst->conv == 'X' || lst->conv == 'p' ||
-			lst->conv == 'a' || lst->conv == 'A' ||
-			lst->conv == 'e' || lst->conv == 'E')
-		lst->base = 16;
-	else if (lst->conv == 'u' || lst->conv == 'U' ||
-			lst->conv == 'f' || lst->conv == 'F' ||
-			lst->conv == 'i' || lst->conv == 'I' ||
-			lst->conv == 'd' || lst->conv == 'D' ||
-			lst->conv == 'g' || lst->conv == 'G')
-		lst->base = 10;
-	else if (lst->conv == 'o' || lst->conv == 'O')
-		lst->base = 8;
-	else if (lst->conv == 'b' || lst->conv == 'B')
-		lst->base = 2;
-	if (!ft_islowercase(lst->conv))
-		lst->maj = 1;
-	ft_undefined(lst);
 }
 
 int		ft_putflag_conv(t_pf *lst, char *str, int count)
@@ -65,6 +56,27 @@ int		ft_putflag_conv(t_pf *lst, char *str, int count)
 	return (count);
 }
 
+int		lst_putdigit_star(t_valst *lst_va, t_pf *lst, char *str, int count)
+{
+	int nb_tmp;
+
+	nb_tmp = 0;
+	if (ft_isdigit(str[count]) == 1)
+		nb_tmp = ft_atoi2(str + count, &count);
+	if (str[count] == '*' || str[count] == '$')
+	{
+		if (str[count] == '$')
+			lstva_digit(lst_va, nb_tmp, 0);
+		nb_tmp = va_arg(lst_va->copy, int);
+		count++;
+	}
+	if (lst->point == 0)
+		lst->field = (nb_tmp * lst->nb_tmp);
+	else
+		lst->preci = (nb_tmp * lst->nb_tmp);
+	return (count);
+}
+
 int		lst_putdigit(t_valst *lst_va, t_pf *lst, char *str, int count)
 {
 	int nb_tmp;
@@ -76,21 +88,9 @@ int		lst_putdigit(t_valst *lst_va, t_pf *lst, char *str, int count)
 		lst->nb_tmp = str[count++] - 46;
 	else if (ft_isdigit(str[count]) == 1 || str[count] == '*'
 			|| str[count] == '$')
-	{
-		if (ft_isdigit(str[count]) == 1)
-			nb_tmp = ft_atoi2(str + count, &count);
-		if (str[count] == '*' || str[count] == '$')
-		{
-			if (str[count] == '$')
-				lstva_digit(lst_va, nb_tmp, 0);
-			nb_tmp = va_arg(lst_va->copy, int);
-			count++;
-		}
-		if (lst->point == 0)
-			lst->field = (nb_tmp * lst->nb_tmp);
-		else
-			lst->preci = nb_tmp;
-	}
+		count = lst_putdigit_star(lst_va, lst, str, count);
+	else
+		count++;
 	return (count);
 }
 
