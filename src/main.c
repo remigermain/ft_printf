@@ -6,6 +6,13 @@ int main()
 {
 	int a = 0;
 
+
+	a = printf("^.^/%+-.2hhi^.^/", 0);
+	printf("pf = %0d\n", a);
+
+	a = ft_printf("^.^/%+-.2hhi^.^/", 0);
+	printf("ft = %0d\n", a);
+/*
 	 a = printf("%015s", "");
 	printf("pf = %0d\n", a);
 	 a = ft_printf("%015s", "");
@@ -73,7 +80,7 @@ printf("ft %d\n", a);
 printf("pf %d\n", a);
 	a = ft_printf("0!% 018.2i!",433288652);
 printf("ft %d\n", a);
-	return (0);
+*/	return (0);
 
 
 

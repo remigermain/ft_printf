@@ -6,7 +6,7 @@
 /*   By: rgermain <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/11/12 12:39:33 by rgermain     #+#   ##    ##    #+#       */
-/*   Updated: 2018/12/11 16:30:14 by rgermain    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/12/19 15:23:18 by rgermain    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -21,6 +21,7 @@ t_pf	*ft_initpf(t_valst *lst_va)
 		return (NULL);
 	lst->ul_nb = 0;
 	lst->fl_nb = 0;
+	lst->ful_nb = 0;
 	lst->hash = 0;
 	lst->space = 0;
 	lst->zero = 0;

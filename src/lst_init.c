@@ -6,7 +6,7 @@
 /*   By: rgermain <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/12/06 13:27:18 by rgermain     #+#   ##    ##    #+#       */
-/*   Updated: 2018/12/19 15:16:30 by rgermain    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/12/19 15:26:27 by rgermain    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -74,14 +74,17 @@ int		lst_putdigit_star(t_valst *lst_va, t_pf *lst, char *str, int count)
 		lst->field = (nb_tmp * lst->nb_tmp);
 	else
 		lst->preci = (nb_tmp * lst->nb_tmp);
+	lst->nb_tmp = 1;
 	return (count);
 }
 
 int		lst_putdigit(t_valst *lst_va, t_pf *lst, char *str, int count)
 {
-	int nb_tmp;
-
-	nb_tmp = 0;
+	if (str[count] == '.')
+	{
+		lst->point += str[count++] - 45;
+		lst->nb_tmp = 1;
+	}
 	if (str[count] == '+')
 		lst->sign = str[count++];
 	else if (str[count] == '-')
@@ -103,9 +106,7 @@ t_pf	*lst_initoption(t_valst *lst_va, char *str, int i, int index)
 	count = i + 1;
 	while (count <= (i + index))
 	{
-		if (str[count] == '.')
-			lst->point += str[count++] - 45;
-		else if (str[count] == '0')
+		if (str[count] == '0')
 			lst->zero += str[count++] - 47;
 		else if (str[count] == 39)
 			lst->local = str[count++] - 38;
