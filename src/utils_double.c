@@ -6,14 +6,39 @@
 /*   By: rgermain <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/11/12 12:38:05 by rgermain     #+#   ##    ##    #+#       */
-/*   Updated: 2018/12/18 16:51:59 by rgermain    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/12/19 22:09:20 by rgermain    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int		ft_putnbr_dlm2(t_pf *lst, int count, int base)
+int			ft_calcul_len2(t_pf *lst, int len, int index)
+{
+	int sign;
+	int max;
+
+	sign = 0;
+	max = 0;
+	if (index == 1)
+	{
+		if (lst->point == 1)
+			max = len + lst->preci;
+		else
+			max = len + 6;
+		return (max);
+	}
+	else
+	{
+		if ((lst->point == 1 && lst->preci > 0) || lst->point == 0)
+			sign++;
+		if (lst->sign != 0)
+			sign++;
+		return (sign);
+	}
+}
+
+static int	ft_putnbr_dlm2(t_pf *lst, int count, int base)
 {
 	int len;
 
@@ -34,7 +59,7 @@ int		ft_putnbr_dlm2(t_pf *lst, int count, int base)
 	return (count);
 }
 
-int		ft_putnbr_dlm3(t_pf *lst, int count, int base)
+static int	ft_putnbr_dlm3(t_pf *lst, int count, int base)
 {
 	while (count < lst->preci)
 	{
@@ -45,7 +70,7 @@ int		ft_putnbr_dlm3(t_pf *lst, int count, int base)
 	return (count);
 }
 
-int		ft_putnbr_dlm(t_pf *lst)
+int			ft_putnbr_dlm(t_pf *lst)
 {
 	int	count;
 	int base;

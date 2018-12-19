@@ -6,14 +6,14 @@
 /*   By: rgermain <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/12/10 16:21:44 by rgermain     #+#   ##    ##    #+#       */
-/*   Updated: 2018/12/19 19:26:05 by rgermain    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/12/19 22:20:41 by rgermain    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int		verif(wchar_t *str)
+static int		verif(wchar_t *str)
 {
 	int count;
 	int	a;
@@ -29,7 +29,7 @@ int		verif(wchar_t *str)
 	return (count);
 }
 
-int		count_wchart(wchar_t *str)
+static int		count_wchart(wchar_t *str)
 {
 	int count;
 	int	a;
@@ -37,11 +37,11 @@ int		count_wchart(wchar_t *str)
 	count = 0;
 	a = 0;
 	while (str[a] != '\0')
-		count += ft_countchar(str[a++]);
+		count += ft_countwchar(str[a++]);
 	return (count);
 }
 
-int		ft_option_string2(t_pf *lst, wchar_t *str, int index)
+static int		ft_option_string2(t_pf *lst, wchar_t *str)
 {
 	int count;
 	int max;
@@ -64,7 +64,7 @@ int		ft_option_string2(t_pf *lst, wchar_t *str, int index)
 	return (count);
 }
 
-int		ft_params_lstring(t_valst *lst_va, t_pf *lst)
+int				ft_params_lstring(t_valst *lst_va, t_pf *lst)
 {
 	int		count;
 	wchar_t	*str2;
@@ -73,6 +73,6 @@ int		ft_params_lstring(t_valst *lst_va, t_pf *lst)
 	str2 = va_arg(lst_va->copy, wchar_t*);
 	if (str2 == NULL)
 		str2 = L"(null)";
-	count = ft_option_string2(lst, str2, 1);
+	count = ft_option_string2(lst, str2);
 	return (count);
 }

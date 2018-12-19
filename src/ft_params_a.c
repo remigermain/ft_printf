@@ -6,7 +6,7 @@
 /*   By: rgermain <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/12/11 20:46:44 by rgermain     #+#   ##    ##    #+#       */
-/*   Updated: 2018/12/18 17:18:15 by rgermain    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/12/19 22:19:49 by rgermain    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -64,7 +64,7 @@ static int		ft_pf_pos(t_pf *lst, int count)
 	return (count);
 }
 
-static void		ft_init_double2(t_pf *lst, t_valst *lst_va, long double nb)
+static void		ft_init_double2(t_pf *lst, long double nb)
 {
 	unsigned long	nb2;
 
@@ -107,7 +107,7 @@ static void		ft_init_double(t_pf *lst, t_valst *lst_va)
 		lst->preci = 6;
 	lst->ul_nb = (unsigned long)nb;
 	if (lst->conv == 'a')
-		ft_init_double2(lst, lst_va, nb);
+		ft_init_double2(lst, nb);
 	else
 		lst->fl_nb = (nb - (long)nb);
 }

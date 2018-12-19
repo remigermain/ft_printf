@@ -6,7 +6,7 @@
 #    By: rgermain <marvin@le-101.fr>                +:+   +:    +:    +:+      #
 #                                                  #+#   #+    #+    #+#       #
 #    Created: 2018/10/01 15:39:03 by rgermain     #+#   ##    ##    #+#        #
-#    Updated: 2018/12/19 18:47:43 by rgermain    ###    #+. /#+    ###.fr      #
+#    Updated: 2018/12/19 22:23:56 by rgermain    ###    #+. /#+    ###.fr      #
 #                                                          /                   #
 #                                                         /                    #
 # **************************************************************************** #
@@ -14,19 +14,18 @@
 
 NAME = ./a.out
 
-//CFLAGS = -Wall -Werror -Wextra
+CFLAGS = -Wall -Werror -Wextra
 
 INCLUDE = -Iincludes
 
 CINC = includes/ft_printf.h libft/includes/libft.h
 
-SRC = main.c ft_printf.c ft_conv.c utils.c utils2.c utils3.c utils_print.c\
-	  ft_params_nb.c ft_params_char.c ft_params_string.c \
-	  ft_params_f.c ft_params_k.c ft_params_ti.c ft_params_ts.c \
-	  ft_params_a.c ft_params_lstring.c \
-	  lst_init.c lst_init2.c lst_initnb.c \
-	  debug.c \
-	  ft_atoi2.c
+SRC = 	main.c ft_printf.c ft_conv.c utils.c utils_print.c utils_double.c \
+		ft_params_nb.c ft_params_char.c ft_params_string.c \
+		ft_params_f.c ft_params_k.c ft_params_ti.c ft_params_ts.c \
+		ft_params_a.c ft_params_lstring.c \
+		lst_init.c lst_initnb.c lst_base.c\
+		debug.c
 
 OBJ = $(SRC:.c=.o)
 

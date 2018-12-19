@@ -6,14 +6,14 @@
 /*   By: rgermain <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/11/20 16:06:08 by rgermain     #+#   ##    ##    #+#       */
-/*   Updated: 2018/12/19 14:07:23 by rgermain    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/12/19 22:17:14 by rgermain    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-void	ft_signprefix(t_pf *lst)
+void		ft_signprefix(t_pf *lst)
 {
 	if (lst->conv == 'p' || ((lst->conv == 'x' || lst->conv == 'X')
 				&& lst->hash == 1 && lst->ul_nb != 0))
@@ -24,7 +24,7 @@ void	ft_signprefix(t_pf *lst)
 		lst->psign = 5;
 }
 
-void	ft_init_unb(t_pf *lst, t_valst *lst_va)
+static void	ft_init_unb(t_pf *lst, t_valst *lst_va)
 {
 	if (lst->lenght == 1 && lst->conv != 'O' && lst->conv != 'U'
 			&& lst->conv != 'D')
@@ -50,7 +50,7 @@ void	ft_init_unb(t_pf *lst, t_valst *lst_va)
 		lst->psign = 2;
 }
 
-void	ft_init_snb(t_pf *lst, t_valst *lst_va)
+static void	ft_init_snb(t_pf *lst, t_valst *lst_va)
 {
 	if (lst->lenght == 1)
 		lst->nb_tmp = (short)va_arg(lst_va->copy, int);
@@ -75,7 +75,7 @@ void	ft_init_snb(t_pf *lst, t_valst *lst_va)
 	lst->ul_nb = (lst->nb_tmp < 0 ? -lst->nb_tmp : lst->nb_tmp);
 }
 
-void	ft_initnb(t_pf *lst, t_valst *lst_va)
+void		ft_initnb(t_pf *lst, t_valst *lst_va)
 {
 	if (lst->conv == 'd' || (lst->conv == 'i') ||
 			(lst->conv == 'D' && lst->lenght == 0))

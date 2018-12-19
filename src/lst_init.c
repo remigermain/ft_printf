@@ -6,14 +6,14 @@
 /*   By: rgermain <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/12/06 13:27:18 by rgermain     #+#   ##    ##    #+#       */
-/*   Updated: 2018/12/19 16:24:07 by rgermain    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/12/19 22:24:00 by rgermain    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-void	ft_undefined(t_pf *lst)
+static void	ft_undefined(t_pf *lst)
 {
 	if (lst->zero > 1 && lst->point > 1)
 		lst->zero = 0;
@@ -26,7 +26,7 @@ void	ft_undefined(t_pf *lst)
 	}
 }
 
-void	ft_init_base(t_pf *lst)
+static void	ft_init_base(t_pf *lst)
 {
 	if (lst->conv == 'x' || lst->conv == 'X' || lst->conv == 'p' ||
 			lst->conv == 'a' || lst->conv == 'A' ||
@@ -47,7 +47,7 @@ void	ft_init_base(t_pf *lst)
 	ft_undefined(lst);
 }
 
-int		ft_putflag_conv(t_pf *lst, char *str, int count)
+static int	ft_putflag_conv(t_pf *lst, char *str, int count)
 {
 	if (str[count] == 'h')
 		lst->lenght++;
@@ -65,7 +65,7 @@ int		ft_putflag_conv(t_pf *lst, char *str, int count)
 	return (count);
 }
 
-int		lst_putdigit(t_valst *lst_va, t_pf *lst, char *str, int count)
+static int	lst_putdigit(t_valst *lst_va, t_pf *lst, char *str, int count)
 {
 	int nb_tmp;
 
@@ -94,7 +94,7 @@ int		lst_putdigit(t_valst *lst_va, t_pf *lst, char *str, int count)
 	return (count);
 }
 
-t_pf	*lst_initoption(t_valst *lst_va, char *str, int i, int index)
+t_pf		*lst_initoption(t_valst *lst_va, char *str, int i, int index)
 {
 	t_pf	*lst;
 	int		count;

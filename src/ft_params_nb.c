@@ -6,14 +6,69 @@
 /*   By: rgermain <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/12/06 14:31:36 by rgermain     #+#   ##    ##    #+#       */
-/*   Updated: 2018/12/19 14:09:12 by rgermain    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/12/19 22:25:09 by rgermain    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int		ft_option_nb(t_pf *lst, int i)
+static int	ft_signcalc(t_pf *lst)
+{
+	int sign;
+
+	sign = 0;
+	if (lst->psign == 1 || lst->psign == 2)
+		sign = 1;
+	if (lst->psign == 3 || lst->psign == 5)
+		sign = 2;
+	if (lst->psign == 4)
+		sign = 3;
+	return (sign);
+}
+
+static int	ft_hashcalc(t_pf *lst, int index, int len)
+{
+	if (lst->hash == 1 && (lst->conv == 'u' || lst->conv == 'U'))
+		lst->hash = 0;
+	if (lst->hash == 1 && (lst->conv == 'o' || lst->conv == 'O'))
+	{
+		if (lst->ul_nb == 0 && lst->point == 1 && lst->preci > 0)
+			return (0);
+		if (lst->point == 0 && lst->ul_nb == 0)
+			return (0);
+		index = 1;
+		if ((lst->point == 1 && lst->preci > len))
+		{
+			if (lst->preci != 0)
+				lst->preci--;
+		}
+		if (lst->field < 0)
+			lst->field++;
+	}
+	return (index);
+}
+
+static int	ft_spacecalc(t_pf *lst, int i)
+{
+	if (lst->point == 1 && lst->preci >= 0)
+		lst->zero = 0;
+	if (lst->space == 1 && (lst->conv == 'o' || lst->conv == 'O' ||
+				lst->conv == 'x' || lst->conv == 'X'))
+		lst->space = 0;
+	if (lst->space == 1 && lst->sign != '+' && lst->psign == 0
+			&& lst->conv != 'u' && lst->conv != 'U')
+	{
+		i += ft_print_prefix(0, 1, 0, lst->fd);
+		if (lst->field > 0)
+			lst->field--;
+		else if (lst->field < 0)
+			lst->field++;
+	}
+	return (i);
+}
+
+static int	ft_option_nb(t_pf *lst, int i)
 {
 	int len;
 	int max;
@@ -25,7 +80,7 @@ int		ft_option_nb(t_pf *lst, int i)
 	if (lst->ul_nb == 0 && lst->point == 1 && lst->preci == 0)
 		len = 0;
 	index = ft_hashcalc(lst, 0, len);
-	i = ft_spacecalc(lst, len, i);
+	i = ft_spacecalc(lst, i);
 	max = ft_max2(len, lst->preci) + sign;
 	if (lst->zero == 1)
 		i += ft_print_sign(lst);
@@ -40,17 +95,13 @@ int		ft_option_nb(t_pf *lst, int i)
 	return (i);
 }
 
-int		ft_params_nb(t_valst *lst_va, char *str, int i, int index)
+int			ft_params_nb(t_valst *lst_va, char *str, int i, int index)
 {
 	t_pf	*lst;
-	int		count;
 
-	count = 0;
 	lst = lst_initoption(lst_va, str, i, index);
 	ft_initnb(lst, lst_va);
-	ft_signprefix(lst);
-	count = ft_option_nb(lst, 0);
-	lst_va->count += count;
+	lst_va->count += ft_option_nb(lst, 0);
 	free(lst);
 	return (index + 1);
 }

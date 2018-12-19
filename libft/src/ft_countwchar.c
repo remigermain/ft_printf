@@ -1,40 +1,27 @@
 /* ************************************************************************** */
 /*                                                          LE - /            */
 /*                                                              /             */
-/*   ft_atoi.c                                        .::    .:/ .      .::   */
+/*   ft_countwchar.c                                  .::    .:/ .      .::   */
 /*                                                 +:+:+   +:    +:  +:+:+    */
 /*   By: rgermain <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
-/*   Created: 2018/08/02 11:14:09 by rgermain     #+#   ##    ##    #+#       */
-/*   Updated: 2018/12/10 13:14:30 by rgermain    ###    #+. /#+    ###.fr     */
+/*   Created: 2018/12/19 21:57:13 by rgermain     #+#   ##    ##    #+#       */
+/*   Updated: 2018/12/19 21:57:57 by rgermain    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "libft.h"
 
-int	ft_atoi2(const char *str, int *count)
+int	ft_countwchar(wchar_t c)
 {
-	int	a;
-	int	b;
-	int	neg;
-
-	a = 0;
-	b = 0;
-	neg = 1;
-	while (str[a] == ' ' || (str[a] >= 9 && str[a] <= 13))
-		a++;
-	if (str[a] == '+' || str[a] == '-')
-	{
-		if (str[a] == '-')
-			neg = -1;
-		a++;
-	}
-	while (str[a] >= '0' && str[a] <= '9')
-	{
-		b = ((b * 10) + (str[a] - '0'));
-		a++;
-	}
-	*count += a;
-	return (b * neg);
+	if (c <= 0x7F)
+		return (1);
+	if (c <= 0x7FF)
+		return (2);
+	if (c <= 0xFFFF)
+		return (3);
+	if (c <= 0x10FFFF)
+		return (4);
+	return (-1);
 }

@@ -6,14 +6,14 @@
 /*   By: rgermain <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/12/10 16:21:44 by rgermain     #+#   ##    ##    #+#       */
-/*   Updated: 2018/12/19 19:17:42 by rgermain    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/12/19 22:06:37 by rgermain    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int		ft_option_string(t_pf *lst, char *str, int index)
+static int	ft_option_string(t_pf *lst, char *str, int index)
 {
 	int count;
 	int max;
@@ -38,7 +38,7 @@ int		ft_option_string(t_pf *lst, char *str, int index)
 	return (count);
 }
 
-int		ft_params_string(t_valst *lst_va, char *str, int i, int index)
+int			ft_params_string(t_valst *lst_va, char *str, int i, int index)
 {
 	t_pf	*lst;
 	int		count;

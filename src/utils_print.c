@@ -6,14 +6,14 @@
 /*   By: rgermain <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/11/11 15:09:25 by rgermain     #+#   ##    ##    #+#       */
-/*   Updated: 2018/12/18 18:23:17 by rgermain    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/12/19 22:12:13 by rgermain    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int		ft_print_prefix(int len, int nb, int point, int fd)
+int			ft_print_prefix(int len, int nb, int point, int fd)
 {
 	int count;
 
@@ -30,7 +30,7 @@ int		ft_print_prefix(int len, int nb, int point, int fd)
 	return (count);
 }
 
-int		ft_print_sign(t_pf *lst)
+int			ft_print_sign(t_pf *lst)
 {
 	int len;
 
@@ -59,7 +59,7 @@ int		ft_print_sign(t_pf *lst)
 	return (len);
 }
 
-void	ft_printcolor2(int i, int fd)
+static void	ft_printcolor2(int i, int fd)
 {
 	char	*tab[10];
 
@@ -76,7 +76,7 @@ void	ft_printcolor2(int i, int fd)
 	ft_putstr_fd(tab[i], fd);
 }
 
-int		ft_printcolor(char *str, int i, int fd)
+int			ft_printcolor(char *str, int i, int fd)
 {
 	char	*tab[10];
 	int		a;

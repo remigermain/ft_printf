@@ -6,7 +6,7 @@
 /*   By: rgermain <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/10/07 18:10:38 by rgermain     #+#   ##    ##    #+#       */
-/*   Updated: 2018/12/19 18:52:31 by rgermain    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/12/19 22:14:07 by rgermain    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -138,5 +138,7 @@ long int		ft_labs(long int nb);
 int				ft_max2(int nb1, int nb2);
 int				ft_min2(int nb1, int nb2);
 size_t			ft_strnlen(const char *str, size_t max);
+int				ft_atoi2(const char *str, int *count);
+int				ft_countwchar(wchar_t c);
 
 #endif
