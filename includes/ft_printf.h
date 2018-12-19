@@ -6,7 +6,7 @@
 /*   By: rgermain <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/11/09 15:34:47 by rgermain     #+#   ##    ##    #+#       */
-/*   Updated: 2018/12/19 22:28:24 by rgermain    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/12/19 23:03:30 by rgermain    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -83,7 +83,6 @@ int				ft_params_char(t_valst *lst_va, char *str, int i, int index);
 int				ft_params_perc(t_valst *lst_va, char *str, int i, int index);
 int				ft_params_no(t_valst *lst_va, char *str, int i, int index);
 int				ft_params_string(t_valst *lst_va, char *str, int i, int index);
-int				ft_params_lstring(t_valst *lst_va, t_pf *lst);
 int				ft_params_k(t_valst *lst_va, char *str, int i, int index);
 int				ft_params_f(t_valst *lst_va, char *str, int i, int index);
 int				ft_params_a(t_valst *lst_va, char *str, int i, int index);
