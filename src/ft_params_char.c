@@ -6,7 +6,7 @@
 /*   By: rgermain <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/12/10 16:21:44 by rgermain     #+#   ##    ##    #+#       */
-/*   Updated: 2018/12/19 22:18:53 by rgermain    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/12/19 22:59:37 by rgermain    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -29,7 +29,7 @@ static	int	ft_print_char(t_pf *lst, char c, wchar_t wc, int index)
 		max = 1;
 	count += ft_print_prefix(max, lst->field, lst->zero, lst->fd);
 	if (index == 1)
-		count += ft_putwchar_fd(c, lst->fd);
+		count += ft_putwchar_fd(wc, lst->fd);
 	else
 		count += ft_putchar_fd(c, lst->fd);
 	count += ft_print_prefix(max, -lst->field, 0, lst->fd);
@@ -48,17 +48,14 @@ int			ft_params_char(t_valst *lst_va, char *str, int i, int index)
 	if ((lst->lenght >= 10 && lst->lenght <= 20) || lst->conv == 'C')
 	{
 		wc = (wchar_t)va_arg(lst_va->copy, wchar_t);
-		ft_print_char(lst, 0, wc, 1);
+		count += ft_print_char(lst, 0, wc, 1);
 	}
 	else
 	{
 		c = (char)va_arg(lst_va->copy, int);
-		ft_print_char(lst, c, 0, 0);
+		count += ft_print_char(lst, c, 0, 0);
 	}
-	if (count == -1)
-		lst_va->count = -1;
-	else
-		lst_va->count += count;
+	lst_va->count = (count == -1 ? count : lst_va->count + count);
 	free(lst);
 	return (index + 1);
 }
