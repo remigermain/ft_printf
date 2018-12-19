@@ -5,13 +5,6 @@
 int main()
 {
 	int a = 0;
-
-
-	a = printf("^.^/%+-.2hhi^.^/", 0);
-	printf("pf = %0d\n", a);
-
-	a = ft_printf("^.^/%+-.2hhi^.^/", 0);
-	printf("ft = %0d\n", a);
 /*
 	 a = printf("%015s", "");
 	printf("pf = %0d\n", a);
@@ -42,7 +35,6 @@ int main()
 	printf("pf = %0d\n", a);
 	 a = ft_printf("%015.s", "");
 	printf("ft = %0d\n", a);
-
 	a = printf("% o|%+o", 42, 42);
 	printf("pf = %0d\n", a);
 	a = ft_printf("% o|%+o", 42, 42);
@@ -58,6 +50,12 @@ int main()
 	a = ft_printf("%D", -1L);
 	printf("ft = %0d\n", a);
 
+*/
+	a = printf("{%.*s}", -5, "42");
+	printf("pf = %0d\n", a);
+	a = ft_printf("{%.*s}", -5, "42");
+	printf("ft = %0d\n", a);
+/*
 	a = printf("% x|%+x", 42, 42);
 	printf("pf = %0d\n", a);
 	a = ft_printf("% x|%+x", 42, 42);
@@ -67,12 +65,12 @@ int main()
 	printf("pf = %0d\n", a);
 	a = ft_printf("%hhD, %hhD", 0, USHRT_MAX);
 	printf("pf = %0d\n", a);
-
-	a = printf("{%}");
+*/
+	a = printf("\n%024hho et%#1.2o %012.O", (unsigned char)12, 0, 123654789);
 printf("pf %d\n", a);
-	a = ft_printf("{%}");
+	a = ft_printf("\n%024hho et%#1.2o %0012.O", (unsigned char)12, 0, 123654789);
 printf("ft %d\n", a);
-
+/*
 
 
 
@@ -80,8 +78,8 @@ printf("ft %d\n", a);
 printf("pf %d\n", a);
 	a = ft_printf("0!% 018.2i!",433288652);
 printf("ft %d\n", a);
-*/	return (0);
-
+	return (0);
+*/
 
 
 
