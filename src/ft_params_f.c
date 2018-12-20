@@ -6,7 +6,7 @@
 /*   By: rgermain <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/12/11 20:46:44 by rgermain     #+#   ##    ##    #+#       */
-/*   Updated: 2018/12/20 14:33:57 by rgermain    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/12/20 19:29:03 by rgermain    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -28,7 +28,7 @@ static int	ft_pf_pos(t_pf *lst, int count)
 	count += ft_print_prefix(max + sign, lst->field, lst->zero, lst->fd);
 	if (lst->zero == 0)
 		count += ft_print_sign(lst);
-	ft_putnbr_ulm(lst, lst->ul_nb, 0, 0);
+	ft_putnbr_ulm(lst->ul_nb, lst->base, lst->maj, lst->fd);
 	if (lst->preci > 0 || lst->point == 0)
 	{
 		count += ft_putchar_fd('.', lst->fd);

@@ -6,7 +6,7 @@
 /*   By: rgermain <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/12/06 14:31:36 by rgermain     #+#   ##    ##    #+#       */
-/*   Updated: 2018/12/20 13:24:52 by rgermain    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/12/20 19:28:32 by rgermain    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -89,8 +89,11 @@ static int	ft_option_nb(t_pf *lst, int i)
 		i += ft_print_sign(lst);
 	i += ft_print_prefix(0, index, 1, lst->fd);
 	i += ft_print_prefix(len, lst->preci, 1, lst->fd);
-	if ((!(lst->point == 1 && lst->preci == 0 && lst->ul_nb == 0)))
-		i += ft_putnbr_ulm(lst, lst->ul_nb, 0, 0);
+	if ((!(lst->point == 1 && lst->preci == 0 && lst->ul_nb == 0)) &&
+			lst->local == 1)
+		i += ft_putnbr_ulm(lst->ul_nb, lst->base, lst->maj, lst->fd);
+	else if ((!(lst->point == 1 && lst->preci == 0 && lst->ul_nb == 0)))
+		i += ft_putnbr_ulm3(lst, lst->ul_nb, 0, 0);
 	i += ft_print_prefix(max, -lst->field, 0, lst->fd);
 	return (i);
 }
