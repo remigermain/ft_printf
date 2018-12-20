@@ -6,15 +6,19 @@
 /*   By: rgermain <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/12/19 22:28:54 by rgermain     #+#   ##    ##    #+#       */
-/*   Updated: 2018/12/19 22:30:07 by rgermain    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/12/20 14:33:21 by rgermain    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-
+#include <locale.h>
 int	main(void)
 {
-	printf("coucou\n");
+	int a;
+
+	a = 0;
+	a = ft_printf("%'lld", 10000055);
+	printf("ft = %d\n", a);
 	return (0);
 }

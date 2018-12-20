@@ -6,7 +6,7 @@
 /*   By: rgermain <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/11/12 12:38:05 by rgermain     #+#   ##    ##    #+#       */
-/*   Updated: 2018/12/19 22:09:20 by rgermain    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/12/20 14:34:30 by rgermain    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -55,7 +55,7 @@ static int	ft_putnbr_dlm2(t_pf *lst, int count, int base)
 	if (lst->lenght != 0 && lst->conv != 'a')
 		lst->fl_nb /= base;
 	if (len < count)
-		ft_putnbr_ulm((unsigned long)lst->fl_nb, base, lst->maj, lst->fd);
+		ft_putnbr_ulm(lst, lst->fl_nb, 0, 0);
 	return (count);
 }
 
@@ -64,7 +64,7 @@ static int	ft_putnbr_dlm3(t_pf *lst, int count, int base)
 	while (count < lst->preci)
 	{
 		lst->fl_nb = (lst->fl_nb - (long)lst->fl_nb) * base;
-		ft_putnbr_ulm((unsigned long)lst->fl_nb, base, lst->maj, lst->fd);
+		ft_putnbr_ulm(lst, lst->fl_nb, 0, 0);
 		count++;
 	}
 	return (count);

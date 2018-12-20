@@ -6,7 +6,7 @@
 /*   By: rgermain <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/12/11 20:46:44 by rgermain     #+#   ##    ##    #+#       */
-/*   Updated: 2018/12/19 22:19:49 by rgermain    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/12/20 14:34:21 by rgermain    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -24,14 +24,14 @@ static int		ft_pf_pos2(t_pf *lst, int count)
 		lst->hash = 1;
 		if (lst->point == 0)
 		{
-			count += ft_putnbr_ulm(lst->ful_nb, lst->base, lst->maj, lst->fd);
+			count += ft_putnbr_ulm(lst, lst->ful_nb, 0, 0);
 			lst->preci++;
 			if (lst->lenght == 0)
 				count += ft_putnbr_dlm(lst);
 		}
 		else
 		{
-			preci = ft_putnbr_ulm(lst->ful_nb, lst->base, lst->maj, lst->fd);
+			count += ft_putnbr_ulm(lst, lst->ful_nb, 0, 0);
 			count += preci;
 			lst->preci -= preci;
 			if (lst->preci != 0)
@@ -58,7 +58,7 @@ static int		ft_pf_pos(t_pf *lst, int count)
 	count += ft_print_prefix(max + sign, lst->field, lst->zero, lst->fd);
 	if (lst->zero == 0)
 		count += ft_print_sign(lst);
-	count += ft_putnbr_ulm(lst->ul_nb, lst->base, lst->maj, lst->fd);
+	count += ft_putnbr_ulm(lst, lst->ul_nb, 0, 0);
 	count = ft_pf_pos2(lst, count);
 	count += ft_print_prefix(max + sign, -lst->field, 1, lst->fd);
 	return (count);
@@ -92,7 +92,7 @@ static void		ft_init_double(t_pf *lst, t_valst *lst_va)
 	long double		nb;
 
 	a = 6;
-	if (lst->lenght == 10)
+	if (lst->lenght != 100000)
 		nb = va_arg(lst_va->copy, long double);
 	else
 		nb = (long double)va_arg(lst_va->copy, double);

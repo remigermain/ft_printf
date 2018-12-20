@@ -6,7 +6,7 @@
 /*   By: rgermain <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/10/04 14:13:25 by rgermain     #+#   ##    ##    #+#       */
-/*   Updated: 2018/12/19 19:00:01 by rgermain    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/12/19 23:45:28 by rgermain    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -58,7 +58,7 @@ int	ft_putnstrw_fd(wchar_t const *s, int len, int fd)
 	len2 = 0;
 	if (!s)
 		return (-1);
-	while (s[count] != '\0' && count < len)
+	while (s[count] != '\0' && len2 < len)
 		len2 += ft_putwchar_fd(s[count++], fd);
 	return (len2);
 }

@@ -6,7 +6,7 @@
 /*   By: rgermain <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/11/09 15:34:47 by rgermain     #+#   ##    ##    #+#       */
-/*   Updated: 2018/12/19 23:03:30 by rgermain    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/12/20 14:32:47 by rgermain    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -110,8 +110,8 @@ void			ft_signprefix(t_pf *lst);
 ** fonctions put_nbr et len_nbr en unsigned long
 **	utils.c
 */
-int				ft_putnbr_ulm(unsigned long nb, size_t b, size_t m, size_t fd);
-int				ft_putnbr_ul(unsigned long nb, size_t fd);
+int				ft_putnbr_ulm(t_pf *lst, unsigned long nb, int i, int first);
+int				ft_putnbr_ul(t_pf *lst, unsigned long nb);
 int				ft_ulen_base(unsigned long nb, size_t base);
 int				ft_ulen(unsigned long nb);
 

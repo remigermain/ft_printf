@@ -6,7 +6,7 @@
 /*   By: rgermain <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/12/06 13:27:18 by rgermain     #+#   ##    ##    #+#       */
-/*   Updated: 2018/12/19 22:24:00 by rgermain    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/12/20 13:05:08 by rgermain    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -24,6 +24,11 @@ static void	ft_undefined(t_pf *lst)
 		lst->point = 0;
 		lst->preci = 0;
 	}
+	if (lst->conv == 'u' || lst->conv == 'U' || lst->conv == 'x' ||
+			lst->conv == 'X' || lst->conv == 'o' || lst->conv == 'O' ||
+			lst->conv == 'I' || lst->conv == 'D' || lst->conv == 'b' ||
+			lst->conv == 'B' || lst->conv == 'p')
+		lst->local = 0;
 }
 
 static void	ft_init_base(t_pf *lst)
@@ -51,7 +56,7 @@ static int	ft_putflag_conv(t_pf *lst, char *str, int count)
 {
 	if (str[count] == 'h')
 		lst->lenght++;
-	else if (str[count] == 'l' || str[count] == 'L')
+	else if (str[count] == 'l')
 		lst->lenght += 10;
 	else if (str[count] == 'j')
 		lst->lenght += 100;
@@ -59,6 +64,8 @@ static int	ft_putflag_conv(t_pf *lst, char *str, int count)
 		lst->lenght += 1000;
 	else if (str[count] == 't')
 		lst->lenght += 10000;
+	else if (str[count] == 'L')
+		lst->lenght += 100000;
 	else
 		lst->conv = str[count];
 	count++;

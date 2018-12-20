@@ -6,7 +6,7 @@
 /*   By: rgermain <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/12/10 16:21:44 by rgermain     #+#   ##    ##    #+#       */
-/*   Updated: 2018/12/19 23:02:29 by rgermain    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/12/19 23:23:13 by rgermain    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -99,6 +99,7 @@ int			ft_params_string(t_valst *lst_va, char *str, int i, int index)
 
 	count = 0;
 	lst = lst_initoption(lst_va, str, i, index);
+	lst->preci = ft_abs(lst->preci);
 	if ((lst->lenght >= 10 && lst->lenght <= 20) || lst->conv == 'S')
 	{
 		initstring(lst_va, &cstr, &wstr, 1);
@@ -106,7 +107,6 @@ int			ft_params_string(t_valst *lst_va, char *str, int i, int index)
 	}
 	else
 	{
-		lst->preci = ft_abs(lst->preci);
 		initstring(lst_va, &cstr, &wstr, 0);
 		if (lst->conv == 'r')
 			count = ft_option_string(lst, cstr, wstr, 0);
