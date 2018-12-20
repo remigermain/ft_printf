@@ -6,14 +6,14 @@
 /*   By: rgermain <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/11/27 20:49:03 by rgermain     #+#   ##    ##    #+#       */
-/*   Updated: 2018/12/20 14:33:42 by rgermain    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/12/20 19:04:10 by rgermain    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int	ft_putnbr_ulm(t_pf *lst, unsigned long nb, int i, int first)
+int	ft_putnbr_ulm3(t_pf *lst, unsigned long nb, int i, int first)
 {
 	unsigned long	j;
 	int				len;
@@ -40,9 +40,28 @@ int	ft_putnbr_ulm(t_pf *lst, unsigned long nb, int i, int first)
 	return (i);
 }
 
-int	ft_putnbr_ul(t_pf *lst, unsigned long nb)
+int	ft_putnbr_ulm(unsigned long nb, size_t base, size_t maj, size_t fd)
 {
-	return (ft_putnbr_ulm(lst, nb, 0, 0));
+	int i;
+
+	i = 0;
+	if (nb >= base)
+	{
+		i += ft_putnbr_ulm((nb / base), base, maj, fd);
+		i += ft_putnbr_ulm((nb % base), base, maj, fd);
+	}
+	else if (nb < 10)
+		i += ft_putchar_fd(nb + '0', fd);
+	else if (maj == 1)
+		i += ft_putchar_fd(nb + 55, fd);
+	else
+		i += ft_putchar_fd(nb + 87, fd);
+	return (i);
+}
+
+int	ft_putnbr_ul(unsigned long nb, size_t fd)
+{
+	return (ft_putnbr_ulm(nb, 10, 1, fd));
 }
 
 int	ft_ulen_base(unsigned long nb, size_t base)
