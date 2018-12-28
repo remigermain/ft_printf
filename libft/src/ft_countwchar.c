@@ -28,12 +28,24 @@ int	ft_countwchar(wchar_t c)
 
 int ft_countwchars(wchar_t *str)
 {
-	int count;
-	int	a;
+	size_t count;
+	size_t a;
 
 	count = 0;
 	a = 0;
 	while (str[a] != '\0')
+		count += ft_countwchar(str[a++]);
+	return (count);
+}
+
+int ft_countnwchars(wchar_t *str, size_t len)
+{
+	size_t count;
+	size_t a;
+
+	count = 0;
+	a = 0;
+	while (str[a] != '\0' && a < len)
 		count += ft_countwchar(str[a++]);
 	return (count);
 }

@@ -13,6 +13,46 @@
 
 #include "ft_printf.h"
 
+
+static wuchar_t *comv_wstr(wchar_t *wstr, size_t len)
+{
+	wuchar_t *str;
+	size_t len2;
+	size_t i;
+	size_t count;
+
+	len2 = ft_countnwchars(wstr, len); 
+	i = 0;
+	count = 0;
+	if (!(str = (wuchar_t*)malloc(sizeof(wuchar_t) * len2)))
+		return (NULL);
+	while (wstr[count] != '\0' && count < len)
+	{
+		if (wstr[count] <= 0x7F)
+			str[i++] = wstr[count];
+		else if (wstr[count] <= 0x7FF)
+		{
+			str[i++] = 192 + (wstr[count] / 64);
+			str[i++] = 128 + (wstr[count] % 64);
+		}
+		else if (wstr[count] <= 0xFFFF)
+		{
+			str[i++] = 224 + (wstr[count] / 4096);
+			str[i++] = 128 + ((wstr[count] / 64) % 64);
+			str[i++] = 128 + (wstr[count] % 64);
+		}
+		else if (wstr[count] <= 0x10FFFF)
+		{
+			str[i++] = 240 + (wstr[count] / 262144);
+			str[i++] = 128 + ((wstr[count] / 4096) % 64);
+			str[i++] = 128 + ((wstr[count] / 64) % 64);
+			str[i++] = 128 + (wstr[count] % 64);
+		}
+		count++;
+	}
+	return (str);
+}
+
 static int	wchar_verif(wchar_t *wstr)
 {
 	int a;
@@ -41,9 +81,9 @@ static	int	ft_print_string(t_pf *lst, wuchar_t *str, wchar_t *wstr, int index)
 	else if (index == 0)
 		pf_putpstr(lst, str);
 	else if (lst->point == 0 && index == 2)
-		pf_tmpjoin(lst, wstr, ft_countwchars(wstr));
+		pf_tmpjoin(lst, comv_wstr(wstr, ft_countwchars(wstr)), ft_countwchars(wstr));
 	else if (index == 2)
-		pf_tmpjoin(lst, wstr, ft_min2(ft_countwchars(wstr), lst->preci));
+		pf_tmpjoin(lst, comv_wstr(wstr, lst->preci), ft_countnwchars(wstr, lst->preci));
 	return (count);
 }
 

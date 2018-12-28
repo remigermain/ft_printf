@@ -143,5 +143,6 @@ size_t			ft_strnlen(const char *str, size_t max);
 int				ft_atoi2(const char *str, int *count);
 int				ft_countwchar(wchar_t c);
 int				ft_countwchars(wchar_t *wstr);
+int				ft_countnwchars(wchar_t *wstr, size_t len);
 
 #endif
