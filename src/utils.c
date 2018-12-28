@@ -68,10 +68,10 @@ void 	pf_putpstr(t_pf *lst, wuchar_t *str)
 			new[j++] = (str[i++] + 64);
 		}
 	}
-	pf_tmpjoin(lst, new, len);
+	pf_tmpjoin(lst, new, len, 1);
 }
 
-static void	ft_putcolor2(t_valst *lst_va, int i)
+static void	ft_putcolor2(t_va *lst_va, int i)
 {
 	char	*tab[10];
 
@@ -88,7 +88,7 @@ static void	ft_putcolor2(t_valst *lst_va, int i)
 	pf_finaljoin(lst_va, tab[i], ft_strlen(tab[i]));
 }
 
-int			ft_putcolor(t_valst *lst_va, char *str)
+int			ft_putcolor(t_va *lst_va, char *str)
 {
 	char	*tab[10];
 	int		a;

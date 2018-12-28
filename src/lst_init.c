@@ -67,7 +67,7 @@ static int	ft_putflag_conv(t_pf *lst, char *str, int count)
 	return (count);
 }
 
-static int	lst_putdigit(t_valst *lst_va, t_pf *lst, char *str, int count)
+static int	lst_putdigit(t_va *lst_va, t_pf *lst, char *str, int count)
 {
 	int nb_tmp;
 
@@ -96,7 +96,7 @@ static int	lst_putdigit(t_valst *lst_va, t_pf *lst, char *str, int count)
 	return (count);
 }
 
-t_pf		*lst_initoption(t_valst *lst_va, char *str, int index)
+t_pf		*lst_initoption(t_va *lst_va, char *str, int index)
 {
 	t_pf	*lst;
 	int		count;

@@ -89,7 +89,7 @@ static	void pf_doublestring(t_pf *lst, char **tab, int len, int larg)
 	pf_puttab(lst, tab, len, larg);
 }
 
-int		ft_params_ts(t_valst *lst_va, char *str, int index)
+int		ft_params_ts(t_va *lst_va, char *str, int index)
 {
 	t_pf	*lst;
 	char	**tab;

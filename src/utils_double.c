@@ -22,7 +22,7 @@ void 		ft_printdouble(t_pf *lst, unsigned long nb[PF_BUFF])
 	while (lst->preci-- > 0)
 	{
 		if (a == 1)
-			pf_tmpjoin(lst, ".", 1);
+			pf_tmpjoin(lst, ".", 1, 0);
 		pf_itoa(lst, nb[a++]);
 	}
 }
@@ -32,7 +32,6 @@ void ft_double_roundup(t_pf *lst, unsigned long nb[PF_BUFF])
 	int a;
 
 	a = lst->preci + 1;
-	dprintf(1, "preci = %d\n", nb[a - 1]);
 	if (a != 0 && nb[a] >= (lst->base / 2))
 		nb[a - 1]++;
 	a--;

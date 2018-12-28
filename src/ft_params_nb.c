@@ -70,7 +70,6 @@ static void	ft_option_nb(t_pf *lst)
 	int index;
 
 	len = ft_ulen_base(lst->ul_nb, lst->base);
-	sign = ft_signcalc(lst);
 	if (lst->ul_nb == 0 && lst->point == 1 && lst->preci == 0)
 		len = 0;
 	index = ft_hashcalc(lst, 0, len);
@@ -88,7 +87,7 @@ static void	ft_option_nb(t_pf *lst)
 	ft_putprefix(lst, max, -lst->field, 0);
 }
 
-int			ft_params_nb(t_valst *lst_va, char *str, int index)
+int			ft_params_nb(t_va *lst_va, char *str, int index)
 {
 	t_pf	*lst;
 

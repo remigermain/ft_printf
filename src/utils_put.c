@@ -13,7 +13,7 @@
 
 #include "ft_printf.h"
 
-void			pf_tmpjoin(t_pf *lst, wuchar_t *str, size_t len)
+void			pf_tmpjoin(t_pf *lst, wuchar_t *str, size_t len, int index)
 {
 	wuchar_t	*new;
 	int		count;
@@ -36,6 +36,8 @@ void			pf_tmpjoin(t_pf *lst, wuchar_t *str, size_t len)
 	lst->count += i;
 	if (lst->str != NULL)
 		free(lst->str);
+	if (index == 1)
+		free(str);
 	lst->str = new;
 }
 
@@ -64,11 +66,10 @@ void		pf_itoa(t_pf *lst, unsigned long n)
 			str[len--] = (n % lst->base) + 87;
 		n = n / lst->base;
 	}
-	pf_tmpjoin(lst, str, mlen);
-	free(str);
+	pf_tmpjoin(lst, str, mlen, 1);
 }
 
-void 		pf_finaljoin(t_valst *lst_va, wuchar_t *str, size_t i)
+void 		pf_finaljoin(t_va *lst_va, wuchar_t *str, size_t i)
 {
 	int			count;
 	int			count_2;
@@ -105,18 +106,17 @@ void	ft_putprefix(t_pf *lst, int len, int nb, int point)
 		return ;
 	while ((len + count) < nb)
 		str[count++] = (point == 1 ? '0' : ' ');
-	pf_tmpjoin(lst, str, count);
-	free(str);
+	pf_tmpjoin(lst, str, count, 1);
 }
 
 void			ft_putsign(t_pf *lst)
 {
 	if (lst->psign == 1)
-		pf_tmpjoin(lst, "-", 1);
-	else if (lst->psign == 2)
-		pf_tmpjoin(lst, "+", 1);
+		pf_tmpjoin(lst, "-", 1, 0);
+	else if (lst->psign == 2, 0)
+		pf_tmpjoin(lst, "+", 1, 0);
 	else if (lst->psign == 3 && lst->maj == 1)
-		pf_tmpjoin(lst, "0X", 2);
+		pf_tmpjoin(lst, "0X", 2, 0);
 	else if (lst->psign == 3 && lst->maj == 0)
-		pf_tmpjoin(lst, "0x", 2);
+		pf_tmpjoin(lst, "0x", 2, 0);
 }

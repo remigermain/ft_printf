@@ -13,7 +13,7 @@
 
 #include "ft_printf.h"
 
-int	ft_conv3(t_valst *lst_va, char *str, int index)
+int	ft_conv3(t_va *lst_va, char *str, int index)
 {
 	int t_index;
 
@@ -40,14 +40,14 @@ int	ft_conv3(t_valst *lst_va, char *str, int index)
 	return (index);
 }
 
-int	ft_conv2(t_valst *lst_va, char *str, int index)
+int	ft_conv2(t_va *lst_va, char *str, int index)
 {
-	int	nb;
+	int	*nb;
 
 	if (str[index] == 'n')
 	{
-		nb = va_arg(lst_va->copy, int);
-		nb = lst_va->count;
+		nb = va_arg(lst_va->copy, int*);
+		*nb = lst_va->count;
 		index += 1;
 	}
 	else if (str[index] == 'f' || str[index] == 'F')
@@ -60,7 +60,7 @@ int	ft_conv2(t_valst *lst_va, char *str, int index)
 	return (index);
 }
 
-int	ft_conv(t_valst *lst_va, char *str, int index)
+int	ft_conv(t_va *lst_va, char *str, int index)
 {
 	if (str[index] == '\0')
 		index = index;

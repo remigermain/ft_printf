@@ -37,7 +37,7 @@ static void 	ft_assign_double(t_pf *lst, int count)
 	ft_printdouble(lst, nb);
 }
 
-static void	ft_initdouble(t_valst *lst_va, t_pf *lst)
+static void	ft_initdouble(t_va *lst_va, t_pf *lst)
 {
 	long double nb;
 
@@ -53,7 +53,7 @@ static void	ft_initdouble(t_valst *lst_va, t_pf *lst)
 		lst->ul_nb++;
 }
 
-int	ft_params_f(t_valst *lst_va, char *str, int index)
+int	ft_params_f(t_va *lst_va, char *str, int index)
 {
 	t_pf	*lst;
 	int 	max;

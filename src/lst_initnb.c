@@ -13,7 +13,7 @@
 
 #include "ft_printf.h"
 
-static void	ft_init_unb(t_pf *lst, t_valst *lst_va)
+static void	ft_init_unb(t_pf *lst, t_va *lst_va)
 {
 	if (lst->lenght == 1 && lst->conv != 'O' && lst->conv != 'U'
 			&& lst->conv != 'D')
@@ -39,7 +39,7 @@ static void	ft_init_unb(t_pf *lst, t_valst *lst_va)
 		lst->psign = 2;
 }
 
-static void	ft_init_snb(t_pf *lst, t_valst *lst_va)
+static void	ft_init_snb(t_pf *lst, t_va *lst_va)
 {
 	if (lst->lenght == 1)
 		lst->nb_tmp = (short)va_arg(lst_va->copy, int);
@@ -64,7 +64,7 @@ static void	ft_init_snb(t_pf *lst, t_valst *lst_va)
 	lst->ul_nb = (lst->nb_tmp < 0 ? -lst->nb_tmp : lst->nb_tmp);
 }
 
-void		ft_initnb(t_pf *lst, t_valst *lst_va)
+void		ft_initnb(t_pf *lst, t_va *lst_va)
 {
 	if (lst->conv == 'd' || (lst->conv == 'i') ||
 			(lst->conv == 'D' && lst->lenght == 0))

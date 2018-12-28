@@ -40,11 +40,11 @@ t_pf	*ft_initpf(void)
 	return (lst);
 }
 
-t_valst	*lstva_init(int fd)
+t_va	*lstva_init(int fd)
 {
-	t_valst *lst_va;
+	t_va *lst_va;
 
-	if (!(lst_va = (t_valst*)malloc(sizeof(t_valst))))
+	if (!(lst_va = (t_va*)malloc(sizeof(t_va))))
 		exit(0);
 	lst_va->count = 0;
 	lst_va->fd = fd;
@@ -52,7 +52,7 @@ t_valst	*lstva_init(int fd)
 	return (lst_va);
 }
 
-void	lstva_digit(t_valst *lst_va, int nb, int index)
+void	lstva_digit(t_va *lst_va, int nb, int index)
 {
 	int		count;
 

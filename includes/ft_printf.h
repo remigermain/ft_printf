@@ -30,7 +30,7 @@ typedef struct	s_valist
 	int		fd;
 	int		count;
 	wuchar_t		*str;
-}				t_valst;
+}								t_va;
 
 typedef struct	s_printf
 {
@@ -67,62 +67,53 @@ int				ft_sprintf(wuchar_t **dest, const char *format, ...);
 **	fonctions pour trouver quelles sont les parametres
 **	ft_conv.c
 */
-int				ft_conv(t_valst *lst_va, char *str, int index);
-int				ft_conv2(t_valst *lst_va, char *str, int index);
-int				ft_conv3(t_valst *lst_va, char *str, int index);
+int				ft_conv(t_va *lst_va, char *str, int index);
+int				ft_conv2(t_va *lst_va, char *str, int index);
+int				ft_conv3(t_va *lst_va, char *str, int index);
 
 /*
 ** fonctions des diferents parametres
 ** ft_params_*.c
 */
-int				ft_params_nb(t_valst *lst_va, char *str, int index);
-int				ft_params_char(t_valst *lst_va, char *str, int index);
-int				ft_params_perc(t_valst *lst_va, char *str, int index);
-int				ft_params_no(t_valst *lst_va, char *str, int index);
-int				ft_params_string(t_valst *lst_va, char *str, int index);
-int				ft_params_k(t_valst *lst_va, char *str, int index);
-int				ft_params_f(t_valst *lst_va, char *str, int index);
-int				ft_params_a(t_valst *lst_va, char *str, int index);
-int				ft_params_la(t_valst *lst_va, char *str, int index);
-int				ft_params_ti(t_valst *lst_va, char *str, int index);
-int				ft_params_ts(t_valst *lst_va, char *str, int index);
+int				ft_params_nb(t_va *lst_va, char *str, int index);
+int				ft_params_char(t_va *lst_va, char *str, int index);
+int				ft_params_perc(t_va *lst_va, char *str, int index);
+int				ft_params_no(t_va *lst_va, char *str, int index);
+int				ft_params_string(t_va *lst_va, char *str, int index);
+int				ft_params_f(t_va *lst_va, char *str, int index);
+int				ft_params_ts(t_va *lst_va, char *str, int index);
 
 /*
-** initialisation des lists
-** lst_init.c && lst_base.c
+** initialisation des lists && fonction pour initialisation des nombres
+** lst_init.c && lst_base.c && lst_initnb.c
 */
-t_valst		*lstva_init(int fd);
-t_pf			*lst_initoption(t_valst *lst_va, char *str, int index);
+t_va			*lstva_init(int fd);
+t_pf			*lst_initoption(t_va *lst_va, char *str, int index);
 t_pf			*ft_initpf(void);
-void			lstva_digit(t_valst *lst_va, int nb, int index);
-
-/*
-**	fonction pour initialisation des nombres
-**	lst_initnb.c
-*/
-void			ft_initnb(t_pf *lst, t_valst *lst_va);
+void			lstva_digit(t_va *lst_va, int nb, int index);
+void			ft_initnb(t_pf *lst, t_va *lst_va);
 void			ft_signprefix(t_pf *lst);
 
 /*
-** fonctions put_nbr et len_nbr en unsigned long
+** fonctions len_nbr , len no_print char && convert in print, put color
 **	utils.c
 */
 int				ft_ulen_base(unsigned long nb, size_t base);
-
-/*
-**	fonctions qui affiche les couleurs && les signes( - , + , 0x , e+00 ...)
-**				&& afficher les esapces et zero des precision/field
-**	utils_print.c
-*/
-
-void			ft_putsign(t_pf *lst);
-void			ft_putprefix(t_pf *lst, int len, int nb, int point);
-void			pf_itoa(t_pf *lst, unsigned long n);
-void 			pf_finaljoin(t_valst *lst_va, wuchar_t *str, size_t i);
-void			pf_tmpjoin(t_pf *lst, wuchar_t *tmp, size_t len);
 int 			pf_countpstr(char *str, size_t len);
 void      pf_putpstr(t_pf *lst, wuchar_t *str);
-int			ft_putcolor(t_valst *lst_va, char *str);
+int				ft_putcolor(t_va *lst_va, char *str);
+
+/*
+**	fonctions qui put les signes( - , + , 0x )
+**			 ajoute les esapces et zero des precision/field
+**				join le str entre eux && unsigned long itoa
+**	utils_put.c
+*/
+void			pf_tmpjoin(t_pf *lst, wuchar_t *tmp, size_t len, int index);
+void			pf_itoa(t_pf *lst, unsigned long n);
+void 			pf_finaljoin(t_va *lst_va, wuchar_t *str, size_t i);
+void			ft_putprefix(t_pf *lst, int len, int nb, int point);
+void			ft_putsign(t_pf *lst);
 
 /*
 **	fonctions put_double len_double en unsigned long double !
@@ -130,6 +121,7 @@ int			ft_putcolor(t_valst *lst_va, char *str);
 */
 void			ft_printdouble(t_pf *lst, unsigned long nb[PF_BUFF]);
 void 			ft_double_roundup(t_pf *lst, unsigned long nb[PF_BUFF]);
+
 /*
 ** fonction de debug de la list
 **	debug.c
