@@ -13,54 +13,69 @@
 
 #include "ft_printf.h"
 
-static int	ftprintf_base(const char *format, t_valst *lst_va)
+static size_t	ft_strlen_perc(char *str, size_t j)
 {
-	int	i;
+	while (str[j] != '\0' && str[j] != '{' && str[j] != '%')
+			j++;
+	return (j);
+}
 
-	i = 0;
-	while (format[i] != '\0')
+static int ftprintf_base(char *str, t_valst *lst_va, size_t i, size_t j)
+{
+	va_copy(lst_va->copy, lst_va->lst_va);
+	while (str[i] != '\0' && lst_va->count != -1)
 	{
-		if (format[i] == '{')
-			i = ft_printcolor((char*)format, i, lst_va->fd);
-		if (format[i] == '%')
-			i = ft_conv(lst_va, (char*)format, i, 1);
-		else
-		{
-			ft_putchar_fd(format[i++], lst_va->fd);
-			lst_va->count++;
-		}
-		if (lst_va->count == -1)
-			return (-1);
+		j = ft_strlen_perc(str + i, 0);
+		pf_finaljoin(lst_va, (char_t*)(str + i), j);
+		if (str[i + j] == '{')
+			i += ft_putcolor(lst_va, str + i + j);
+		else if (str[i + j] == '%')
+			i += ft_conv(lst_va, str + i + j, 1);
+		i += j;
 	}
+	va_end(lst_va->lst_va);
+	va_end(lst_va->copy);
 	return (lst_va->count);
+}
+
+int			ft_sprintf(char_t **dest, const char *format, ...)
+{
+	t_valst	*lst_va;
+	int			i;
+
+	lst_va = lstva_init(1);
+	va_start(lst_va->lst_va, format);
+	i = ftprintf_base((char*)format, lst_va, 0, 0);
+	*dest = ft_strndup(lst_va->str, i);
+	free(lst_va->str);
+	free(lst_va);
+	return (i);
 }
 
 int			ft_dprintf(int fd, const char *format, ...)
 {
 	t_valst	*lst_va;
-	int		count;
+	int			i;
 
 	lst_va = lstva_init(fd);
 	va_start(lst_va->lst_va, format);
-	va_copy(lst_va->copy, lst_va->lst_va);
-	count = ftprintf_base(format, lst_va);
-	va_end(lst_va->lst_va);
-	va_end(lst_va->copy);
+	i = ftprintf_base((char*)format, lst_va, 0, 0);
+	write(lst_va->fd, lst_va->str, i);
+	free(lst_va->str);
 	free(lst_va);
-	return (lst_va->count);
+	return (i);
 }
 
 int			ft_printf(const char *format, ...)
 {
 	t_valst	*lst_va;
-	int		count;
+	int			i;
 
 	lst_va = lstva_init(1);
 	va_start(lst_va->lst_va, format);
-	va_copy(lst_va->copy, lst_va->lst_va);
-	count = ftprintf_base(format, lst_va);
-	va_end(lst_va->lst_va);
-	va_end(lst_va->copy);
+	i = ftprintf_base((char*)format, lst_va, 0, 0);
+	write(lst_va->fd, lst_va->str, i);
+	free(lst_va->str);
 	free(lst_va);
-	return (lst_va->count);
+	return (i);
 }

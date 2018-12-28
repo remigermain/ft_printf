@@ -13,80 +13,72 @@
 
 #include "ft_printf.h"
 
-int	ft_conv3(t_valst *lst_va, char *str, int i, int index)
+int	ft_conv3(t_valst *lst_va, char *str, int index)
 {
 	int t_index;
 
 	t_index = index;
-	if (str[i + index] == '+' || str[i + index] == '-')
+	if (str[index] == '+' || str[index] == '-')
 		index++;
-	else if (str[i + index] == ' ' || str[i + index] == '.')
+	else if (str[index] == ' ' || str[index] == '.')
 		index++;
-	else if (str[i + index] == '#' || str[i + index] == '$' ||
-			str[i + index] == '*')
+	else if (str[index] == '#' || str[index] == '$' ||
+			str[index] == '*')
 		index++;
-	else if (str[i + index] == 'l' || str[i + index] == 'h')
+	else if (str[index] == 'l' || str[index] == 'h')
 		index++;
-	else if (str[i + index] == 'j' || str[i + index] == 'z')
+	else if (str[index] == 'j' || str[index] == 'z')
 		index++;
-	else if (str[i + index] == 'L' || str[i + index] == 39)
+	else if (str[index] == 'L' || str[index] == 39)
 		index++;
-	while (ft_isdigit(str[i + index]))
+	while (ft_isdigit(str[index]))
 		index++;
 	if (t_index != index)
-		i = (ft_conv(lst_va, str, i, index));
+		index = (ft_conv(lst_va, str, index));
 	else if (t_index == index)
-		i += ft_params_no(lst_va, str, i, index);
-	return (i);
+		index = ft_params_no(lst_va, str, index);
+	return (index);
 }
 
-int	ft_conv2(t_valst *lst_va, char *str, int i, int index)
+int	ft_conv2(t_valst *lst_va, char *str, int index)
 {
 	int	nb;
 
-	if (str[i + index] == 'n')
+	if (str[index] == 'n')
 	{
 		nb = va_arg(lst_va->copy, int);
 		nb = lst_va->count;
-		i += index + 1;
+		index += 1;
 	}
-	else if (str[i + index] == 'a' || str[i + index] == 'A'
-			|| str[i + index] == 'e' || str[i + index] == 'E'
-			|| str[i + index] == 'g' || str[i + index] == 'G')
-		i += ft_params_a(lst_va, str, i, index);
-	else if (str[i + index] == 'f' || str[i + index] == 'F')
-		i += ft_params_f(lst_va, str, i, index);
-	else if (str[i + index] == 's' || str[i + index] == 'r' ||
-			str[i + index] == 'S')
-		i += ft_params_string(lst_va, str, i, index);
+	else if (str[index] == 'f' || str[index] == 'F')
+		index = ft_params_f(lst_va, str, index);
+	else if (str[index] == 's' || str[index] == 'r' ||
+			str[index] == 'S')
+		index = ft_params_string(lst_va, str, index);
 	else
-		i = ft_conv3(lst_va, str, i, index);
-	return (i);
+		index = ft_conv3(lst_va, str, index);
+	return (index);
 }
 
-int	ft_conv(t_valst *lst_va, char *str, int i, int index)
+int	ft_conv(t_valst *lst_va, char *str, int index)
 {
-	if (str[i + index] == '\0')
-		i += index;
-	else if (str[i + index] == 'd' || str[i + index] == 'i' ||
-			str[i + index] == 'D' || str[i + index] == 'I' ||
-			str[i + index] == 'x' || str[i + index] == 'X' ||
-			str[i + index] == 'o' || str[i + index] == 'O' ||
-			str[i + index] == 'u' || str[i + index] == 'U' ||
-			str[i + index] == 'p' || str[i + index] == 'b' ||
-			str[i + index] == 'B')
-		i += ft_params_nb(lst_va, str, i, index);
-	else if (str[i + index] == 'c' || str[i + index] == 'C')
-		i += ft_params_char(lst_va, str, i, index);
-	else if (str[i + index] == 'k')
-		i += ft_params_k(lst_va, str, i, index);
-	else if (str[i + index] == '%')
-		i += ft_params_perc(lst_va, str, i, index);
-	else if (str[i + index] == 't' && str[i + index + 1] == 's')
-		i += ft_params_ts(lst_va, str, i, index);
-	else if (str[i + index] == 't' && str[i + index + 1] == 'i')
-		i += ft_params_ti(lst_va, str, i, index);
+	if (str[index] == '\0')
+		index = index;
+	else if (str[index] == 'd' || str[index] == 'i' ||
+			str[index] == 'D' || str[index] == 'I' ||
+			str[index] == 'x' || str[index] == 'X' ||
+			str[index] == 'o' || str[index] == 'O' ||
+			str[index] == 'u' || str[index] == 'U' ||
+			str[index] == 'p' || str[index] == 'b' ||
+			str[index] == 'B')
+		index = ft_params_nb(lst_va, str, index);
+	else if (str[index] == 'c' || str[index] == 'C')
+		index = ft_params_char(lst_va, str, index);
+	else if (str[index] == 't' && str[index + 1] == 's')
+		index = ft_params_ts(lst_va, str, index + 1);
+	else if (str[index] == '%')
+		index = ft_params_perc(lst_va, str, index);
 	else
-		i = ft_conv2(lst_va, str, i, index);
-	return (i);
+		index = ft_conv2(lst_va, str, index);
+	return (index);
 }

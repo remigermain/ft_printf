@@ -13,7 +13,7 @@
 
 #include "ft_printf.h"
 
-static int	wchar_verif(wchar_t *wstr)
+static int	wchar_verif(char_t *wstr)
 {
 	int a;
 	int count;
@@ -29,27 +29,25 @@ static int	wchar_verif(wchar_t *wstr)
 	return (count);
 }
 
-static	int	ft_print_string(t_pf *lst, char *str, wchar_t *wstr, int index)
+static	int	ft_print_string(t_pf *lst, char *str, char_t *wstr, int index)
 {
 	int count;
 
 	count = 0;
 	if (lst->point == 0 && index == 1)
-		count += ft_putstr_fd(str, lst->fd);
+		pf_tmpjoin(lst, str, ft_strlen(str));
 	else if (index == 1)
-		count += ft_putnstr_fd(str, lst->preci, lst->fd);
-	else if (lst->point == 0 && index == 0)
-		count += ft_putpstr_fd(str, lst->fd);
+		pf_tmpjoin(lst, str, ft_min2(ft_strlen(str), lst->preci));
 	else if (index == 0)
-		count += ft_putpnstr_fd(str, lst->preci, lst->fd);
+		pf_putpstr(lst, str);
 	else if (lst->point == 0 && index == 2)
-		count += ft_putstrw_fd(wstr, lst->fd);
+		pf_tmpjoin(lst, wstr, ft_countwchars(wstr));
 	else if (index == 2)
-		count += ft_putnstrw_fd(wstr, lst->preci, lst->fd);
+		pf_tmpjoin(lst, wstr, ft_min2(ft_countwchars(wstr), lst->preci));
 	return (count);
 }
 
-static int	ft_option_string(t_pf *lst, char *str, wchar_t *wstr, int index)
+static int	ft_option_string(t_pf *lst, char *str, char_t *wstr, int index)
 {
 	int count;
 	int max;
@@ -68,9 +66,9 @@ static int	ft_option_string(t_pf *lst, char *str, wchar_t *wstr, int index)
 		max = ft_min2(lst->preci, len);
 	else
 		max = len;
-	count += ft_print_prefix(max, lst->field, lst->zero, lst->fd);
-	count += ft_print_string(lst, str, wstr, index);
-	count += ft_print_prefix(count, -lst->field, 0, lst->fd);
+	ft_putprefix(lst, max, lst->field, lst->zero);
+	ft_print_string(lst, str, wstr, index);
+	ft_putprefix(lst, count, -lst->field, 0);
 	return (count);
 }
 
@@ -90,7 +88,7 @@ static void	initstring(t_valst *lst_va, char **cstr, wchar_t **wstr, int index)
 	}
 }
 
-int			ft_params_string(t_valst *lst_va, char *str, int i, int index)
+int			ft_params_string(t_valst *lst_va, char *str, int index)
 {
 	t_pf	*lst;
 	int		count;
@@ -98,7 +96,7 @@ int			ft_params_string(t_valst *lst_va, char *str, int i, int index)
 	wchar_t	*wstr;
 
 	count = 0;
-	lst = lst_initoption(lst_va, str, i, index);
+	lst = lst_initoption(lst_va, str, index);
 	lst->preci = ft_abs(lst->preci);
 	if ((lst->lenght >= 10 && lst->lenght <= 20) || lst->conv == 'S')
 	{
@@ -113,7 +111,11 @@ int			ft_params_string(t_valst *lst_va, char *str, int i, int index)
 		else
 			count = ft_option_string(lst, cstr, wstr, 1);
 	}
-	lst_va->count = (count == -1 ? count : lst_va->count + count);
+	if (count == -1)
+		lst_va->count = -1;
+	else
+		pf_finaljoin(lst_va, lst->str, lst->count);
+	free(lst->str);
 	free(lst);
 	return (index + 1);
 }

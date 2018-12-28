@@ -13,73 +13,36 @@
 
 #include "ft_printf.h"
 
-int			ft_calcul_len2(t_pf *lst, int len, int index)
+void 		ft_printdouble(t_pf *lst, unsigned long nb[PF_BUFF])
 {
-	int sign;
-	int max;
+	int a;
 
-	sign = 0;
-	max = 0;
-	if (index == 1)
+	a = 0;
+	pf_itoa(lst, nb[a++]);
+	while (lst->preci-- > 0)
 	{
-		if (lst->point == 1)
-			max = len + lst->preci;
-		else
-			max = len + 6;
-		return (max);
-	}
-	else
-	{
-		if ((lst->point == 1 && lst->preci > 0) || lst->point == 0)
-			sign++;
-		if (lst->sign != 0)
-			sign++;
-		return (sign);
+		if (a == 1)
+			pf_tmpjoin(lst, ".", 1);
+		pf_itoa(lst, nb[a++]);
 	}
 }
 
-static int	ft_putnbr_dlm2(t_pf *lst, int count, int base)
+void ft_double_roundup(t_pf *lst, unsigned long nb[PF_BUFF])
 {
-	int len;
+	int a;
 
-	len = 0;
-	while (count < (lst->preci))
+	a = lst->preci + 1;
+	dprintf(1, "preci = %d\n", nb[a - 1]);
+	if (a != 0 && nb[a] >= (lst->base / 2))
+		nb[a - 1]++;
+	a--;
+	while ((a + 1) != 0)
 	{
-		count++;
-		lst->fl_nb *= base;
-		if ((long)(lst->fl_nb * base) == 0 && count < (lst->preci))
-			len += ft_putchar_fd('0', lst->fd);
+		if (a > 0 && ft_ulen_base(nb[a], lst->base) > 1)
+		{
+			nb[a - 1]++;
+			nb[a] %= lst->base;
+		}
+		a--;
 	}
-	if (((long)lst->fl_nb % lst->base) >= (lst->base / 2))
-		lst->fl_nb++;
-	if (lst->lenght != 0 && lst->conv != 'a')
-		lst->fl_nb /= base;
-	if (len < count)
-		ft_putnbr_ulm(lst->fl_nb, lst->base, lst->maj, lst->fd);
-	return (count);
-}
-
-static int	ft_putnbr_dlm3(t_pf *lst, int count, int base)
-{
-	while (count < lst->preci)
-	{
-		lst->fl_nb = (lst->fl_nb - (long)lst->fl_nb) * base;
-		ft_putnbr_ulm(lst->fl_nb, lst->base, lst->maj, lst->fd);
-		count++;
-	}
-	return (count);
-}
-
-int			ft_putnbr_dlm(t_pf *lst)
-{
-	int	count;
-	int base;
-
-	count = 0;
-	base = lst->base;
-	if (lst->preci > 18)
-		count = ft_putnbr_dlm3(lst, count, base);
-	else
-		count = ft_putnbr_dlm2(lst, count, base);
-	return (count);
 }

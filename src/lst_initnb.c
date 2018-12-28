@@ -13,17 +13,6 @@
 
 #include "ft_printf.h"
 
-void		ft_signprefix(t_pf *lst)
-{
-	if (lst->conv == 'p' || ((lst->conv == 'x' || lst->conv == 'X')
-				&& lst->hash == 1 && lst->ul_nb != 0))
-		lst->psign = 3;
-	else if (lst->conv == 'e' || lst->conv == 'E')
-		lst->psign = 4;
-	else if (lst->conv == 'a' || lst->conv == 'A')
-		lst->psign = 5;
-}
-
 static void	ft_init_unb(t_pf *lst, t_valst *lst_va)
 {
 	if (lst->lenght == 1 && lst->conv != 'O' && lst->conv != 'U'
@@ -82,5 +71,7 @@ void		ft_initnb(t_pf *lst, t_valst *lst_va)
 		ft_init_snb(lst, lst_va);
 	else
 		ft_init_unb(lst, lst_va);
-	ft_signprefix(lst);
+	if (lst->conv == 'p' || ((lst->conv == 'x' || lst->conv == 'X')
+				&& lst->hash == 1 && lst->ul_nb != 0))
+	lst->psign = 3;
 }

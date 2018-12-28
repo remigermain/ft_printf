@@ -33,20 +33,15 @@ static void	ft_undefined(t_pf *lst)
 
 static void	ft_init_base(t_pf *lst)
 {
-	if (lst->conv == 'x' || lst->conv == 'X' || lst->conv == 'p' ||
-			lst->conv == 'a' || lst->conv == 'A' ||
-			lst->conv == 'e' || lst->conv == 'E')
+	if (lst->conv == 'x' || lst->conv == 'X' || lst->conv == 'p'
+				|| lst->conv == 'a' || lst->conv == 'A')
 		lst->base = 16;
-	else if (lst->conv == 'u' || lst->conv == 'U' ||
-			lst->conv == 'f' || lst->conv == 'F' ||
-			lst->conv == 'i' || lst->conv == 'I' ||
-			lst->conv == 'd' || lst->conv == 'D' ||
-			lst->conv == 'g' || lst->conv == 'G')
-		lst->base = 10;
 	else if (lst->conv == 'o' || lst->conv == 'O')
 		lst->base = 8;
 	else if (lst->conv == 'b' || lst->conv == 'B')
 		lst->base = 2;
+	else
+		lst->base = 10;
 	if (!ft_islowercase(lst->conv))
 		lst->maj = 1;
 	ft_undefined(lst);
@@ -101,18 +96,18 @@ static int	lst_putdigit(t_valst *lst_va, t_pf *lst, char *str, int count)
 	return (count);
 }
 
-t_pf		*lst_initoption(t_valst *lst_va, char *str, int i, int index)
+t_pf		*lst_initoption(t_valst *lst_va, char *str, int index)
 {
 	t_pf	*lst;
 	int		count;
 
-	lst = ft_initpf(lst_va);
-	count = i + 1;
-	while (count <= (i + index))
+	lst = ft_initpf();
+	count = 1;
+	while (count <= index)
 	{
 		if (str[count] == '.')
 			lst->point += str[count++] - 45;
-		else if (str[count] == '0')
+		else if (str[count] == '0' && lst->point == 0)
 			lst->zero += str[count++] - 47;
 		else if (str[count] == 39)
 			lst->local = str[count++] - 38;

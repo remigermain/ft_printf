@@ -13,101 +13,101 @@
 
 #include "ft_printf.h"
 
-int		ft_printback(t_pf *lst, int len2, int b, int c)
+void	ft_strjoin_f1(t_pf *lst, char *s2, size_t l2)
 {
-	int count;
+	int		count;
+	int		count_2;
+	char	*new;
 
 	count = 0;
-	if (lst->preci >= 1)
+	count_2 = 0;
+	if (!(new = (char *)malloc(sizeof(char) * l2 + lst->count + 1)))
+		return ;
+	while (count < lst->count)
 	{
-		if (c == '\0')
-			ft_dprintf(lst->fd, "{blue}%*c%c{eoc} |", len2 - 1, 92, '0', b++);
-		else
-			ft_dprintf(lst->fd, "{blue}%*c%c{eoc} |", len2 - 1, 'N', 'O', b++);
+		new[count] = lst->str[count];
+		count++;
 	}
-	return (b);
+	while (count_2 < l2)
+		new[count++] = s2[count_2++];
+	new[lst->count + l2] = '\0';
+	lst->count += l2;
+	free(lst->str);
+	free(s2);
+	lst->str = new;
 }
 
-void	ft_printend(t_pf *lst, char **tab, int larg, int a)
-{
-	int len;
-
-	len = 0;
-	if (lst->preci >= 1)
-	{
-		len = ft_ulen(larg - 1);
-		if (tab[a] == NULL)
-			ft_dprintf(lst->fd, "\n[%.*d]  {blue}NULL{eoc} ", len, a);
-		else
-			ft_dprintf(lst->fd, "\n[%.*d]  {red}NO NU{eoc} ", len, a);
-	}
-}
-
-int		ft_printtab2(t_pf *lst, char **tab, int larg, int len)
+static	void pf_puttab(t_pf *lst, char **tab, int len, int larg)
 {
 	int a;
 	int b;
-	int i;
-	int len2;
+	char c;
+	char *str;
+	int ret;
 
 	a = 0;
-	i = 1;
-	if (lst->preci >= 1)
-		i = 2;
-	len2 = ((ft_ulen(len) + i / 2) + 1);
-	while (tab[a] != NULL)
+	while (tab[++a] != NULL)
 	{
 		b = 0;
-		ft_dprintf(lst->fd, "\n[%.*d] |", ft_ulen(larg - 1), a);
-		while (tab[a][b] != '\0')
-			ft_dprintf(lst->fd, "%*c |", len2, tab[a][b++]);
-		b = ft_printback(lst, len2, b, tab[a][b]);
+		ret = ft_sprintf(&str, "\n[%.*d]|", larg, a);
+		ft_strjoin_f1(lst, str, ret);
 		while (b < len)
-			ft_dprintf(lst->fd, "%*c |", len2, ' ', b++);
-		a++;
+		{
+			if (b >= ft_strlen(tab[a]))
+				c = ' ';
+			else
+				c = tab[a][b];
+			if ((len % 10) == 0)
+				ret = ft_sprintf(&str, " %*c |", ft_ulen_base(len, 10) - 1, c);
+			else
+				ret = ft_sprintf(&str, " %*c |", ft_ulen_base(len, 10), c);
+			ft_strjoin_f1(lst, str, ret);
+			b++;
+		}
 	}
-	ft_printend(lst, tab, larg, a);
-	return (0);
 }
 
-int		ft_pf_case(t_pf *lst, char **tab)
+static	void pf_doublestring(t_pf *lst, char **tab, int len, int larg)
 {
-	int len;
-	int larg;
-	int	b;
-	int i;
+	int ret;
+	int b;
+	char_t *str;
 
 	b = 0;
 	len = ft_maxlen_tab(tab, 1);
-	larg = ft_ulen(ft_maxlen_tab(tab, 0));
-	i = 1;
-	if (lst->point == 1)
+	larg = ft_ulen_base(ft_maxlen_tab(tab, 0), 10);
+	ret = ft_sprintf(&str, "%*.c |", larg + 1, ' ');
+	ft_strjoin_f1(lst, str, ret);
+	while (b < len)
 	{
-		ft_dprintf(lst->fd, "%*.c |", ft_ulen(larg - 1) + 2, ' ');
-		if (lst->preci >= 1)
-		{
-			i = 2;
-			larg++;
-			len++;
-		}
-		while (b < len)
-			ft_dprintf(lst->fd, "[%.*d]|", ft_ulen(len) + i - 1, b++);
-		ft_printtab2(lst, tab, larg, len);
+		if ((len % 10) == 0)
+			ret = ft_sprintf(&str, "[%.*d]|", ft_ulen_base(len, 10) - 1, b++);
+		else
+			ret = ft_sprintf(&str, "[%.*d]|", ft_ulen_base(len, 10), b++);
+		ft_strjoin_f1(lst, str, ret);
 	}
-	else
-		ft_printtab_fd(tab, lst->fd);
-	return (1);
+	pf_puttab(lst, tab, len, larg);
 }
 
-int		ft_params_ts(t_valst *lst_va, char *str, int i, int index)
+int		ft_params_ts(t_valst *lst_va, char *str, int index)
 {
 	t_pf	*lst;
 	char	**tab;
-	int		count;
 
-	lst = lst_initoption(lst_va, str, i, index);
+	lst = lst_initoption(lst_va, str, index);
 	tab = va_arg(lst_va->copy, char**);
-	count = ft_pf_case(lst, tab);
+	if (lst->point == 1)
+		pf_doublestring(lst, tab, 0, 0);
+	else
+	while (*tab != NULL)
+	{
+		ft_strjoin_f1(lst, *tab, ft_strlen(*tab));
+		tab++;
+		if (*tab != NULL)
+			ft_strjoin_f1(lst, "\n", 1);
+	}
+	pf_finaljoin(lst_va, lst->str, lst->count);
+	free(lst->str);
 	free(lst);
 	return (index + 1);
 }

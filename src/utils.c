@@ -13,57 +13,6 @@
 
 #include "ft_printf.h"
 
-int	ft_putnbr_ulm3(t_pf *lst, unsigned long nb, int i, int first)
-{
-	unsigned long	j;
-	int				len;
-
-	j = 1;
-	while (j < nb)
-		j *= lst->base;
-	len = ft_ulen_base(nb, lst->base);
-	while (len > 0)
-	{
-		nb %= j;
-		j /= lst->base;
-		if (((len % 3) == 0) && first == 1)
-			i += ft_putchar_fd('\'', lst->fd);
-		if ((nb / j) < 10)
-			i += ft_putchar_fd((nb / j) + '0', lst->fd);
-		else if (lst->maj == 1)
-			i += ft_putchar_fd((nb / j) + 55, lst->fd);
-		else
-			i += ft_putchar_fd((nb / j) + 87, lst->fd);
-		first = lst->local;
-		len--;
-	}
-	return (i);
-}
-
-int	ft_putnbr_ulm(unsigned long nb, size_t base, size_t maj, size_t fd)
-{
-	int i;
-
-	i = 0;
-	if (nb >= base)
-	{
-		i += ft_putnbr_ulm((nb / base), base, maj, fd);
-		i += ft_putnbr_ulm((nb % base), base, maj, fd);
-	}
-	else if (nb < 10)
-		i += ft_putchar_fd(nb + '0', fd);
-	else if (maj == 1)
-		i += ft_putchar_fd(nb + 55, fd);
-	else
-		i += ft_putchar_fd(nb + 87, fd);
-	return (i);
-}
-
-int	ft_putnbr_ul(unsigned long nb, size_t fd)
-{
-	return (ft_putnbr_ulm(nb, 10, 1, fd));
-}
-
 int	ft_ulen_base(unsigned long nb, size_t base)
 {
 	int count;
@@ -77,7 +26,91 @@ int	ft_ulen_base(unsigned long nb, size_t base)
 	return (count + 1);
 }
 
-int	ft_ulen(unsigned long nb)
+int pf_countpstr(char *str, size_t len)
 {
-	return (ft_ulen_base(nb, 10));
+	int i;
+	int a;
+
+	i = 0;
+	a = 0;
+	while (str[i] != '\0' && i < len)
+	{
+		if (ft_isprint(str[i]) || (str[i] >= 9 && str[i] <= 13))
+			a++;
+		else
+			a += 2;
+		i++;
+	}
+	return (a);
+}
+
+void 	pf_putpstr(t_pf *lst, char_t *str)
+{
+	int i;
+	int j;
+	int len;
+	char_t *new;
+
+	i = 0;
+	j = 0;
+	len = pf_countpstr(str, ft_strlen(str));
+	if (lst->point == 1)
+		len = ft_max2(len, lst->preci);
+	if (!(new = (char_t*)malloc(sizeof(char_t) + len)))
+		return ;
+	while (str[i] != '\0' && i < len)
+	{
+		if (ft_isprint(str[i]) || (str[i] >= 9 && str[i] <= 13))
+			new[j++] = str[i++];
+		else
+		{
+			new[j++] = '^';
+			new[j++] = (str[i++] + 64);
+		}
+	}
+	pf_tmpjoin(lst, new, len);
+}
+
+static void	ft_putcolor2(t_valst *lst_va, int i)
+{
+	char	*tab[10];
+
+	tab[0] = "\033[0m";
+	tab[1] = "\033[30m";
+	tab[2] = "\033[31m";
+	tab[3] = "\033[32m";
+	tab[4] = "\033[33m";
+	tab[5] = "\033[34m";
+	tab[6] = "\033[35m";
+	tab[7] = "\033[36m";
+	tab[8] = "\033[37m";
+	tab[9] = "\033[0m";
+	pf_finaljoin(lst_va, tab[i], ft_strlen(tab[i]));
+}
+
+int			ft_putcolor(t_valst *lst_va, char *str)
+{
+	char	*tab[10];
+	int		a;
+
+	tab[0] = "{white}";
+	tab[1] = "{black}";
+	tab[2] = "{red}";
+	tab[3] = "{green}";
+	tab[4] = "{yellow}";
+	tab[5] = "{blue}";
+	tab[6] = "{purple}";
+	tab[7] = "{cyan}";
+	tab[8] = "{grey}";
+	tab[9] = "{eoc}";
+	a = 0;
+	while (a < 10 && ft_strncmp((str), tab[a], ft_strlen(tab[a])) != 0)
+		a++;
+	if (a < 10)
+	{
+		ft_putcolor2(lst_va, a);
+		return (ft_strlen(tab[a]));
+	}
+	pf_finaljoin(lst_va, str, 1);
+	return (1);
 }

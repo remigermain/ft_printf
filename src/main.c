@@ -12,13 +12,16 @@
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-#include <locale.h>
-int	main(void)
-{
-	int a;
 
-	a = 0;
-	a = ft_printf("%'lld", 10000055);
-	printf("ft = %d\n", a);
+int	main(int argc, char **argv)
+{
+	int a = 0;
+	char *str;
+	long double nb = 1669243656.21556646666;
+	a = ft_printf("%Lf\n", nb);
+	a = printf("%Lf\n", nb);
+	//ft_printf("ft = %d\n", a);
+	//a = dprintf(1, "bonjour %d ddd %s ,  dddd", -42, "ouiiiii",  699812);
+	//ft_printf("pf = %d\n", a);
 	return (0);
 }

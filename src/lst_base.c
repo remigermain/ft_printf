@@ -13,7 +13,7 @@
 
 #include "ft_printf.h"
 
-t_pf	*ft_initpf(t_valst *lst_va)
+t_pf	*ft_initpf(void)
 {
 	t_pf *lst;
 
@@ -35,7 +35,8 @@ t_pf	*ft_initpf(t_valst *lst_va)
 	lst->lenght = 0;
 	lst->conv = 0;
 	lst->nb_tmp = 1;
-	lst->fd = lst_va->fd;
+	lst->str = NULL;
+	lst->count = 0;
 	return (lst);
 }
 
@@ -47,6 +48,7 @@ t_valst	*lstva_init(int fd)
 		exit(0);
 	lst_va->count = 0;
 	lst_va->fd = fd;
+	lst_va->str = NULL;
 	return (lst_va);
 }
 
