@@ -13,7 +13,7 @@
 
 #include "ft_printf.h"
 
-static int	wchar_verif(char_t *wstr)
+static int	wchar_verif(wchar_t *wstr)
 {
 	int a;
 	int count;
@@ -29,7 +29,7 @@ static int	wchar_verif(char_t *wstr)
 	return (count);
 }
 
-static	int	ft_print_string(t_pf *lst, char *str, char_t *wstr, int index)
+static	int	ft_print_string(t_pf *lst, wuchar_t *str, wchar_t *wstr, int index)
 {
 	int count;
 
@@ -47,7 +47,7 @@ static	int	ft_print_string(t_pf *lst, char *str, char_t *wstr, int index)
 	return (count);
 }
 
-static int	ft_option_string(t_pf *lst, char *str, char_t *wstr, int index)
+static int	ft_option_string(t_pf *lst, wuchar_t *str, wchar_t *wstr, int index)
 {
 	int count;
 	int max;
@@ -72,7 +72,7 @@ static int	ft_option_string(t_pf *lst, char *str, char_t *wstr, int index)
 	return (count);
 }
 
-static void	initstring(t_valst *lst_va, char **cstr, wchar_t **wstr, int index)
+static void	initstring(t_valst *lst_va, wuchar_t **cstr, wchar_t **wstr, int index)
 {
 	if (index == 1)
 	{
@@ -84,7 +84,7 @@ static void	initstring(t_valst *lst_va, char **cstr, wchar_t **wstr, int index)
 	{
 		*cstr = va_arg(lst_va->copy, char*);
 		if (*cstr == NULL)
-			*cstr = "(null)";
+			*cstr = ft_strndup("(null)", 6);
 	}
 }
 
@@ -92,7 +92,7 @@ int			ft_params_string(t_valst *lst_va, char *str, int index)
 {
 	t_pf	*lst;
 	int		count;
-	char	*cstr;
+	wuchar_t	*cstr;
 	wchar_t	*wstr;
 
 	count = 0;

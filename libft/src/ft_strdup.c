@@ -32,13 +32,30 @@ char	*ft_strdup(const char *s1)
 	return (dest);
 }
 
-char	*ft_strndup(unsigned char *s1, size_t len)
+unsigned char	*ft_ustrndup(unsigned char *s1, size_t len)
 {
-	size_t	count;
-	char		*dest;
+	size_t					count;
+	unsigned char		*dest;
 
 	count = 0;
-	if (!(dest = (char *)malloc(sizeof(char) * len + 1)))
+	if (!(dest = (unsigned char *)malloc(sizeof(unsigned char) * len + 1)))
+		return (NULL);
+	while (count < len)
+	{
+		dest[count] = s1[count];
+		count++;
+	}
+	dest[count] = '\0';
+	return (dest);
+}
+
+unsigned char	*ft_strndup(char *s1, size_t len)
+{
+	size_t					count;
+	unsigned char		*dest;
+
+	count = 0;
+	if (!(dest = (unsigned char *)malloc(sizeof(unsigned char) * len + 1)))
 		return (NULL);
 	while (count < len)
 	{

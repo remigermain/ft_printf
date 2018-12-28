@@ -26,7 +26,7 @@ static int ftprintf_base(char *str, t_valst *lst_va, size_t i, size_t j)
 	while (str[i] != '\0' && lst_va->count != -1)
 	{
 		j = ft_strlen_perc(str + i, 0);
-		pf_finaljoin(lst_va, (char_t*)(str + i), j);
+		pf_finaljoin(lst_va, (wuchar_t*)(str + i), j);
 		if (str[i + j] == '{')
 			i += ft_putcolor(lst_va, str + i + j);
 		else if (str[i + j] == '%')
@@ -38,7 +38,7 @@ static int ftprintf_base(char *str, t_valst *lst_va, size_t i, size_t j)
 	return (lst_va->count);
 }
 
-int			ft_sprintf(char_t **dest, const char *format, ...)
+int			ft_sprintf(wuchar_t **dest, const char *format, ...)
 {
 	t_valst	*lst_va;
 	int			i;
@@ -46,7 +46,7 @@ int			ft_sprintf(char_t **dest, const char *format, ...)
 	lst_va = lstva_init(1);
 	va_start(lst_va->lst_va, format);
 	i = ftprintf_base((char*)format, lst_va, 0, 0);
-	*dest = ft_strndup(lst_va->str, i);
+	*dest = ft_ustrndup(lst_va->str, i);
 	free(lst_va->str);
 	free(lst_va);
 	return (i);

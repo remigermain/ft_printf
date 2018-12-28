@@ -77,10 +77,10 @@ static void	ft_option_nb(t_pf *lst)
 	ft_spacecalc(lst);
 	max = ft_max2(len, lst->preci) + sign;
 	if (lst->zero == 1)
-		ft_print_sign(lst);
+		ft_putsign(lst);
 	ft_putprefix(lst, max + index, lst->field, lst->zero);
 	if (lst->zero == 0)
-		ft_print_sign(lst);
+		ft_putsign(lst);
 	ft_putprefix(lst, 0, index, 1);
 	ft_putprefix(lst, len, lst->preci, 1);
 	if (!(lst->point == 1 && lst->preci == 0 && lst->ul_nb == 0))

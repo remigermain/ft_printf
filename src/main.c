@@ -16,9 +16,9 @@
 int	main(int argc, char **argv)
 {
 	int a = 0;
-	char *str;
+	wuchar_t *str;
 	long double nb = 1669243656.21556646666;
-	a = ft_printf("%Lf\n", nb);
+	a = ft_printf("%#+'050.12lld\n", 1523566644);
 	a = printf("%Lf\n", nb);
 	//ft_printf("ft = %d\n", a);
 	//a = dprintf(1, "bonjour %d ddd %s ,  dddd", -42, "ouiiiii",  699812);

@@ -44,19 +44,19 @@ int pf_countpstr(char *str, size_t len)
 	return (a);
 }
 
-void 	pf_putpstr(t_pf *lst, char_t *str)
+void 	pf_putpstr(t_pf *lst, wuchar_t *str)
 {
 	int i;
 	int j;
 	int len;
-	char_t *new;
+	wuchar_t *new;
 
 	i = 0;
 	j = 0;
 	len = pf_countpstr(str, ft_strlen(str));
 	if (lst->point == 1)
 		len = ft_max2(len, lst->preci);
-	if (!(new = (char_t*)malloc(sizeof(char_t) + len)))
+	if (!(new = (wuchar_t*)malloc(sizeof(wuchar_t) + len)))
 		return ;
 	while (str[i] != '\0' && i < len)
 	{

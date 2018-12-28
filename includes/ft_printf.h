@@ -21,7 +21,7 @@
 
 # define intmax_t long
 # define PF_BUFF 10000
-# define char_t unsigned char
+# define wuchar_t unsigned char
 
 typedef struct	s_valist
 {
@@ -29,7 +29,7 @@ typedef struct	s_valist
 	va_list	copy;
 	int		fd;
 	int		count;
-	char_t		*str;
+	wuchar_t		*str;
 }				t_valst;
 
 typedef struct	s_printf
@@ -50,7 +50,7 @@ typedef struct	s_printf
 	size_t			base;
 	size_t			lenght;
 	size_t			conv;
-	char_t			*str;
+	wuchar_t			*str;
 	size_t				count;
 	long			nb_tmp;
 }				t_pf;
@@ -61,7 +61,7 @@ typedef struct	s_printf
 */
 int				ft_printf(const char *str, ...);
 int				ft_dprintf(int fd, const char *str, ...);
-int				ft_sprintf(char_t **dest, const char *format, ...);
+int				ft_sprintf(wuchar_t **dest, const char *format, ...);
 
 /*
 **	fonctions pour trouver quelles sont les parametres
@@ -115,13 +115,13 @@ int				ft_ulen_base(unsigned long nb, size_t base);
 **	utils_print.c
 */
 
-void			ft_print_sign(t_pf *lst);
+void			ft_putsign(t_pf *lst);
 void			ft_putprefix(t_pf *lst, int len, int nb, int point);
 void			pf_itoa(t_pf *lst, unsigned long n);
-void 			pf_finaljoin(t_valst *lst_va, char_t *str, size_t i);
-void			pf_tmpjoin(t_pf *lst, char_t *tmp, size_t len);
+void 			pf_finaljoin(t_valst *lst_va, wuchar_t *str, size_t i);
+void			pf_tmpjoin(t_pf *lst, wuchar_t *tmp, size_t len);
 int 			pf_countpstr(char *str, size_t len);
-void      pf_putpstr(t_pf *lst, char_t *str);
+void      pf_putpstr(t_pf *lst, wuchar_t *str);
 int			ft_putcolor(t_valst *lst_va, char *str);
 
 /*

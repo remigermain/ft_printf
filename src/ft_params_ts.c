@@ -13,15 +13,15 @@
 
 #include "ft_printf.h"
 
-void	ft_strjoin_f1(t_pf *lst, char *s2, size_t l2)
+void	ft_strjoin_f1(t_pf *lst, wuchar_t *s2, size_t l2)
 {
 	int		count;
 	int		count_2;
-	char	*new;
+	wuchar_t	*new;
 
 	count = 0;
 	count_2 = 0;
-	if (!(new = (char *)malloc(sizeof(char) * l2 + lst->count + 1)))
+	if (!(new = (wuchar_t *)malloc(sizeof(wuchar_t) * l2 + lst->count + 1)))
 		return ;
 	while (count < lst->count)
 	{
@@ -42,7 +42,7 @@ static	void pf_puttab(t_pf *lst, char **tab, int len, int larg)
 	int a;
 	int b;
 	char c;
-	char *str;
+	wuchar_t *str;
 	int ret;
 
 	a = 0;
@@ -71,7 +71,7 @@ static	void pf_doublestring(t_pf *lst, char **tab, int len, int larg)
 {
 	int ret;
 	int b;
-	char_t *str;
+	wuchar_t *str;
 
 	b = 0;
 	len = ft_maxlen_tab(tab, 1);
