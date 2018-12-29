@@ -30,7 +30,7 @@ static int ftprintf_base(char *str, t_pf *lst, size_t i, size_t j)
 		if (str[i + j] == '{')
 			i += ft_putcolor(lst, str + i + j);
 		else if (str[i + j] == '%')
-			i += ft_conv(lst, str + i + j, 1);
+			i +=  find_options(lst, str + i + j, 1);
 		i += j;
 	}
 	va_end(lst->va_lst);

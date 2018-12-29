@@ -26,11 +26,6 @@ int	ft_ulen_base(unsigned long nb, size_t base)
 	return (count + 1);
 }
 
-int	ft_ulen(unsigned long nb)
-{
-	return (ft_ulen_base(nb, 10));
-}
-
 int pf_countpstr(char *str, size_t len)
 {
 	int i;
@@ -76,46 +71,30 @@ void 	pf_putpstr(t_pf *lst, wuchar_t *str)
 //	pf_tmpjoin(lst, new, len, 1);
 }
 
-static void	ft_putcolor2(t_pf *lst, int i)
-{
-	char	*tab[10];
-
-	tab[0] = "\033[0m";
-	tab[1] = "\033[30m";
-	tab[2] = "\033[31m";
-	tab[3] = "\033[32m";
-	tab[4] = "\033[33m";
-	tab[5] = "\033[34m";
-	tab[6] = "\033[35m";
-	tab[7] = "\033[36m";
-	tab[8] = "\033[37m";
-	tab[9] = "\033[0m";
-	pf_stringjoin(lst, tab[i], ft_strlen(tab[i]), 0);
-}
 
 int			ft_putcolor(t_pf *lst, char *str)
 {
-	char	*tab[10];
-	int		a;
+	int ret;
 
-	tab[0] = "{white}";
-	tab[1] = "{black}";
-	tab[2] = "{red}";
-	tab[3] = "{green}";
-	tab[4] = "{yellow}";
-	tab[5] = "{blue}";
-	tab[6] = "{purple}";
-	tab[7] = "{cyan}";
-	tab[8] = "{grey}";
-	tab[9] = "{eoc}";
-	a = 0;
-	while (a < 10 && ft_strncmp((str), tab[a], ft_strlen(tab[a])) != 0)
-		a++;
-	if (a < 10)
-	{
-		ft_putcolor2(lst, a);
-		return (ft_strlen(tab[a]));
-	}
-	pf_stringjoin(lst, str, 1, 0);
-	return (1);
+	ret = 0;
+	if ((ft_strncmp(str, "{white}", 7) == 0 && (ret = 4)) ||
+	(ft_strncmp(str, "{eoc}", 4) == 0 && (ret = 4)))
+		pf_stringjoin(lst, white, ft_strlen(white), 0);
+	else if (ft_strcmp(str, "{black}") == 0 && (ret = 6))
+		pf_stringjoin(lst, black, ft_strlen(black), 0);
+	else if (ft_strcmp(str, "{red}") == 0 && (ret = 5))
+		pf_stringjoin(lst, red, ft_strlen(red), 0);
+	else if (ft_strcmp(str, "{green}") == 0 && (ret = 7))
+		pf_stringjoin(lst, green, ft_strlen(green), 0);
+	else if (ft_strcmp(str, "{yellow}") == 0 && (ret = 8))
+		pf_stringjoin(lst, yellow, ft_strlen(yellow), 0);
+	else if ((ft_strncmp(str, "{blue}", 5) == 0) && (ret = 5))
+		pf_stringjoin(lst, blue, ft_strlen(blue), 0);
+	else if (ft_strcmp(str, "{purple}") == 0 && (ret = 8))
+		pf_stringjoin(lst, purple, ft_strlen(purple), 0);
+	else if (ft_strcmp(str, "{cyan}") == 0 && (ret = 6))
+		pf_stringjoin(lst, cyan, ft_strlen(cyan), 0);
+	else if (ft_strcmp(str, "{grey}") == 0 && (ret = 6))
+		pf_stringjoin(lst, grey, ft_strlen(grey), 0);
+	return (ret + 1);
 }

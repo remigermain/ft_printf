@@ -19,8 +19,8 @@ static	void pf_puttab_back(t_pf *lst, char **tab, int len, int b)
 	int				ret;
 	wuchar_t	*str;
 
-	llen = ft_ulen(len) + lst->preci;
-	llen -= (((len % 10) == 0) ? -1 : 0);
+	llen = ft_ulen_base(len, 10) + lst->preci;
+	llen -= (((len % 10) == 0) ? 1 : 0);
 	if (lst->preci == 1)
 	{
 		ret = ft_sprintf(&str, " {blue}%*s{eoc} |", llen, "\\0");
@@ -54,8 +54,8 @@ static	void pf_puttab(t_pf *lst, char **tab, int len, int larg)
 	int 			b;
 	int 			ret;
 
-	llen = ft_ulen(len) + lst->preci;
-	llen -= (((len % 10) == 0) ? -1 : 0);
+	llen = ft_ulen_base(len, 10) + lst->preci;
+	llen -= (((len % 10) == 0) ? 1 : 0);
 	a = -1;
 	while (tab[++a] != NULL && (b = -1))
 	{
@@ -82,8 +82,8 @@ static	void pf_doublestring(t_pf *lst, char **tab, int len, int larg)
 	len = ft_maxlen_tab(tab, 1) + lst->preci;
 	larg = ft_maxlen_tab(tab, 0);
 	larg = ft_ulen_base(ft_min2(larg - 1, larg), 10);
-	llen = ft_ulen(len) + lst->preci;
-	llen -= (((len % 10) == 0) ? -1 : 0);
+	llen = ft_ulen_base(len, 10) + lst->preci;
+	llen -= (((len % 10) == 0) ? 1 : 0);
 	ret = ft_sprintf(&str, "%*.c |", larg + 1, ' ');
 	pf_stringjoin(lst, str, ret, 1);
 	while (b < len)
@@ -94,7 +94,7 @@ static	void pf_doublestring(t_pf *lst, char **tab, int len, int larg)
 	pf_puttab(lst, tab, len, larg);
 }
 
-int		ft_params_ts(t_pf *lst, char *str, int index)
+int		ft_params_tabstring(t_pf *lst, char *str, int index)
 {
 	char	**tab;
 

@@ -87,7 +87,7 @@ static void	ft_option_nb(t_pf *lst)
 	pf_putprefix(lst, max, -lst->field, 0);
 }
 
-int			ft_params_nb(t_pf *lst, char *str, int index)
+int			ft_params_int(t_pf *lst, char *str, int index)
 {
 	lst_putoption(lst, str, index);
 	lst_putnb(lst);

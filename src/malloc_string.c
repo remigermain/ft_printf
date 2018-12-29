@@ -19,18 +19,13 @@ void pf_stringjoin(t_pf *lst, wuchar_t *str, size_t len, size_t index)
 	size_t		count;
 
 	count = 0;
-	new_wuchart(lst, &new, len);
+	if (!(new = (wuchar_t*)malloc(sizeof(wuchar_t) * len + lst->count + 1)))
+		return ;
+	ft_memcpy(new, lst->str, lst->count);
 	ft_memcpy(new + lst->count, str, len);
 	lstfree_wuchart(lst, new, len);
 	if (index == 1)
 		free(str);
-}
-
-void new_wuchart(t_pf *lst, wuchar_t **new, size_t len)
-{
-	if (!(*new = (wuchar_t*)malloc(sizeof(wuchar_t) * len + lst->count + 1)))
-		return ;
-	ft_memcpy(*new, lst->str, lst->count);
 }
 
 void 	lstfree_wuchart(t_pf *lst, wuchar_t *new, size_t len)
@@ -52,7 +47,9 @@ void		pf_itoa(t_pf *lst, unsigned long n)
 	if (lst->local == 1 && len > 3)
 		len += ((len / 3) - (len % 3 == 0 ? 1 : 0));
 	mlen = len;
-	new_wuchart(lst, &new, len);
+	if (!(new = (wuchar_t*)malloc(sizeof(wuchar_t) * len + lst->count + 1)))
+		return ;
+	ft_memcpy(new, lst->str, lst->count);
 	len--;
 	while (len >= 0)
 	{
@@ -72,12 +69,16 @@ void		pf_itoa(t_pf *lst, unsigned long n)
 void	pf_putprefix(t_pf *lst, int len, int nb, int point)
 {
 	wuchar_t *new;
-	int count;
+	int 			count;
+	size_t		llen;
 
 	count = 0;
 	if (len >= nb)
 		return;
-	new_wuchart(lst, &new, (nb - len));
+	llen = (nb - len) + lst->count + 1;
+	if (!(new = (wuchar_t*)malloc(sizeof(wuchar_t) * llen)))
+		return ;
+	ft_memcpy(new, lst->str, lst->count);
 	ft_memset(new + lst->count, (point == 1 ? '0' : ' '), (nb - len));
 	lstfree_wuchart(lst, new, (nb - len));
 }
@@ -90,7 +91,9 @@ void			pf_putsign(t_pf *lst)
 	if (lst->psign != 0)
 	{
 		len = (lst->psign == 3 ? 2 : 1);
-		new_wuchart(lst, &new, len);
+		if (!(new = (wuchar_t*)malloc(sizeof(wuchar_t) * len)))
+			return ;
+		ft_memcpy(new, lst->str, lst->count);
 		if (lst->psign == 1 || lst->psign == 2)
 			new[lst->count] = (lst->psign == 1 ? '-' : '+');
 		else if (lst->psign == 3)
