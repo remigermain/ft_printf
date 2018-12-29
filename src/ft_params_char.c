@@ -19,7 +19,7 @@ static wuchar_t *pf_convwchar(wchar_t wc)
 	size_t		a;
 
 	if (!(new = (wuchar_t*)malloc(sizeof(wuchar_t) * len_wchar(wc) + 1)))
-		return (NULL);
+		ftprintf_error("pf_convwchar", 1);
 	a = 0;
 	convert_wchar(&new, wc, &a);
 	return (new);

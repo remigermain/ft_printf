@@ -38,7 +38,7 @@ t_pf	*lst_init(void)
 	t_pf *lst;
 
 	if (!(lst = (t_pf*)malloc(sizeof(t_pf))))
-		exit(0);
+		ftprintf_error("lst_init", 1);
 	lst->count = 0;
 	lst->str = NULL;
 	return (lst);

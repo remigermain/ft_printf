@@ -13,6 +13,17 @@
 
 #include "ft_printf.h"
 
+void ftprintf_error(char *str, size_t index)
+{
+	ft_putstr_fd("\n  / \\    WARNING\n / | \\  FT_PRINT ERROR", 2);
+	ft_putstr_fd("\n/  o  \\\n-------\n     	[", 2);
+	if (index == 1)
+		ft_putstr_fd("Error malloc to function \"", 2);
+	ft_putstr_fd(str, 2);
+	ft_putstr_fd("]     \n\n", 2);
+	exit (0);
+}
+
 int	ft_ulen_base(unsigned long nb, size_t base)
 {
 	int count;
@@ -35,7 +46,7 @@ int pf_countpstr(char *str, size_t len)
 	a = 0;
 	while (str[i] != '\0' && i < len)
 	{
-		if (ft_isprint(str[i]) || (str[i] >= 9 && str[i] <= 13))
+		if (ft_isprint(str[i] && str[i] != '\n') || str[i] == '\t')
 			a++;
 		else
 			a += 2;
@@ -55,12 +66,14 @@ void 	pf_putpstr(t_pf *lst, wuchar_t *str)
 	j = 0;
 	len = pf_countpstr(str, ft_strlen(str));
 	if (lst->point == 1)
-		len = ft_max2(len, lst->preci);
-	if (!(new = (wuchar_t*)malloc(sizeof(wuchar_t) + len)))
-		return ;
+		len = ft_min2(len, lst->preci);
+	if (!(new = (wuchar_t*)malloc(sizeof(wuchar_t) * len)))
+		ftprintf_error("pf_putpstr", 1);
 	while (str[i] != '\0' && i < len)
 	{
-		if (ft_isprint(str[i]) || (str[i] >= 9 && str[i] <= 13))
+		if (str[i] == '\n')
+			new[j++] = '$';
+		if (ft_isprint(str[i]) || str[i] == '\n' || str[i] == '\t')
 			new[j++] = str[i++];
 		else
 		{
@@ -68,7 +81,8 @@ void 	pf_putpstr(t_pf *lst, wuchar_t *str)
 			new[j++] = (str[i++] + 64);
 		}
 	}
-//	pf_tmpjoin(lst, new, len, 1);
+	pf_stringjoin(lst, new, len, 1);
+	free(str);
 }
 
 

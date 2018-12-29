@@ -22,7 +22,7 @@ static wuchar_t *comv_wstr(wchar_t *wstr, size_t len)
 	i = 0;
 	count = 0;
 	if (!(str = (wuchar_t*)malloc(sizeof(wuchar_t) * nlen_strwchar(wstr, len))))
-		return (NULL);
+		ftprintf_error("comv_wstr", 1);;
 	while (wstr[count] != '\0' && count < len)
 		convert_wchar(&str, wstr[count++], &i);
 	return (str);
@@ -78,9 +78,8 @@ int			ft_params_string(t_pf *lst, char *str, int index)
 	{
 		cstr = (char*)va_arg(lst->va_copy, char*);
 		if (cstr == NULL)
-			cstr = ft_strdup("(null)");
-		else
-			cstr = ft_strdup(cstr);
+			cstr = "(null)";
+		cstr = ft_strdup(cstr);
 		if (lst->conv == 'r')
 			pf_string(lst, cstr, wstr, 0);
 		else

@@ -118,7 +118,7 @@ void 			lstfree_wuchart(t_pf *lst, wuchar_t *new, size_t len);
 void			pf_itoa(t_pf *lst, unsigned long n);
 void			pf_putprefix(t_pf *lst, int len, int nb, int point);
 void			pf_putsign(t_pf *lst);
-
+void 			ftprintf_error(char *str, size_t index);
 /*
 ** fonction de debug de la list
 **	debug.c
