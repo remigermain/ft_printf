@@ -37,14 +37,14 @@ static void 	ft_assign_double(t_pf *lst, int count)
 	ft_printdouble(lst, nb);
 }
 
-static void	ft_initdouble(t_va *lst_va, t_pf *lst)
+static void	ft_initdouble(t_pf *lst)
 {
 	long double nb;
 
 	if (lst->lenght == 100000)
-		nb = va_arg(lst_va->copy, long double);
+		nb = va_arg(lst->va_copy, long double);
 	else
-		nb = (long double)va_arg(lst_va->copy, double);
+		nb = (long double)va_arg(lst->va_copy, double);
 	if (lst->point == 0)
 		lst->preci = 6;
 	lst->ul_nb = (unsigned long)nb;
@@ -53,22 +53,18 @@ static void	ft_initdouble(t_va *lst_va, t_pf *lst)
 		lst->ul_nb++;
 }
 
-int	ft_params_f(t_va *lst_va, char *str, int index)
+int	ft_params_f(t_pf *lst, char *str, int index)
 {
-	t_pf	*lst;
 	int 	max;
 	int 	len;
 
-	lst = lst_initoption(lst_va, str, index);
-	ft_initdouble(lst_va, lst);
+	lst_putoption(lst, str, index);
+	ft_initdouble(lst);
 	len = ft_ulen_base(lst->ul_nb, lst->base);
 	max = len + lst->preci;
 	if (lst->point == 0 || lst->preci > 0)
 		max++;
-	ft_putprefix(lst, max, lst->field, lst->zero);
+	pf_putprefix(lst, max, lst->field, lst->zero);
 	ft_assign_double(lst, 0);
-	pf_finaljoin(lst_va, lst->str, lst->count);
-	free(lst->str);
-	free(lst);
 	return (index + 1);
 }

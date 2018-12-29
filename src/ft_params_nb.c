@@ -54,7 +54,7 @@ static void	ft_spacecalc(t_pf *lst)
 	if (lst->space == 1 && lst->sign != '+' && lst->psign == 0
 			&& lst->conv != 'u' && lst->conv != 'U')
 	{
-		ft_putprefix(lst, 0, 1, 0);
+		pf_putprefix(lst, 0, 1, 0);
 		if (lst->field > 0)
 			lst->field--;
 		else if (lst->field < 0)
@@ -76,26 +76,21 @@ static void	ft_option_nb(t_pf *lst)
 	ft_spacecalc(lst);
 	max = ft_max2(len, lst->preci) + sign;
 	if (lst->zero == 1)
-		ft_putsign(lst);
-	ft_putprefix(lst, max + index, lst->field, lst->zero);
+		pf_putsign(lst);
+	pf_putprefix(lst, max + index, lst->field, lst->zero);
 	if (lst->zero == 0)
-		ft_putsign(lst);
-	ft_putprefix(lst, 0, index, 1);
-	ft_putprefix(lst, len, lst->preci, 1);
+		pf_putsign(lst);
+	pf_putprefix(lst, 0, index, 1);
+	pf_putprefix(lst, len, lst->preci, 1);
 	if (!(lst->point == 1 && lst->preci == 0 && lst->ul_nb == 0))
 			pf_itoa(lst, lst->ul_nb);
-	ft_putprefix(lst, max, -lst->field, 0);
+	pf_putprefix(lst, max, -lst->field, 0);
 }
 
-int			ft_params_nb(t_va *lst_va, char *str, int index)
+int			ft_params_nb(t_pf *lst, char *str, int index)
 {
-	t_pf	*lst;
-
-	lst = lst_initoption(lst_va, str, index);
-	ft_initnb(lst, lst_va);
+	lst_putoption(lst, str, index);
+	lst_putnb(lst);
 	ft_option_nb(lst);
-	pf_finaljoin(lst_va, lst->str, lst->count);
-	free(lst->str);
-	free(lst);
 	return (index + 1);
 }

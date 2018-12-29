@@ -13,7 +13,7 @@
 
 #include "ft_printf.h"
 
-static void	ft_undefined(t_pf *lst)
+static void	lst_undefined(t_pf *lst)
 {
 	if (lst->zero > 1 && lst->point > 1)
 		lst->zero = 0;
@@ -29,9 +29,11 @@ static void	ft_undefined(t_pf *lst)
 			lst->conv == 'I' || lst->conv == 'D' || lst->conv == 'b' ||
 			lst->conv == 'B' || lst->conv == 'p')
 		lst->local = 0;
+	if (lst->conv == 's' || lst->conv == 'S')
+	lst->preci = ft_abs(lst->preci);
 }
 
-static void	ft_init_base(t_pf *lst)
+static void	lst_base(t_pf *lst)
 {
 	if (lst->conv == 'x' || lst->conv == 'X' || lst->conv == 'p'
 				|| lst->conv == 'a' || lst->conv == 'A')
@@ -44,10 +46,10 @@ static void	ft_init_base(t_pf *lst)
 		lst->base = 10;
 	if (!ft_islowercase(lst->conv))
 		lst->maj = 1;
-	ft_undefined(lst);
+	lst_undefined(lst);
 }
 
-static int	ft_putflag_conv(t_pf *lst, char *str, int count)
+static int	lst_putflag_conv(t_pf *lst, char *str, int count)
 {
 	if (str[count] == 'h')
 		lst->lenght++;
@@ -67,7 +69,7 @@ static int	ft_putflag_conv(t_pf *lst, char *str, int count)
 	return (count);
 }
 
-static int	lst_putdigit(t_va *lst_va, t_pf *lst, char *str, int count)
+static int	lst_putdigit(t_pf *lst, char *str, int count)
 {
 	int nb_tmp;
 
@@ -84,8 +86,8 @@ static int	lst_putdigit(t_va *lst_va, t_pf *lst, char *str, int count)
 		if (str[count] == '*' || str[count] == '$')
 		{
 			if (str[count] == '$')
-				lstva_digit(lst_va, nb_tmp, 0);
-			nb_tmp = va_arg(lst_va->copy, int);
+				lst_initdollar(lst, nb_tmp, 0);
+			nb_tmp = va_arg(lst->va_copy, int);
 			count++;
 		}
 		if (lst->point == 0)
@@ -96,12 +98,11 @@ static int	lst_putdigit(t_va *lst_va, t_pf *lst, char *str, int count)
 	return (count);
 }
 
-t_pf		*lst_initoption(t_va *lst_va, char *str, int index)
+void   lst_putoption(t_pf *lst, char *str, int index)
 {
-	t_pf	*lst;
 	int		count;
 
-	lst = ft_initpf();
+	lst_zero(lst);
 	count = 1;
 	while (count <= index)
 	{
@@ -117,10 +118,9 @@ t_pf		*lst_initoption(t_va *lst_va, char *str, int index)
 			lst->space = str[count++] - 31;
 		else if (ft_isdigit(str[count]) == 1 || str[count] == '+' ||
 				str[count] == '-' || str[count] == '*' || str[count] == '$')
-			count = lst_putdigit(lst_va, lst, str, count);
+			count = lst_putdigit(lst, str, count);
 		else
-			count = ft_putflag_conv(lst, str, count);
+			count = lst_putflag_conv(lst, str, count);
 	}
-	ft_init_base(lst);
-	return (lst);
+	lst_base(lst);
 }

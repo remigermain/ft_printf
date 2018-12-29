@@ -26,6 +26,11 @@ int	ft_ulen_base(unsigned long nb, size_t base)
 	return (count + 1);
 }
 
+int	ft_ulen(unsigned long nb)
+{
+	return (ft_ulen_base(nb, 10));
+}
+
 int pf_countpstr(char *str, size_t len)
 {
 	int i;
@@ -68,10 +73,10 @@ void 	pf_putpstr(t_pf *lst, wuchar_t *str)
 			new[j++] = (str[i++] + 64);
 		}
 	}
-	pf_tmpjoin(lst, new, len, 1);
+//	pf_tmpjoin(lst, new, len, 1);
 }
 
-static void	ft_putcolor2(t_va *lst_va, int i)
+static void	ft_putcolor2(t_pf *lst, int i)
 {
 	char	*tab[10];
 
@@ -85,10 +90,10 @@ static void	ft_putcolor2(t_va *lst_va, int i)
 	tab[7] = "\033[36m";
 	tab[8] = "\033[37m";
 	tab[9] = "\033[0m";
-	pf_finaljoin(lst_va, tab[i], ft_strlen(tab[i]));
+	pf_stringjoin(lst, tab[i], ft_strlen(tab[i]), 0);
 }
 
-int			ft_putcolor(t_va *lst_va, char *str)
+int			ft_putcolor(t_pf *lst, char *str)
 {
 	char	*tab[10];
 	int		a;
@@ -108,9 +113,9 @@ int			ft_putcolor(t_va *lst_va, char *str)
 		a++;
 	if (a < 10)
 	{
-		ft_putcolor2(lst_va, a);
+		ft_putcolor2(lst, a);
 		return (ft_strlen(tab[a]));
 	}
-	pf_finaljoin(lst_va, str, 1);
+	pf_stringjoin(lst, str, 1, 0);
 	return (1);
 }

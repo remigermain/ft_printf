@@ -13,12 +13,8 @@
 
 #include "ft_printf.h"
 
-t_pf	*ft_initpf(void)
+void  lst_zero(t_pf *lst)
 {
-	t_pf *lst;
-
-	if (!(lst = (t_pf*)malloc(sizeof(t_pf))))
-		return (NULL);
 	lst->ul_nb = 0;
 	lst->fl_nb = 0;
 	lst->hash = 0;
@@ -35,33 +31,29 @@ t_pf	*ft_initpf(void)
 	lst->lenght = 0;
 	lst->conv = 0;
 	lst->nb_tmp = 1;
-	lst->str = NULL;
+}
+
+t_pf	*lst_init(void)
+{
+	t_pf *lst;
+
+	if (!(lst = (t_pf*)malloc(sizeof(t_pf))))
+		exit(0);
 	lst->count = 0;
+	lst->str = NULL;
 	return (lst);
 }
 
-t_va	*lstva_init(int fd)
-{
-	t_va *lst_va;
-
-	if (!(lst_va = (t_va*)malloc(sizeof(t_va))))
-		exit(0);
-	lst_va->count = 0;
-	lst_va->fd = fd;
-	lst_va->str = NULL;
-	return (lst_va);
-}
-
-void	lstva_digit(t_va *lst_va, int nb, int index)
+void	lst_initdollar(t_pf *lst, int nb, int index)
 {
 	int		count;
 
 	count = 0;
 	if (index == 0)
-		va_copy(lst_va->copy, lst_va->lst_va);
+		va_copy(lst->va_copy, lst->va_lst);
 	while (count < (nb - 1))
 	{
-		va_arg(lst_va->copy, int);
+		va_arg(lst->va_copy, int);
 		count++;
 	}
 }

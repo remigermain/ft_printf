@@ -23,20 +23,12 @@
 # define PF_BUFF 10000
 # define wuchar_t unsigned char
 
-typedef struct	s_valist
-{
-	va_list	lst_va;
-	va_list	copy;
-	int		fd;
-	int		count;
-	wuchar_t		*str;
-}								t_va;
-
 typedef struct	s_printf
 {
 	unsigned long	ul_nb;
 	unsigned long	ful_nb;
 	long double		fl_nb;
+	long			nb_tmp;
 	size_t			hash;
 	size_t			space;
 	size_t			zero;
@@ -50,9 +42,10 @@ typedef struct	s_printf
 	size_t			base;
 	size_t			lenght;
 	size_t			conv;
-	wuchar_t			*str;
-	size_t				count;
-	long			nb_tmp;
+	va_list			va_lst;
+	va_list			va_copy;
+	int					count;
+	wuchar_t		*str;
 }				t_pf;
 
 /*
@@ -67,41 +60,39 @@ int				ft_sprintf(wuchar_t **dest, const char *format, ...);
 **	fonctions pour trouver quelles sont les parametres
 **	ft_conv.c
 */
-int				ft_conv(t_va *lst_va, char *str, int index);
-int				ft_conv2(t_va *lst_va, char *str, int index);
-int				ft_conv3(t_va *lst_va, char *str, int index);
+int				ft_conv(t_pf *lst, char *str, int index);
+int				ft_conv2(t_pf *lst, char *str, int index);
+int				ft_conv3(t_pf *lst, char *str, int index);
 
 /*
 ** fonctions des diferents parametres
 ** ft_params_*.c
 */
-int				ft_params_nb(t_va *lst_va, char *str, int index);
-int				ft_params_char(t_va *lst_va, char *str, int index);
-int				ft_params_perc(t_va *lst_va, char *str, int index);
-int				ft_params_no(t_va *lst_va, char *str, int index);
-int				ft_params_string(t_va *lst_va, char *str, int index);
-int				ft_params_f(t_va *lst_va, char *str, int index);
-int				ft_params_ts(t_va *lst_va, char *str, int index);
+int				ft_params_nb(t_pf *lst, char *str, int index);
+int				ft_params_char(t_pf *lst, char *str, int index);
+int				ft_params_string(t_pf *lst, char *str, int index);
+int				ft_params_f(t_pf *lst, char *str, int index);
+int				ft_params_ts(t_pf *lst, char *str, int index);
 
 /*
 ** initialisation des lists && fonction pour initialisation des nombres
 ** lst_init.c && lst_base.c && lst_initnb.c
 */
-t_va			*lstva_init(int fd);
-t_pf			*lst_initoption(t_va *lst_va, char *str, int index);
-t_pf			*ft_initpf(void);
-void			lstva_digit(t_va *lst_va, int nb, int index);
-void			ft_initnb(t_pf *lst, t_va *lst_va);
-void			ft_signprefix(t_pf *lst);
+t_pf			*lst_init(void);
+void      lst_putoption(t_pf *lst, char *str, int index);
+void      lst_zero(t_pf *lst);
+void			lst_initdollar(t_pf *lst, int nb, int index);
+void			lst_putnb(t_pf *lst);
 
 /*
 ** fonctions len_nbr , len no_print char && convert in print, put color
 **	utils.c
 */
 int				ft_ulen_base(unsigned long nb, size_t base);
+int				ft_ulen(unsigned long nb);
 int 			pf_countpstr(char *str, size_t len);
 void      pf_putpstr(t_pf *lst, wuchar_t *str);
-int				ft_putcolor(t_va *lst_va, char *str);
+int				ft_putcolor(t_pf *lst, char *str);
 
 /*
 **	fonctions qui put les signes( - , + , 0x )
@@ -109,11 +100,12 @@ int				ft_putcolor(t_va *lst_va, char *str);
 **				join le str entre eux && unsigned long itoa
 **	utils_put.c
 */
-void			pf_tmpjoin(t_pf *lst, wuchar_t *tmp, size_t len, int index);
+void 			pf_stringjoin(t_pf *lst, wuchar_t *str, size_t len, size_t index);
+void      new_wuchart(t_pf *lst, wuchar_t **new, size_t len);
+void 			lstfree_wuchart(t_pf *lst, wuchar_t *new, size_t len);
 void			pf_itoa(t_pf *lst, unsigned long n);
-void 			pf_finaljoin(t_va *lst_va, wuchar_t *str, size_t i);
-void			ft_putprefix(t_pf *lst, int len, int nb, int point);
-void			ft_putsign(t_pf *lst);
+void			pf_putprefix(t_pf *lst, int len, int nb, int point);
+void			pf_putsign(t_pf *lst);
 
 /*
 **	fonctions put_double len_double en unsigned long double !

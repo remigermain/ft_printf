@@ -20,9 +20,9 @@ INCLUDE = -Iincludes
 
 CINC = includes/ft_printf.h libft/includes/libft.h
 
-SRC = main.c ft_printf.c ft_conv.c utils.c utils_double.c utils_put.c \
-		ft_params_nb.c ft_params_char.c ft_params_string.c \
-		ft_params_f.c ft_params_ts.c \
+SRC = main.c ft_printf.c ft_conv.c utils.c utils_put.c utils_double.c \
+		ft_params_nb.c  ft_params_string.c ft_params_f.c \
+		ft_params_char.c ft_params_ts.c \
 		lst_init.c lst_initnb.c lst_base.c \
 		debug.c
 

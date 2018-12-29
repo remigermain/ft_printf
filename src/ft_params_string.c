@@ -21,95 +21,70 @@ static wuchar_t *comv_wstr(wchar_t *wstr, size_t len)
 
 	i = 0;
 	count = 0;
-	if (!(str = (wuchar_t*)malloc(sizeof(wuchar_t) * nlenstrwchar(wstr, len))))
+	if (!(str = (wuchar_t*)malloc(sizeof(wuchar_t) * nlen_strwchar(wstr, len))))
 		return (NULL);
 	while (wstr[count] != '\0' && count < len)
 		convert_wchar(&str, wstr[count++], &i);
 	return (str);
 }
 
-static	int	put_string(t_pf *lst, wuchar_t *str, wchar_t *wstr, int index)
+static	void	pf_putstring(t_pf *lst, wuchar_t *str, wchar_t *wstr, int index)
 {
-	int count;
-	int preci;
-
-	count = 0;
-	preci = lst->preci;
+	if (lst->point == 0 && index == 2)
+		str = comv_wstr(wstr, len_strwchar(wstr));
+	else if (index == 2)
+		str = comv_wstr(wstr, ft_min2(lst->preci, len_strwchar(wstr)));
 	if (lst->point == 0 && index == 1)
-		pf_tmpjoin(lst, str, ft_strlen(str), 0);
+		pf_stringjoin(lst, str, ft_strlen(str), 1);
 	else if (index == 1)
-		pf_tmpjoin(lst, str, ft_min2(ft_strlen(str), preci), 0);
+		pf_stringjoin(lst, str, ft_min2(ft_strlen(str), lst->preci), 1);
 	else if (index == 0)
 		pf_putpstr(lst, str);
 	else if (lst->point == 0 && index == 2)
-		pf_tmpjoin(lst, comv_wstr(wstr, lenstrwchar(wstr)), lenstrwchar(wstr), 1);
+		pf_stringjoin(lst, str, len_strwchar(wstr), 1);
 	else if (index == 2)
-		pf_tmpjoin(lst, comv_wstr(wstr, preci), nlenstrwchar(wstr, preci), 1);
-	return (count);
+		pf_stringjoin(lst, str, nlen_strwchar(wstr, lst->preci), 1);
 }
 
-static int	pf_string(t_pf *lst, wuchar_t *str, wchar_t *wstr, int index)
+static void	pf_string(t_pf *lst, wuchar_t *str, wchar_t *wstr, int index)
 {
-	int count;
 	int max;
-	int len;
 
-	count = 0;
 	if (index == 2)
-		len = lenstrwchar(wstr);
+		max = len_strwchar(wstr);
 	else
-		len = ft_strlen(str);
+		max = ft_strlen(str);
 	if (lst->point == 1)
-		max = ft_min2(lst->preci, len);
-	else
-		max = len;
-	ft_putprefix(lst, max, lst->field, lst->zero);
-	put_string(lst, str, wstr, index);
-	ft_putprefix(lst, count, -lst->field, 0);
-	return (count);
+		max = ft_min2(lst->preci, max);
+	pf_putprefix(lst, max, lst->field, lst->zero);
+	pf_putstring(lst, str, wstr, index);
+	pf_putprefix(lst, 0, -lst->field, 0);
 }
 
-static void	initstring(t_va *lst_va, wuchar_t **cstr, wchar_t **wstr, int i)
+int			ft_params_string(t_pf *lst, char *str, int index)
 {
-	if (i == 1)
-	{
-		*wstr = va_arg(lst_va->copy, wchar_t*);
-		if (*wstr == NULL)
-			*wstr = L"(null)";
-	}
-	else
-	{
-		*cstr = va_arg(lst_va->copy, char*);
-		if (*cstr == NULL)
-			*cstr = "(null)";
-	}
-}
-
-int			ft_params_string(t_va *lst_va, char *str, int index)
-{
-	t_pf	*lst;
-	int		count;
 	wuchar_t	*cstr;
-	wchar_t	*wstr;
+	wchar_t		*wstr;
 
-	count = 0;
-	lst = lst_initoption(lst_va, str, index);
-	lst->preci = ft_abs(lst->preci);
+	lst_putoption(lst, str, index);
 	if ((lst->lenght >= 10 && lst->lenght <= 20) || lst->conv == 'S')
 	{
-		initstring(lst_va, &cstr, &wstr, 1);
-		count = pf_string(lst, cstr, wstr, 2);
+		wstr = va_arg(lst->va_copy, wchar_t*);
+		if (wstr == NULL)
+			wstr = L"(null)";
+		pf_string(lst, cstr, wstr, 2);
 	}
 	else
 	{
-		initstring(lst_va, &cstr, &wstr, 0);
-		if (lst->conv == 'r')
-			count = pf_string(lst, cstr, wstr, 0);
+		cstr = (char*)va_arg(lst->va_copy, char*);
+		if (cstr == NULL)
+			cstr = ft_strdup("(null)");
 		else
-			count = pf_string(lst, cstr, wstr, 1);
+			cstr = ft_strdup(cstr);
+		if (lst->conv == 'r')
+			pf_string(lst, cstr, wstr, 0);
+		else
+			pf_string(lst, cstr, wstr, 1);
 	}
-	pf_finaljoin(lst_va, lst->str, lst->count);
-	free(lst->str);
-	free(lst);
 	return (index + 1);
 }

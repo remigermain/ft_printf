@@ -13,31 +13,32 @@
 
 #include "ft_printf.h"
 
-void			pf_tmpjoin(t_pf *lst, wuchar_t *str, size_t len, int index)
+void pf_stringjoin(t_pf *lst, wuchar_t *str, size_t len, size_t index)
 {
-	wuchar_t	*new;
-	int		count;
-	int		i;
+	wuchar_t *new;
+	size_t		count;
 
 	count = 0;
-	i = 0;
-	if (!(new = (wuchar_t*)malloc(sizeof(wuchar_t) * (len + lst->count))))
-		return ;
-	while (count < lst->count)
-	{
-		new[count] = lst->str[count];
-		count++;
-	}
-	while (len-- > 0)
-	{
-		new[count + i] = str[i];
-		i++;
-	}
-	lst->count += i;
-	if (lst->str != NULL)
-		free(lst->str);
+	new_wuchart(lst, &new, len);
+	ft_memcpy(new + lst->count, str, len);
+	lstfree_wuchart(lst, new, len);
 	if (index == 1)
 		free(str);
+}
+
+void new_wuchart(t_pf *lst, wuchar_t **new, size_t len)
+{
+	if (!(*new = (wuchar_t*)malloc(sizeof(wuchar_t) * len + lst->count + 1)))
+		return ;
+	ft_memcpy(*new, lst->str, lst->count);
+}
+
+void 	lstfree_wuchart(t_pf *lst, wuchar_t *new, size_t len)
+{
+	lst->count += len;
+	new[lst->count] = '\0';
+	if (lst->str != NULL)
+		free(lst->str);
 	lst->str = new;
 }
 
@@ -45,78 +46,58 @@ void		pf_itoa(t_pf *lst, unsigned long n)
 {
 	int		len;
 	int		mlen;
-	wuchar_t	*str;
+	wuchar_t	*new;
 
 	len = ft_ulen_base(n, lst->base);
 	if (lst->local == 1 && len > 3)
-		len += (len / 3) - (len % 3 == 0 ? 1 : 0);
+		len += ((len / 3) - (len % 3 == 0 ? 1 : 0));
 	mlen = len;
-	if (!(str = (wuchar_t*)malloc(sizeof(wuchar_t) * len + 1)))
-		return ;
-	str[len--] = '\0';
+	new_wuchart(lst, &new, len);
+	len--;
 	while (len >= 0)
 	{
 		if (lst->local == 1 && (mlen - len) % 4 == 0)
-			str[len--] = '\'';
+			new[lst->count + len-- ] = '\'';
 		if ((n % lst->base) < 10)
-			str[len--] = (n % lst->base) + 48;
+			new[lst->count + len--] = (n % lst->base) + 48;
 		else if (lst->maj == 1)
-			str[len--] = (n % lst->base) + 55;
+			new[lst->count + len--] = (n % lst->base) + 55;
 		else
-			str[len--] = (n % lst->base) + 87;
+			new[lst->count + len--] = (n % lst->base) + 87;
 		n = n / lst->base;
 	}
-	pf_tmpjoin(lst, str, mlen, 1);
+	lstfree_wuchart(lst, new, mlen);
 }
 
-void 		pf_finaljoin(t_va *lst_va, wuchar_t *str, size_t i)
+void	pf_putprefix(t_pf *lst, int len, int nb, int point)
 {
-	int			count;
-	int			count_2;
-	wuchar_t	*new;
-
-	count = 0;
-	count_2 = 0;
-	if (str == NULL || i == 0 ||
-		!(new = (wuchar_t*)malloc(sizeof(wuchar_t) * lst_va->count + i)))
-		return ;
-	while (count < lst_va->count)
-	{
-		new[count] = lst_va->str[count];
-		count++;
-	}
-	while (count_2 < i)
-		new[count++] = str[count_2++];
-	lst_va->count += i;
-	if (lst_va->str != NULL)
-		free(lst_va->str);
-	lst_va->str = new;
-}
-
-
-void	ft_putprefix(t_pf *lst, int len, int nb, int point)
-{
-	wuchar_t *str;
+	wuchar_t *new;
 	int count;
 
 	count = 0;
 	if (len >= nb)
 		return;
-	if (!(str = (wuchar_t*)malloc(sizeof(wuchar_t) * (nb - len))))
-		return ;
-	while ((len + count) < nb)
-		str[count++] = (point == 1 ? '0' : ' ');
-	pf_tmpjoin(lst, str, count, 1);
+	new_wuchart(lst, &new, (nb - len));
+	ft_memset(new + lst->count, (point == 1 ? '0' : ' '), (nb - len));
+	lstfree_wuchart(lst, new, (nb - len));
 }
 
-void			ft_putsign(t_pf *lst)
+void			pf_putsign(t_pf *lst)
 {
-	if (lst->psign == 1)
-		pf_tmpjoin(lst, "-", 1, 0);
-	else if (lst->psign == 2, 0)
-		pf_tmpjoin(lst, "+", 1, 0);
-	else if (lst->psign == 3 && lst->maj == 1)
-		pf_tmpjoin(lst, "0X", 2, 0);
-	else if (lst->psign == 3 && lst->maj == 0)
-		pf_tmpjoin(lst, "0x", 2, 0);
+	wuchar_t *new;
+	size_t len;
+
+	if (lst->psign != 0)
+	{
+		len = (lst->psign == 3 ? 2 : 1);
+		new_wuchart(lst, &new, len);
+		if (lst->psign == 1 || lst->psign == 2)
+			new[lst->count] = (lst->psign == 1 ? '-' : '+');
+		else if (lst->psign == 3)
+		{
+			new[lst->count] = '0';
+			new[lst->count + 1] = (lst->maj == 1 ? 'X' : 'x');
+		}
+		lstfree_wuchart(lst, new, len);
+	}
 }

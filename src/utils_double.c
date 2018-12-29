@@ -22,7 +22,7 @@ void 		ft_printdouble(t_pf *lst, unsigned long nb[PF_BUFF])
 	while (lst->preci-- > 0)
 	{
 		if (a == 1)
-			pf_tmpjoin(lst, ".", 1, 0);
+			pf_stringjoin(lst, ".", 1, 0);
 		pf_itoa(lst, nb[a++]);
 	}
 }

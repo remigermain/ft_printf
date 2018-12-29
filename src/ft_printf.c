@@ -20,61 +20,61 @@ static size_t	ft_strlen_perc(char *str, size_t j)
 	return (j);
 }
 
-static int ftprintf_base(char *str, t_va *lst_va, size_t i, size_t j)
+static int ftprintf_base(char *str, t_pf *lst, size_t i, size_t j)
 {
-	va_copy(lst_va->copy, lst_va->lst_va);
-	while (str[i] != '\0' && lst_va->count != -1)
+	va_copy(lst->va_copy, lst->va_lst);
+	while (str[i] != '\0' && lst->count != -1)
 	{
 		j = ft_strlen_perc(str + i, 0);
-		pf_finaljoin(lst_va, (wuchar_t*)(str + i), j);
+		pf_stringjoin(lst, (wuchar_t*)(str + i), j, 0);
 		if (str[i + j] == '{')
-			i += ft_putcolor(lst_va, str + i + j);
+			i += ft_putcolor(lst, str + i + j);
 		else if (str[i + j] == '%')
-			i += ft_conv(lst_va, str + i + j, 1);
+			i += ft_conv(lst, str + i + j, 1);
 		i += j;
 	}
-	va_end(lst_va->lst_va);
-	va_end(lst_va->copy);
-	return (lst_va->count);
+	va_end(lst->va_lst);
+	va_end(lst->va_copy);
+	return (lst->count);
 }
 
 int			ft_sprintf(wuchar_t **dest, const char *format, ...)
 {
-	t_va	*lst_va;
+	t_pf	*lst;
 	int			i;
 
-	lst_va = lstva_init(1);
-	va_start(lst_va->lst_va, format);
-	i = ftprintf_base((char*)format, lst_va, 0, 0);
-	*dest = lst_va->str;
-	free(lst_va);
+	lst = lst_init();
+	va_start(lst->va_lst, format);
+	i = ftprintf_base((char*)format, lst, 0, 0);
+	*dest = lst->str;
+	free(lst);
 	return (i);
 }
 
 int			ft_dprintf(int fd, const char *format, ...)
 {
-	t_va	*lst_va;
+	t_pf	*lst;
 	int			i;
 
-	lst_va = lstva_init(fd);
-	va_start(lst_va->lst_va, format);
-	i = ftprintf_base((char*)format, lst_va, 0, 0);
-	write(lst_va->fd, lst_va->str, i);
-	free(lst_va->str);
-	free(lst_va);
+	lst = lst_init();
+	va_start(lst->va_lst, format);
+	i = ftprintf_base((char*)format, lst, 0, 0);
+	write(fd, lst->str, i);
+	free(lst->str);
+	free(lst);
 	return (i);
 }
 
 int			ft_printf(const char *format, ...)
 {
-	t_va	*lst_va;
+	t_pf	*lst;
 	int			i;
 
-	lst_va = lstva_init(1);
-	va_start(lst_va->lst_va, format);
-	i = ftprintf_base((char*)format, lst_va, 0, 0);
-	write(lst_va->fd, lst_va->str, i);
-	free(lst_va->str);
-	free(lst_va);
+	lst = lst_init();
+	va_start(lst->va_lst, format);
+	i = ftprintf_base((char*)format, lst, 0, 0);
+	write(1, lst->str, i);
+	free(lst->str);
+	free(lst);
 	return (i);
 }
