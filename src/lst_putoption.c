@@ -24,13 +24,12 @@ static void	lst_undefined(t_pf *lst)
 		lst->point = 0;
 		lst->preci = 0;
 	}
-	if (lst->conv == 'u' || lst->conv == 'U' || lst->conv == 'x' ||
-			lst->conv == 'X' || lst->conv == 'o' || lst->conv == 'O' ||
-			lst->conv == 'I' || lst->conv == 'D' || lst->conv == 'b' ||
-			lst->conv == 'B' || lst->conv == 'p')
+	if (lst->conv != 'i' && lst->conv != 'd' && lst->conv != 'u' &&
+			lst->conv != 'f' && lst->conv != 'F' && lst->conv != 'g' &&
+			lst->conv != 'G')
 		lst->local = 0;
 	if (lst->conv == 's' || lst->conv == 'S')
-	lst->preci = ft_abs(lst->preci);
+		lst->preci = ft_abs(lst->preci);
 }
 
 static void	lst_base(t_pf *lst)
@@ -86,7 +85,7 @@ static int	lst_putdigit(t_pf *lst, char *str, int count)
 		if (str[count] == '*' || str[count] == '$')
 		{
 			if (str[count] == '$')
-				lst_initdollar(lst, nb_tmp, 0);
+				lst_putdollar(lst, nb_tmp);
 			nb_tmp = va_arg(lst->va_copy, int);
 			count++;
 		}
@@ -102,8 +101,8 @@ void   lst_putoption(t_pf *lst, char *str, int index)
 {
 	int		count;
 
-	lst_zero(lst);
 	count = 1;
+	lst_zero(lst);
 	while (count <= index)
 	{
 		if (str[count] == '.')

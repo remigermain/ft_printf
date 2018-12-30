@@ -13,13 +13,13 @@
 
 #include "ft_printf.h"
 
-static wuchar_t *pf_convwchar(wchar_t wc)
+static wuchar_t *pf_convwchar(t_pf *lst, wchar_t wc)
 {
 	wuchar_t	*new;
 	size_t		a;
 
 	if (!(new = (wuchar_t*)malloc(sizeof(wuchar_t) * len_wchar(wc) + 1)))
-		ftprintf_error("pf_convwchar", 1);
+		ftprintf_error(lst, "pf_convwchar", 1);
 	a = 0;
 	convert_wchar(&new, wc, &a);
 	return (new);
@@ -49,7 +49,7 @@ int			ft_params_char(t_pf *lst, char *str, int index)
 	lst_putoption(lst, str, index);
 	if ((lst->lenght >= 10 && lst->lenght <= 20) || lst->conv == 'C')
 	{
-		wc = pf_convwchar(va_arg(lst->va_copy, wchar_t));
+		wc = pf_convwchar(lst, va_arg(lst->va_copy, wchar_t));
 		pf_putchar(lst, 0, wc, 1);
 		free(wc);
 	}

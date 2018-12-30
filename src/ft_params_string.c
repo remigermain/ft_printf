@@ -13,7 +13,7 @@
 
 #include "ft_printf.h"
 
-static wuchar_t *comv_wstr(wchar_t *wstr, size_t len)
+static wuchar_t *comv_wstr(t_pf *lst, wchar_t *wstr, size_t len)
 {
 	wuchar_t *str;
 	size_t i;
@@ -22,7 +22,7 @@ static wuchar_t *comv_wstr(wchar_t *wstr, size_t len)
 	i = 0;
 	count = 0;
 	if (!(str = (wuchar_t*)malloc(sizeof(wuchar_t) * nlen_strwchar(wstr, len))))
-		ftprintf_error("comv_wstr", 1);;
+		ftprintf_error(lst, "comv_wstr", 1);;
 	while (wstr[count] != '\0' && count < len)
 		convert_wchar(&str, wstr[count++], &i);
 	return (str);
@@ -31,9 +31,9 @@ static wuchar_t *comv_wstr(wchar_t *wstr, size_t len)
 static	void	pf_putstring(t_pf *lst, wuchar_t *str, wchar_t *wstr, int index)
 {
 	if (lst->point == 0 && index == 2)
-		str = comv_wstr(wstr, len_strwchar(wstr));
+		str = comv_wstr(lst, wstr, len_strwchar(wstr));
 	else if (index == 2)
-		str = comv_wstr(wstr, ft_min2(lst->preci, len_strwchar(wstr)));
+		str = comv_wstr(lst, wstr, ft_min2(lst->preci, len_strwchar(wstr)));
 	if (lst->point == 0 && index == 1)
 		pf_stringjoin(lst, str, ft_strlen(str), 1);
 	else if (index == 1)

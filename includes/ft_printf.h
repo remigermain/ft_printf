@@ -41,6 +41,8 @@ typedef struct	s_printf
 	size_t			base;
 	size_t			lenght;
 	size_t			conv;
+	int					tmp_count;
+	wuchar_t		*tmp_str;
 	va_list			va_lst;
 	va_list			va_copy;
 	int					count;
@@ -94,7 +96,7 @@ int				ft_params_tabstring(t_pf *lst, char *str, int index);
 t_pf			*lst_init(void);
 void      lst_putoption(t_pf *lst, char *str, int index);
 void      lst_zero(t_pf *lst);
-void			lst_initdollar(t_pf *lst, int nb, int index);
+void			lst_putdollar(t_pf *lst, int len);
 void			lst_putnb(t_pf *lst);
 
 /*
@@ -118,7 +120,7 @@ void 			lstfree_wuchart(t_pf *lst, wuchar_t *new, size_t len);
 void			pf_itoa(t_pf *lst, unsigned long n);
 void			pf_putprefix(t_pf *lst, int len, int nb, int point);
 void			pf_putsign(t_pf *lst);
-void 			ftprintf_error(char *str, size_t index);
+void 			ftprintf_error(t_pf *lst, char *str, size_t index);
 /*
 ** fonction de debug de la list
 **	debug.c

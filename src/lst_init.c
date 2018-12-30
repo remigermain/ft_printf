@@ -17,6 +17,8 @@ void  lst_zero(t_pf *lst)
 {
 	lst->ul_nb = 0;
 	lst->fl_nb = 0;
+	lst->ful_nb = 0;
+	lst->nb_tmp = 1;
 	lst->hash = 0;
 	lst->space = 0;
 	lst->zero = 0;
@@ -30,7 +32,8 @@ void  lst_zero(t_pf *lst)
 	lst->base = 0;
 	lst->lenght = 0;
 	lst->conv = 0;
-	lst->nb_tmp = 1;
+	lst->tmp_count = 0;
+	lst->tmp_str = NULL;
 }
 
 t_pf	*lst_init(void)
@@ -38,22 +41,16 @@ t_pf	*lst_init(void)
 	t_pf *lst;
 
 	if (!(lst = (t_pf*)malloc(sizeof(t_pf))))
-		ftprintf_error("lst_init", 1);
+		ftprintf_error(lst, "lst_init", 1);
 	lst->count = 0;
 	lst->str = NULL;
 	return (lst);
 }
 
-void	lst_initdollar(t_pf *lst, int nb, int index)
+void	lst_putdollar(t_pf *lst, int len)
 {
-	int		count;
-
-	count = 0;
-	if (index == 0)
-		va_copy(lst->va_copy, lst->va_lst);
-	while (count < (nb - 1))
-	{
+	va_end(lst->va_copy);
+	va_copy(lst->va_copy, lst->va_lst);
+	while (--len > 0)
 		va_arg(lst->va_copy, int);
-		count++;
-	}
 }

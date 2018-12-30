@@ -13,7 +13,7 @@
 
 #include "ft_printf.h"
 
-void ftprintf_error(char *str, size_t index)
+void ftprintf_error(t_pf *lst, char *str, size_t index)
 {
 	ft_putstr_fd("\n  / \\    WARNING\n / | \\  FT_PRINT ERROR", 2);
 	ft_putstr_fd("\n/  o  \\\n-------\n     	[", 2);
@@ -21,6 +21,14 @@ void ftprintf_error(char *str, size_t index)
 		ft_putstr_fd("Error malloc to function \"", 2);
 	ft_putstr_fd(str, 2);
 	ft_putstr_fd("]     \n\n", 2);
+	if (lst != NULL)
+	{
+		if (lst->str != NULL)
+			free(lst->str);
+		if (lst->str != NULL)
+			free(lst->tmp_str);
+		free(lst);
+	}
 	exit (0);
 }
 
@@ -68,7 +76,7 @@ void 	pf_putpstr(t_pf *lst, wuchar_t *str)
 	if (lst->point == 1)
 		len = ft_min2(len, lst->preci);
 	if (!(new = (wuchar_t*)malloc(sizeof(wuchar_t) * len)))
-		ftprintf_error("pf_putpstr", 1);
+		ftprintf_error(lst, "pf_putpstr", 1);
 	while (str[i] != '\0' && i < len)
 	{
 		if (str[i] == '\n')

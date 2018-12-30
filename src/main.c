@@ -33,6 +33,8 @@ int	main(int argc, char **argv)
 char *c = "efre \t\n\1\2\3 fffewf wfwe \t\n\r\fwe";
 	//ft_printf("%d %d %d, %d, %d, %d %d %d %d %d\n",c, c << 1,  c >> 1, c >> 2 , c >> 3, c >> 4, c >> 5, c >> 6, c >> 7, c >> 8);
 	//ft_printf("%d %d\n", c, c & 1);
-	ft_printf(" %s %#50.36llu %c %C %50.20p \n%.1ts\n","feeerfee546", 1661611569, 97, 256, &ft_strlen, argv);
+	//ft_printf(" %s %#50.36llu %c %C %50.20p \n%.1ts\n","feeerfee546", 1661611569, 97, 256, &ft_strlen, argv);
+	ft_printf(" d = %d  d = %d d = %1$d  d = %d %0$d\n", 42, 53, 10, 22, 55);
+	printf(" d = %d  d = %d d = %$0d  d = %d\n", 42, 53);
 	return (0);
 }

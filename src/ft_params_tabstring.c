@@ -23,12 +23,12 @@ static	void pf_puttab_back(t_pf *lst, char **tab, int len, int b)
 	llen -= (((len % 10) == 0) ? 1 : 0);
 	if (lst->preci == 1)
 	{
-		ret = ft_sprintf(&str, " {blue}%*s{eoc} |", llen, "\\0");
+		ret = ft_sprintf(&str, " {blue}%*S{eoc} |", llen, "\\0");
 		pf_stringjoin(lst, str, ret, 1);
 	}
 	while ((b + lst->preci) < len)
 	{
-		ret = ft_sprintf(&str, " %*c |", llen, ' ');
+		ret = ft_sprintf(&str, " %*C |", llen, ' ');
 		pf_stringjoin(lst, str, ret, 1);
 		b++;
 	}
@@ -63,7 +63,7 @@ static	void pf_puttab(t_pf *lst, char **tab, int len, int larg)
 		pf_stringjoin(lst, str, ret, 1);
 		while (tab[a][++b] != '\0')
 		{
-			ret = ft_sprintf(&str, " %*c |", llen, tab[a][b]);
+			ret = ft_sprintf(&str, " %*C |", llen, tab[a][b]);
 			pf_stringjoin(lst, str, ret, 1);
 		}
 		pf_puttab_back(lst, tab, len, b);
