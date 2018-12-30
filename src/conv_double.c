@@ -86,7 +86,7 @@ static void	ft_initdouble(t_pf *lst)
 		lst->ul_nb++;
 }
 
-int	ft_params_double(t_pf *lst, char *str, int index)
+int	conv_double(t_pf *lst, char *str, int index)
 {
 	int 	max;
 	int 	len;

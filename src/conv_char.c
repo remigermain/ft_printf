@@ -35,13 +35,13 @@ static void	pf_putchar(t_pf *lst, char c, wuchar_t *wc, int index)
 		max = 1;
 	pf_putprefix(lst, max, lst->field, lst->zero);
 	if (index == 1)
-		pf_stringjoin(lst, wc, max, 0);
+		pf_tmpstringjoin(lst, wc, max, 0);
 	else
-		pf_stringjoin(lst, &c, 1, 0);
+		pf_tmpstringjoin(lst, &c, 1, 0);
 	pf_putprefix(lst, max, -lst->field, 0);
 }
 
-int			ft_params_char(t_pf *lst, char *str, int index)
+int			conv_char(t_pf *lst, char *str, int index)
 {
 	int				count;
 	wuchar_t *wc;
@@ -57,5 +57,6 @@ int			ft_params_char(t_pf *lst, char *str, int index)
 		pf_putchar(lst, (char)va_arg(lst->va_copy, int), 0, 0);
 	else
 		pf_putchar(lst, str[index], 0, 0);
+	pf_stringjoin(lst, lst->tmp_str, lst->tmp_count, 1);
 	return (index + 1);
 }

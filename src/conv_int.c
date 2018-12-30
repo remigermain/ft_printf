@@ -87,10 +87,11 @@ static void	ft_option_nb(t_pf *lst)
 	pf_putprefix(lst, max, -lst->field, 0);
 }
 
-int			ft_params_int(t_pf *lst, char *str, int index)
+int			conv_int(t_pf *lst, char *str, int index)
 {
 	lst_putoption(lst, str, index);
 	lst_putnb(lst);
 	ft_option_nb(lst);
+	pf_stringjoin(lst, lst->tmp_str, lst->tmp_count, 1);
 	return (index + 1);
 }

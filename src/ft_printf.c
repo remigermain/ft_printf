@@ -28,9 +28,9 @@ static int ftprintf_base(char *str, t_pf *lst, size_t i, size_t j)
 		j = ft_strlen_perc(str + i, 0);
 		pf_stringjoin(lst, (wuchar_t*)(str + i), j, 0);
 		if (str[i + j] == '{')
-			i += ft_putcolor(lst, str + i + j);
+			i += pf_putcolor(lst, str + i + j);
 		else if (str[i + j] == '%')
-			i +=  find_options(lst, str + i + j, 1);
+			i +=  find_conv(lst, str + i + j, 1);
 		i += j;
 	}
 	va_end(lst->va_lst);

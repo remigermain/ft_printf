@@ -75,19 +75,19 @@ int				ft_sprintf(wuchar_t **dest, const char *format, ...);
 **	fonctions pour trouver quelles sont les parametres
 **	ft_conv.c
 */
-int				find_options(t_pf *lst, char *str, int index);
-int				find_options2(t_pf *lst, char *str, int index);
-int				find_options3(t_pf *lst, char *str, int index);
+int				find_conv(t_pf *lst, char *str, int index);
+int				find_conv2(t_pf *lst, char *str, int index);
+int				find_conv3(t_pf *lst, char *str, int index);
 
 /*
 ** fonctions des diferents parametres
 ** ft_params_*.c
 */
-int				ft_params_int(t_pf *lst, char *str, int index);
-int				ft_params_char(t_pf *lst, char *str, int index);
-int				ft_params_string(t_pf *lst, char *str, int index);
-int				ft_params_double(t_pf *lst, char *str, int index);
-int				ft_params_tabstring(t_pf *lst, char *str, int index);
+int				conv_int(t_pf *lst, char *str, int index);
+int				conv_char(t_pf *lst, char *str, int index);
+int				conv_string(t_pf *lst, char *str, int index);
+int				conv_double(t_pf *lst, char *str, int index);
+int				conv_tabstring(t_pf *lst, char *str, int index);
 
 /*
 ** initialisation des lists && fonction pour initialisation des nombres
@@ -103,10 +103,11 @@ void			lst_putnb(t_pf *lst);
 ** fonctions len_nbr , len no_print char && convert in print, put color
 **	utils.c
 */
+void 			ftprintf_error(t_pf *lst, char *str, size_t index);
 int				ft_ulen_base(unsigned long nb, size_t base);
 int 			pf_countpstr(char *str, size_t len);
 void      pf_putpstr(t_pf *lst, wuchar_t *str);
-int				ft_putcolor(t_pf *lst, char *str);
+int				pf_putcolor(t_pf *lst, char *str);
 
 /*
 **	fonctions qui put les signes( - , + , 0x )
@@ -114,13 +115,12 @@ int				ft_putcolor(t_pf *lst, char *str);
 **				join le str entre eux && unsigned long itoa
 **	utils_put.c
 */
+void 			pf_tmpstringjoin(t_pf *lst, wuchar_t *str, size_t len, size_t index);
 void 			pf_stringjoin(t_pf *lst, wuchar_t *str, size_t len, size_t index);
-void      new_wuchart(t_pf *lst, wuchar_t **new, size_t len);
-void 			lstfree_wuchart(t_pf *lst, wuchar_t *new, size_t len);
 void			pf_itoa(t_pf *lst, unsigned long n);
 void			pf_putprefix(t_pf *lst, int len, int nb, int point);
 void			pf_putsign(t_pf *lst);
-void 			ftprintf_error(t_pf *lst, char *str, size_t index);
+
 /*
 ** fonction de debug de la list
 **	debug.c

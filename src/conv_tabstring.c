@@ -94,7 +94,7 @@ static	void pf_doublestring(t_pf *lst, char **tab, int len, int larg)
 	pf_puttab(lst, tab, len, larg);
 }
 
-int		ft_params_tabstring(t_pf *lst, char *str, int index)
+int		conv_tabstring(t_pf *lst, char *str, int index)
 {
 	char	**tab;
 

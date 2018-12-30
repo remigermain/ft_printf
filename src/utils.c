@@ -89,12 +89,12 @@ void 	pf_putpstr(t_pf *lst, wuchar_t *str)
 			new[j++] = (str[i++] + 64);
 		}
 	}
-	pf_stringjoin(lst, new, len, 1);
+	pf_tmpstringjoin(lst, new, len, 1);
 	free(str);
 }
 
 
-int			ft_putcolor(t_pf *lst, char *str)
+int			pf_putcolor(t_pf *lst, char *str)
 {
 	int ret;
 
