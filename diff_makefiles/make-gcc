@@ -55,4 +55,6 @@ fclean: clean
 	@rm -f $(NAME)
 	@echo "Suppresion de la library "$(NAME)
 
+re: fclean all
+
 .PHONY: all clean fclean

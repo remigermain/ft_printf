@@ -101,22 +101,22 @@ int			pf_putcolor(t_pf *lst, char *str)
 	ret = 0;
 	if ((ft_strncmp(str, "{white}", 7) == 0 && (ret = 4)) ||
 	(ft_strncmp(str, "{eoc}", 4) == 0 && (ret = 4)))
-		pf_stringjoin(lst, white, ft_strlen(white), 0);
+		pf_stringjoin(lst, ((wuchar_t*)(white)), ft_strlen(white), 0);
 	else if (ft_strcmp(str, "{black}") == 0 && (ret = 6))
-		pf_stringjoin(lst, black, ft_strlen(black), 0);
+		pf_stringjoin(lst, ((wuchar_t*)(black)), ft_strlen(black), 0);
 	else if (ft_strcmp(str, "{red}") == 0 && (ret = 5))
-		pf_stringjoin(lst, red, ft_strlen(red), 0);
+		pf_stringjoin(lst, ((wuchar_t*)(red)), ft_strlen(red), 0);
 	else if (ft_strcmp(str, "{green}") == 0 && (ret = 7))
-		pf_stringjoin(lst, green, ft_strlen(green), 0);
+		pf_stringjoin(lst, ((wuchar_t*)(green)), ft_strlen(green), 0);
 	else if (ft_strcmp(str, "{yellow}") == 0 && (ret = 8))
-		pf_stringjoin(lst, yellow, ft_strlen(yellow), 0);
+		pf_stringjoin(lst, ((wuchar_t*)(yellow)), ft_strlen(yellow), 0);
 	else if ((ft_strncmp(str, "{blue}", 5) == 0) && (ret = 5))
-		pf_stringjoin(lst, blue, ft_strlen(blue), 0);
+		pf_stringjoin(lst, ((wuchar_t*)(blue)), ft_strlen(blue), 0);
 	else if (ft_strcmp(str, "{purple}") == 0 && (ret = 8))
-		pf_stringjoin(lst, purple, ft_strlen(purple), 0);
+		pf_stringjoin(lst, ((wuchar_t*)(purple)), ft_strlen(purple), 0);
 	else if (ft_strcmp(str, "{cyan}") == 0 && (ret = 6))
-		pf_stringjoin(lst, cyan, ft_strlen(cyan), 0);
+		pf_stringjoin(lst, ((wuchar_t*)(cyan)), ft_strlen(cyan), 0);
 	else if (ft_strcmp(str, "{grey}") == 0 && (ret = 6))
-		pf_stringjoin(lst, grey, ft_strlen(grey), 0);
+		pf_stringjoin(lst, ((wuchar_t*)(grey)), ft_strlen(grey), 0);
 	return (ret + 1);
 }
