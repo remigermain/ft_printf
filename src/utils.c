@@ -101,7 +101,7 @@ int			pf_putcolor(t_pf *lst, char *str)
 	ret = 0;
 	if ((ft_strncmp(str, "{white}", 7) == 0 && (ret = 4)) ||
 	(ft_strncmp(str, "{eoc}", 4) == 0 && (ret = 4)))
-		pf_stringjoin(lst, &white2, 1, 0);
+		pf_stringjoin(lst, white, ft_strlen(white), 0);
 	else if (ft_strcmp(str, "{black}") == 0 && (ret = 6))
 		pf_stringjoin(lst, black, ft_strlen(black), 0);
 	else if (ft_strcmp(str, "{red}") == 0 && (ret = 5))
