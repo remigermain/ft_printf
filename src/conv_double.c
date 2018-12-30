@@ -15,14 +15,16 @@
 
 static void 		ft_printdouble(t_pf *lst, unsigned long nb[PF_BUFF])
 {
-	int a;
+	size_t	 a;
+	wuchar_t point;
 
 	a = 0;
+	point = '.';
 	pf_itoa(lst, nb[a++]);
 	while (lst->preci-- > 0)
 	{
 		if (a == 1)
-			pf_stringjoin(lst, ".", 1, 0);
+			pf_stringjoin(lst, &point, 1, 0);
 		pf_itoa(lst, nb[a++]);
 	}
 }
@@ -46,7 +48,7 @@ static void ft_double_roundup(t_pf *lst, unsigned long nb[PF_BUFF])
 	}
 }
 
-static void 	ft_assign_double(t_pf *lst, int count)
+static void 	ft_assign_double(t_pf *lst)
 {
 	unsigned long nb[PF_BUFF];
 	int						a;
@@ -98,6 +100,6 @@ int	conv_double(t_pf *lst, char *str, int index)
 	if (lst->point == 0 || lst->preci > 0)
 		max++;
 	pf_putprefix(lst, max, lst->field, lst->zero);
-	ft_assign_double(lst, 0);
+	ft_assign_double(lst);
 	return (index + 1);
 }

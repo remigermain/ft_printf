@@ -45,10 +45,10 @@ int	ft_ulen_base(unsigned long nb, size_t base)
 	return (count + 1);
 }
 
-int pf_countpstr(char *str, size_t len)
+size_t pf_countpstr(wuchar_t *str, size_t len)
 {
-	int i;
-	int a;
+	size_t i;
+	size_t a;
 
 	i = 0;
 	a = 0;
@@ -72,7 +72,7 @@ void 	pf_putpstr(t_pf *lst, wuchar_t *str)
 
 	i = 0;
 	j = 0;
-	len = pf_countpstr(str, ft_strlen(str));
+	len = pf_countpstr(str, ft_ustrlen(str));
 	if (lst->point == 1)
 		len = ft_min2(len, lst->preci);
 	if (!(new = (wuchar_t*)malloc(sizeof(wuchar_t) * len)))
@@ -101,7 +101,7 @@ int			pf_putcolor(t_pf *lst, char *str)
 	ret = 0;
 	if ((ft_strncmp(str, "{white}", 7) == 0 && (ret = 4)) ||
 	(ft_strncmp(str, "{eoc}", 4) == 0 && (ret = 4)))
-		pf_stringjoin(lst, white, ft_strlen(white), 0);
+		pf_stringjoin(lst, &white2, 1, 0);
 	else if (ft_strcmp(str, "{black}") == 0 && (ret = 6))
 		pf_stringjoin(lst, black, ft_strlen(black), 0);
 	else if (ft_strcmp(str, "{red}") == 0 && (ret = 5))

@@ -13,7 +13,7 @@
 
 #include "ft_printf.h"
 
-static	void pf_puttab_back(t_pf *lst, char **tab, int len, int b)
+static	void pf_puttab_back(t_pf *lst, int len, int b)
 {
 	int 			llen;
 	int				ret;
@@ -23,7 +23,7 @@ static	void pf_puttab_back(t_pf *lst, char **tab, int len, int b)
 	llen -= (((len % 10) == 0) ? 1 : 0);
 	if (lst->preci == 1)
 	{
-		ret = ft_sprintf(&str, " {blue}%*S{eoc} |", llen, "\\0");
+		ret = ft_sprintf(&str, " {blue}%*s{eoc} |", llen, "\\0");
 		pf_stringjoin(lst, str, ret, 1);
 	}
 	while ((b + lst->preci) < len)
@@ -34,7 +34,7 @@ static	void pf_puttab_back(t_pf *lst, char **tab, int len, int b)
 	}
 }
 
-static	void pf_puttab_end(t_pf *lst, char **tab, int larg, int max)
+static	void pf_puttab_end(t_pf *lst, int larg, int max)
 {
 	int 			ret;
 	wuchar_t	*str;
@@ -66,9 +66,9 @@ static	void pf_puttab(t_pf *lst, char **tab, int len, int larg)
 			ret = ft_sprintf(&str, " %*C |", llen, tab[a][b]);
 			pf_stringjoin(lst, str, ret, 1);
 		}
-		pf_puttab_back(lst, tab, len, b);
+		pf_puttab_back(lst, len, b);
 	}
-	pf_puttab_end(lst, tab, larg, ft_maxlen_tab(tab, 0));
+	pf_puttab_end(lst, larg, ft_maxlen_tab(tab, 0));
 }
 
 static	void pf_doublestring(t_pf *lst, char **tab, int len, int larg)
@@ -96,17 +96,19 @@ static	void pf_doublestring(t_pf *lst, char **tab, int len, int larg)
 
 int		conv_tabstring(t_pf *lst, char *str, int index)
 {
-	char	**tab;
+	char		**tab;
+	wuchar_t c;
 
 	lst_putoption(lst, str, index);
 	tab = va_arg(lst->va_copy, char**);
+	c = '\n';
 	if (lst->point == 1)
 		pf_doublestring(lst, tab, 0, 0);
 	while (*tab != NULL && lst->point == 0)
 	{
-		pf_stringjoin(lst, *tab, ft_strlen(*tab), 0);
+		pf_stringjoin(lst, (wuchar_t*)*tab, ft_strlen(*tab), 0);
 		if (*tab++ != NULL)
-			pf_stringjoin(lst, "\n", 1, 0);
+			pf_stringjoin(lst, &c, 1, 0);
 	}
 	return (index + 1);
 }

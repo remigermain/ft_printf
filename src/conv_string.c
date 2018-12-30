@@ -35,9 +35,9 @@ static	void	pf_putstring(t_pf *lst, wuchar_t *str, wchar_t *wstr, int index)
 	else if (index == 2)
 		str = comv_wstr(lst, wstr, ft_min2(lst->preci, len_strwchar(wstr)));
 	if (lst->point == 0 && index == 1)
-		pf_tmpstringjoin(lst, str, ft_strlen(str), 1);
+		pf_tmpstringjoin(lst, str, ft_ustrlen(str), 1);
 	else if (index == 1)
-		pf_tmpstringjoin(lst, str, ft_min2(ft_strlen(str), lst->preci), 1);
+		pf_tmpstringjoin(lst, str, ft_min2(ft_ustrlen(str), lst->preci), 1);
 	else if (index == 0)
 		pf_putpstr(lst, str);
 	else if (lst->point == 0 && index == 2)
@@ -48,12 +48,12 @@ static	void	pf_putstring(t_pf *lst, wuchar_t *str, wchar_t *wstr, int index)
 
 static void	pf_string(t_pf *lst, wuchar_t *str, wchar_t *wstr, int index)
 {
-	int max;
+	size_t max;
 
 	if (index == 2)
 		max = len_strwchar(wstr);
 	else
-		max = ft_strlen(str);
+		max = ft_ustrlen(str);
 	if (lst->point == 1)
 		max = ft_min2(lst->preci, max);
 	pf_putprefix(lst, max, lst->field, lst->zero);
@@ -72,18 +72,18 @@ int			conv_string(t_pf *lst, char *str, int index)
 		wstr = va_arg(lst->va_copy, wchar_t*);
 		if (wstr == NULL)
 			wstr = L"(null)";
-		pf_string(lst, ustr, wstr, 2);
+		pf_string(lst, NULL, wstr, 2);
 	}
 	else
 	{
-		ustr = (char*)va_arg(lst->va_copy, char*);
+		ustr = (wuchar_t*)va_arg(lst->va_copy, char*);
 		if (ustr == NULL)
 			str = "(null)";
-		ustr = ft_strdup(ustr);
+		ustr = ft_ustrdup(ustr);
 		if (lst->conv == 'r')
-			pf_string(lst, ustr, wstr, 0);
+			pf_string(lst, ustr, NULL, 0);
 		else
-			pf_string(lst, ustr, wstr, 1);
+			pf_string(lst, ustr, NULL, 1);
 	}
 	pf_stringjoin(lst, lst->tmp_str, lst->tmp_count, 1);
 	return (index + 1);

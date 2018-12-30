@@ -25,7 +25,7 @@ static wuchar_t *pf_convwchar(t_pf *lst, wchar_t wc)
 	return (new);
 }
 
-static void	pf_putchar(t_pf *lst, char c, wuchar_t *wc, int index)
+static void	pf_putchar(t_pf *lst, wuchar_t c, wuchar_t *wc, int index)
 {
 	size_t max;
 
@@ -43,7 +43,6 @@ static void	pf_putchar(t_pf *lst, char c, wuchar_t *wc, int index)
 
 int			conv_char(t_pf *lst, char *str, int index)
 {
-	int				count;
 	wuchar_t *wc;
 
 	lst_putoption(lst, str, index);
@@ -54,7 +53,7 @@ int			conv_char(t_pf *lst, char *str, int index)
 		free(wc);
 	}
 	else if (lst->conv == 'c')
-		pf_putchar(lst, (char)va_arg(lst->va_copy, int), 0, 0);
+		pf_putchar(lst, (wuchar_t)(char)va_arg(lst->va_copy, int), 0, 0);
 	else
 		pf_putchar(lst, str[index], 0, 0);
 	pf_stringjoin(lst, lst->tmp_str, lst->tmp_count, 1);

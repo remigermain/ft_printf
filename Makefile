@@ -11,10 +11,9 @@
 #                                                         /                    #
 # **************************************************************************** #
 
-
 NAME = ./a.out
 
-#CFLAGS = -Wall -Werror -Wextra
+CFLAGS = -Wall -Werror -Wextra
 
 INCLUDE = -Iincludes
 

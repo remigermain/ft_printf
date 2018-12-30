@@ -74,6 +74,7 @@ static void	ft_option_nb(t_pf *lst)
 		len = 0;
 	index = ft_hashcalc(lst, 0, len);
 	ft_spacecalc(lst);
+	sign = ft_signcalc(lst);
 	max = ft_max2(len, lst->preci) + sign;
 	if (lst->zero == 1)
 		pf_putsign(lst);
