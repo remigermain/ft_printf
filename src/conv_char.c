@@ -18,7 +18,7 @@ static wuchar_t *pf_convwchar(t_pf *lst, wchar_t wc)
 	wuchar_t	*new;
 	size_t		a;
 
-	if (!(new = (wuchar_t*)malloc(sizeof(wuchar_t) * len_wchar(wc) + 1)))
+	if (!(new = (wuchar_t*)malloc(sizeof(wuchar_t) * len_wchar_single(wc) + 1)))
 		ftprintf_error(lst, "pf_convwchar", 1);
 	a = 0;
 	convert_wchar(&new, wc, &a);
@@ -28,16 +28,24 @@ static wuchar_t *pf_convwchar(t_pf *lst, wchar_t wc)
 static void	pf_putchar(t_pf *lst, wuchar_t c, wuchar_t *wc, int index)
 {
 	size_t max;
+	wuchar_t *new;
 
 	if (index == 1)
 		max = len_wuchart(wc);
 	else
 		max = 1;
 	pf_putprefix(lst, max, lst->field, lst->zero);
+	if (!(new = (wuchar_t*)malloc(sizeof(wuchar_t) * max + lst->tmp_count + 1)))
+		ftprintf_error(lst, "pf_string join", 1);
+	ft_memcpy(new, lst->tmp_str, lst->tmp_count);
+	ft_memcpy(new + lst->tmp_count, (index == 1 ? wc : &c), max);
+	lst->tmp_count += max;
+	new[lst->tmp_count] = '\0';
+	if (lst->tmp_str != NULL)
+		free(lst->tmp_str);
+	lst->tmp_str = new;
 	if (index == 1)
-		pf_tmpstringjoin(lst, wc, max, 0);
-	else
-		pf_tmpstringjoin(lst, &c, 1, 0);
+		free(wc);
 	pf_putprefix(lst, max, -lst->field, 0);
 }
 
@@ -50,7 +58,6 @@ int			conv_char(t_pf *lst, char *str, int index)
 	{
 		wc = pf_convwchar(lst, va_arg(lst->va_copy, wchar_t));
 		pf_putchar(lst, 0, wc, 1);
-		free(wc);
 	}
 	else if (lst->conv == 'c')
 		pf_putchar(lst, (wuchar_t)(char)va_arg(lst->va_copy, int), 0, 0);

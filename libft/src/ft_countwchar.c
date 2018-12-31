@@ -13,7 +13,7 @@
 
 #include "libft.h"
 
-int	len_wchar(wchar_t c)
+int	len_wchar_single(wchar_t c)
 {
 	if (c <= 0x7F)
 		return (1);
@@ -26,7 +26,7 @@ int	len_wchar(wchar_t c)
 	return (-1);
 }
 
-int len_strwchar(wchar_t *str)
+int len_wchar(wchar_t *str)
 {
 	size_t count;
 	size_t a;
@@ -34,7 +34,7 @@ int len_strwchar(wchar_t *str)
 	count = 0;
 	a = 0;
 	while (str[a] != '\0')
-		count += len_wchar(str[a++]);
+		count += len_wchar_single(str[a++]);
 	return (count);
 }
 
@@ -48,7 +48,7 @@ size_t len_wuchart(unsigned char *str)
 	return (a);
 }
 
-int nlen_strwchar(wchar_t *str, size_t len)
+int nlen_wchar(wchar_t *str, size_t len)
 {
 	size_t count;
 	size_t a;
@@ -56,7 +56,7 @@ int nlen_strwchar(wchar_t *str, size_t len)
 	count = 0;
 	a = 0;
 	while (str[a] != '\0' && a < len)
-		count += len_wchar(str[a++]);
+		count += len_wchar_single(str[a++]);
 	return (count);
 }
 

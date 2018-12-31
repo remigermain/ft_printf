@@ -13,21 +13,30 @@
 
 #include "ft_printf.h"
 
-void pf_tmpstringjoin(t_pf *lst, wuchar_t *str, size_t len, size_t index)
+wuchar_t 	*comv_pstr(t_pf *lst, wuchar_t *str, size_t len)
 {
 	wuchar_t *new;
+	size_t i;
+	size_t j;
 
-	if (!(new = (wuchar_t*)malloc(sizeof(wuchar_t) * len + lst->tmp_count + 1)))
-		ftprintf_error(lst, "pf_string join", 1);
-	ft_memcpy(new, lst->tmp_str, lst->tmp_count);
-	ft_memcpy(new + lst->tmp_count, str, len);
-	lst->tmp_count += len;
-	new[lst->tmp_count] = '\0';
-	if (lst->tmp_str != NULL)
-		free(lst->tmp_str);
-	lst->tmp_str = new;
-	if (index == 1)
-		free(str);
+	i = 0;
+	j = 0;
+	if (!(new = (wuchar_t*)malloc(sizeof(wuchar_t) * len + 1)))
+		ftprintf_error(lst, "pf_putpstr", 1);
+	while (str[i] != '\0' && i < len)
+	{
+		if (str[i] == '\n')
+			new[j++] = '$';
+		if (ft_isprint(str[i]) || str[i] == '\n' || str[i] == '\t')
+			new[j++] = str[i++];
+		else
+		{
+			new[j++] = '^';
+			new[j++] = (str[i++] + 64);
+		}
+	}
+	free(str);
+	return (new);
 }
 
 void pf_stringjoin(t_pf *lst, wuchar_t *str, size_t len, size_t index)
@@ -53,7 +62,7 @@ void		pf_itoa(t_pf *lst, unsigned long n)
 	int		mlen;
 	wuchar_t	*new;
 
-	len = ft_ulen_base(n, lst->base);
+	len = ulen_base(n, lst->base);
 	if (lst->local == 1 && len > 3)
 		len += ((len / 3) - (len % 3 == 0 ? 1 : 0));
 	mlen = len;

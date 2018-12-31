@@ -13,15 +13,6 @@
 
 #include "ft_printf.h"
 
-static int	ft_signcalc(t_pf *lst)
-{
-	if (lst->psign == 1 || lst->psign == 2)
-		return (1);
-	else if (lst->psign == 3)
-		return (2);
-	return (0);
-}
-
 static int	ft_hashcalc(t_pf *lst, int index, int len)
 {
 	if (lst->hash == 1 && (lst->conv == 'u' || lst->conv == 'U'))
@@ -69,12 +60,12 @@ static void	ft_option_nb(t_pf *lst)
 	int sign;
 	int index;
 
-	len = ft_ulen_base(lst->ul_nb, lst->base);
+	len = ulen_base(lst->ul_nb, lst->base);
+	sign = ((lst->sign == 3) ? 2 : (lst->sign == 0 ? 0 : 1));
 	if (lst->ul_nb == 0 && lst->point == 1 && lst->preci == 0)
 		len = 0;
 	index = ft_hashcalc(lst, 0, len);
 	ft_spacecalc(lst);
-	sign = ft_signcalc(lst);
 	max = ft_max2(len, lst->preci) + sign;
 	if (lst->zero == 1)
 		pf_putsign(lst);

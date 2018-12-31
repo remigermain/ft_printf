@@ -49,10 +49,12 @@ $(DOBJ)%.o : $(DSRC)%.c $(CINC)
 clean:
 	@mkdir -p $(DOBJ)
 	@rm -rf $(DOBJ)
+	@make -C libft clean
 	@echo "Suppresion des objects"
 
 fclean: clean
 	@rm -f $(NAME)
+	@make -C libft fclean
 	@echo "Suppresion de la library "$(NAME)
 
 re: fclean all

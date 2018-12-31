@@ -100,9 +100,9 @@ void			lst_putnb(t_pf *lst);
 **	utils.c
 */
 void 			ftprintf_error(t_pf *lst, char *str, size_t index);
-int				ft_ulen_base(unsigned long nb, size_t base);
-size_t 			pf_countpstr(wuchar_t *str, size_t len);
-void      pf_putpstr(t_pf *lst, wuchar_t *str);
+int				ulen_base(unsigned long nb, size_t base);
+size_t 		len_pstr(wuchar_t *str);
+size_t 		len_pstrn(wuchar_t *str, size_t len);
 int				pf_putcolor(t_pf *lst, char *str);
 
 /*
@@ -111,7 +111,7 @@ int				pf_putcolor(t_pf *lst, char *str);
 **				join le str entre eux && unsigned long itoa avec local
 **	utils_put.c
 */
-void 			pf_tmpstringjoin(t_pf *lst, wuchar_t *str, size_t len, size_t index);
+wuchar_t 	*comv_pstr(t_pf *lst, wuchar_t *str, size_t len);
 void 			pf_stringjoin(t_pf *lst, wuchar_t *str, size_t len, size_t index);
 void			pf_itoa(t_pf *lst, unsigned long n);
 void			pf_putprefix(t_pf *lst, int len, int nb, int point);

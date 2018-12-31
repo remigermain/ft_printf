@@ -19,7 +19,7 @@ static	void pf_puttab_back(t_pf *lst, int len, int b)
 	int				ret;
 	wuchar_t	*str;
 
-	llen = ft_ulen_base(len, 10) + lst->preci;
+	llen = ulen_base(len, 10) + lst->preci;
 	llen -= (((len % 10) == 0) ? 1 : 0);
 	if (lst->preci == 1)
 	{
@@ -54,7 +54,7 @@ static	void pf_puttab(t_pf *lst, char **tab, int len, int larg)
 	int 			b;
 	int 			ret;
 
-	llen = ft_ulen_base(len, 10) + lst->preci;
+	llen = ulen_base(len, 10) + lst->preci;
 	llen -= (((len % 10) == 0) ? 1 : 0);
 	a = -1;
 	while (tab[++a] != NULL && (b = -1))
@@ -81,8 +81,8 @@ static	void pf_doublestring(t_pf *lst, char **tab, int len, int larg)
 	b = 0;
 	len = ft_maxlen_tab(tab, 1) + lst->preci;
 	larg = ft_maxlen_tab(tab, 0);
-	larg = ft_ulen_base(ft_min2(larg - 1, larg), 10);
-	llen = ft_ulen_base(len, 10) + lst->preci;
+	larg = ulen_base(ft_min2(larg - 1, larg), 10);
+	llen = ulen_base(len, 10) + lst->preci;
 	llen -= (((len % 10) == 0) ? 1 : 0);
 	ret = ft_sprintf(&str, "%*.c |", larg + 1, ' ');
 	pf_stringjoin(lst, str, ret, 1);

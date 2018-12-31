@@ -142,9 +142,9 @@ size_t			ft_strnlen(const char *str, size_t max);
 size_t			ft_ustrlen(const unsigned char *str);
 size_t			ft_ustrnlen(const unsigned char *str, size_t max);
 int				ft_atoi2(const char *str, int *count);
-int				len_wchar(wchar_t c);
-int				len_strwchar(wchar_t *wstr);
-int				nlen_strwchar(wchar_t *wstr, size_t len);
+int				len_wchar_single(wchar_t c);
+int				len_wchar(wchar_t *wstr);
+int				nlen_wchar(wchar_t *wstr, size_t len);
 void 			convert_wchar(unsigned char **new, wchar_t wc, size_t *i);
 size_t		len_wuchart(unsigned char *str);
 

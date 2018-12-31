@@ -25,14 +25,14 @@ void ftprintf_error(t_pf *lst, char *str, size_t index)
 	{
 		if (lst->str != NULL)
 			free(lst->str);
-		if (lst->str != NULL)
+		if (lst->tmp_str != NULL)
 			free(lst->tmp_str);
 		free(lst);
 	}
 	exit (0);
 }
 
-int	ft_ulen_base(unsigned long nb, size_t base)
+int	ulen_base(unsigned long nb, size_t base)
 {
 	int count;
 
@@ -45,7 +45,12 @@ int	ft_ulen_base(unsigned long nb, size_t base)
 	return (count + 1);
 }
 
-size_t pf_countpstr(wuchar_t *str, size_t len)
+size_t len_pstr(wuchar_t *str)
+{
+	return (len_pstrn(str, ft_ustrlen(str)));
+}
+
+size_t len_pstrn(wuchar_t *str, size_t len)
 {
 	size_t i;
 	size_t a;
@@ -62,37 +67,6 @@ size_t pf_countpstr(wuchar_t *str, size_t len)
 	}
 	return (a);
 }
-
-void 	pf_putpstr(t_pf *lst, wuchar_t *str)
-{
-	int i;
-	int j;
-	int len;
-	wuchar_t *new;
-
-	i = 0;
-	j = 0;
-	len = pf_countpstr(str, ft_ustrlen(str));
-	if (lst->point == 1)
-		len = ft_min2(len, lst->preci);
-	if (!(new = (wuchar_t*)malloc(sizeof(wuchar_t) * len)))
-		ftprintf_error(lst, "pf_putpstr", 1);
-	while (str[i] != '\0' && i < len)
-	{
-		if (str[i] == '\n')
-			new[j++] = '$';
-		if (ft_isprint(str[i]) || str[i] == '\n' || str[i] == '\t')
-			new[j++] = str[i++];
-		else
-		{
-			new[j++] = '^';
-			new[j++] = (str[i++] + 64);
-		}
-	}
-	pf_tmpstringjoin(lst, new, len, 1);
-	free(str);
-}
-
 
 int			pf_putcolor(t_pf *lst, char *str)
 {

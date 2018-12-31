@@ -39,7 +39,7 @@ static void ft_double_roundup(t_pf *lst, unsigned long nb[PF_BUFF])
 	a--;
 	while ((a + 1) != 0)
 	{
-		if (a > 0 && ft_ulen_base(nb[a], lst->base) > 1)
+		if (a > 0 && ulen_base(nb[a], lst->base) > 1)
 		{
 			nb[a - 1]++;
 			nb[a] %= lst->base;
@@ -95,7 +95,7 @@ int	conv_double(t_pf *lst, char *str, int index)
 
 	lst_putoption(lst, str, index);
 	ft_initdouble(lst);
-	len = ft_ulen_base(lst->ul_nb, lst->base);
+	len = ulen_base(lst->ul_nb, lst->base);
 	max = len + lst->preci;
 	if (lst->point == 0 || lst->preci > 0)
 		max++;
