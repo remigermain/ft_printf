@@ -1,48 +1,55 @@
 /* ************************************************************************** */
-/*                                                          LE - /            */
+/*                                                          Le - /            */
 /*                                                              /             */
-/*   ft_params_f.c                                    .::    .:/ .      .::   */
+/*   main.c                                           .::    .:/ .      .::   */
 /*                                                 +:+:+   +:    +:  +:+:+    */
-/*   By: rgermain <marvin@le-101.fr>                +:+   +:    +:    +:+     */
+/*   By: rgermain <marvin@Le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
-/*   Created: 2018/12/11 20:46:44 by rgermain     #+#   ##    ##    #+#       */
-/*   Updated: 2018/12/20 19:33:33 by rgermain    ###    #+. /#+    ###.fr     */
+/*   Created: 2018/12/19 22:28:54 by rgermain     #+#   ##    ##    #+#       */
+/*   Updated: 2018/12/20 14:33:21 by rgermain    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-static void 		ft_printdouble(t_pf *lst, unsigned long nb[PF_BUFF])
+static void 	put_double(t_pf *lst, unsigned long nb[PF_BUFF])
 {
-	size_t	 a;
-	wuchar_t point;
+	size_t a;
 
 	a = 0;
-	point = '.';
 	pf_itoa(lst, nb[a++]);
-	while (lst->preci-- > 0)
+	if (lst->conv == 'g' || lst->conv == 'G')
 	{
-		if (a == 1)
-			pf_stringjoin(lst, &point, 1, 0);
-		pf_itoa(lst, nb[a++]);
+		while (lst->preci > 0)
+		{
+			if (nb[lst->preci] == 0)
+					lst->preci--;
+			else
+				break;
+		}
 	}
+	if (lst->preci > 0)
+	{
+		lst->psign = 4;
+		pf_putsign(lst);
+	}
+	while ((a - 1) < (size_t)lst->preci)
+		pf_itoa(lst, nb[a++]);
 }
 
-static void ft_double_roundup(t_pf *lst, unsigned long nb[PF_BUFF])
+static void roundup_double(t_pf *lst, unsigned long nb[PF_BUFF])
 {
 	int a;
 
 	a = lst->preci + 1;
-	if (a != 0 && nb[a] >= (lst->base / 2))
-		nb[a - 1]++;
-	a--;
-	while ((a + 1) != 0)
+	while (a > 0)
 	{
-		if (a > 0 && ulen_base(nb[a], lst->base) > 1)
+		if ((nb[a] >= (lst->base / 2) && a == (lst->preci + 1)) ||
+			(nb[a] >= lst->base && a > 0))
 		{
-			nb[a - 1]++;
-			nb[a] %= lst->base;
+			nb[a - 1] += 1;
+			nb[a] = nb[a] % lst->base;
 		}
 		a--;
 	}
@@ -51,41 +58,45 @@ static void ft_double_roundup(t_pf *lst, unsigned long nb[PF_BUFF])
 static void 	ft_assign_double(t_pf *lst)
 {
 	unsigned long nb[PF_BUFF];
-	int						a;
+	size_t				a;
 	int 					preci;
 
 	a = 0;
-	preci = lst->preci;
+	preci = lst->preci + 1;
 	nb[a++] = lst->ul_nb;
-	while (lst->preci-- > 0)
+	while (lst->preci >= 0)
 	{
 		lst->fl_nb *= lst->base;
-		if (lst->preci == 0 &&
-			((long)(lst->fl_nb * lst->base) % lst->base) > 5)
-			nb[a++] = (long)(lst->fl_nb) + 1;
-		else
-			nb[a++] = (long)lst->fl_nb;
+		nb[a++] = (long)lst->fl_nb;
 		lst->fl_nb -= (long)lst->fl_nb;
+		lst->preci--;
 	}
-	lst->preci = preci;
-  ft_double_roundup(lst, nb);
-	ft_printdouble(lst, nb);
+	lst->preci = preci - 1;
+  roundup_double(lst, nb);
+	put_double(lst, nb);
 }
 
-static void	ft_initdouble(t_pf *lst)
+static void double_sufix(t_pf *lst)
 {
-	long double nb;
+	wuchar_t	*new;
+	int				ret;
+	char 			c;
 
-	if (lst->lenght == 100000)
-		nb = va_arg(lst->va_copy, long double);
+	if (lst->conv == 'a' || lst->conv == 'A')
+		c = (lst->maj == 1 ? 'P' : 'p');
 	else
-		nb = (long double)va_arg(lst->va_copy, double);
-	if (lst->point == 0)
-		lst->preci = 6;
-	lst->ul_nb = (unsigned long)nb;
-	lst->fl_nb = nb - (unsigned long)nb;
-	if (lst->preci == 0 && (int)(lst->fl_nb * lst->base) > 5)
-		lst->ul_nb++;
+		c = (lst->maj == 1 ? 'E' : 'e');
+	if ((lst->conv == 'e' || lst->conv == 'E' ||
+			lst->conv == 'G') && lst->ul_nb != 0)
+	{
+		ret = ft_sprintf(&new, "%c%+.2d", c, lst->exposant);
+		pf_stringjoin(lst, new, ret, 1);
+	}
+	else if (lst->conv == 'a' || lst->conv == 'A')
+	{
+		ret = ft_sprintf(&new, "%c%+d", c, lst->exposant);
+		pf_stringjoin(lst, new, ret, 1);
+	}
 }
 
 int	conv_double(t_pf *lst, char *str, int index)
@@ -94,12 +105,15 @@ int	conv_double(t_pf *lst, char *str, int index)
 	int 	len;
 
 	lst_putoption(lst, str, index);
-	ft_initdouble(lst);
+	lst_putdouble(lst);
 	len = ulen_base(lst->ul_nb, lst->base);
 	max = len + lst->preci;
 	if (lst->point == 0 || lst->preci > 0)
 		max++;
 	pf_putprefix(lst, max, lst->field, lst->zero);
 	ft_assign_double(lst);
+	pf_putprefix(lst, max, -lst->field, lst->zero);
+	pf_stringjoin(lst, lst->tmp_str, lst->tmp_count, 1);
+	double_sufix(lst);
 	return (index + 1);
 }

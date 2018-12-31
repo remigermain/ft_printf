@@ -64,7 +64,7 @@ static void	lst_putnb_snb(t_pf *lst)
 	lst->ul_nb = (lst->nb_tmp < 0 ? -lst->nb_tmp : lst->nb_tmp);
 }
 
-void		lst_putnb(t_pf *lst)
+void		lst_putint(t_pf *lst)
 {
 	if (lst->conv == 'd' || (lst->conv == 'i') ||
 			(lst->conv == 'D' && lst->lenght == 0))

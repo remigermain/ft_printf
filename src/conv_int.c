@@ -82,7 +82,7 @@ static void	ft_option_nb(t_pf *lst)
 int			conv_int(t_pf *lst, char *str, int index)
 {
 	lst_putoption(lst, str, index);
-	lst_putnb(lst);
+	lst_putint(lst);
 	ft_option_nb(lst);
 	pf_stringjoin(lst, lst->tmp_str, lst->tmp_count, 1);
 	return (index + 1);

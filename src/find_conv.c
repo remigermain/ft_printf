@@ -50,8 +50,11 @@ int	find_conv2(t_pf *lst, char *str, int index)
 		*nb = lst->count;
 		index += 1;
 	}
-	else if (str[index] == 'f' || str[index] == 'F')
-		index = conv_double(lst, str, index);
+	else if (str[index] == 'f' || str[index] == 'F' ||
+				str[index] == 'e' || str[index] == 'E' ||
+			str[index] == 'g' || str[index] == 'G' ||
+		str[index] == 'a' || str[index] == 'A')
+			index = conv_double(lst, str, index);
 	else if (str[index] == 's' || str[index] == 'r' ||
 			str[index] == 'S')
 		index = conv_string(lst, str, index);

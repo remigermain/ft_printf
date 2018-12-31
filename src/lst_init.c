@@ -17,7 +17,7 @@ void  lst_zero(t_pf *lst)
 {
 	lst->ul_nb = 0;
 	lst->fl_nb = 0;
-	lst->ful_nb = 0;
+	lst->exposant = 0;
 	lst->nb_tmp = 1;
 	lst->hash = 0;
 	lst->space = 0;

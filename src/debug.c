@@ -17,8 +17,8 @@ void	debug(t_pf *lst)
 {
 	printf("\n [printf list]\n");
 	printf("lst->ul_nb = %ld\n", lst->ul_nb);
-	printf("lst->fl_nb = %Lf\n", lst->fl_nb);
-	printf("lst->ful_nb = %ld\n", lst->ful_nb);
+	printf("lst->fl_nb = %.20Lf\n", lst->fl_nb);
+	printf("lst->exposant = %ld\n", lst->exposant);
 	printf("lst->hash = %zu\n", lst->hash);
 	printf("lst->space = %zu\n", lst->space);
 	printf("lst->zero = %zu\n", lst->zero);

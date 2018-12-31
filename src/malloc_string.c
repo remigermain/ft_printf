@@ -118,6 +118,8 @@ void			pf_putsign(t_pf *lst)
 		ft_memcpy(new, lst->tmp_str, lst->tmp_count);
 		if (lst->psign == 1 || lst->psign == 2)
 			new[lst->tmp_count] = (lst->psign == 1 ? '-' : '+');
+		if (lst->psign == 4)
+			new[lst->tmp_count] = '.';
 		else if (lst->psign == 3)
 		{
 			new[lst->tmp_count] = '0';

@@ -35,8 +35,8 @@
 typedef struct	s_printf
 {
 	unsigned long	ul_nb;
-	unsigned long	ful_nb;
 	long double		fl_nb;
+	int				exposant;
 	long			nb_tmp;
 	size_t			hash;
 	size_t			space;
@@ -93,7 +93,7 @@ t_pf			*lst_init(void);
 void      lst_putoption(t_pf *lst, char *str, int index);
 void      lst_zero(t_pf *lst);
 void			lst_putdollar(t_pf *lst, int len);
-void			lst_putnb(t_pf *lst);
+void			lst_putint(t_pf *lst);
 
 /*
 ** fonctions len_nbr , len no_print char && convert in print, put color
@@ -117,6 +117,7 @@ void			pf_itoa(t_pf *lst, unsigned long n);
 void			pf_putprefix(t_pf *lst, int len, int nb, int point);
 void			pf_putsign(t_pf *lst);
 
+void	lst_putdouble(t_pf *lst);
 /*
 ** fonction de debug de la list
 **	debug.c
