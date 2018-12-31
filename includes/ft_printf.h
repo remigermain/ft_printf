@@ -1,4 +1,5 @@
 /* ************************************************************************** */
+/*                                                          LE - /            */
 /*                                                              /             */
 /*   ft_printf.h                                      .::    .:/ .      .::   */
 /*                                                 +:+:+   +:    +:  +:+:+    */
@@ -15,29 +16,22 @@
 # include "../libft/includes/libft.h"
 # include <stdarg.h>
 # include <stdio.h>
+# include <stdlib.h>
+# include <limits.h>
 
-# define intmax_t long
-# define PF_BUFF 10000
-# define wuchar_t unsigned char
-/*
-** color
-*/
-# define white 	"\033[0m"
-# define black  "\033[30m"
-# define red 		"\033[31m"
-# define green  "\033[32m"
-# define yellow "\033[33m"
-# define blue	  "\033[34m"
-# define purple "\033[35m"
-# define cyan	  "\033[36m"
-# define grey		"\033[37m"
+typedef struct	s_valist
+{
+	va_list	lst_va;
+	va_list	copy;
+	int		fd;
+	int		count;
+}				t_valst;
 
 typedef struct	s_printf
 {
 	unsigned long	ul_nb;
 	unsigned long	ful_nb;
 	long double		fl_nb;
-	long			nb_tmp;
 	size_t			hash;
 	size_t			space;
 	size_t			zero;
@@ -51,13 +45,19 @@ typedef struct	s_printf
 	size_t			base;
 	size_t			lenght;
 	size_t			conv;
-	int					tmp_count;
-	wuchar_t		*tmp_str;
-	va_list			va_lst;
-	va_list			va_copy;
-	int					count;
-	wuchar_t		*str;
+	size_t			fd;
+	long			nb_tmp;
 }				t_pf;
+
+typedef struct	s_time
+{
+	int	da;
+	int	h;
+	int	mi;
+	int	d;
+	int	mo;
+	int	y;
+}				t_time;
 
 /*
 **	fonctions main de ft_printf
@@ -65,57 +65,72 @@ typedef struct	s_printf
 */
 int				ft_printf(const char *str, ...);
 int				ft_dprintf(int fd, const char *str, ...);
-int				ft_sprintf(wuchar_t **dest, const char *format, ...);
 
 /*
 **	fonctions pour trouver quelles sont les parametres
-**	find_conv.c
+**	ft_conv.c
 */
-int				find_conv(t_pf *lst, char *str, int index);
-int				find_conv2(t_pf *lst, char *str, int index);
-int				find_conv3(t_pf *lst, char *str, int index);
+int				ft_conv(t_valst *lst_va, char *str, int i, int index);
+int				ft_conv2(t_valst *lst_va, char *str, int i, int index);
+int				ft_conv3(t_valst *lst_va, char *str, int i, int index);
 
 /*
-** fonctions des differentes convertion
-** conv_*.c
+** fonctions des diferents parametres
+** ft_params_*.c
 */
-int				conv_int(t_pf *lst, char *str, int index);
-int				conv_char(t_pf *lst, char *str, int index);
-int				conv_string(t_pf *lst, char *str, int index);
-int				conv_double(t_pf *lst, char *str, int index);
-int				conv_tabstring(t_pf *lst, char *str, int index);
+int				ft_params_nb(t_valst *lst_va, char *str, int i, int index);
+int				ft_params_char(t_valst *lst_va, char *str, int i, int index);
+int				ft_params_perc(t_valst *lst_va, char *str, int i, int index);
+int				ft_params_no(t_valst *lst_va, char *str, int i, int index);
+int				ft_params_string(t_valst *lst_va, char *str, int i, int index);
+int				ft_params_k(t_valst *lst_va, char *str, int i, int index);
+int				ft_params_f(t_valst *lst_va, char *str, int i, int index);
+int				ft_params_a(t_valst *lst_va, char *str, int i, int index);
+int				ft_params_la(t_valst *lst_va, char *str, int i, int index);
+int				ft_params_ti(t_valst *lst_va, char *str, int i, int index);
+int				ft_params_ts(t_valst *lst_va, char *str, int i, int index);
 
 /*
-** initialisation lst && fonction pour ajouter les differentes options
-** lst_init.c && lst_base.c && lst_initnb.c
+** initialisation des lists
+** lst_init.c && lst_base.c
 */
-t_pf			*lst_init(void);
-void      lst_putoption(t_pf *lst, char *str, int index);
-void      lst_zero(t_pf *lst);
-void			lst_putdollar(t_pf *lst, int len);
-void			lst_putnb(t_pf *lst);
+t_valst			*lstva_init(int fd);
+t_pf			*lst_initoption(t_valst *lst_va, char *str, int i, int index);
+t_pf			*ft_initpf(t_valst *lst_va);
+void			lstva_digit(t_valst *lst_va, int nb, int index);
 
 /*
-** fonctions len_nbr , len no_print char && convert in print, put color
+**	fonction pour initialisation des nombres
+**	lst_initnb.c
+*/
+void			ft_initnb(t_pf *lst, t_valst *lst_va);
+void			ft_signprefix(t_pf *lst);
+
+/*
+** fonctions put_nbr et len_nbr en unsigned long
 **	utils.c
 */
-void 			ftprintf_error(t_pf *lst, char *str, size_t index);
-int				ulen_base(unsigned long nb, size_t base);
-size_t 		len_pstr(wuchar_t *str);
-size_t 		len_pstrn(wuchar_t *str, size_t len);
-int				pf_putcolor(t_pf *lst, char *str);
+int				ft_putnbr_ulm3(t_pf *lst, unsigned long nb, int i, int first);
+int				ft_putnbr_ulm(unsigned long nb, size_t b, size_t m, size_t fd);
+int				ft_putnbr_ul(unsigned long nb, size_t fd);
+int				ft_ulen_base(unsigned long nb, size_t base);
+int				ft_ulen(unsigned long nb);
 
 /*
-**	fonctions qui put les signes( - , + , 0x )
-**			 ajoute les esapces et zero des precisions/field
-**				join le str entre eux && unsigned long itoa avec local
-**	utils_put.c
+**	fonctions qui affiche les couleurs && les signes( - , + , 0x , e+00 ...)
+**				&& afficher les esapces et zero des precision/field
+**	utils_print.c
 */
-wuchar_t 	*comv_pstr(t_pf *lst, wuchar_t *str, size_t len);
-void 			pf_stringjoin(t_pf *lst, wuchar_t *str, size_t len, size_t index);
-void			pf_itoa(t_pf *lst, unsigned long n);
-void			pf_putprefix(t_pf *lst, int len, int nb, int point);
-void			pf_putsign(t_pf *lst);
+int				ft_print_prefix(int len, int nb, int point, int fd);
+int				ft_printcolor(char *str, int i, int fd);
+int				ft_print_sign(t_pf *lst);
+
+/*
+**	fonctions put_double len_double en unsigned long double !
+**	utils_double.c
+*/
+int				ft_putnbr_dlm(t_pf *lst);
+int				ft_calcul_len2(t_pf *lst, int len, int index);
 
 /*
 ** fonction de debug de la list

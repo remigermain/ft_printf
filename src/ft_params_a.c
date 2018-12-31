@@ -1,24 +1,26 @@
 /* ************************************************************************** */
 /*                                                          LE - /            */
 /*                                                              /             */
-/*   main.c                                           .::    .:/ .      .::   */
+/*   ft_params_f.c                                    .::    .:/ .      .::   */
 /*                                                 +:+:+   +:    +:  +:+:+    */
 /*   By: rgermain <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
-/*   Created: 2018/12/19 22:28:54 by rgermain     #+#   ##    ##    #+#       */
-/*   Updated: 2018/12/20 14:33:21 by rgermain    ###    #+. /#+    ###.fr     */
+/*   Created: 2018/12/11 20:46:44 by rgermain     #+#   ##    ##    #+#       */
+/*   Updated: 2018/12/20 19:34:13 by rgermain    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-#include <locale.h>
-int	main(void)
-{
-	int a;
 
-	a = 0;
-	a = ft_printf("%'lld", 10000055);
-	printf("ft = %d\n", a);
-	return (0);
+int				ft_params_a(t_valst *lst_va, char *str, int i, int index)
+{
+	t_pf	*lst;
+	int		count;
+
+	lst = lst_initoption(lst_va, str, i, index);
+	count = 0;
+	lst_va->count += count;
+	free(lst);
+	return (index + 1);
 }

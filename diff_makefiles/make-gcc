@@ -11,6 +11,7 @@
 #                                                         /                    #
 # **************************************************************************** #
 
+
 NAME = ./a.out
 
 CFLAGS = -Wall -Werror -Wextra
@@ -19,11 +20,11 @@ INCLUDE = -Iincludes
 
 CINC = includes/ft_printf.h libft/includes/libft.h
 
-SRC = main.c ft_printf.c find_conv.c \
-		conv_int.c  conv_string.c conv_double.c \
-		conv_char.c conv_tabstring.c \
-		lst_init.c lst_putnb.c lst_putoption.c \
-		utils.c malloc_string.c \
+SRC = main.c ft_printf.c ft_conv.c utils.c utils_print.c utils_double.c \
+		ft_params_nb.c ft_params_char.c ft_params_string.c \
+		ft_params_f.c ft_params_k.c ft_params_ti.c ft_params_ts.c \
+		ft_params_a.c \
+		lst_init.c lst_initnb.c lst_base.c \
 		debug.c
 
 OBJ = $(SRC:.c=.o)
@@ -54,7 +55,5 @@ clean:
 fclean: clean
 	@rm -f $(NAME)
 	@echo "Suppresion de la library "$(NAME)
-
-re: fclean all
 
 .PHONY: all clean fclean

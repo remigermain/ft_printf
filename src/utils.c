@@ -13,26 +13,58 @@
 
 #include "ft_printf.h"
 
-void ftprintf_error(t_pf *lst, char *str, size_t index)
+int	ft_putnbr_ulm3(t_pf *lst, unsigned long nb, int i, int first)
 {
-	ft_putstr_fd("\n  / \\    WARNING\n / | \\  FT_PRINT ERROR", 2);
-	ft_putstr_fd("\n/  o  \\\n-------\n     	[", 2);
-	if (index == 1)
-		ft_putstr_fd("Error malloc to function \"", 2);
-	ft_putstr_fd(str, 2);
-	ft_putstr_fd("]     \n\n", 2);
-	if (lst != NULL)
+	unsigned long	j;
+	int				len;
+
+	j = 1;
+	while (j < nb)
+		j *= lst->base;
+	len = ft_ulen_base(nb, lst->base);
+	while (len > 0)
 	{
-		if (lst->str != NULL)
-			free(lst->str);
-		if (lst->tmp_str != NULL)
-			free(lst->tmp_str);
-		free(lst);
+		nb %= j;
+		j /= lst->base;
+		if (((len % 3) == 0) && first == 1)
+			i += ft_putchar_fd('\'', lst->fd);
+		if ((nb / j) < 10)
+			i += ft_putchar_fd((nb / j) + '0', lst->fd);
+		else if (lst->maj == 1)
+			i += ft_putchar_fd((nb / j) + 55, lst->fd);
+		else
+			i += ft_putchar_fd((nb / j) + 87, lst->fd);
+		first = lst->local;
+		len--;
 	}
-	exit (0);
+	return (i);
 }
 
-int	ulen_base(unsigned long nb, size_t base)
+int	ft_putnbr_ulm(unsigned long nb, size_t base, size_t maj, size_t fd)
+{
+	int i;
+
+	i = 0;
+	if (nb >= base)
+	{
+		i += ft_putnbr_ulm((nb / base), base, maj, fd);
+		i += ft_putnbr_ulm((nb % base), base, maj, fd);
+	}
+	else if (nb < 10)
+		i += ft_putchar_fd(nb + '0', fd);
+	else if (maj == 1)
+		i += ft_putchar_fd(nb + 55, fd);
+	else
+		i += ft_putchar_fd(nb + 87, fd);
+	return (i);
+}
+
+int	ft_putnbr_ul(unsigned long nb, size_t fd)
+{
+	return (ft_putnbr_ulm(nb, 10, 1, fd));
+}
+
+int	ft_ulen_base(unsigned long nb, size_t base)
 {
 	int count;
 
@@ -45,52 +77,7 @@ int	ulen_base(unsigned long nb, size_t base)
 	return (count + 1);
 }
 
-size_t len_pstr(wuchar_t *str)
+int	ft_ulen(unsigned long nb)
 {
-	return (len_pstrn(str, ft_ustrlen(str)));
-}
-
-size_t len_pstrn(wuchar_t *str, size_t len)
-{
-	size_t i;
-	size_t a;
-
-	i = 0;
-	a = 0;
-	while (str[i] != '\0' && i < len)
-	{
-		if (ft_isprint(str[i] && str[i] != '\n') || str[i] == '\t')
-			a++;
-		else
-			a += 2;
-		i++;
-	}
-	return (a);
-}
-
-int			pf_putcolor(t_pf *lst, char *str)
-{
-	int ret;
-
-	ret = 0;
-	if ((ft_strncmp(str, "{white}", 7) == 0 && (ret = 4)) ||
-	(ft_strncmp(str, "{eoc}", 4) == 0 && (ret = 4)))
-		pf_stringjoin(lst, ((wuchar_t*)(white)), ft_strlen(white), 0);
-	else if (ft_strcmp(str, "{black}") == 0 && (ret = 6))
-		pf_stringjoin(lst, ((wuchar_t*)(black)), ft_strlen(black), 0);
-	else if (ft_strcmp(str, "{red}") == 0 && (ret = 5))
-		pf_stringjoin(lst, ((wuchar_t*)(red)), ft_strlen(red), 0);
-	else if (ft_strcmp(str, "{green}") == 0 && (ret = 7))
-		pf_stringjoin(lst, ((wuchar_t*)(green)), ft_strlen(green), 0);
-	else if (ft_strcmp(str, "{yellow}") == 0 && (ret = 8))
-		pf_stringjoin(lst, ((wuchar_t*)(yellow)), ft_strlen(yellow), 0);
-	else if ((ft_strncmp(str, "{blue}", 5) == 0) && (ret = 5))
-		pf_stringjoin(lst, ((wuchar_t*)(blue)), ft_strlen(blue), 0);
-	else if (ft_strcmp(str, "{purple}") == 0 && (ret = 8))
-		pf_stringjoin(lst, ((wuchar_t*)(purple)), ft_strlen(purple), 0);
-	else if (ft_strcmp(str, "{cyan}") == 0 && (ret = 6))
-		pf_stringjoin(lst, ((wuchar_t*)(cyan)), ft_strlen(cyan), 0);
-	else if (ft_strcmp(str, "{grey}") == 0 && (ret = 6))
-		pf_stringjoin(lst, ((wuchar_t*)(grey)), ft_strlen(grey), 0);
-	return (ret + 1);
+	return (ft_ulen_base(nb, 10));
 }
