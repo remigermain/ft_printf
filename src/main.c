@@ -12,6 +12,7 @@
 /* ************************************************************************** */
 
 #include "ft_printf.h"
+#include <math.h>
 
 int	main(int argc, char **argv)
 {
@@ -21,26 +22,26 @@ int	main(int argc, char **argv)
 		a++;
 	if (argv[0][0] == 1)
 		a++;
-	long double nb =	5115525227.0252172700100006316;
+	long double nb =	 -M_PI ;
 	int b = 10;
 		a = 10;
-	ft_printf("%'.*Lf\n", a++,nb);
-	printf("%'.*Lf\n\n", b++,nb);
-	ft_printf("%'.*Lf\n", a++,nb);
-	printf("%'.*Lf\n\n", b++,nb);
-	ft_printf("%'.*Lf\n", a++,nb);
-	printf("%'.*Lf\n\n", b++,nb);
-	ft_printf("%'.*Lf\n", a++,nb);
-	printf("%'.*Lf\n\n", b++,nb);
-	ft_printf("%'.*Lf\n", a++,nb);
-	printf("%'.*Lf\n\n", b++,nb);
-	ft_printf("%'.*Lf\n", a++,nb);
-	printf("%'.*Lf\n\n", b++,nb);
-	ft_printf("%'.*Lf\n", a++,nb);
-	printf("%'.*Lf\n\n", b++,nb);
-	ft_printf("%'.*Lf\n", a++,nb);
-	printf("%'.*Lf\n\n", b++,nb);
-	ft_printf("%'.*Lf\n", a++,nb);
-	printf("%'.*Lf\n\n", b++,nb);
+	ft_printf("%+40.20Lf\n", a++,nb);
+	printf("%+40.20Lf\n\n", b++,nb);
+	ft_printf("%+40.20Lf\n", a++,nb);
+	printf("%+40.20Lf\n\n", b++,nb);
+	ft_printf("%+40.20Lf\n", a++,nb);
+	printf("%+40.20Lf\n\n", b++,nb);
+	ft_printf("%+40.20Lf\n", a++,nb);
+	printf("%+40.20Lf\n\n", b++,nb);
+	ft_printf("%+40.20Lf\n", a++,nb);
+	printf("%+40.20Lf\n\n", b++,nb);
+	ft_printf("%+40.20Lf\n", a++,nb);
+	printf("%+40.20Lf\n\n", b++,nb);
+	ft_printf("%+40.20Lf\n", a++,nb);
+	printf("%+40.20Lf\n\n", b++,nb);
+	ft_printf("%+40.20Lf\n", a++,nb);
+	printf("%+40.20Lf\n\n", b++,nb);
+	ft_printf("%+40.20Lf\n", a++,nb);
+	printf("%+40.20Lf\n\n", b++,nb);
 	return (0);
 }

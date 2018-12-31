@@ -40,6 +40,26 @@ static void	lst_putdouble_neg(t_pf *lst, long double nb, unsigned long coef)
 
 }
 
+static void	lst_putdouble_main(t_pf *lst, long double nb)
+{
+	if ((lst->conv == 'f' || lst->conv == 'F') ||
+		((lst->conv == 'g' || lst->conv == 'G') && nb > 0.0001))
+		{
+			if (lst->conv == 'g' || lst->conv == 'G')
+				lst->conv = 'g';
+			lst->ul_nb = (unsigned long)nb;
+			lst->fl_nb = nb - (unsigned long)nb;
+		}
+	else if ((unsigned long)nb > 0)
+		lst_putdouble_pos(lst, nb, 1);
+	else
+		lst_putdouble_neg(lst, nb, 1);
+	if (lst->point == 0)
+		lst->preci = 6;
+	if ((lst->conv == 'g' || lst->conv == 'G') && lst->ul_nb != 0)
+		lst->preci = ft_abs(lst->preci - ulen_base(lst->ul_nb, lst->base));
+}
+
 void	lst_putdouble(t_pf *lst)
 {
 	long double nb;
@@ -48,20 +68,12 @@ void	lst_putdouble(t_pf *lst)
 		nb = va_arg(lst->va_copy, long double);
 	else
 		nb = (long double)va_arg(lst->va_copy, double);
-  if ((lst->conv == 'f' || lst->conv == 'F') ||
-	((lst->conv == 'g' || lst->conv == 'G') && nb > 0.0001))
-  {
-		if (lst->conv == 'g' || lst->conv == 'G')
-			lst->conv = 'g';
-	  lst->ul_nb = (unsigned long)nb;
-	  lst->fl_nb = nb - (unsigned long)nb;
-  }
-  else if ((unsigned long)nb > 0)
-    lst_putdouble_pos(lst, nb, 1);
-	else
-		lst_putdouble_neg(lst, nb, 1);
-	if (lst->point == 0)
-		lst->preci = 6;
-	if ((lst->conv == 'g' || lst->conv == 'G') && lst->ul_nb != 0)
-		lst->preci = ft_abs(lst->preci - ulen_base(lst->ul_nb, lst->base));
+	if (nb < 0)
+	{
+		nb = -nb;
+		lst->psign = 1;
+	}
+	else if (nb >= 0 && lst->sign == '+')
+		lst->psign = 2;
+	lst_putdouble_main(lst, nb);
 }

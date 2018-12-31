@@ -110,7 +110,13 @@ int	conv_double(t_pf *lst, char *str, int index)
 	max = len + lst->preci;
 	if (lst->point == 0 || lst->preci > 0)
 		max++;
+	if (lst->psign != 0)
+		max++;
+	if (lst->zero == 1)
+		pf_putsign(lst);
 	pf_putprefix(lst, max, lst->field, lst->zero);
+	if (lst->zero == 0)
+		pf_putsign(lst);
 	ft_assign_double(lst);
 	pf_putprefix(lst, max, -lst->field, lst->zero);
 	pf_stringjoin(lst, lst->tmp_str, lst->tmp_count, 1);
