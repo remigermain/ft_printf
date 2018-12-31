@@ -30,6 +30,7 @@ char			*ft_strcat(char *s1, const char *s2);
 char			*ft_strchr(const char *s, int c);
 char			*ft_strcpy(char *dst, const char *src);
 char			*ft_strdup(const char *s1);
+unsigned char			*ft_ustrdup(const unsigned char *s1);
 char			*ft_strjoin(char const *s1, char const *s2);
 char			*ft_strmap(char const *s, char (*f)(char));
 char			*ft_strmapi(char const *s, char (*f)(unsigned int, char));
@@ -138,8 +139,13 @@ long int		ft_labs(long int nb);
 int				ft_max2(int nb1, int nb2);
 int				ft_min2(int nb1, int nb2);
 size_t			ft_strnlen(const char *str, size_t max);
+size_t			ft_ustrlen(const unsigned char *str);
+size_t			ft_ustrnlen(const unsigned char *str, size_t max);
 int				ft_atoi2(const char *str, int *count);
-int				ft_countwchar(wchar_t c);
-int				ft_countwchars(wchar_t *wstr);
+int				len_wchar_single(wchar_t c);
+int				len_wchar(wchar_t *wstr);
+int				nlen_wchar(wchar_t *wstr, size_t len);
+void 			convert_wchar(unsigned char **new, wchar_t wc, size_t *i);
+size_t		len_wuchart(unsigned char *str);
 
 #endif

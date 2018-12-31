@@ -35,7 +35,10 @@ void	debug(t_pf *lst)
 	printf("lst->base = %zu\n", lst->base);
 	printf("lst->lenght = %zu\n", lst->lenght);
 	printf("lst->conv = %c\n", (char)lst->conv);
-	printf("lst->fd = %zu\n", lst->fd);
 	printf("lst->nb_tmp = %ld\n", lst->nb_tmp);
-	printf(" [end printf list]\n");
+	printf("\n[str_tmp]\nlst->tmp_count = %d\n", lst->tmp_count);
+	printf("lst->tmp_str = %s\n", lst->tmp_str);
+	printf("\n[str]\nlst->count = %d\n", lst->count);
+	printf("lst->str = %s", lst->str);
+	printf("\n[end printf list]\n\n");
 }

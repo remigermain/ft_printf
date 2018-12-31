@@ -13,7 +13,7 @@
 
 #include "libft.h"
 
-int	ft_countwchar(wchar_t c)
+int	len_wchar_single(wchar_t c)
 {
 	if (c <= 0x7F)
 		return (1);
@@ -26,14 +26,58 @@ int	ft_countwchar(wchar_t c)
 	return (-1);
 }
 
-int ft_countwchars(wchar_t *str)
+int len_wchar(wchar_t *str)
 {
-	int count;
-	int	a;
+	size_t count;
+	size_t a;
 
 	count = 0;
 	a = 0;
 	while (str[a] != '\0')
-		count += ft_countwchar(str[a++]);
+		count += len_wchar_single(str[a++]);
 	return (count);
+}
+
+size_t len_wuchart(unsigned char *str)
+{
+	size_t a;
+
+	a = 0;
+	while (str[a] != 0)
+		a++;
+	return (a);
+}
+
+int nlen_wchar(wchar_t *str, size_t len)
+{
+	size_t count;
+	size_t a;
+
+	count = 0;
+	a = 0;
+	while (str[a] != '\0' && a < len)
+		count += len_wchar_single(str[a++]);
+	return (count);
+}
+
+void convert_wchar(unsigned char **new, wchar_t wc, size_t *i)
+{
+	if (wc <= 0x7F)
+		(*new)[(*i)++] = wc;
+	else if (wc <= 0x7FF)
+		(*new)[(*i)++] = 192 + (wc / 64);
+	else
+	{
+		if (wc > 0xFFFF)
+		{
+			(*new)[(*i)++] = 240 + (wc / 262144);
+			(*new)[(*i)++] = 128 + ((wc / 4096) % 64);
+		}
+		else
+			(*new)[(*i)++] = 224 + (wc / 4096);
+		(*new)[(*i)++] = 128 + ((wc / 64) % 64);
+	}
+	if (wc > 0x7F)
+		(*new)[(*i)++] = 128 + (wc % 64);
+	(*new)[(*i)] = '\0';
 }
