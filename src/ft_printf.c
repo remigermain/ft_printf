@@ -26,15 +26,16 @@ static int ftprintf_base(char *str, t_pf *lst, size_t i, size_t j)
 	while (str[i] != '\0' && lst->count != -1)
 	{
 		j = ft_strlen_perc(str + i, 0);
-		pf_stringjoin(lst, (wuchar_t*)(str + i), j, 0);
+		put_buff(lst, str + i, j, 0);
 		if (str[i + j] == '{')
-			i += pf_putcolor(lst, str + i + j);
+			i += put_color(lst, str + i + j);
 		else if (str[i + j] == '%')
 			i +=  find_conv(lst, str + i + j, 1);
 		i += j;
 	}
 	va_end(lst->va_lst);
 	va_end(lst->va_copy);
+	comvert_buff(lst, NULL, 0);
 	return (lst->count);
 }
 

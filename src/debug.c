@@ -16,9 +16,14 @@
 void	debug(t_pf *lst)
 {
 	printf("\n [printf list]\n");
-	printf("lst->ul_nb = %ld\n", lst->ul_nb);
-	printf("lst->fl_nb = %.20Lf\n", lst->fl_nb);
-	printf("lst->exposant = %ld\n", lst->exposant);
+	printf("\n[buff]\nlst->buff_count = %d\n", lst->buff_count);
+	printf("lst->buff = %s\n", lst->buff);
+	printf("\n[str]\nlst->count = %d\n", lst->count);
+	printf("lst->str = %s\n\n", lst->str);
+	printf("lst->ul_nb = %lu\n", lst->ul_nb);
+	printf("lst->fl_nb = %lu\n", lst->ful_nb);
+	printf("lst->fl_nb = %.*Lf\n", lst->preci, lst->fl_nb);
+	printf("lst->exponent = %d\n", lst->exponent);
 	printf("lst->hash = %zu\n", lst->hash);
 	printf("lst->space = %zu\n", lst->space);
 	printf("lst->zero = %zu\n", lst->zero);
@@ -35,10 +40,5 @@ void	debug(t_pf *lst)
 	printf("lst->base = %zu\n", lst->base);
 	printf("lst->lenght = %zu\n", lst->lenght);
 	printf("lst->conv = %c\n", (char)lst->conv);
-	printf("lst->nb_tmp = %ld\n", lst->nb_tmp);
-	printf("\n[str_tmp]\nlst->tmp_count = %d\n", lst->tmp_count);
-	printf("lst->tmp_str = %s\n", lst->tmp_str);
-	printf("\n[str]\nlst->count = %d\n", lst->count);
-	printf("lst->str = %s", lst->str);
 	printf("\n[end printf list]\n\n");
 }

@@ -13,122 +13,84 @@
 
 #include "ft_printf.h"
 
-wuchar_t 	*comv_pstr(t_pf *lst, wuchar_t *str, size_t len)
+void 			comvert_buff(t_pf *lst, void *tmp, size_t len)
 {
-	wuchar_t *new;
-	size_t i;
-	size_t j;
+	wuchar_t	*new;
 
-	i = 0;
-	j = 0;
-	if (!(new = (wuchar_t*)malloc(sizeof(wuchar_t) * len + 1)))
-		ftprintf_error(lst, "pf_putpstr", 1);
-	while (str[i] != '\0' && i < len)
-	{
-		if (str[i] == '\n')
-			new[j++] = '$';
-		if (ft_isprint(str[i]) || str[i] == '\n' || str[i] == '\t')
-			new[j++] = str[i++];
-		else
-		{
-			new[j++] = '^';
-			new[j++] = (str[i++] + 64);
-		}
-	}
-	free(str);
-	return (new);
-}
-
-void pf_stringjoin(t_pf *lst, wuchar_t *str, size_t len, size_t index)
-{
-	wuchar_t *new;
-
-	if (!(new = (wuchar_t*)malloc(sizeof(wuchar_t) * len + lst->count + 1)))
-		ftprintf_error(lst, "pf_string join", 1);
+	if (!(new = (wuchar_t*)malloc(lst->count + lst->buff_count + len + 1)))
+		ftprintf_error(lst, "comvert_buff", 1);
+	new[lst->count + lst->buff_count + len + 1] = '\0';
 	ft_memcpy(new, lst->str, lst->count);
-	ft_memcpy(new + lst->count, str, len);
-	lst->count += len;
-	new[lst->count] = '\0';
+	ft_memcpy(new + lst->count, lst->buff, lst->buff_count);
+	ft_memcpy(new + lst->count + lst->buff_count, tmp, len);
 	if (lst->str != NULL)
 		free(lst->str);
 	lst->str = new;
-	if (index == 1)
-		free(str);
+	lst->count += lst->buff_count + len;
+	lst->buff_count = 0;
 }
 
-void		pf_itoa(t_pf *lst, unsigned long n)
+void 			put_buff(t_pf *lst, void *tmp, size_t len, size_t index)
+{
+	wuchar_t	*new;
+
+	if (len == 0)
+		return ;
+	if (((lst->buff_count + len) >= BUFF_PRINTF) || len >= BUFF_PRINTF)
+		comvert_buff(lst, tmp, len);
+	else
+	{
+		ft_memcpy(lst->buff + lst->buff_count, tmp, len);
+		lst->buff_count += len;
+	}
+	if (index == 1)
+		free(tmp);
+}
+
+void		put_itoa(t_pf *lst, unsigned long n)
 {
 	int		len;
 	int		mlen;
-	wuchar_t	*new;
+	wuchar_t tmp[27];
 
 	len = ulen_base(n, lst->base);
-	if (lst->local == 1 && len > 3)
+	if (lst->local == 1 && (len - 1) > 3)
 		len += ((len / 3) - (len % 3 == 0 ? 1 : 0));
 	mlen = len;
-	if (!(new = (wuchar_t*)malloc(sizeof(wuchar_t) * len + lst->tmp_count + 1)))
-		ftprintf_error(lst, "pf_itoa", 1);
-	new[len-- + lst->tmp_count] = '\0';
-	ft_memcpy(new, lst->tmp_str, lst->tmp_count);
+	len--;
 	while (len >= 0)
 	{
-		if (lst->local == 1 && (mlen - len) % 4 == 0)
-			new[lst->tmp_count + len-- ] = '\'';
+		if (lst->local == 1 && ((mlen - len) % 4 == 0))
+			tmp[len-- ] = '\'';
 		if ((n % lst->base) < 10)
-			new[lst->tmp_count + len--] = (n % lst->base) + 48;
+			tmp[len--] = (n % lst->base) + 48;
 		else
-			new[lst->tmp_count + len--] = (n % lst->base) + (lst->maj == 1 ? 55 : 87);
+			tmp[len--] = (n % lst->base) + (lst->maj == 1 ? 55 : 87);
 		n = n / lst->base;
 	}
-	lst->tmp_count += mlen;
-	if (lst->tmp_str != NULL)
-		free(lst->tmp_str);
-	lst->tmp_str = new;
+	put_buff(lst, tmp, mlen, 0);
 }
 
-void	pf_putprefix(t_pf *lst, int len, int nb, int point)
+void	put_prefix(t_pf *lst, int len, int nb, int point)
 {
-	wuchar_t *new;
 	size_t		llen;
+	wuchar_t	tmp[nb - len];
 
+	llen = (nb - len);
 	if (len >= nb)
 		return;
-	llen = (nb - len) + lst->tmp_count;
-	if (!(new = (wuchar_t*)malloc(sizeof(wuchar_t) * llen + 1)))
-		ftprintf_error(lst, "pf_putprefix", 1);
-	ft_memcpy(new, lst->tmp_str, lst->tmp_count);
-	ft_memset(new + lst->tmp_count, (point == 1 ? '0' : ' '), (nb - len));
-	lst->tmp_count += (nb - len);
-	new[lst->tmp_count] = '\0';
-	if (lst->tmp_str != NULL)
-		free(lst->tmp_str);
-	lst->tmp_str = new;
+	ft_memset(tmp, (point == 1 ? '0' : ' '), llen);
+	put_buff(lst, tmp, llen, 0);
 }
 
-void			pf_putsign(t_pf *lst)
+void			put_sign(t_pf *lst)
 {
-	wuchar_t *new;
-	size_t len;
-
-	if (lst->psign != 0)
-	{
-		len = (lst->psign == 3 ? 2 : 1);
-		if (!(new = (wuchar_t*)malloc(sizeof(wuchar_t) * len + lst->tmp_count + 1)))
-			ftprintf_error(lst, "pf_putsign", 1);
-		ft_memcpy(new, lst->tmp_str, lst->tmp_count);
-		if (lst->psign == 1 || lst->psign == 2)
-			new[lst->tmp_count] = (lst->psign == 1 ? '-' : '+');
-		if (lst->psign == 4)
-			new[lst->tmp_count] = '.';
-		else if (lst->psign == 3)
-		{
-			new[lst->tmp_count] = '0';
-			new[lst->tmp_count + 1] = (lst->maj == 1 ? 'X' : 'x');
-		}
-		lst->tmp_count += len;
-		new[lst->tmp_count] = '\0';
-		if (lst->tmp_str != NULL)
-			free(lst->tmp_str);
-		lst->tmp_str = new;
-	}
+	if (lst->psign == 1)
+		put_buff(lst, "-", 1, 0);
+	else if (lst->psign == 2)
+		put_buff(lst, "+", 1, 0);
+	else if (lst->psign == 3)
+		put_buff(lst, (lst->maj == 1 ? "0X" : "0x"), 2, 0);
+	else if (lst->psign == 4)
+		put_buff(lst, ".", 1, 0);
 }

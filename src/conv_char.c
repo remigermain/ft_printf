@@ -28,25 +28,14 @@ static wuchar_t *pf_convwchar(t_pf *lst, wchar_t wc)
 static void	pf_putchar(t_pf *lst, wuchar_t c, wuchar_t *wc, int index)
 {
 	size_t max;
-	wuchar_t *new;
 
 	if (index == 1)
 		max = len_wuchart(wc);
 	else
 		max = 1;
-	pf_putprefix(lst, max, lst->field, lst->zero);
-	if (!(new = (wuchar_t*)malloc(sizeof(wuchar_t) * max + lst->tmp_count + 1)))
-		ftprintf_error(lst, "pf_string join", 1);
-	ft_memcpy(new, lst->tmp_str, lst->tmp_count);
-	ft_memcpy(new + lst->tmp_count, (index == 1 ? wc : &c), max);
-	lst->tmp_count += max;
-	new[lst->tmp_count] = '\0';
-	if (lst->tmp_str != NULL)
-		free(lst->tmp_str);
-	lst->tmp_str = new;
-	if (index == 1)
-		free(wc);
-	pf_putprefix(lst, max, -lst->field, 0);
+	put_prefix(lst, max, lst->field, lst->zero);
+	put_buff(lst, (index == 1 ? wc : &c), max, index);
+	put_prefix(lst, max, -lst->field, 0);
 }
 
 int			conv_char(t_pf *lst, char *str, int index)
@@ -63,6 +52,5 @@ int			conv_char(t_pf *lst, char *str, int index)
 		pf_putchar(lst, (wuchar_t)(char)va_arg(lst->va_copy, int), 0, 0);
 	else
 		pf_putchar(lst, str[index], 0, 0);
-	pf_stringjoin(lst, lst->tmp_str, lst->tmp_count, 1);
 	return (index + 1);
 }

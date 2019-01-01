@@ -16,9 +16,9 @@
 void  lst_zero(t_pf *lst)
 {
 	lst->ul_nb = 0;
+	lst->ful_nb = 0;
 	lst->fl_nb = 0;
-	lst->exposant = 0;
-	lst->nb_tmp = 1;
+	lst->exponent = 0;
 	lst->hash = 0;
 	lst->space = 0;
 	lst->zero = 0;
@@ -32,8 +32,6 @@ void  lst_zero(t_pf *lst)
 	lst->base = 0;
 	lst->lenght = 0;
 	lst->conv = 0;
-	lst->tmp_count = 0;
-	lst->tmp_str = NULL;
 }
 
 t_pf	*lst_init(void)
@@ -43,6 +41,7 @@ t_pf	*lst_init(void)
 	if (!(lst = (t_pf*)malloc(sizeof(t_pf))))
 		ftprintf_error(lst, "lst_init", 1);
 	lst->count = 0;
+	lst->buff_count = 0;
 	lst->str = NULL;
 	return (lst);
 }

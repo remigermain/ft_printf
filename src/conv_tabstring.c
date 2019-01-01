@@ -24,12 +24,12 @@ static	void pf_puttab_back(t_pf *lst, int len, int b)
 	if (lst->preci == 1)
 	{
 		ret = ft_sprintf(&str, " {blue}%*s{eoc} |", llen, "\\0");
-		pf_stringjoin(lst, str, ret, 1);
+		put_buff(lst, str, ret, 1);
 	}
 	while ((b + lst->preci) < len)
 	{
 		ret = ft_sprintf(&str, " %*C |", llen, ' ');
-		pf_stringjoin(lst, str, ret, 1);
+		put_buff(lst, str, ret, 1);
 		b++;
 	}
 }
@@ -42,7 +42,7 @@ static	void pf_puttab_end(t_pf *lst, int larg, int max)
 	if (lst->preci == 1)
 	{
 		ret = ft_sprintf(&str, "\n[%.*d]| {blue}$NULL{eoc}", larg, max);
-		pf_stringjoin(lst, str, ret, 1);
+		put_buff(lst, str, ret, 1);
 	}
 }
 
@@ -60,11 +60,11 @@ static	void pf_puttab(t_pf *lst, char **tab, int len, int larg)
 	while (tab[++a] != NULL && (b = -1))
 	{
 		ret = ft_sprintf(&str, "\n[%.*d]|", larg, a);
-		pf_stringjoin(lst, str, ret, 1);
+		put_buff(lst, str, ret, 1);
 		while (tab[a][++b] != '\0')
 		{
 			ret = ft_sprintf(&str, " %*C |", llen, tab[a][b]);
-			pf_stringjoin(lst, str, ret, 1);
+			put_buff(lst, str, ret, 1);
 		}
 		pf_puttab_back(lst, len, b);
 	}
@@ -85,11 +85,11 @@ static	void pf_doublestring(t_pf *lst, char **tab, int len, int larg)
 	llen = ulen_base(len, 10) + lst->preci;
 	llen -= (((len % 10) == 0) ? 1 : 0);
 	ret = ft_sprintf(&str, "%*.c |", larg + 1, ' ');
-	pf_stringjoin(lst, str, ret, 1);
+	put_buff(lst, str, ret, 1);
 	while (b < len)
 	{
 		ret = ft_sprintf(&str, "[%.*d]|", llen, b++);
-		pf_stringjoin(lst, str, ret, 1);
+		put_buff(lst, str, ret, 1);
 	}
 	pf_puttab(lst, tab, len, larg);
 }
@@ -106,9 +106,9 @@ int		conv_tabstring(t_pf *lst, char *str, int index)
 		pf_doublestring(lst, tab, 0, 0);
 	while (*tab != NULL && lst->point == 0)
 	{
-		pf_stringjoin(lst, (wuchar_t*)*tab, ft_strlen(*tab), 0);
+		put_buff(lst, (wuchar_t*)*tab, ft_strlen(*tab), 0);
 		if (*tab++ != NULL)
-			pf_stringjoin(lst, &c, 1, 0);
+			put_buff(lst, &c, 1, 0);
 	}
 	return (index + 1);
 }

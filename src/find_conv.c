@@ -13,7 +13,7 @@
 
 #include "ft_printf.h"
 
-int	find_conv3(t_pf *lst, char *str, int index)
+static int	find_conv3(t_pf *lst, char *str, int index)
 {
 	int t_index;
 
@@ -40,7 +40,7 @@ int	find_conv3(t_pf *lst, char *str, int index)
 	return (index);
 }
 
-int	find_conv2(t_pf *lst, char *str, int index)
+static int	find_conv2(t_pf *lst, char *str, int index)
 {
 	int	*nb;
 

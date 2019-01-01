@@ -17,7 +17,8 @@
 # include <stdio.h>
 
 # define intmax_t long
-# define PF_BUFF 10000
+# define BUFF_PRINTF 64
+# define BUFF_FLOAT 256
 # define wuchar_t unsigned char
 /*
 ** color
@@ -34,29 +35,29 @@
 
 typedef struct	s_printf
 {
+	va_list			va_lst;
+	va_list			va_copy;
+	int					buff_count;
+	wuchar_t		buff[BUFF_PRINTF];
+	int					count;
+	wuchar_t		*str;
 	unsigned long	ul_nb;
+	unsigned long ful_nb;
 	long double		fl_nb;
-	int				exposant;
-	long			nb_tmp;
+	int					exponent;
 	size_t			hash;
 	size_t			space;
 	size_t			zero;
 	size_t			sign;
 	size_t			local;
-	int				field;
+	int					field;
 	size_t			point;
-	int				preci;
+	int					preci;
 	size_t			maj;
 	size_t			psign;
 	size_t			base;
 	size_t			lenght;
 	size_t			conv;
-	int					tmp_count;
-	wuchar_t		*tmp_str;
-	va_list			va_lst;
-	va_list			va_copy;
-	int					count;
-	wuchar_t		*str;
 }				t_pf;
 
 /*
@@ -66,14 +67,7 @@ typedef struct	s_printf
 int				ft_printf(const char *str, ...);
 int				ft_dprintf(int fd, const char *str, ...);
 int				ft_sprintf(wuchar_t **dest, const char *format, ...);
-
-/*
-**	fonctions pour trouver quelles sont les parametres
-**	find_conv.c
-*/
 int				find_conv(t_pf *lst, char *str, int index);
-int				find_conv2(t_pf *lst, char *str, int index);
-int				find_conv3(t_pf *lst, char *str, int index);
 
 /*
 ** fonctions des differentes convertion
@@ -94,6 +88,7 @@ void      lst_putoption(t_pf *lst, char *str, int index);
 void      lst_zero(t_pf *lst);
 void			lst_putdollar(t_pf *lst, int len);
 void			lst_putint(t_pf *lst);
+void			lst_putdouble(t_pf *lst);
 
 /*
 ** fonctions len_nbr , len no_print char && convert in print, put color
@@ -101,9 +96,8 @@ void			lst_putint(t_pf *lst);
 */
 void 			ftprintf_error(t_pf *lst, char *str, size_t index);
 int				ulen_base(unsigned long nb, size_t base);
-size_t 		len_pstr(wuchar_t *str);
-size_t 		len_pstrn(wuchar_t *str, size_t len);
-int				pf_putcolor(t_pf *lst, char *str);
+size_t 		len_pstrn(wuchar_t *str, size_t len, size_t index);
+int				put_color(t_pf *lst, char *str);
 
 /*
 **	fonctions qui put les signes( - , + , 0x )
@@ -111,13 +105,12 @@ int				pf_putcolor(t_pf *lst, char *str);
 **				join le str entre eux && unsigned long itoa avec local
 **	utils_put.c
 */
-wuchar_t 	*comv_pstr(t_pf *lst, wuchar_t *str, size_t len);
-void 			pf_stringjoin(t_pf *lst, wuchar_t *str, size_t len, size_t index);
-void			pf_itoa(t_pf *lst, unsigned long n);
-void			pf_putprefix(t_pf *lst, int len, int nb, int point);
-void			pf_putsign(t_pf *lst);
+void 			comvert_buff(t_pf *lst,void *tmp, size_t len);
+void 			put_buff(t_pf *lst, void *tmp, size_t len, size_t index);
+void			put_itoa(t_pf *lst, unsigned long n);
+void			put_prefix(t_pf *lst, int len, int nb, int point);
+void			put_sign(t_pf *lst);
 
-void	lst_putdouble(t_pf *lst);
 /*
 ** fonction de debug de la list
 **	debug.c

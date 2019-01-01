@@ -41,27 +41,29 @@ static void	lst_putnb_unb(t_pf *lst)
 
 static void	lst_putnb_snb(t_pf *lst)
 {
+	long nb_tmp;
+
 	if (lst->lenght == 1)
-		lst->nb_tmp = (short)va_arg(lst->va_copy, int);
+		nb_tmp = (short)va_arg(lst->va_copy, int);
 	else if (lst->lenght == 2)
-		lst->nb_tmp = (char)va_arg(lst->va_copy, int);
+		nb_tmp = (char)va_arg(lst->va_copy, int);
 	else if (lst->lenght == 10)
-		lst->nb_tmp = va_arg(lst->va_copy, long);
+		nb_tmp = va_arg(lst->va_copy, long);
 	else if (lst->lenght == 20)
-		lst->nb_tmp = va_arg(lst->va_copy, long);
+		nb_tmp = va_arg(lst->va_copy, long);
 	else if (lst->lenght == 100)
-		lst->nb_tmp = va_arg(lst->va_copy, intmax_t);
+		nb_tmp = va_arg(lst->va_copy, intmax_t);
 	else if (lst->lenght == 1000)
-		lst->nb_tmp = va_arg(lst->va_copy, size_t);
+		nb_tmp = va_arg(lst->va_copy, size_t);
 	else if (lst->conv == 'D' || lst->conv == 'I' || lst->lenght != 0)
-		lst->nb_tmp = va_arg(lst->va_copy, long);
+		nb_tmp = va_arg(lst->va_copy, long);
 	else
-		lst->nb_tmp = va_arg(lst->va_copy, int);
-	lst->psign = (lst->nb_tmp < 0 ? 1 : 0);
-	if (lst->sign == '+' && lst->nb_tmp >= 0 && (lst->conv == 'd' ||
+		nb_tmp = va_arg(lst->va_copy, int);
+	lst->psign = (nb_tmp < 0 ? 1 : 0);
+	if (lst->sign == '+' && nb_tmp >= 0 && (lst->conv == 'd' ||
 				lst->conv == 'D' || lst->conv == 'I' || lst->conv == 'i'))
 		lst->psign = 2;
-	lst->ul_nb = (lst->nb_tmp < 0 ? -lst->nb_tmp : lst->nb_tmp);
+	lst->ul_nb = (nb_tmp < 0 ? -nb_tmp : nb_tmp);
 }
 
 void		lst_putint(t_pf *lst)

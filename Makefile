@@ -20,8 +20,7 @@ INCLUDE = -Iincludes
 CINC = includes/ft_printf.h libft/includes/libft.h
 
 SRC = main.c ft_printf.c find_conv.c \
-		conv_int.c  conv_string.c conv_double.c \
-		conv_char.c conv_tabstring.c \
+		conv_int.c conv_char.c conv_double.c conv_string.c conv_tabstring.c \
 		lst_init.c lst_putint.c lst_putdouble.c lst_putoption.c \
 		utils.c malloc_string.c \
 		debug.c

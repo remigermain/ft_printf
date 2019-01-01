@@ -30,6 +30,10 @@ static void	lst_undefined(t_pf *lst)
 		lst->local = 0;
 	if (lst->conv == 's' || lst->conv == 'S')
 		lst->preci = ft_abs(lst->preci);
+	if (lst->hash == 1 && (lst->conv == 'u' || lst->conv == 'U'))
+		lst->hash = 0;
+	if (lst->point == 1 && lst->preci >= 0)
+		lst->zero = 0;
 }
 
 static void	lst_base(t_pf *lst)
@@ -68,7 +72,7 @@ static int	lst_putflag_conv(t_pf *lst, char *str, int count)
 	return (count);
 }
 
-static int	lst_putdigit(t_pf *lst, char *str, int count)
+static int	lst_putdigit(t_pf *lst, char *str, int count, int *neg)
 {
 	int nb_tmp;
 
@@ -76,7 +80,7 @@ static int	lst_putdigit(t_pf *lst, char *str, int count)
 	if (str[count] == '+')
 		lst->sign = str[count++];
 	else if (str[count] == '-')
-		lst->nb_tmp = str[count++] - 46;
+		(*neg) = str[count++] - 46;
 	else if (ft_isdigit(str[count]) == 1 || str[count] == '*'
 			|| str[count] == '$')
 	{
@@ -90,7 +94,7 @@ static int	lst_putdigit(t_pf *lst, char *str, int count)
 			count++;
 		}
 		if (lst->point == 0)
-			lst->field = (nb_tmp * lst->nb_tmp);
+			lst->field = (nb_tmp * (*neg));
 		else
 			lst->preci = nb_tmp;
 	}
@@ -100,8 +104,10 @@ static int	lst_putdigit(t_pf *lst, char *str, int count)
 void   lst_putoption(t_pf *lst, char *str, int index)
 {
 	int		count;
+	int		neg;
 
 	count = 1;
+	neg = 1;
 	lst_zero(lst);
 	while (count <= index)
 	{
@@ -117,7 +123,7 @@ void   lst_putoption(t_pf *lst, char *str, int index)
 			lst->space = str[count++] - 31;
 		else if (ft_isdigit(str[count]) == 1 || str[count] == '+' ||
 				str[count] == '-' || str[count] == '*' || str[count] == '$')
-			count = lst_putdigit(lst, str, count);
+			count = lst_putdigit(lst, str, count, &neg);
 		else
 			count = lst_putflag_conv(lst, str, count);
 	}

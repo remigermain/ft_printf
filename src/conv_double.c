@@ -13,65 +13,63 @@
 
 #include "ft_printf.h"
 
-static void 	put_double(t_pf *lst, unsigned long nb[PF_BUFF])
+static void 	put_double(t_pf *lst, unsigned long nb[BUFF_FLOAT])
 {
-	size_t a;
+	size_t i;
 
-	a = 0;
-	pf_itoa(lst, nb[a++]);
-	if (lst->conv == 'g' || lst->conv == 'G')
-	{
-		while (lst->preci > 0)
-		{
-			if (nb[lst->preci] == 0)
-					lst->preci--;
-			else
-				break;
-		}
-	}
+	i = 0;
+	put_itoa(lst, nb[i++]);
 	if (lst->preci > 0)
 	{
 		lst->psign = 4;
-		pf_putsign(lst);
+		put_sign(lst);
 	}
-	while ((a - 1) < (size_t)lst->preci)
-		pf_itoa(lst, nb[a++]);
+	while ((i - 1) < (size_t)lst->preci)
+		put_itoa(lst, nb[i++]);
 }
 
-static void roundup_double(t_pf *lst, unsigned long nb[PF_BUFF])
+static void roundup_double(t_pf *lst, unsigned long nb[BUFF_FLOAT])
 {
-	int a;
+	size_t i;
+	size_t max;
 
-	a = lst->preci + 1;
-	while (a > 0)
+	i = ft_min2(lst->preci + 1, ft_abs(lst->exponent));
+	max = ft_min2(lst->preci + 1, ft_abs(lst->exponent));
+	while (i > 0)
 	{
-		if ((nb[a] >= (lst->base / 2) && a == (lst->preci + 1)) ||
-			(nb[a] >= lst->base && a > 0))
+		if ((nb[i] >= (lst->base / 2) && i == max) ||
+			(nb[i] >= lst->base && i > 0))
 		{
-			nb[a - 1] += 1;
-			nb[a] = nb[a] % lst->base;
+			nb[i - 1] += 1;
+			nb[i] = nb[i] % lst->base;
 		}
-		a--;
+		i--;
 	}
 }
 
-static void 	ft_assign_double(t_pf *lst)
+static void 	ft_assign_double(t_pf *lst, size_t i, size_t j, size_t k)
 {
-	unsigned long nb[PF_BUFF];
-	size_t				a;
-	int 					preci;
+	unsigned long nb[BUFF_FLOAT];
+	size_t preci;
 
-	a = 0;
 	preci = lst->preci + 1;
-	nb[a++] = lst->ul_nb;
-	while (lst->preci >= 0)
+	nb[i++] = lst->ul_nb;
+	if (lst->exponent > 0)
+		j = ulen_base(lst->ful_nb, lst->base);
+	while (k < j)
+	{
+		nb[i + ulen_base(lst->ful_nb, lst->base) - 1] = lst->ful_nb % lst->base;
+		lst->ful_nb /= lst->base;
+		k++;
+	}
+	preci = ft_max2(preci - j, 0);
+	i += j;
+	while (preci > 0 && (preci--))
 	{
 		lst->fl_nb *= lst->base;
-		nb[a++] = (long)lst->fl_nb;
-		lst->fl_nb -= (long)lst->fl_nb;
-		lst->preci--;
+		nb[i++] = (int)lst->fl_nb % lst->base;
+		lst->fl_nb -= (int)lst->fl_nb;
 	}
-	lst->preci = preci - 1;
   roundup_double(lst, nb);
 	put_double(lst, nb);
 }
@@ -82,20 +80,11 @@ static void double_sufix(t_pf *lst)
 	int				ret;
 	char 			c;
 
-	if (lst->conv == 'a' || lst->conv == 'A')
-		c = (lst->maj == 1 ? 'P' : 'p');
-	else
-		c = (lst->maj == 1 ? 'E' : 'e');
-	if ((lst->conv == 'e' || lst->conv == 'E' ||
-			lst->conv == 'G') && lst->ul_nb != 0)
+	c = (lst->maj == 1 ? 'E' : 'e');
+	if (lst->conv == 'e' || lst->conv == 'E')
 	{
-		ret = ft_sprintf(&new, "%c%+.2d", c, lst->exposant);
-		pf_stringjoin(lst, new, ret, 1);
-	}
-	else if (lst->conv == 'a' || lst->conv == 'A')
-	{
-		ret = ft_sprintf(&new, "%c%+d", c, lst->exposant);
-		pf_stringjoin(lst, new, ret, 1);
+		ret = ft_sprintf(&new, "%c%+.2d", c, lst->exponent);
+		put_buff(lst, new, ret, 0);
 	}
 }
 
@@ -108,18 +97,21 @@ int	conv_double(t_pf *lst, char *str, int index)
 	lst_putdouble(lst);
 	len = ulen_base(lst->ul_nb, lst->base);
 	max = len + lst->preci;
-	if (lst->point == 0 || lst->preci > 0)
-		max++;
+	if (lst->conv == 'e' || lst->conv == 'E')
+		max += 2 + ft_max2(ulen_base(ft_abs(lst->exponent), 10), 2);
+	else if (lst->conv == 'g' || lst->conv == 'G')
+		max += 2 + ft_max2(ulen_base(ft_abs(lst->exponent), 10), 2);
 	if (lst->psign != 0)
 		max++;
+	if (lst->point == 0 || lst->preci > 0)
+		max++;
 	if (lst->zero == 1)
-		pf_putsign(lst);
-	pf_putprefix(lst, max, lst->field, lst->zero);
+		put_sign(lst);
+	put_prefix(lst, max, lst->field, lst->zero);
 	if (lst->zero == 0)
-		pf_putsign(lst);
-	ft_assign_double(lst);
-	pf_putprefix(lst, max, -lst->field, lst->zero);
-	pf_stringjoin(lst, lst->tmp_str, lst->tmp_count, 1);
+		put_sign(lst);
+	ft_assign_double(lst, 0, 0, 0);
+	put_prefix(lst, max, -lst->field, lst->zero);
 	double_sufix(lst);
 	return (index + 1);
 }
