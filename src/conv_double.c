@@ -13,7 +13,7 @@
 
 #include "ft_printf.h"
 
-static void 	put_double(t_pf *lst, unsigned long nb[BUFF_FLOAT])
+static void put_double(t_pf *lst, unsigned long nb[BUFF_FLOAT])
 {
 	size_t i;
 
@@ -33,8 +33,8 @@ static void roundup_double(t_pf *lst, unsigned long nb[BUFF_FLOAT])
 	size_t i;
 	size_t max;
 
-	i = ft_min2(lst->preci + 1, ft_abs(lst->exponent));
-	max = ft_min2(lst->preci + 1, ft_abs(lst->exponent));
+	i = lst->preci + 1;
+	max = lst->preci + 1;
 	while (i > 0)
 	{
 		if ((nb[i] >= (lst->base / 2) && i == max) ||
@@ -64,13 +64,15 @@ static void 	ft_assign_double(t_pf *lst, size_t i, size_t j, size_t k)
 	}
 	preci = ft_max2(preci - j, 0);
 	i += j;
-	while (preci > 0 && (preci--))
+	while (preci > 0)
 	{
 		lst->fl_nb *= lst->base;
 		nb[i++] = (int)lst->fl_nb % lst->base;
 		lst->fl_nb -= (int)lst->fl_nb;
+		preci--;
 	}
-  roundup_double(lst, nb);
+	if ((ft_abs(lst->exponent) >= lst->preci) || lst->conv == 'f' || lst->conv == 'F')
+		roundup_double(lst, nb);
 	put_double(lst, nb);
 }
 
@@ -88,6 +90,18 @@ static void double_sufix(t_pf *lst)
 	}
 }
 
+void preci(t_pf *lst)
+{
+	long double tmp;
+
+	tmp = lst->fl_nb;
+	while ((int)(tmp * lst->base) == 0)
+	{
+		tmp *= lst->base;
+		lst->preci++;
+	}
+}
+
 int	conv_double(t_pf *lst, char *str, int index)
 {
 	int 	max;
@@ -95,11 +109,11 @@ int	conv_double(t_pf *lst, char *str, int index)
 
 	lst_putoption(lst, str, index);
 	lst_putdouble(lst);
+	if (lst->conv != 'f' && lst->conv != 'F')
+		preci(lst);
 	len = ulen_base(lst->ul_nb, lst->base);
 	max = len + lst->preci;
-	if (lst->conv == 'e' || lst->conv == 'E')
-		max += 2 + ft_max2(ulen_base(ft_abs(lst->exponent), 10), 2);
-	else if (lst->conv == 'g' || lst->conv == 'G')
+	if ((lst->conv == 'e' || lst->conv == 'E') && lst->exponent != 0)
 		max += 2 + ft_max2(ulen_base(ft_abs(lst->exponent), 10), 2);
 	if (lst->psign != 0)
 		max++;
