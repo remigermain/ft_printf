@@ -38,7 +38,9 @@ static void	lst_putdouble_neg(t_pf *lst, long double nb, unsigned long coef)
 
 static void	lst_putdouble_main(t_pf *lst, long double nb)
 {
-	if (lst->conv == 'f' || lst->conv == 'F')
+	if (lst->point == 0)
+		lst->preci = 6;
+	if ((lst->conv == 'f' || lst->conv == 'F') || (lst->conv == 'g' && lst->preci >= ulen_base(nb, lst->base)))
 	{
 		lst->ul_nb = (unsigned long)nb;
 		lst->fl_nb = nb - (unsigned long)nb;
@@ -47,9 +49,7 @@ static void	lst_putdouble_main(t_pf *lst, long double nb)
 		lst_putdouble_pos(lst, nb, 1);
 	else
 		lst_putdouble_neg(lst, nb, 1);
-	if (lst->point == 0 && (lst->conv == 'f' || lst->conv == 'F'))
-		lst->preci = 6;
-	else if (lst->point == 0 && (lst->conv == 'e' || lst->conv == 'E'))
+	if (lst->point == 0 && (lst->conv == 'e' || lst->conv == 'E'))
 		lst->preci = ft_max2(6, ft_abs(lst->exponent));
 }
 

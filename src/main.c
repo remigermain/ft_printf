@@ -26,46 +26,46 @@ int	main(int argc, char **argv)
 	long double nb2 =	 0.0004894565168984 ;
 	int b = 10;
 		a = 10;
-	a = ft_printf("%50.37Lf", nb);
+	a = ft_printf("%50.37Lg", nb);
 	ft_printf("ft = %d\n", a);
-	a = printf("%50.37Lf", nb);
+	a = printf("%50.37Lg", nb);
 	printf("pf = %d\n", a);
 
-	a = ft_printf("%50.2Lf", nb);
+	a = ft_printf("%50.2Lg", nb);
 	ft_printf("ft = %d\n", a);
-	a = printf("%50.2Lf", nb);
+	a = printf("%50.2Lg", nb);
 	printf("pf = %d\n", a);
 
-	a = ft_printf("%.37Lf", nb);
+	a = ft_printf("%.37Lg", nb);
 	ft_printf("ft = %d\n", a);
-	a = printf("%.37Lf", nb);
+	a = printf("%.37Lg", nb);
 	printf("pf = %d\n", a);
 
-	a = ft_printf("%Lf", nb);
+	a = ft_printf("%Lg", nb);
 	ft_printf("ft = %d\n", a);
-	a = printf("%Lf", nb);
+	a = printf("%Lg", nb);
 	printf("pf = %d\n\n\n", a);
 
 
 //////////
-	a = ft_printf("%50.37Lf", nb2);
+	a = ft_printf("%50.37Lg", nb2);
 	ft_printf("ft = %d\n", a);
-	a = printf("%50.37Lf", nb2);
+	a = printf("%50.37Lg", nb2);
 	printf("pf = %d\n", a);
 
-	a = ft_printf("%50.1Lf", nb2);
+	a = ft_printf("%50.1Lg", nb2);
 	ft_printf("ft = %d\n", a);
-	a = printf("%50.1Lf", nb2);
+	a = printf("%50.1Lg", nb2);
 	printf("pf = %d\n", a);
 
-	a = ft_printf("%.37Lf", nb2);
+	a = ft_printf("%.37Lg", nb2);
 	ft_printf("ft = %d\n", a);
-	a = printf("%.37Lf", nb2);
+	a = printf("%.37Lg", nb2);
 	printf("pf = %d\n", a);
 
-	a = ft_printf("%Lf", nb2);
+	a = ft_printf("%Lg", nb2);
 	ft_printf("ft = %d\n", a);
-	a = printf("%Lf", nb2);
+	a = printf("%Lg", nb2);
 	printf("pf = %d\n", a);
 	return (0);
 }

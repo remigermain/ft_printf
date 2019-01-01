@@ -13,12 +13,29 @@
 
 #include "ft_printf.h"
 
+static  void zero(t_pf *lst, unsigned long nb[BUFF_FLOAT])
+{
+	size_t i;
+
+	i = lst->preci;
+	while (i > 1)
+	{
+		if (nb[i] == 0)
+			lst->preci--;
+		else
+			break;
+		i--;
+	}
+}
+
 static void put_double(t_pf *lst, unsigned long nb[BUFF_FLOAT])
 {
 	size_t i;
 
 	i = 0;
 	put_itoa(lst, nb[i++]);
+	if (lst->conv == 'g' || lst->conv == 'G')
+		zero(lst, nb);
 	if (lst->preci > 0)
 	{
 		lst->psign = 4;
@@ -71,7 +88,8 @@ static void 	ft_assign_double(t_pf *lst, size_t i, size_t j, size_t k)
 		lst->fl_nb -= (int)lst->fl_nb;
 		preci--;
 	}
-	if ((ft_abs(lst->exponent) >= lst->preci) || lst->conv == 'f' || lst->conv == 'F')
+	if ((ft_abs(lst->exponent) >= lst->preci) || lst->conv == 'f' || lst->conv == 'F' ||
+lst->conv == 'g' || lst->conv == 'G')
 		roundup_double(lst, nb);
 	put_double(lst, nb);
 }
@@ -83,7 +101,8 @@ static void double_sufix(t_pf *lst)
 	char 			c;
 
 	c = (lst->maj == 1 ? 'E' : 'e');
-	if (lst->conv == 'e' || lst->conv == 'E')
+	if ((lst->conv == 'e' || lst->conv == 'E' ||
+			lst->conv == 'g' || lst->conv == 'G') && lst->preci <= ft_abs(lst->exponent))
 	{
 		ret = ft_sprintf(&new, "%c%+.2d", c, lst->exponent);
 		put_buff(lst, new, ret, 0);
@@ -111,9 +130,17 @@ int	conv_double(t_pf *lst, char *str, int index)
 	lst_putdouble(lst);
 	if (lst->conv != 'f' && lst->conv != 'F')
 		preci(lst);
-	len = ulen_base(lst->ul_nb, lst->base);
+	if (lst->conv == 'g' || lst->conv == 'G')
+		len = ulen_base(lst->ul_nb, lst->base);
+	else
+		len = ulen_base(lst->ul_nb, lst->base);
+	if ((lst->conv == 'g' || lst->conv == 'G') && (lst->exponent < -4 || (ft_abs(lst->exponent) >= lst->preci)))
+		lst->preci = ft_min2(ft_abs(lst->exponent), lst->preci);
+
 	max = len + lst->preci;
-	if ((lst->conv == 'e' || lst->conv == 'E') && lst->exponent != 0)
+	if ((lst->conv == 'g' || lst->conv == 'G') && (lst->exponent < -4 || (ft_abs(lst->exponent) >= lst->preci)))
+		max += 2 + ft_max2(ulen_base(ft_abs(lst->exponent), 10), 1);
+	else if ((lst->conv == 'e' || lst->conv == 'E') && lst->exponent != 0)
 		max += 2 + ft_max2(ulen_base(ft_abs(lst->exponent), 10), 2);
 	if (lst->psign != 0)
 		max++;
