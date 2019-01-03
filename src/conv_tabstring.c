@@ -81,7 +81,7 @@ static	void pf_doublestring(t_pf *lst, char **tab, int len, int larg)
 	b = 0;
 	len = ft_maxlen_tab(tab, 1) + lst->preci;
 	larg = ft_maxlen_tab(tab, 0);
-	larg = ulen_base(ft_min2(larg - 1, larg), 10);
+	larg = ulen_base(MIN(larg - 1, larg), 10);
 	llen = ulen_base(len, 10) + lst->preci;
 	llen -= (((len % 10) == 0) ? 1 : 0);
 	ret = ft_sprintf(&str, "%*.c |", larg + 1, ' ');

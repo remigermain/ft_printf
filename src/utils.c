@@ -30,7 +30,7 @@ void ftprintf_error(t_pf *lst, char *str, size_t index)
 	exit (0);
 }
 
-int	ulen_base(unsigned long nb, size_t base)
+int	ulen_base(ulong_t nb, size_t base)
 {
 	int count;
 

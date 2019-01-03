@@ -20,6 +20,10 @@
 # define BUFF_PRINTF 64
 # define BUFF_FLOAT 256
 # define wuchar_t unsigned char
+# define ulong_t unsigned long
+#define ABS(a)				(a < 0 ? -a : a)
+#define MAX(a, b)			(a < b ? b : a)
+#define MIN(a, b)			(a < b ? a : b)
 /*
 ** color
 */
@@ -41,8 +45,8 @@ typedef struct	s_printf
 	wuchar_t		buff[BUFF_PRINTF];
 	int					count;
 	wuchar_t		*str;
-	unsigned long	ul_nb;
-	unsigned long ful_nb;
+	ulong_t	ul_nb;
+	ulong_t ful_nb;
 	long double		fl_nb;
 	int					exponent;
 	size_t			hash;
@@ -95,19 +99,19 @@ void			lst_putdouble(t_pf *lst);
 **	utils.c
 */
 void 			ftprintf_error(t_pf *lst, char *str, size_t index);
-int				ulen_base(unsigned long nb, size_t base);
+int				ulen_base(ulong_t nb, size_t base);
 size_t 		len_pstrn(wuchar_t *str, size_t len, size_t index);
 int				put_color(t_pf *lst, char *str);
 
 /*
 **	fonctions qui put les signes( - , + , 0x )
 **			 ajoute les esapces et zero des precisions/field
-**				join le str entre eux && unsigned long itoa avec local
+**				join le str entre eux && ulong_t itoa avec local
 **	utils_put.c
 */
 void 			comvert_buff(t_pf *lst,void *tmp, size_t len);
 void 			put_buff(t_pf *lst, void *tmp, size_t len, size_t index);
-void			put_itoa(t_pf *lst, unsigned long n);
+void			put_itoa(t_pf *lst, ulong_t n);
 void			put_prefix(t_pf *lst, int len, int nb, int point);
 void			put_sign(t_pf *lst);
 
@@ -116,5 +120,5 @@ void			put_sign(t_pf *lst);
 **	debug.c
 */
 void			debug(t_pf *lst);
-
+void	pf_string(t_pf *lst, wuchar_t *str, wchar_t *wstr, int index);
 #endif

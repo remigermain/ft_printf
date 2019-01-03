@@ -17,14 +17,14 @@ static void	lst_putnb_unb(t_pf *lst)
 {
 	if (lst->lenght == 1 && lst->conv != 'O' && lst->conv != 'U'
 			&& lst->conv != 'D')
-		lst->ul_nb = (unsigned short)va_arg(lst->va_copy, unsigned long);
+		lst->ul_nb = (unsigned short)va_arg(lst->va_copy, ulong_t);
 	else if (lst->lenght == 2 && lst->conv != 'O' && lst->conv != 'U'
 			&& lst->conv != 'D')
-		lst->ul_nb = (unsigned char)va_arg(lst->va_copy, unsigned long);
+		lst->ul_nb = (unsigned char)va_arg(lst->va_copy, ulong_t);
 	else if (lst->lenght == 10)
 		lst->ul_nb = va_arg(lst->va_copy, long);
 	else if (lst->lenght == 20)
-		lst->ul_nb = va_arg(lst->va_copy, unsigned long);
+		lst->ul_nb = va_arg(lst->va_copy, ulong_t);
 	else if (lst->lenght == 100)
 		lst->ul_nb = va_arg(lst->va_copy, intmax_t);
 	else if (lst->lenght == 1000)
@@ -33,7 +33,7 @@ static void	lst_putnb_unb(t_pf *lst)
 			lst->conv == 'u' || lst->conv == 'X')
 		lst->ul_nb = va_arg(lst->va_copy, unsigned int);
 	else
-		lst->ul_nb = va_arg(lst->va_copy, unsigned long);
+		lst->ul_nb = va_arg(lst->va_copy, ulong_t);
 	if (lst->sign == '+' && (lst->conv == 'd' || lst->conv == 'D' ||
 				lst->conv == 'I' || lst->conv == 'i'))
 		lst->psign = 2;

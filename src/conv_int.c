@@ -35,6 +35,10 @@ static int	ft_hashcalc(t_pf *lst, int index, int len)
 
 static void	ft_spacecalc(t_pf *lst)
 {
+	if (lst->hash == 1 && (lst->conv == 'u' || lst->conv == 'U'))
+		lst->hash = 0;
+	if (lst->point == 1 && lst->preci >= 0)
+		lst->zero = 0;
 	if (lst->space == 1 && (lst->conv == 'o' || lst->conv == 'O' ||
 				lst->conv == 'x' || lst->conv == 'X'))
 		lst->space = 0;
@@ -63,7 +67,7 @@ int			conv_int(t_pf *lst, char *str, int index)
 		len = 0;
 	lst->hash = ft_hashcalc(lst, 0, len);
 	ft_spacecalc(lst);
-	max = ft_max2(len, lst->preci) + sign;
+	max = MAX(len, lst->preci) + sign;
 	if (lst->zero == 1)
 		put_sign(lst);
 	put_prefix(lst, max + lst->hash, lst->field, lst->zero);

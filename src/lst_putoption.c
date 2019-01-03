@@ -29,11 +29,7 @@ static void	lst_undefined(t_pf *lst)
 			lst->conv != 'G')
 		lst->local = 0;
 	if (lst->conv == 's' || lst->conv == 'S')
-		lst->preci = ft_abs(lst->preci);
-	if (lst->hash == 1 && (lst->conv == 'u' || lst->conv == 'U'))
-		lst->hash = 0;
-	if (lst->point == 1 && lst->preci >= 0)
-		lst->zero = 0;
+		lst->preci = ABS(lst->preci);
 }
 
 static void	lst_base(t_pf *lst)

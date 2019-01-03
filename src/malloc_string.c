@@ -32,8 +32,6 @@ void 			comvert_buff(t_pf *lst, void *tmp, size_t len)
 
 void 			put_buff(t_pf *lst, void *tmp, size_t len, size_t index)
 {
-	wuchar_t	*new;
-
 	if (len == 0)
 		return ;
 	if (((lst->buff_count + len) >= BUFF_PRINTF) || len >= BUFF_PRINTF)
@@ -47,7 +45,7 @@ void 			put_buff(t_pf *lst, void *tmp, size_t len, size_t index)
 		free(tmp);
 }
 
-void		put_itoa(t_pf *lst, unsigned long n)
+void		put_itoa(t_pf *lst, ulong_t n)
 {
 	int		len;
 	int		mlen;
@@ -61,7 +59,7 @@ void		put_itoa(t_pf *lst, unsigned long n)
 	while (len >= 0)
 	{
 		if (lst->local == 1 && ((mlen - len) % 4 == 0))
-			tmp[len-- ] = '\'';
+			tmp[len-- ] = ',';
 		if ((n % lst->base) < 10)
 			tmp[len--] = (n % lst->base) + 48;
 		else

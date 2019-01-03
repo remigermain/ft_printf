@@ -54,9 +54,8 @@ static wuchar_t *comv_wstr(t_pf *lst, wchar_t *wstr, size_t len)
 	return (str);
 }
 
-static void	pf_string(t_pf *lst, wuchar_t *str, wchar_t *wstr, int index)
+void	pf_string(t_pf *lst, wuchar_t *str, wchar_t *wstr, int index)
 {
-	wuchar_t *new;
 	size_t len;
 	size_t max;
 
