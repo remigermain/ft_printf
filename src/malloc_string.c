@@ -16,8 +16,10 @@
 void 			comvert_buff(t_pf *lst, void *tmp, size_t len)
 {
 	wuchar_t	*new;
+	size_t 		len_malloc;
 
-	if (!(new = (wuchar_t*)malloc(lst->count + lst->buff_count + len + 1)))
+	len_malloc = lst->count + lst->buff_count + len + 1;
+	if ((new = (wuchar_t*)ft_memalloc(len_malloc)) == NULL)
 		ftprintf_error(lst, "comvert_buff", 1);
 	new[lst->count + lst->buff_count + len + 1] = '\0';
 	ft_memcpy(new, lst->str, lst->count);

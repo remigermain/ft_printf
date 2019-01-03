@@ -23,6 +23,6 @@ int	main(int argc, char **argv)
 		a++;
 	if (argv[0][0] == 1)
 		a++;
-	ft_printf("%@ avant apres", "help");
+	ft_printf("%@", "help");
 	return (0);
 }
