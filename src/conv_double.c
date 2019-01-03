@@ -31,7 +31,7 @@ static void put_double(t_pf *lst, ulong_t nb[BUFF_FLOAT], size_t i)
 		c = (lst->maj == 1 ? 'E' : 'e');
 		max = ((lst->conv == 'a' || lst->conv == 'A') ? 1 : 2);
 		ret = ft_sprintf(&new, "%c%+.*d", c, max,lst->exponent);
-		put_buff(lst, new, ret, 0);
+		put_buff(lst, new, ret, 1);
 	}
 }
 

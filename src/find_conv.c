@@ -79,6 +79,10 @@ int	find_conv(t_pf *lst, char *str, int index)
 		index = conv_char(lst, str, index);
 	else if (str[index] == 't' && str[index + 1] == 's')
 		index = conv_tabstring(lst, str, index + 1);
+	else if (str[index] == '@')
+		index = conv_other(lst, str, index);
+	else if (str[index] == '{')
+		index = conv_color(lst, str, index + 1);
 	else
 		index = find_conv2(lst, str, index);
 	return (index);

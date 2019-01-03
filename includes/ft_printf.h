@@ -82,6 +82,7 @@ int				conv_char(t_pf *lst, char *str, int index);
 int				conv_string(t_pf *lst, char *str, int index);
 int				conv_double(t_pf *lst, char *str, int index);
 int				conv_tabstring(t_pf *lst, char *str, int index);
+int   		conv_other(t_pf *lst, char *str, int index);
 
 /*
 ** initialisation lst && fonction pour ajouter les differentes options
@@ -101,7 +102,7 @@ void			lst_putdouble(t_pf *lst);
 void 			ftprintf_error(t_pf *lst, char *str, size_t index);
 int				ulen_base(ulong_t nb, size_t base);
 size_t 		len_pstrn(wuchar_t *str, size_t len, size_t index);
-int				put_color(t_pf *lst, char *str);
+int				conv_color(t_pf *lst, char *str, int index);
 
 /*
 **	fonctions qui put les signes( - , + , 0x )

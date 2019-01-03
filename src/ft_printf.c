@@ -15,7 +15,7 @@
 
 static size_t	ft_strlen_perc(char *str, size_t j)
 {
-	while (str[j] != '\0' && str[j] != '{' && str[j] != '%')
+	while (str[j] != '\0' && str[j] != '%')
 			j++;
 	return (j);
 }
@@ -27,10 +27,8 @@ static int ftprintf_base(char *str, t_pf *lst, size_t i, size_t j)
 	{
 		j = ft_strlen_perc(str + i, 0);
 		put_buff(lst, str + i, j, 0);
-		if (str[i + j] == '{')
-			i += put_color(lst, str + i + j);
-		else if (str[i + j] == '%')
-			i +=  find_conv(lst, str + i + j, 1);
+		if (str[i + j] == '%')
+			i +=  find_conv(lst, (str + i + j), 1);
 		i += j;
 	}
 	va_end(lst->va_lst);
