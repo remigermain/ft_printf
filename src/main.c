@@ -12,7 +12,7 @@
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-
+#include <locale.h>
 int	main(int argc, char **argv)
 {
 	int a;
@@ -22,6 +22,9 @@ int	main(int argc, char **argv)
 		a++;
 	if (argv[0][0] == 1)
 		a++;
-	ft_printf("%@\n", "help");
-	return (0);
+	setlocale(LC_ALL, "");
+	a = printf("{%f}{%F}", 1.42, 1.42);
+	printf("ft = %d\n", a);
+	a = ft_printf("{%f}{%F}", 1.42, 1.42);
+	printf("ft = %d\n", a);
 }

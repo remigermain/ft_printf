@@ -23,25 +23,18 @@ int		len_wchar_single(wchar_t c)
 		return (3);
 	if (c <= 0x10FFFF)
 		return (4);
-	return (-1);
+	return (0);
 }
 
 int		len_wchar(wchar_t *str)
 {
 	size_t	count;
-	int		verif;
 	size_t	a;
 
 	count = 0;
 	a = 0;
 	while (str[a] != '\0')
-	{
-		verif = len_wchar_single(str[a++]);
-		if (verif == -1)
-			return (-1);
-		count += verif;
-		a++;
-	}
+		count += len_wchar_single(str[a++]);
 	return (count);
 }
 
@@ -58,19 +51,12 @@ size_t	len_wuchart(unsigned char *str)
 int		nlen_wchar(wchar_t *str, size_t len)
 {
 	size_t	count;
-	int		verif;
 	size_t	a;
 
 	count = 0;
 	a = 0;
-	while (str[a] != '\0' && count < len)
-	{
-		verif = len_wchar_single(str[a++]);
-		if (verif == -1)
-			return (-1);
-		count += verif;
-		a++;
-	}
+	while (str[a] != '\0' && a < len)
+		count += len_wchar_single(str[a++]);
 	return (count);
 }
 

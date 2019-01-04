@@ -59,12 +59,12 @@ void			pf_string(t_pf *lst, WUCHAR_T *str, wchar_t *wstr, int index)
 	size_t	len;
 	int		max;
 
-	if (index == 2)
-		max = len_wchar(wstr);
-	else
-		max = ft_ustrlen(str);
+	max = (index == 2 ? len_wchar(wstr) : ft_ustrlen(str));
 	if (max == -1)
+	{
+		lst->buff_count = -1;
 		return ;
+	}
 	if (POINT == 1)
 		max = ft_min2(PRECI, max);
 	put_prefix(lst, max, FIELD, ZERO);

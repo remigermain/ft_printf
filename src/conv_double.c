@@ -137,7 +137,7 @@ int			conv_double(t_pf *lst, char *str, int index)
 		put_buff(lst, ft_ustrdup((WUCHAR_T*)("nan")), 3, 1);
 	else
 		assign_double(lst, 0, 0);
-	if (CONV != 'e' || CONV != 'E')
+	if (CONV == 'e' || CONV == 'E')
 	{
 		c = (MAJ == 1 ? 'E' : 'e');
 		ret = ft_sprintf(&new, "%c%+.2d", c, EXPONENT);

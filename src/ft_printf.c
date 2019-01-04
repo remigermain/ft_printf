@@ -23,7 +23,7 @@ static size_t	strlen_perc(char *str, size_t j)
 static int		ftprintf_base(char *str, t_pf *lst, size_t i, size_t j)
 {
 	va_copy(lst->va_copy, lst->va_lst);
-	while (str[i] != '\0' && lst->count != -1)
+	while (str[i] != '\0')
 	{
 		j = strlen_perc(str + i, 0);
 		put_buff(lst, str + i, j, 0);
