@@ -6,14 +6,14 @@
 /*   By: rgermain <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/12/19 21:57:13 by rgermain     #+#   ##    ##    #+#       */
-/*   Updated: 2018/12/19 22:45:25 by rgermain    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/01/04 15:57:51 by rgermain    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	len_wchar_single(wchar_t c)
+int		len_wchar_single(wchar_t c)
 {
 	if (c <= 0x7F)
 		return (1);
@@ -26,19 +26,26 @@ int	len_wchar_single(wchar_t c)
 	return (-1);
 }
 
-int len_wchar(wchar_t *str)
+int		len_wchar(wchar_t *str)
 {
-	size_t count;
-	size_t a;
+	size_t	count;
+	int		verif;
+	size_t	a;
 
 	count = 0;
 	a = 0;
 	while (str[a] != '\0')
-		count += len_wchar_single(str[a++]);
+	{
+		verif = len_wchar_single(str[a++]);
+		if (verif == -1)
+			return (-1);
+		count += verif;
+		a++;
+	}
 	return (count);
 }
 
-size_t len_wuchart(unsigned char *str)
+size_t	len_wuchart(unsigned char *str)
 {
 	size_t a;
 
@@ -48,19 +55,26 @@ size_t len_wuchart(unsigned char *str)
 	return (a);
 }
 
-int nlen_wchar(wchar_t *str, size_t len)
+int		nlen_wchar(wchar_t *str, size_t len)
 {
-	size_t count;
-	size_t a;
+	size_t	count;
+	int		verif;
+	size_t	a;
 
 	count = 0;
 	a = 0;
-	while (str[a] != '\0' && a < len)
-		count += len_wchar_single(str[a++]);
+	while (str[a] != '\0' && count < len)
+	{
+		verif = len_wchar_single(str[a++]);
+		if (verif == -1)
+			return (-1);
+		count += verif;
+		a++;
+	}
 	return (count);
 }
 
-void convert_wchar(unsigned char **new, wchar_t wc, size_t *i)
+void	convert_wchar(unsigned char **new, wchar_t wc, size_t *i)
 {
 	if (wc <= 0x7F)
 		(*new)[(*i)++] = wc;

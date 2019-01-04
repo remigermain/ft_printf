@@ -6,27 +6,29 @@
 /*   By: rgermain <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/11/11 15:09:25 by rgermain     #+#   ##    ##    #+#       */
-/*   Updated: 2018/12/19 23:16:03 by rgermain    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/01/04 15:39:08 by rgermain    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-static size_t	strlen_perc(char *str)
+static size_t	strlen_perc(char *str, size_t j)
 {
-	return ((*str && *str != '%') ? strlen_perc(str + 1) + 1 : 0);
+	while (str[j] != '\0' && str[j] != '%')
+		j++;
+	return (j);
 }
 
-static int ftprintf_base(char *str, t_pf *lst, size_t i, size_t j)
+static int		ftprintf_base(char *str, t_pf *lst, size_t i, size_t j)
 {
 	va_copy(lst->va_copy, lst->va_lst);
 	while (str[i] != '\0' && lst->count != -1)
 	{
-		j = strlen_perc(str + i);
+		j = strlen_perc(str + i, 0);
 		put_buff(lst, str + i, j, 0);
 		if (str[i + j] == '%')
-			i +=  find_conv(lst, (str + i + j), 1);
+			i += find_conv(lst, (str + i + j), 1);
 		i += j;
 	}
 	va_end(lst->va_lst);
@@ -35,7 +37,7 @@ static int ftprintf_base(char *str, t_pf *lst, size_t i, size_t j)
 	return (lst->count);
 }
 
-int			ft_sprintf(wuchar_t **dest, const char *format, ...)
+int				ft_sprintf(wuchar_t **dest, const char *format, ...)
 {
 	t_pf	*lst;
 	int		i;
@@ -48,7 +50,7 @@ int			ft_sprintf(wuchar_t **dest, const char *format, ...)
 	return (i);
 }
 
-int			ft_dprintf(int fd, const char *format, ...)
+int				ft_dprintf(int fd, const char *format, ...)
 {
 	t_pf	*lst;
 	int		i;
@@ -62,7 +64,7 @@ int			ft_dprintf(int fd, const char *format, ...)
 	return (i);
 }
 
-int			ft_printf(const char *format, ...)
+int				ft_printf(const char *format, ...)
 {
 	t_pf	*lst;
 	int		i;

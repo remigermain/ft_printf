@@ -6,20 +6,20 @@
 /*   By: rgermain <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/11/27 20:49:03 by rgermain     #+#   ##    ##    #+#       */
-/*   Updated: 2018/12/20 19:26:54 by rgermain    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/01/04 15:44:56 by rgermain    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-static int			conv_format(t_pf *lst, char *str, int index)
+static int	conv_format(t_pf *lst, char *str, int index)
 {
 	int ret;
 
 	ret = 1;
 	if ((ft_strncmp(str + index, "F_DEF}", 6) == 0 && (ret = 6)) ||
-    (ft_strncmp(str + index, "F_EOC}", 6) == 0 && (ret = 6)))
+		(ft_strncmp(str + index, "F_EOC}", 6) == 0 && (ret = 6)))
 		put_buff(lst, F_DEF, ft_strlen(F_DEF), 0);
 	else if (ft_strncmp(str + index, "F_BOLD}", 7) == 0 && (ret = 7))
 		put_buff(lst, F_BOLD, ft_strlen(F_BOLD), 0);
@@ -31,16 +31,16 @@ static int			conv_format(t_pf *lst, char *str, int index)
 		put_buff(lst, F_REVERSE, ft_strlen(F_REVERSE), 0);
 	else if (ft_strncmp(str + index, "F_INVISIBL}", 11) == 0 && (ret = 11))
 		put_buff(lst, F_INVISIBL, ft_strlen(F_INVISIBL), 0);
-  return (ret);
+	return (ret);
 }
 
-static int			conv_backcolor(t_pf *lst, char *str, int index)
+static int	conv_backcolor(t_pf *lst, char *str, int index)
 {
 	int ret;
 
 	ret = 1;
 	if ((ft_strncmp(str + index, "B_WHITE}", 8) == 0 && (ret = 8)) ||
-        (ft_strncmp(str + index, "B_EOC}", 6) == 0 && (ret = 6)))
+			(ft_strncmp(str + index, "B_EOC}", 6) == 0 && (ret = 6)))
 		put_buff(lst, B_WHITE, ft_strlen(B_WHITE), 0);
 	else if (ft_strncmp(str + index, "B_BLACK}", 8) == 0 && (ret = 8))
 		put_buff(lst, B_BLACK, ft_strlen(B_BLACK), 0);
@@ -54,14 +54,14 @@ static int			conv_backcolor(t_pf *lst, char *str, int index)
 		put_buff(lst, B_PURPLE, ft_strlen(B_PURPLE), 0);
 	else if (ft_strncmp(str + index, "B_CYAN}", 7) == 0 && (ret = 7))
 		put_buff(lst, B_CYAN, ft_strlen(B_CYAN), 0);
-  else if (ft_strncmp(str + index, "B_GREY}", 7) == 0 && (ret = 7))
-  	put_buff(lst, B_GREY, ft_strlen(B_GREY), 0);
-  else
-    ret = conv_format(lst, str, index);
-  return (ret);
+	else if (ft_strncmp(str + index, "B_GREY}", 7) == 0 && (ret = 7))
+		put_buff(lst, B_GREY, ft_strlen(B_GREY), 0);
+	else
+		ret = conv_format(lst, str, index);
+	return (ret);
 }
 
-static int			conv_textcolor(t_pf *lst, char *str, int index)
+static int	conv_textcolor(t_pf *lst, char *str, int index)
 {
 	int ret;
 
@@ -80,9 +80,9 @@ static int			conv_textcolor(t_pf *lst, char *str, int index)
 		put_buff(lst, T_LPURPLE, ft_strlen(T_LPURPLE), 0);
 	else if (ft_strncmp(str + index, "T_LCYAN}", 8) == 0 && (ret = 8))
 		put_buff(lst, T_LCYAN, ft_strlen(T_LCYAN), 0);
-  else
-    ret = conv_backcolor(lst, str, index);
-  return (ret);
+	else
+		ret = conv_backcolor(lst, str, index);
+	return (ret);
 }
 
 int			conv_color(t_pf *lst, char *str, int index)
@@ -91,7 +91,7 @@ int			conv_color(t_pf *lst, char *str, int index)
 
 	ret = 1;
 	if ((ft_strncmp(str + index, "T_WHITE}", 8) == 0 && (ret = 8)) ||
-	(ft_strncmp(str + index, "T_EOC}", 6) == 0 && (ret = 6)))
+			(ft_strncmp(str + index, "T_EOC}", 6) == 0 && (ret = 6)))
 		put_buff(lst, T_WHITE, ft_strlen(T_WHITE), 0);
 	else if (ft_strncmp(str + index, "T_BLACK}", 8) == 0 && (ret = 8))
 		put_buff(lst, T_BLACK, ft_strlen(T_BLACK), 0);
@@ -109,7 +109,7 @@ int			conv_color(t_pf *lst, char *str, int index)
 		put_buff(lst, T_CYAN, ft_strlen(T_CYAN), 0);
 	else if (ft_strncmp(str + index, "T_LGREY}", 8) == 0 && (ret = 8))
 		put_buff(lst, T_LGREY, ft_strlen(T_LGREY), 0);
-  else
-    ret = conv_textcolor(lst, str, index);
+	else
+		ret = conv_textcolor(lst, str, index);
 	return (index + ret);
 }

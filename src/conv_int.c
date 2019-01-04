@@ -1,55 +1,64 @@
 /* ************************************************************************** */
 /*                                                          LE - /            */
 /*                                                              /             */
-/*   ft_params_nb.c                                   .::    .:/ .      .::   */
+/*   conv_int.c                                       .::    .:/ .      .::   */
 /*                                                 +:+:+   +:    +:  +:+:+    */
 /*   By: rgermain <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
-/*   Created: 2018/12/06 14:31:36 by rgermain     #+#   ##    ##    #+#       */
-/*   Updated: 2018/12/20 19:35:17 by rgermain    ###    #+. /#+    ###.fr     */
+/*   Created: 2019/01/04 16:24:00 by rgermain     #+#   ##    ##    #+#       */
+/*   Updated: 2019/01/04 16:24:05 by rgermain    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
+static int	sign_calc(t_pf *lst)
+{
+	if (PSIGN == 1 || PSIGN == 2)
+		return (1);
+	else if (PSIGN == 3)
+		return (2);
+	return (0);
+}
+
 static int	ft_hashcalc(t_pf *lst, int index, int len)
 {
-	if (lst->hash == 1 && (lst->conv == 'o' || lst->conv == 'O'))
+	if (HASH == 1 && (CONV == 'o' || CONV == 'O'))
 	{
-		if (lst->ul_nb == 0 && lst->point == 1 && lst->preci > 0)
+		if (lst->ul_nb == 0 && POINT == 1 && PRECI > 0)
 			return (0);
-		if (lst->point == 0 && lst->ul_nb == 0)
+		if (POINT == 0 && lst->ul_nb == 0)
 			return (0);
 		index = 1;
-		if ((lst->point == 1 && lst->preci > len))
+		if ((POINT == 1 && PRECI > len))
 		{
-			if (lst->preci != 0)
-				lst->preci--;
+			if (PRECI != 0)
+				PRECI--;
 		}
-		if (lst->field < 0)
-			lst->field++;
+		if (FIELD < 0)
+			FIELD++;
 	}
 	return (index);
 }
 
 static void	ft_spacecalc(t_pf *lst)
 {
-	if (lst->hash == 1 && (lst->conv == 'u' || lst->conv == 'U'))
-		lst->hash = 0;
-	if (lst->point == 1 && lst->preci >= 0)
-		lst->zero = 0;
-	if (lst->space == 1 && (lst->conv == 'o' || lst->conv == 'O' ||
-				lst->conv == 'x' || lst->conv == 'X'))
-		lst->space = 0;
-	if (lst->space == 1 && lst->sign != '+' && lst->psign == 0
-			&& lst->conv != 'u' && lst->conv != 'U')
+	if (HASH == 1 && (CONV == 'u' || CONV == 'U'))
+		HASH = 0;
+	if (POINT == 1 && PRECI >= 0)
+		ZERO = 0;
+	if (SPACE == 1 && (CONV == 'o' || CONV == 'O' ||
+				CONV == 'x' || CONV == 'X'))
+		SPACE = 0;
+	if (SPACE == 1 && SIGN != '+' && PSIGN == 0
+			&& CONV != 'u' && CONV != 'U')
 	{
 		put_prefix(lst, 0, 1, 0);
-		if (lst->field > 0)
-			lst->field--;
-		else if (lst->field < 0)
-			lst->field++;
+		if (FIELD > 0)
+			FIELD--;
+		else if (FIELD < 0)
+			FIELD++;
 	}
 }
 
@@ -61,22 +70,22 @@ int			conv_int(t_pf *lst, char *str, int index)
 
 	lst_putoption(lst, str, index);
 	lst_putint(lst);
-	len = ulen_base(lst->ul_nb, lst->base);
-	sign = ((lst->sign == 3) ? 2 : (lst->sign == 0 ? 0 : 1));
-	if (lst->ul_nb == 0 && lst->point == 1 && lst->preci == 0)
+	len = ulen_base(lst->ul_nb, BASE);
+	sign = sign_calc(lst);
+	if (lst->ul_nb == 0 && POINT == 1 && PRECI == 0)
 		len = 0;
-	lst->hash = ft_hashcalc(lst, 0, len);
+	HASH = ft_hashcalc(lst, 0, len);
 	ft_spacecalc(lst);
-	max = MAX(len, lst->preci) + sign;
-	if (lst->zero == 1)
+	max = MAX(len, PRECI) + sign;
+	if (ZERO == 1)
 		put_sign(lst);
-	put_prefix(lst, max + lst->hash, lst->field, lst->zero);
-	if (lst->zero == 0)
+	put_prefix(lst, max + HASH, FIELD, ZERO);
+	if (ZERO == 0)
 		put_sign(lst);
-	put_prefix(lst, 0, lst->hash, 1);
-	put_prefix(lst, len, lst->preci, 1);
-	if (!(lst->point == 1 && lst->preci == 0 && lst->ul_nb == 0))
-			put_itoa(lst, lst->ul_nb);
-	put_prefix(lst, max, -lst->field, 0);
+	put_prefix(lst, 0, HASH, 1);
+	put_prefix(lst, len, PRECI, 1);
+	if (!(POINT == 1 && PRECI == 0 && lst->ul_nb == 0))
+		put_itoa(lst, lst->ul_nb);
+	put_prefix(lst, max, -FIELD, 0);
 	return (index + 1);
 }

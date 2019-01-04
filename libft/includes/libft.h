@@ -6,7 +6,7 @@
 /*   By: rgermain <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/10/07 18:10:38 by rgermain     #+#   ##    ##    #+#       */
-/*   Updated: 2018/12/19 22:44:14 by rgermain    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/01/04 15:59:09 by rgermain    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -17,6 +17,7 @@
 # include <unistd.h>
 # include <stdlib.h>
 # include <string.h>
+# define UCHAR unsigned char
 
 typedef struct	s_list
 {
@@ -30,7 +31,8 @@ char			*ft_strcat(char *s1, const char *s2);
 char			*ft_strchr(const char *s, int c);
 char			*ft_strcpy(char *dst, const char *src);
 char			*ft_strdup(const char *s1);
-unsigned char			*ft_ustrdup(const unsigned char *s1);
+UCHAR			*ft_ustrdup(unsigned char *s1);
+UCHAR			*ft_strudup(char *s1);
 char			*ft_strjoin(char const *s1, char const *s2);
 char			*ft_strmap(char const *s, char (*f)(char));
 char			*ft_strmapi(char const *s, char (*f)(unsigned int, char));
@@ -96,7 +98,6 @@ void			ft_lstadd(t_list **alst, t_list *new);
 void			ft_lstdel(t_list **alst, void (*del)(void *, size_t));
 void			ft_lstdelone(t_list **alst, void (*del)(void*, size_t));
 t_list			*ft_lstnew(void const *content, size_t content_size);
-
 void			ft_sort_integer_table(int *tab, int size);
 void			ft_swap(int *a, int *b);
 int				ft_is_prime(int nb);
@@ -145,7 +146,7 @@ int				ft_atoi2(const char *str, int *count);
 int				len_wchar_single(wchar_t c);
 int				len_wchar(wchar_t *wstr);
 int				nlen_wchar(wchar_t *wstr, size_t len);
-void 			convert_wchar(unsigned char **new, wchar_t wc, size_t *i);
-size_t		len_wuchart(unsigned char *str);
+void			convert_wchar(unsigned char **new, wchar_t wc, size_t *i);
+size_t			len_wuchart(unsigned char *str);
 
 #endif

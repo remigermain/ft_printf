@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                          LE - /            */
 /*                                                              /             */
-/*   lst_init.c                                       .::    .:/ .      .::   */
+/*   lst_putoption.c                                  .::    .:/ .      .::   */
 /*                                                 +:+:+   +:    +:  +:+:+    */
 /*   By: rgermain <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
-/*   Created: 2018/12/06 13:27:18 by rgermain     #+#   ##    ##    #+#       */
-/*   Updated: 2018/12/20 13:05:08 by rgermain    ###    #+. /#+    ###.fr     */
+/*   Created: 2019/01/04 16:26:12 by rgermain     #+#   ##    ##    #+#       */
+/*   Updated: 2019/01/04 16:26:13 by rgermain    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -15,55 +15,55 @@
 
 static void	lst_undefined(t_pf *lst)
 {
-	if (lst->zero > 1 && lst->point > 1)
-		lst->zero = 0;
-	else if (lst->zero > 1)
-		lst->zero = 1;
-	if (lst->point > 1)
+	if (ZERO > 1 && POINT > 1)
+		ZERO = 0;
+	else if (ZERO > 1)
+		ZERO = 1;
+	if (POINT > 1)
 	{
-		lst->point = 0;
-		lst->preci = 0;
+		POINT = 0;
+		PRECI = 0;
 	}
-	if (lst->conv != 'i' && lst->conv != 'd' && lst->conv != 'u' &&
-			lst->conv != 'f' && lst->conv != 'F' && lst->conv != 'g' &&
-			lst->conv != 'G')
-		lst->local = 0;
-	if (lst->conv == 's' || lst->conv == 'S')
-		lst->preci = ABS(lst->preci);
+	if (CONV != 'i' && CONV != 'd' && CONV != 'u' &&
+			CONV != 'f' && CONV != 'F' && CONV != 'g' &&
+			CONV != 'G')
+		LOCAL = 0;
+	if (CONV == 's' || CONV == 'S')
+		PRECI = ABS(PRECI);
 }
 
 static void	lst_base(t_pf *lst)
 {
-	if (lst->conv == 'x' || lst->conv == 'X' || lst->conv == 'p'
-				|| lst->conv == 'a' || lst->conv == 'A')
-		lst->base = 16;
-	else if (lst->conv == 'o' || lst->conv == 'O')
-		lst->base = 8;
-	else if (lst->conv == 'b' || lst->conv == 'B')
-		lst->base = 2;
+	if (CONV == 'x' || CONV == 'X' || CONV == 'p'
+				|| CONV == 'a' || CONV == 'A')
+		BASE = 16;
+	else if (CONV == 'o' || CONV == 'O')
+		BASE = 8;
+	else if (CONV == 'b' || CONV == 'B')
+		BASE = 2;
 	else
-		lst->base = 10;
-	if (!ft_islowercase(lst->conv))
-		lst->maj = 1;
+		BASE = 10;
+	if (!ft_islowercase(CONV))
+		MAJ = 1;
 	lst_undefined(lst);
 }
 
 static int	lst_putflag_conv(t_pf *lst, char *str, int count)
 {
 	if (str[count] == 'h')
-		lst->lenght++;
+		LENGHT++;
 	else if (str[count] == 'l')
-		lst->lenght += 10;
+		LENGHT += 10;
 	else if (str[count] == 'j')
-		lst->lenght += 100;
+		LENGHT += 100;
 	else if (str[count] == 'z')
-		lst->lenght += 1000;
+		LENGHT += 1000;
 	else if (str[count] == 't')
-		lst->lenght += 10000;
+		LENGHT += 10000;
 	else if (str[count] == 'L')
-		lst->lenght += 100000;
+		LENGHT += 100000;
 	else
-		lst->conv = str[count];
+		CONV = str[count];
 	count++;
 	return (count);
 }
@@ -74,7 +74,7 @@ static int	lst_putdigit(t_pf *lst, char *str, int count, int *neg)
 
 	nb_tmp = 0;
 	if (str[count] == '+')
-		lst->sign = str[count++];
+		SIGN = str[count++];
 	else if (str[count] == '-')
 		(*neg) = str[count++] - 46;
 	else if (ft_isdigit(str[count]) == 1 || str[count] == '*'
@@ -89,15 +89,15 @@ static int	lst_putdigit(t_pf *lst, char *str, int count, int *neg)
 			nb_tmp = va_arg(lst->va_copy, int);
 			count++;
 		}
-		if (lst->point == 0)
-			lst->field = (nb_tmp * (*neg));
+		if (POINT == 0)
+			FIELD = (nb_tmp * (*neg));
 		else
-			lst->preci = nb_tmp;
+			PRECI = nb_tmp;
 	}
 	return (count);
 }
 
-void   lst_putoption(t_pf *lst, char *str, int index)
+void		lst_putoption(t_pf *lst, char *str, int index)
 {
 	int		count;
 	int		neg;
@@ -108,15 +108,15 @@ void   lst_putoption(t_pf *lst, char *str, int index)
 	while (count <= index)
 	{
 		if (str[count] == '.')
-			lst->point += str[count++] - 45;
-		else if (str[count] == '0' && lst->point == 0)
-			lst->zero += str[count++] - 47;
+			POINT += str[count++] - 45;
+		else if (str[count] == '0' && POINT == 0)
+			ZERO += str[count++] - 47;
 		else if (str[count] == 39)
-			lst->local = str[count++] - 38;
+			LOCAL = str[count++] - 38;
 		else if (str[count] == '#')
-			lst->hash = str[count++] - 34;
+			HASH = str[count++] - 34;
 		else if (str[count] == ' ')
-			lst->space = str[count++] - 31;
+			SPACE = str[count++] - 31;
 		else if (ft_isdigit(str[count]) == 1 || str[count] == '+' ||
 				str[count] == '-' || str[count] == '*' || str[count] == '$')
 			count = lst_putdigit(lst, str, count, &neg);

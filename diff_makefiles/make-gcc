@@ -17,13 +17,13 @@ CFLAGS = -Wall -Werror -Wextra
 
 INCLUDE = -Iincludes
 
-CINC = includes/ft_printf.h libft/includes/libft.h
+CINC = includes/ft_printf.h libft/includes/libft.h includes/color.h
 
 SRC = main.c ft_printf.c find_conv.c \
-		conv_int.c  conv_string.c conv_double.c \
-		conv_char.c conv_tabstring.c \
-		lst_init.c lst_putnb.c lst_putoption.c \
-		utils.c malloc_string.c \
+		conv_int.c conv_char.c conv_double.c conv_string.c \
+		conv_tabstring.c conv_other.c \
+		lst_init.c lst_putint.c lst_putdouble.c lst_putoption.c \
+		utils.c malloc_string.c put_color.c \
 		debug.c
 
 OBJ = $(SRC:.c=.o)
@@ -49,10 +49,12 @@ $(DOBJ)%.o : $(DSRC)%.c $(CINC)
 clean:
 	@mkdir -p $(DOBJ)
 	@rm -rf $(DOBJ)
+	@make -C libft clean
 	@echo "Suppresion des objects"
 
 fclean: clean
 	@rm -f $(NAME)
+	@make -C libft fclean
 	@echo "Suppresion de la library "$(NAME)
 
 re: fclean all

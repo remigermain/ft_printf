@@ -6,14 +6,14 @@
 /*   By: rgermain <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/11/27 20:49:03 by rgermain     #+#   ##    ##    #+#       */
-/*   Updated: 2018/12/20 19:26:54 by rgermain    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/01/04 15:45:54 by rgermain    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-void ftprintf_error(t_pf *lst, char *str, size_t index)
+void	ftprintf_error(t_pf *lst, char *str, size_t index)
 {
 	ft_putstr_fd("\n  / \\    WARNING\n / | \\  FT_PRINT ERROR", 2);
 	ft_putstr_fd("\n/  o  \\\n-------\n     	[", 2);
@@ -27,15 +27,23 @@ void ftprintf_error(t_pf *lst, char *str, size_t index)
 			free(lst->str);
 		free(lst);
 	}
-	exit (0);
+	exit(0);
 }
 
-int	ulen_base(ulong_t nb, size_t base)
+int		ulen_base(ulong_t nb, size_t base)
 {
-	return (1 + (nb >= base ? ulen_base(nb / base, base) : 0));
+	int count;
+
+	count = 0;
+	while (nb >= base)
+	{
+		nb /= base;
+		count++;
+	}
+	return (count + 1);
 }
 
-size_t len_pstrn(wuchar_t *str, size_t len, size_t index)
+size_t	len_pstrn(wuchar_t *str, size_t len, size_t index)
 {
 	size_t i;
 	size_t a;

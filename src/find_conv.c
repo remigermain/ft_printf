@@ -6,7 +6,7 @@
 /*   By: rgermain <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/11/11 15:09:25 by rgermain     #+#   ##    ##    #+#       */
-/*   Updated: 2018/12/19 22:31:53 by rgermain    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/01/04 15:38:17 by rgermain    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -44,10 +44,10 @@ static int	find_conv2(t_pf *lst, char *str, int index)
 		index += 1;
 	}
 	else if (str[index] == 'f' || str[index] == 'F' ||
-				str[index] == 'e' || str[index] == 'E' ||
+		str[index] == 'e' || str[index] == 'E' ||
 			str[index] == 'g' || str[index] == 'G' ||
-		str[index] == 'a' || str[index] == 'A')
-			index = conv_double(lst, str, index);
+				str[index] == 'a' || str[index] == 'A')
+		index = conv_double(lst, str, index);
 	else if (str[index] == 's' || str[index] == 'r' ||
 			str[index] == 'S')
 		index = conv_string(lst, str, index);
@@ -56,10 +56,10 @@ static int	find_conv2(t_pf *lst, char *str, int index)
 	return (index);
 }
 
-int	find_conv(t_pf *lst, char *str, int index)
+int			find_conv(t_pf *lst, char *str, int index)
 {
 	if (str[index] == '\0')
-		index = index;
+		return (index);
 	else if (str[index] == 'd' || str[index] == 'i' ||
 			str[index] == 'D' || str[index] == 'I' ||
 			str[index] == 'x' || str[index] == 'X' ||

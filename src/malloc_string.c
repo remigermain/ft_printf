@@ -1,22 +1,22 @@
 /* ************************************************************************** */
 /*                                                          LE - /            */
 /*                                                              /             */
-/*   ft_printf.c                                      .::    .:/ .      .::   */
+/*   malloc_string.c                                  .::    .:/ .      .::   */
 /*                                                 +:+:+   +:    +:  +:+:+    */
 /*   By: rgermain <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
-/*   Created: 2018/11/11 15:09:25 by rgermain     #+#   ##    ##    #+#       */
-/*   Updated: 2018/12/19 22:12:13 by rgermain    ###    #+. /#+    ###.fr     */
+/*   Created: 2019/01/04 16:26:02 by rgermain     #+#   ##    ##    #+#       */
+/*   Updated: 2019/01/04 16:26:03 by rgermain    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-void 			comvert_buff(t_pf *lst, void *tmp, size_t len)
+void	comvert_buff(t_pf *lst, void *tmp, size_t len)
 {
 	wuchar_t	*new;
-	size_t 		len_malloc;
+	size_t		len_malloc;
 
 	len_malloc = lst->count + lst->buff_count + len + 1;
 	if ((new = (wuchar_t*)ft_memalloc(len_malloc)) == NULL)
@@ -32,7 +32,7 @@ void 			comvert_buff(t_pf *lst, void *tmp, size_t len)
 	lst->buff_count = 0;
 }
 
-void 			put_buff(t_pf *lst, void *tmp, size_t len, size_t index)
+void	put_buff(t_pf *lst, void *tmp, size_t len, size_t index)
 {
 	if (len == 0)
 		return ;
@@ -47,26 +47,26 @@ void 			put_buff(t_pf *lst, void *tmp, size_t len, size_t index)
 		free(tmp);
 }
 
-void		put_itoa(t_pf *lst, ulong_t n)
+void	put_itoa(t_pf *lst, ulong_t n)
 {
-	int		len;
-	int		mlen;
-	wuchar_t tmp[27];
+	wuchar_t	tmp[27];
+	int			len;
+	int			mlen;
 
-	len = ulen_base(n, lst->base);
-	if (lst->local == 1 && (len - 1) > 3)
+	len = ulen_base(n, BASE);
+	if (LOCAL == 1 && (len - 1) > 3)
 		len += ((len / 3) - (len % 3 == 0 ? 1 : 0));
 	mlen = len;
 	len--;
 	while (len >= 0)
 	{
-		if (lst->local == 1 && ((mlen - len) % 4 == 0))
-			tmp[len-- ] = ',';
-		if ((n % lst->base) < 10)
-			tmp[len--] = (n % lst->base) + 48;
+		if (LOCAL == 1 && ((mlen - len) % 4 == 0))
+			tmp[len--] = ',';
+		if ((n % BASE) < 10)
+			tmp[len--] = (n % BASE) + 48;
 		else
-			tmp[len--] = (n % lst->base) + (lst->maj == 1 ? 55 : 87);
-		n = n / lst->base;
+			tmp[len--] = (n % BASE) + (MAJ == 1 ? 55 : 87);
+		n = n / BASE;
 	}
 	put_buff(lst, tmp, mlen, 0);
 }
@@ -78,19 +78,19 @@ void	put_prefix(t_pf *lst, int len, int nb, int point)
 
 	llen = (nb - len);
 	if (len >= nb)
-		return;
+		return ;
 	ft_memset(tmp, (point == 1 ? '0' : ' '), llen);
 	put_buff(lst, tmp, llen, 0);
 }
 
-void			put_sign(t_pf *lst)
+void	put_sign(t_pf *lst)
 {
-	if (lst->psign == 1)
+	if (PSIGN == 1)
 		put_buff(lst, "-", 1, 0);
-	else if (lst->psign == 2)
+	else if (PSIGN == 2)
 		put_buff(lst, "+", 1, 0);
-	else if (lst->psign == 3)
-		put_buff(lst, (lst->maj == 1 ? "0X" : "0x"), 2, 0);
-	else if (lst->psign == 4)
+	else if (PSIGN == 3)
+		put_buff(lst, (MAJ == 1 ? "0X" : "0x"), 2, 0);
+	else if (PSIGN == 4)
 		put_buff(lst, ".", 1, 0);
 }

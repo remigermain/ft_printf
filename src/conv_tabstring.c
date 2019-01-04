@@ -1,32 +1,32 @@
 /* ************************************************************************** */
 /*                                                          LE - /            */
 /*                                                              /             */
-/*   ft_params_ts.c                                   .::    .:/ .      .::   */
+/*   conv_tabstring.c                                 .::    .:/ .      .::   */
 /*                                                 +:+:+   +:    +:  +:+:+    */
 /*   By: rgermain <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
-/*   Created: 2018/12/11 20:45:01 by rgermain     #+#   ##    ##    #+#       */
-/*   Updated: 2018/12/14 14:40:47 by rgermain    ###    #+. /#+    ###.fr     */
+/*   Created: 2019/01/04 16:24:47 by rgermain     #+#   ##    ##    #+#       */
+/*   Updated: 2019/01/04 16:24:48 by rgermain    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-static	void pf_puttab_back(t_pf *lst, int len, int b)
+static void	pf_puttab_back(t_pf *lst, int len, int b)
 {
-	int 			llen;
-	int				ret;
+	int			llen;
+	int			ret;
 	wuchar_t	*str;
 
-	llen = ulen_base(len, 10) + lst->preci;
+	llen = ulen_base(len, 10) + PRECI;
 	llen -= (((len % 10) == 0) ? 1 : 0);
-	if (lst->preci == 1)
+	if (PRECI == 1)
 	{
 		ret = ft_sprintf(&str, " {blue}%*s{eoc} |", llen, "\\0");
 		put_buff(lst, str, ret, 1);
 	}
-	while ((b + lst->preci) < len)
+	while ((b + PRECI) < len)
 	{
 		ret = ft_sprintf(&str, " %*C |", llen, ' ');
 		put_buff(lst, str, ret, 1);
@@ -34,27 +34,27 @@ static	void pf_puttab_back(t_pf *lst, int len, int b)
 	}
 }
 
-static	void pf_puttab_end(t_pf *lst, int larg, int max)
+static void	pf_puttab_end(t_pf *lst, int larg, int max)
 {
-	int 			ret;
 	wuchar_t	*str;
+	int			ret;
 
-	if (lst->preci == 1)
+	if (PRECI == 1)
 	{
 		ret = ft_sprintf(&str, "\n[%.*d]| {blue}$NULL{eoc}", larg, max);
 		put_buff(lst, str, ret, 1);
 	}
 }
 
-static	void pf_puttab(t_pf *lst, char **tab, int len, int larg)
+static void	pf_puttab(t_pf *lst, char **tab, int len, int larg)
 {
 	wuchar_t	*str;
-	int				llen;
-	int 			a;
-	int 			b;
-	int 			ret;
+	int			llen;
+	int			a;
+	int			b;
+	int			ret;
 
-	llen = ulen_base(len, 10) + lst->preci;
+	llen = ulen_base(len, 10) + PRECI;
 	llen -= (((len % 10) == 0) ? 1 : 0);
 	a = -1;
 	while (tab[++a] != NULL && (b = -1))
@@ -71,18 +71,18 @@ static	void pf_puttab(t_pf *lst, char **tab, int len, int larg)
 	pf_puttab_end(lst, larg, ft_maxlen_tab(tab, 0));
 }
 
-static	void pf_doublestring(t_pf *lst, char **tab, int len, int larg)
+static void	pf_doublestring(t_pf *lst, char **tab, int len, int larg)
 {
-	wuchar_t *str;
-	int				b;
-	int				ret;
-	int				llen;
+	wuchar_t	*str;
+	int			b;
+	int			ret;
+	int			llen;
 
 	b = 0;
-	len = ft_maxlen_tab(tab, 1) + lst->preci;
+	len = ft_maxlen_tab(tab, 1) + PRECI;
 	larg = ft_maxlen_tab(tab, 0);
 	larg = ulen_base(MIN(larg - 1, larg), 10);
-	llen = ulen_base(len, 10) + lst->preci;
+	llen = ulen_base(len, 10) + PRECI;
 	llen -= (((len % 10) == 0) ? 1 : 0);
 	ret = ft_sprintf(&str, "%*.c |", larg + 1, ' ');
 	put_buff(lst, str, ret, 1);
@@ -94,17 +94,17 @@ static	void pf_doublestring(t_pf *lst, char **tab, int len, int larg)
 	pf_puttab(lst, tab, len, larg);
 }
 
-int		conv_tabstring(t_pf *lst, char *str, int index)
+int			conv_tabstring(t_pf *lst, char *str, int index)
 {
 	char		**tab;
-	wuchar_t c;
+	wuchar_t	c;
 
 	lst_putoption(lst, str, index);
 	tab = va_arg(lst->va_copy, char**);
 	c = '\n';
-	if (lst->point == 1)
+	if (POINT == 1)
 		pf_doublestring(lst, tab, 0, 0);
-	while (*tab != NULL && lst->point == 0)
+	while (*tab != NULL && POINT == 0)
 	{
 		put_buff(lst, (wuchar_t*)*tab, ft_strlen(*tab), 0);
 		if (*tab++ != NULL)

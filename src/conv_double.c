@@ -1,136 +1,147 @@
 /* ************************************************************************** */
-/*                                                          Le - /            */
+/*                                                          LE - /            */
 /*                                                              /             */
-/*   main.c                                           .::    .:/ .      .::   */
+/*   conv_double.c                                    .::    .:/ .      .::   */
 /*                                                 +:+:+   +:    +:  +:+:+    */
-/*   By: rgermain <marvin@Le-101.fr>                +:+   +:    +:    +:+     */
+/*   By: rgermain <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
-/*   Created: 2018/12/19 22:28:54 by rgermain     #+#   ##    ##    #+#       */
-/*   Updated: 2018/12/20 14:33:21 by rgermain    ###    #+. /#+    ###.fr     */
+/*   Created: 2019/01/04 16:25:42 by rgermain     #+#   ##    ##    #+#       */
+/*   Updated: 2019/01/04 16:25:43 by rgermain    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-static void put_double(t_pf *lst, ulong_t nb[BUFF_FLOAT], size_t i)
+static void	remove_zero(t_pf *lst, ulong_t nb[BUFF_FLOAT], int i, size_t index)
 {
-	wuchar_t	*new;
-	size_t 		max;
-	int				ret;
-	char 			c;
-
-	put_itoa(lst, nb[i++]);
-	if (lst->preci > 0)
-		put_buff(lst, ".", 1, 0);
-	while ((i - 1) < (size_t)lst->preci)
-		put_itoa(lst, nb[i++]);
-	if (lst->conv != 'f' && lst->conv != 'F' &&
-			lst->conv != 'g' && lst->conv != 'G')
+	if ((CONV == 'g' || CONV == 'G') && (index == 1 || index == 3))
 	{
-		c = (lst->maj == 1 ? 'E' : 'e');
-		max = ((lst->conv == 'a' || lst->conv == 'A') ? 1 : 2);
-		ret = ft_sprintf(&new, "%c%+.*d", c, max,lst->exponent);
-		put_buff(lst, new, ret, 1);
-	}
-}
-
-static void roundup_double(t_pf *lst, ulong_t nb[BUFF_FLOAT], int i, int max)
-{
-	i = lst->preci + 2;
-	max = lst->preci + 2;
-	while (i > 0)
-	{
-		if ((nb[i] >= (lst->base / 2) && (i == max || i == (max - 1))) ||
-			(nb[i] >= lst->base && i > 0))
+		while (i < PRECI)
 		{
-			nb[i - 1] += 1;
-			nb[i] = nb[i] % lst->base;
+			if (nb[i] == 0)
+				PRECI++;
+			else
+				break ;
+			i++;
 		}
-		i--;
 	}
-	if (lst->conv == 'g' || lst->conv == 'G')
+	if ((CONV == 'g' || CONV == 'G') && (index == 2 || index == 3))
 	{
-		i = lst->preci;
+		i = PRECI;
 		while (i > 1)
 		{
 			if (nb[i] == 0)
-				lst->preci--;
+				PRECI--;
 			else
-				break;
+				break ;
 			i--;
 		}
 	}
-	put_double(lst, nb, 0);
 }
 
-static void 	assign_double(t_pf *lst, size_t i, int j)
+static void	put_double(t_pf *lst, ulong_t nb[BUFF_FLOAT], int i, int max)
 {
-	ulong_t nb[BUFF_FLOAT];
-	size_t 				preci;
+	remove_zero(lst, nb, 1, 3);
+	i = PRECI + 1;
+	max = PRECI + 1;
+	while (i > 0)
+	{
+		if ((nb[i] >= (BASE / 2) && i == max) ||
+			(nb[i] >= BASE && i > 0))
+		{
+			nb[i - 1] += 1;
+			nb[i] = nb[i] % BASE;
+		}
+		i--;
+	}
+	remove_zero(lst, nb, 0, 2);
+	put_itoa(lst, nb[i++]);
+	if (PRECI > 0)
+		put_buff(lst, ".", 1, 0);
+	while ((i - 1) < PRECI)
+		put_itoa(lst, nb[i++]);
+}
 
-	preci = lst->preci + 2;
+static void	assign_double(t_pf *lst, size_t i, int j)
+{
+	ulong_t	nb[BUFF_FLOAT];
+	size_t	preci;
+	size_t	verif;
+
+	preci = PRECI + 1;
 	nb[i++] = lst->ul_nb;
-	j = (lst->ful_nb != 0 ? ulen_base(lst->ful_nb, lst->base) : 0);
+	verif = 0;
+	j = (lst->ful_nb != 0 ? ulen_base(lst->ful_nb, BASE) : 0);
 	i += j;
 	while (j > 0)
 	{
-		nb[j--] = lst->ful_nb % lst->base;
-		lst->ful_nb /= lst->base;
+		nb[j--] = lst->ful_nb % BASE;
+		lst->ful_nb /= BASE;
 	}
 	while (preci > 0)
 	{
-		lst->fl_nb *= lst->base;
+		lst->fl_nb *= BASE;
+		if ((int)lst->fl_nb != 0 && verif == 0)
+			preci--;
+		else if ((int)lst->fl_nb != 0)
+			verif = 0;
 		nb[i++] = (int)lst->fl_nb;
 		lst->fl_nb -= (int)lst->fl_nb;
-		preci--;
 	}
-	roundup_double(lst, nb, 0, 0);
+	put_double(lst, nb, 0, 0);
 }
 
-static int max_calc(t_pf *lst, int max)
+static int	max_calc(t_pf *lst, int max)
 {
-	if (lst->space == 1 && lst->sign != '+' && lst->psign == 0)
+	if (SPACE == 1 && SIGN != '+' && PSIGN == 0)
 	{
 		put_prefix(lst, 0, 1, 0);
-		if (lst->field > 0)
-			lst->field--;
-		else if (lst->field < 0)
-			lst->field++;
+		if (FIELD > 0)
+			FIELD--;
+		else if (FIELD < 0)
+			FIELD++;
 	}
 	if (lst->ul_nb > 9223372036854775807)
 		max = 3;
 	else
 	{
-		if ((lst->conv == 'g' || lst->conv == 'G') && lst->ul_nb != 0)
-			lst->preci--;
-		max = ulen_base(lst->ul_nb, lst->base) + lst->preci;
-		max += (lst->psign != 0 ? 1 : 0);
-		max += ((lst->point == 0 || lst->preci > 0) ? 1 : 0);
-		if (lst->conv != 'f' && lst->conv != 'F' &&
-			lst->conv != 'g' && lst->conv != 'G')
-			max += 2 + MAX(ulen_base(ABS(lst->exponent), lst->base), 2);
+		if ((CONV == 'g' || CONV == 'G') && lst->ul_nb != 0)
+			PRECI = (PRECI == 0 ? 0 : PRECI - 1);
+		max = ulen_base(lst->ul_nb, BASE) + PRECI;
+		max += (PSIGN != 0 ? 1 : 0);
+		max += ((POINT == 0 || PRECI > 0) ? 1 : 0);
+		if (CONV == 'e' || CONV == 'E')
+			max += 2 + MAX(ulen_base(ABS(EXPONENT), BASE), 2);
 	}
 	return (max);
 }
 
-
-int	conv_double(t_pf *lst, char *str, int index)
+int			conv_double(t_pf *lst, char *str, int index)
 {
-	int 	max;
+	wuchar_t	*new;
+	int			ret;
+	int			max;
+	char		c;
 
+	max = 0;
 	lst_putoption(lst, str, index);
 	lst_putdouble(lst);
 	max = max_calc(lst, 0);
-	if (lst->zero == 1)
+	if (ZERO == 1)
 		put_sign(lst);
-	put_prefix(lst, max, lst->field, lst->zero);
-	if (lst->zero == 0)
+	put_prefix(lst, max, FIELD, ZERO);
+	if (ZERO == 0)
 		put_sign(lst);
 	if (lst->ul_nb > 9223372036854775807)
 		put_buff(lst, ft_ustrdup((wuchar_t*)("nan")), 3, 1);
 	else
 		assign_double(lst, 0, 0);
-	put_prefix(lst, max, -lst->field, 0);
+	if (CONV != 'e' || CONV != 'E')
+	{
+		c = (MAJ == 1 ? 'E' : 'e');
+		ret = ft_sprintf(&new, "%c%+.2d", c, EXPONENT);
+		put_buff(lst, new, ret, 1);
+	}
 	return (index + 1);
 }

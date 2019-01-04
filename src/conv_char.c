@@ -1,19 +1,19 @@
 /* ************************************************************************** */
 /*                                                          LE - /            */
 /*                                                              /             */
-/*   ft_params_char.c                                 .::    .:/ .      .::   */
+/*   conv_char.c                                      .::    .:/ .      .::   */
 /*                                                 +:+:+   +:    +:  +:+:+    */
 /*   By: rgermain <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
-/*   Created: 2018/12/10 16:21:44 by rgermain     #+#   ##    ##    #+#       */
-/*   Updated: 2018/12/19 23:37:10 by rgermain    ###    #+. /#+    ###.fr     */
+/*   Created: 2019/01/04 16:23:36 by rgermain     #+#   ##    ##    #+#       */
+/*   Updated: 2019/01/04 16:23:41 by rgermain    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-static wuchar_t *pf_convwchar(t_pf *lst, wchar_t wc)
+static wuchar_t	*pf_convwchar(t_pf *lst, wchar_t wc)
 {
 	wuchar_t	*new;
 	size_t		a;
@@ -25,7 +25,7 @@ static wuchar_t *pf_convwchar(t_pf *lst, wchar_t wc)
 	return (new);
 }
 
-static void	pf_putchar(t_pf *lst, wuchar_t c, wuchar_t *wc, int index)
+static void		pf_putchar(t_pf *lst, wuchar_t c, wuchar_t *wc, int index)
 {
 	size_t max;
 
@@ -33,24 +33,29 @@ static void	pf_putchar(t_pf *lst, wuchar_t c, wuchar_t *wc, int index)
 		max = len_wuchart(wc);
 	else
 		max = 1;
-	put_prefix(lst, max, lst->field, lst->zero);
+	put_prefix(lst, max, FIELD, ZERO);
 	put_buff(lst, (index == 1 ? wc : &c), max, index);
-	put_prefix(lst, max, -lst->field, 0);
+	put_prefix(lst, max, -FIELD, 0);
 }
 
-int			conv_char(t_pf *lst, char *str, int index)
+int				conv_char(t_pf *lst, char *str, int index)
 {
-	wuchar_t *wc;
+	wuchar_t	*wc;
+	size_t		verif;
 
 	lst_putoption(lst, str, index);
-	if ((lst->lenght >= 10 && lst->lenght <= 20) || lst->conv == 'C')
-	{
-		wc = pf_convwchar(lst, va_arg(lst->va_copy, wchar_t));
-		pf_putchar(lst, 0, wc, 1);
-	}
-	else if (lst->conv == 'c')
-		pf_putchar(lst, (wuchar_t)(char)va_arg(lst->va_copy, int), 0, 0);
-	else
+	if (CONV != 'c' && CONV != 'C')
 		pf_putchar(lst, str[index], 0, 0);
+	else
+	{
+		verif = va_arg(lst->va_copy, int);
+		if (verif > 127)
+			wc = pf_convwchar(lst, verif);
+		if (((LENGHT >= 10 && LENGHT <= 20) || CONV == 'C')
+				&& verif > 127)
+			pf_putchar(lst, 0, wc, 1);
+		else
+			pf_putchar(lst, (char)verif, 0, 0);
+	}
 	return (index + 1);
 }
