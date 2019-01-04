@@ -49,36 +49,28 @@ static WUCHAR_T	*comv_wstr(t_pf *lst, wchar_t *wstr, size_t len)
 	count = 0;
 	if (!(str = (WUCHAR_T*)malloc(sizeof(WUCHAR_T) * nlen_wchar(wstr, len))))
 		ftprintf_error(lst, "comv_wstr", 1);
-	while (wstr[count] != '\0' && count < len)
+	while (wstr[count] != '\0' && count < len && i < len)
 		convert_wchar(&str, wstr[count++], &i);
 	return (str);
 }
 
 void			pf_string(t_pf *lst, WUCHAR_T *str, wchar_t *wstr, int index)
 {
-	size_t	len;
-	int		max;
+	size_t	max;
 
-	max = (index == 2 ? len_wchar(wstr) : ft_ustrlen(str));
-	if (max == -1)
-	{
-		lst->buff_count = -1;
-		return ;
-	}
-	if (POINT == 1)
-		max = ft_min2(PRECI, max);
+	max = 0;
+	if (index == 0)
+		max = (POINT == 0 ? len_pstrn(str, 0, 1) : len_pstrn(str, PRECI, 0));
+	else if (index == 1)
+		max = (POINT == 0 ? ft_ustrlen(str) : ft_ustrnlen(str, PRECI));
+	else if (index == 2)
+		max = (POINT == 0 ? len_wchar(wstr) : nlen_wchar(wstr, PRECI));
 	put_prefix(lst, max, FIELD, ZERO);
 	if (index == 0)
-		len = len_pstrn(str, PRECI, POINT);
-	else if (index == 1)
-		len = (POINT == 0 ? ft_ustrlen(str) : ft_ustrnlen(str, PRECI));
-	else
-		len = (POINT == 0 ? len_wchar(wstr) : nlen_wchar(wstr, PRECI));
-	if (index == 0)
-		str = comv_pstr(lst, str, len);
+		str = comv_pstr(lst, str, max);
 	else if (index == 2)
-		str = comv_wstr(lst, wstr, len);
-	put_buff(lst, str, len, 1);
+		str = comv_wstr(lst, wstr, max);
+	put_buff(lst, str, max, 1);
 	put_prefix(lst, max, -FIELD, 0);
 }
 

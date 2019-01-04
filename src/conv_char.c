@@ -18,7 +18,7 @@ static WUCHAR_T	*pf_convwchar(t_pf *lst, wchar_t wc)
 	WUCHAR_T	*new;
 	size_t		a;
 
-	if (!(new = (WUCHAR_T*)malloc(sizeof(WUCHAR_T) * len_wchar_single(wc) + 1)))
+	if (!(new = (WUCHAR_T*)malloc(len_wchar_single(wc) + 1)))
 		ftprintf_error(lst, "pf_convwchar", 1);
 	a = 0;
 	convert_wchar(&new, wc, &a);

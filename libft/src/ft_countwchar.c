@@ -51,13 +51,24 @@ size_t	len_wuchart(unsigned char *str)
 int		nlen_wchar(wchar_t *str, size_t len)
 {
 	size_t	count;
+	size_t	count2;
 	size_t	a;
 
 	count = 0;
+	count2 = 0;
 	a = 0;
-	while (str[a] != '\0' && a < len)
-		count += len_wchar_single(str[a++]);
-	return (count);
+	while (str[a] != '\0')
+	{
+		count = len_wchar_single(str[a]);
+		if ((count2 + count) > len)
+			return (count2);
+		else if ((count2 + count) == len)
+			return (count2 + count);
+		else
+			count2 += count;
+		a++;
+	}
+	return (count2);
 }
 
 void	convert_wchar(unsigned char **new, wchar_t wc, size_t *i)
