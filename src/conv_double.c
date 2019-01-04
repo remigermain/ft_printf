@@ -5,15 +5,15 @@
 /*                                                 +:+:+   +:    +:  +:+:+    */
 /*   By: rgermain <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
-/*   Created: 2019/01/04 16:25:42 by rgermain     #+#   ##    ##    #+#       */
-/*   Updated: 2019/01/04 16:25:43 by rgermain    ###    #+. /#+    ###.fr     */
+/*   Created: 2019/01/04 16:38:32 by rgermain     #+#   ##    ##    #+#       */
+/*   Updated: 2019/01/04 16:38:33 by rgermain    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-static void	remove_zero(t_pf *lst, ulong_t nb[BUFF_FLOAT], int i, size_t index)
+static void	remove_zero(t_pf *lst, ULONG_T nb[BUFF_FLOAT], int i, size_t index)
 {
 	if ((CONV == 'g' || CONV == 'G') && (index == 1 || index == 3))
 	{
@@ -40,7 +40,7 @@ static void	remove_zero(t_pf *lst, ulong_t nb[BUFF_FLOAT], int i, size_t index)
 	}
 }
 
-static void	put_double(t_pf *lst, ulong_t nb[BUFF_FLOAT], int i, int max)
+static void	put_double(t_pf *lst, ULONG_T nb[BUFF_FLOAT], int i, int max)
 {
 	remove_zero(lst, nb, 1, 3);
 	i = PRECI + 1;
@@ -65,7 +65,7 @@ static void	put_double(t_pf *lst, ulong_t nb[BUFF_FLOAT], int i, int max)
 
 static void	assign_double(t_pf *lst, size_t i, int j)
 {
-	ulong_t	nb[BUFF_FLOAT];
+	ULONG_T	nb[BUFF_FLOAT];
 	size_t	preci;
 	size_t	verif;
 
@@ -119,7 +119,7 @@ static int	max_calc(t_pf *lst, int max)
 
 int			conv_double(t_pf *lst, char *str, int index)
 {
-	wuchar_t	*new;
+	WUCHAR_T	*new;
 	int			ret;
 	int			max;
 	char		c;
@@ -134,7 +134,7 @@ int			conv_double(t_pf *lst, char *str, int index)
 	if (ZERO == 0)
 		put_sign(lst);
 	if (lst->ul_nb > 9223372036854775807)
-		put_buff(lst, ft_ustrdup((wuchar_t*)("nan")), 3, 1);
+		put_buff(lst, ft_ustrdup((WUCHAR_T*)("nan")), 3, 1);
 	else
 		assign_double(lst, 0, 0);
 	if (CONV != 'e' || CONV != 'E')

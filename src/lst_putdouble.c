@@ -5,36 +5,36 @@
 /*                                                 +:+:+   +:    +:  +:+:+    */
 /*   By: rgermain <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
-/*   Created: 2019/01/04 16:25:11 by rgermain     #+#   ##    ##    #+#       */
-/*   Updated: 2019/01/04 16:25:13 by rgermain    ###    #+. /#+    ###.fr     */
+/*   Created: 2019/01/04 16:38:43 by rgermain     #+#   ##    ##    #+#       */
+/*   Updated: 2019/01/04 16:38:44 by rgermain    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-static void	lst_putdouble_pos(t_pf *lst, long double nb, ulong_t coef)
+static void	lst_putdouble_pos(t_pf *lst, long double nb, ULONG_T coef)
 {
-	while (((coef * BASE) < (ulong_t)nb) && nb != 0)
+	while (((coef * BASE) < (ULONG_T)nb) && nb != 0)
 	{
 		dprintf(1, "ddd\n");
 		coef *= BASE;
 		EXPONENT++;
 	}
-	lst->ul_nb = (ulong_t)nb / coef;
+	lst->ul_nb = (ULONG_T)nb / coef;
 	lst->ful_nb = nb - (lst->ul_nb * coef);
-	lst->fl_nb = nb - (ulong_t)nb;
+	lst->fl_nb = nb - (ULONG_T)nb;
 }
 
-static void	lst_putdouble_neg(t_pf *lst, long double nb, ulong_t coef)
+static void	lst_putdouble_neg(t_pf *lst, long double nb, ULONG_T coef)
 {
-	while (((ulong_t)(coef * nb) <= 0) && nb != 0)
+	while (((ULONG_T)(coef * nb) <= 0) && nb != 0)
 	{
 		dprintf(1, "ddd\n");
 		coef *= BASE;
 		EXPONENT--;
 	}
-	lst->ul_nb = (ulong_t)(nb * coef);
+	lst->ul_nb = (ULONG_T)(nb * coef);
 	lst->fl_nb = (nb * coef) - lst->ul_nb;
 }
 
@@ -45,10 +45,10 @@ static void	lst_putdouble_main(t_pf *lst, long double nb)
 	if ((CONV == 'f' || CONV == 'F') || (CONV == 'g' &&
 			PRECI >= ulen_base(nb, BASE)))
 	{
-		lst->ul_nb = (ulong_t)nb;
-		lst->fl_nb = nb - (ulong_t)nb;
+		lst->ul_nb = (ULONG_T)nb;
+		lst->fl_nb = nb - (ULONG_T)nb;
 	}
-	else if ((ulong_t)nb > 0)
+	else if ((ULONG_T)nb > 0)
 		lst_putdouble_pos(lst, nb, 1);
 	else
 		lst_putdouble_neg(lst, nb, 1);
@@ -71,8 +71,8 @@ void		lst_putdouble(t_pf *lst)
 	}
 	else if (nb >= 0 && SIGN == '+')
 		PSIGN = 2;
-	if ((ulong_t)nb > 9223372036854775807)
-		lst->ul_nb = (ulong_t)nb;
+	if ((ULONG_T)nb > 9223372036854775807)
+		lst->ul_nb = (ULONG_T)nb;
 	else
 		lst_putdouble_main(lst, nb);
 }

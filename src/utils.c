@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                          LE - /            */
 /*                                                              /             */
-/*   utils4.c                                         .::    .:/ .      .::   */
+/*   utils.c                                          .::    .:/ .      .::   */
 /*                                                 +:+:+   +:    +:  +:+:+    */
 /*   By: rgermain <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
-/*   Created: 2018/11/27 20:49:03 by rgermain     #+#   ##    ##    #+#       */
-/*   Updated: 2019/01/04 15:45:54 by rgermain    ###    #+. /#+    ###.fr     */
+/*   Created: 2019/01/04 16:38:55 by rgermain     #+#   ##    ##    #+#       */
+/*   Updated: 2019/01/04 16:38:56 by rgermain    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -30,7 +30,7 @@ void	ftprintf_error(t_pf *lst, char *str, size_t index)
 	exit(0);
 }
 
-int		ulen_base(ulong_t nb, size_t base)
+int		ulen_base(ULONG_T nb, size_t base)
 {
 	int count;
 
@@ -43,7 +43,7 @@ int		ulen_base(ulong_t nb, size_t base)
 	return (count + 1);
 }
 
-size_t	len_pstrn(wuchar_t *str, size_t len, size_t index)
+size_t	len_pstrn(WUCHAR_T *str, size_t len, size_t index)
 {
 	size_t i;
 	size_t a;

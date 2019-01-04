@@ -5,8 +5,8 @@
 /*                                                 +:+:+   +:    +:  +:+:+    */
 /*   By: rgermain <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
-/*   Created: 2018/11/11 15:09:25 by rgermain     #+#   ##    ##    #+#       */
-/*   Updated: 2019/01/04 15:39:08 by rgermain    ###    #+. /#+    ###.fr     */
+/*   Created: 2019/01/04 16:38:22 by rgermain     #+#   ##    ##    #+#       */
+/*   Updated: 2019/01/04 16:38:23 by rgermain    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -37,7 +37,7 @@ static int		ftprintf_base(char *str, t_pf *lst, size_t i, size_t j)
 	return (lst->count);
 }
 
-int				ft_sprintf(wuchar_t **dest, const char *format, ...)
+int				ft_sprintf(WUCHAR_T **dest, const char *format, ...)
 {
 	t_pf	*lst;
 	int		i;

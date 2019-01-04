@@ -5,8 +5,8 @@
 /*                                                 +:+:+   +:    +:  +:+:+    */
 /*   By: rgermain <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
-/*   Created: 2019/01/04 16:24:47 by rgermain     #+#   ##    ##    #+#       */
-/*   Updated: 2019/01/04 16:24:48 by rgermain    ###    #+. /#+    ###.fr     */
+/*   Created: 2019/01/04 16:39:28 by rgermain     #+#   ##    ##    #+#       */
+/*   Updated: 2019/01/04 16:39:29 by rgermain    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -17,7 +17,7 @@ static void	pf_puttab_back(t_pf *lst, int len, int b)
 {
 	int			llen;
 	int			ret;
-	wuchar_t	*str;
+	WUCHAR_T	*str;
 
 	llen = ulen_base(len, 10) + PRECI;
 	llen -= (((len % 10) == 0) ? 1 : 0);
@@ -36,7 +36,7 @@ static void	pf_puttab_back(t_pf *lst, int len, int b)
 
 static void	pf_puttab_end(t_pf *lst, int larg, int max)
 {
-	wuchar_t	*str;
+	WUCHAR_T	*str;
 	int			ret;
 
 	if (PRECI == 1)
@@ -48,7 +48,7 @@ static void	pf_puttab_end(t_pf *lst, int larg, int max)
 
 static void	pf_puttab(t_pf *lst, char **tab, int len, int larg)
 {
-	wuchar_t	*str;
+	WUCHAR_T	*str;
 	int			llen;
 	int			a;
 	int			b;
@@ -73,7 +73,7 @@ static void	pf_puttab(t_pf *lst, char **tab, int len, int larg)
 
 static void	pf_doublestring(t_pf *lst, char **tab, int len, int larg)
 {
-	wuchar_t	*str;
+	WUCHAR_T	*str;
 	int			b;
 	int			ret;
 	int			llen;
@@ -97,7 +97,7 @@ static void	pf_doublestring(t_pf *lst, char **tab, int len, int larg)
 int			conv_tabstring(t_pf *lst, char *str, int index)
 {
 	char		**tab;
-	wuchar_t	c;
+	WUCHAR_T	c;
 
 	lst_putoption(lst, str, index);
 	tab = va_arg(lst->va_copy, char**);
@@ -106,7 +106,7 @@ int			conv_tabstring(t_pf *lst, char *str, int index)
 		pf_doublestring(lst, tab, 0, 0);
 	while (*tab != NULL && POINT == 0)
 	{
-		put_buff(lst, (wuchar_t*)*tab, ft_strlen(*tab), 0);
+		put_buff(lst, (WUCHAR_T*)*tab, ft_strlen(*tab), 0);
 		if (*tab++ != NULL)
 			put_buff(lst, &c, 1, 0);
 	}

@@ -5,27 +5,27 @@
 /*                                                 +:+:+   +:    +:  +:+:+    */
 /*   By: rgermain <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
-/*   Created: 2019/01/04 16:23:36 by rgermain     #+#   ##    ##    #+#       */
-/*   Updated: 2019/01/04 16:23:41 by rgermain    ###    #+. /#+    ###.fr     */
+/*   Created: 2019/01/04 16:37:51 by rgermain     #+#   ##    ##    #+#       */
+/*   Updated: 2019/01/04 16:37:52 by rgermain    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-static wuchar_t	*pf_convwchar(t_pf *lst, wchar_t wc)
+static WUCHAR_T	*pf_convwchar(t_pf *lst, wchar_t wc)
 {
-	wuchar_t	*new;
+	WUCHAR_T	*new;
 	size_t		a;
 
-	if (!(new = (wuchar_t*)malloc(sizeof(wuchar_t) * len_wchar_single(wc) + 1)))
+	if (!(new = (WUCHAR_T*)malloc(sizeof(WUCHAR_T) * len_wchar_single(wc) + 1)))
 		ftprintf_error(lst, "pf_convwchar", 1);
 	a = 0;
 	convert_wchar(&new, wc, &a);
 	return (new);
 }
 
-static void		pf_putchar(t_pf *lst, wuchar_t c, wuchar_t *wc, int index)
+static void		pf_putchar(t_pf *lst, WUCHAR_T c, WUCHAR_T *wc, int index)
 {
 	size_t max;
 
@@ -40,7 +40,7 @@ static void		pf_putchar(t_pf *lst, wuchar_t c, wuchar_t *wc, int index)
 
 int				conv_char(t_pf *lst, char *str, int index)
 {
-	wuchar_t	*wc;
+	WUCHAR_T	*wc;
 	size_t		verif;
 
 	lst_putoption(lst, str, index);

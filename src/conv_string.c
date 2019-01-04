@@ -5,23 +5,23 @@
 /*                                                 +:+:+   +:    +:  +:+:+    */
 /*   By: rgermain <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
-/*   Created: 2019/01/04 16:24:33 by rgermain     #+#   ##    ##    #+#       */
-/*   Updated: 2019/01/04 16:24:34 by rgermain    ###    #+. /#+    ###.fr     */
+/*   Created: 2019/01/04 16:38:13 by rgermain     #+#   ##    ##    #+#       */
+/*   Updated: 2019/01/04 16:38:14 by rgermain    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-static wuchar_t	*comv_pstr(t_pf *lst, wuchar_t *str, size_t len)
+static WUCHAR_T	*comv_pstr(t_pf *lst, WUCHAR_T *str, size_t len)
 {
-	wuchar_t	*new;
+	WUCHAR_T	*new;
 	size_t		i;
 	size_t		j;
 
 	i = 0;
 	j = 0;
-	if (!(new = (wuchar_t*)malloc(sizeof(wuchar_t) * len + 1)))
+	if (!(new = (WUCHAR_T*)malloc(sizeof(WUCHAR_T) * len + 1)))
 		ftprintf_error(lst, "pf_putpstr", 1);
 	while (str[i] != '\0' && i < len)
 	{
@@ -39,22 +39,22 @@ static wuchar_t	*comv_pstr(t_pf *lst, wuchar_t *str, size_t len)
 	return (new);
 }
 
-static wuchar_t	*comv_wstr(t_pf *lst, wchar_t *wstr, size_t len)
+static WUCHAR_T	*comv_wstr(t_pf *lst, wchar_t *wstr, size_t len)
 {
-	wuchar_t	*str;
+	WUCHAR_T	*str;
 	size_t		i;
 	size_t		count;
 
 	i = 0;
 	count = 0;
-	if (!(str = (wuchar_t*)malloc(sizeof(wuchar_t) * nlen_wchar(wstr, len))))
+	if (!(str = (WUCHAR_T*)malloc(sizeof(WUCHAR_T) * nlen_wchar(wstr, len))))
 		ftprintf_error(lst, "comv_wstr", 1);
 	while (wstr[count] != '\0' && count < len)
 		convert_wchar(&str, wstr[count++], &i);
 	return (str);
 }
 
-void			pf_string(t_pf *lst, wuchar_t *str, wchar_t *wstr, int index)
+void			pf_string(t_pf *lst, WUCHAR_T *str, wchar_t *wstr, int index)
 {
 	size_t	len;
 	int		max;
@@ -84,7 +84,7 @@ void			pf_string(t_pf *lst, wuchar_t *str, wchar_t *wstr, int index)
 
 int				conv_string(t_pf *lst, char *str, int index)
 {
-	wuchar_t	*ustr;
+	WUCHAR_T	*ustr;
 	wchar_t		*wstr;
 
 	lst_putoption(lst, str, index);
@@ -98,7 +98,7 @@ int				conv_string(t_pf *lst, char *str, int index)
 	}
 	else
 	{
-		ustr = (wuchar_t*)va_arg(lst->va_copy, char*);
+		ustr = (WUCHAR_T*)va_arg(lst->va_copy, char*);
 		if (ustr == NULL)
 			ustr = ft_strudup("(null)");
 		else

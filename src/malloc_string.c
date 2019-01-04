@@ -5,8 +5,8 @@
 /*                                                 +:+:+   +:    +:  +:+:+    */
 /*   By: rgermain <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
-/*   Created: 2019/01/04 16:26:02 by rgermain     #+#   ##    ##    #+#       */
-/*   Updated: 2019/01/04 16:26:03 by rgermain    ###    #+. /#+    ###.fr     */
+/*   Created: 2019/01/04 16:39:10 by rgermain     #+#   ##    ##    #+#       */
+/*   Updated: 2019/01/04 16:39:11 by rgermain    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -15,11 +15,11 @@
 
 void	comvert_buff(t_pf *lst, void *tmp, size_t len)
 {
-	wuchar_t	*new;
+	WUCHAR_T	*new;
 	size_t		len_malloc;
 
 	len_malloc = lst->count + lst->buff_count + len + 1;
-	if ((new = (wuchar_t*)ft_memalloc(len_malloc)) == NULL)
+	if ((new = (WUCHAR_T*)ft_memalloc(len_malloc)) == NULL)
 		ftprintf_error(lst, "comvert_buff", 1);
 	new[lst->count + lst->buff_count + len + 1] = '\0';
 	ft_memcpy(new, lst->str, lst->count);
@@ -47,9 +47,9 @@ void	put_buff(t_pf *lst, void *tmp, size_t len, size_t index)
 		free(tmp);
 }
 
-void	put_itoa(t_pf *lst, ulong_t n)
+void	put_itoa(t_pf *lst, ULONG_T n)
 {
-	wuchar_t	tmp[27];
+	WUCHAR_T	tmp[27];
 	int			len;
 	int			mlen;
 
@@ -74,7 +74,7 @@ void	put_itoa(t_pf *lst, ulong_t n)
 void	put_prefix(t_pf *lst, int len, int nb, int point)
 {
 	size_t		llen;
-	wuchar_t	tmp[nb - len];
+	WUCHAR_T	tmp[nb - len];
 
 	llen = (nb - len);
 	if (len >= nb)

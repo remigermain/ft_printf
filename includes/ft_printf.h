@@ -1,15 +1,15 @@
 /* ************************************************************************** */
-/*                                                          LE - /            */
-/*                                                              /             */
-/*   ft_printf.h                                      .::    .:/ .      .::   */
-/*                                                 +:+:+   +:    +:  +:+:+    */
-/*   By: rgermain <marvin@le-101.fr>                +:+   +:    +:    +:+     */
-/*                                                 #+#   #+    #+    #+#      */
-/*   Created: 2019/01/04 15:50:06 by rgermain     #+#   ##    ##    #+#       */
-/*   Updated: 2019/01/04 15:54:55 by rgermain    ###    #+. /#+    ###.fr     */
-/*                                                         /                  */
-/*                                                        /                   */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_printf.h                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: rgermain <rgermain@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/01/04 15:50:06 by rgermain          #+#    #+#             */
+/*   Updated: 2019/01/04 16:35:44 by rgermain         ###   ########.fr       */
+/*                                                                            */
 /* ************************************************************************** */
+
 
 #ifndef FT_PRINTF_H
 # define FT_PRINTF_H
@@ -53,11 +53,11 @@ typedef struct	s_printf
 	va_list			va_lst;
 	va_list			va_copy;
 	int				buff_count;
-	wuchar_t		buff[BUFF_PRINTF];
+	WUCHAR_T		buff[BUFF_PRINTF];
 	int				count;
-	wuchar_t		*str;
-	ulong_t			ul_nb;
-	ulong_t			ful_nb;
+	WUCHAR_T		*str;
+	ULONG_T			ul_nb;
+	ULONG_T			ful_nb;
 	long double		fl_nb;
 	int				exponent;
 	size_t			hash;
@@ -81,7 +81,7 @@ typedef struct	s_printf
 */
 int				ft_printf(const char *str, ...);
 int				ft_dprintf(int fd, const char *str, ...);
-int				ft_sprintf(wuchar_t **dest, const char *format, ...);
+int				ft_sprintf(WUCHAR_T **dest, const char *format, ...);
 int				find_conv(t_pf *lst, char *str, int index);
 
 /*
@@ -111,19 +111,19 @@ void			lst_putdouble(t_pf *lst);
 **	utils.c
 */
 void			ftprintf_error(t_pf *lst, char *str, size_t index);
-int				ulen_base(ulong_t nb, size_t base);
-size_t			len_pstrn(wuchar_t *str, size_t len, size_t index);
+int				ulen_base(ULONG_T nb, size_t base);
+size_t			len_pstrn(WUCHAR_T *str, size_t len, size_t index);
 int				conv_color(t_pf *lst, char *str, int index);
 
 /*
 **	fonctions qui put les signes( - , + , 0x )
 **			 ajoute les esapces et zero des precisions/field
-**				join le str entre eux && ulong_t itoa avec local
+**				join le str entre eux && ULONG_T itoa avec local
 **	utils_put.c
 */
 void			comvert_buff(t_pf *lst, void *tmp, size_t len);
 void			put_buff(t_pf *lst, void *tmp, size_t len, size_t index);
-void			put_itoa(t_pf *lst, ulong_t n);
+void			put_itoa(t_pf *lst, ULONG_T n);
 void			put_prefix(t_pf *lst, int len, int nb, int point);
 void			put_sign(t_pf *lst);
 
