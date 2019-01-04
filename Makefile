@@ -6,18 +6,19 @@
 #    By: rgermain <marvin@le-101.fr>                +:+   +:    +:    +:+      #
 #                                                  #+#   #+    #+    #+#       #
 #    Created: 2018/10/01 15:39:03 by rgermain     #+#   ##    ##    #+#        #
-#    Updated: 2018/12/19 23:02:17 by rgermain    ###    #+. /#+    ###.fr      #
+#    Updated: 2019/01/04 10:40:02 by rgermain    ###    #+. /#+    ###.fr      #
 #                                                          /                   #
 #                                                         /                    #
 # **************************************************************************** #
 
-NAME = ./a.out
 
-CFLAGS = -Wall -Werror -Wextra
+NAME = libftprintf.a
+
+//CFLAGS = -Wall -Werror -Wextra
 
 INCLUDE = -Iincludes
 
-CINC = includes/ft_printf.h libft/includes/libft.h includes/color.h
+CINC = includes/ft_printf.h libft/includes/libft.h
 
 SRC = main.c ft_printf.c find_conv.c \
 		conv_int.c conv_char.c conv_double.c conv_string.c \
@@ -37,26 +38,27 @@ COBJ = $(addprefix $(DOBJ),$(OBJ))
 all: $(NAME)
 
 $(NAME): $(COBJ)
-	@make -C libft/ all
 	@echo "Compilation de l'executable" $(NAME)
-	@gcc $? libft/libft.a -o $(NAME)
+	@ar ru $(NAME) $? libft/obj/*.o
+	@ranlib $(NAME)
 
 $(DOBJ)%.o : $(DSRC)%.c $(CINC)
+	@make -C libft/ all
 	@mkdir -p $(DOBJ)
 	@gcc $(CFLAGS) $(INCLUDE) -c $< -o $@
 	@echo "Compilation de la fonction "$<
 
 clean:
+	@make -C libft/ clean
 	@mkdir -p $(DOBJ)
 	@rm -rf $(DOBJ)
-	@make -C libft clean
 	@echo "Suppresion des objects"
 
 fclean: clean
+	@make -C libft/ fclean
 	@rm -f $(NAME)
-	@make -C libft fclean
 	@echo "Suppresion de la library "$(NAME)
 
 re: fclean all
 
-.PHONY: all clean fclean
+.PHONY: all clean fclean re
