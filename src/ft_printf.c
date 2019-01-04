@@ -33,8 +33,7 @@ static int		ftprintf_base(char *str, t_pf *lst, size_t i, size_t j)
 	}
 	va_end(lst->va_lst);
 	va_end(lst->va_copy);
-	comvert_buff(lst, NULL, 0);
-	return (lst->count);
+	return (lst->count + lst->buff_count);
 }
 
 int				ft_sprintf(WUCHAR_T **dest, const char *format, ...)
@@ -45,8 +44,8 @@ int				ft_sprintf(WUCHAR_T **dest, const char *format, ...)
 	lst = lst_init();
 	va_start(lst->va_lst, format);
 	i = ftprintf_base((char*)format, lst, 0, 0);
+	convert_buff(lst, NULL, 0);
 	*dest = lst->str;
-	free(lst);
 	return (i);
 }
 
@@ -58,7 +57,17 @@ int				ft_dprintf(int fd, const char *format, ...)
 	lst = lst_init();
 	va_start(lst->va_lst, format);
 	i = ftprintf_base((char*)format, lst, 0, 0);
-	write(fd, lst->str, i);
+	if (lst->count == 0)
+		write(fd, lst->buff, lst->buff_count);
+	else if (lst->buff_count == 0)
+		write(fd, lst->str, lst->count);
+	else
+	{
+		write(fd, lst->str, lst->count);
+		write(fd, lst->buff, lst->buff_count);
+	}
+	if (lst->str != NULL)
+		free(lst->str);
 	free(lst->str);
 	free(lst);
 	return (i);
@@ -72,8 +81,17 @@ int				ft_printf(const char *format, ...)
 	lst = lst_init();
 	va_start(lst->va_lst, format);
 	i = ftprintf_base((char*)format, lst, 0, 0);
-	write(1, lst->str, i);
-	free(lst->str);
+	if (lst->count == 0)
+		write(1, lst->buff, lst->buff_count);
+	else if (lst->buff_count == 0)
+		write(1, lst->str, lst->count);
+	else
+	{
+		write(1, lst->str, lst->count);
+		write(1, lst->buff, lst->buff_count);
+	}
+	if (lst->str != NULL)
+		free(lst->str);
 	free(lst);
 	return (i);
 }

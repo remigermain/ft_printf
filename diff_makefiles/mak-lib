@@ -14,18 +14,17 @@
 
 NAME = libftprintf.a
 
-//CFLAGS = -Wall -Werror -Wextra
+CFLAGS = -Wall -Werror -Wextra
 
 INCLUDE = -Iincludes
 
 CINC = includes/ft_printf.h libft/includes/libft.h
 
-SRC = main.c ft_printf.c find_conv.c \
+SRC = ft_printf.c find_conv.c \
 		conv_int.c conv_char.c conv_double.c conv_string.c \
 		conv_tabstring.c conv_other.c \
 		lst_init.c lst_putint.c lst_putdouble.c lst_putoption.c \
-		utils.c malloc_string.c put_color.c \
-		debug.c
+		utils.c put_string.c put_color.c
 
 OBJ = $(SRC:.c=.o)
 

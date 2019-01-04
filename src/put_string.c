@@ -13,7 +13,7 @@
 
 #include "ft_printf.h"
 
-void	comvert_buff(t_pf *lst, void *tmp, size_t len)
+void	convert_buff(t_pf *lst, void *tmp, size_t len)
 {
 	WUCHAR_T	*new;
 	size_t		len_malloc;
@@ -37,7 +37,7 @@ void	put_buff(t_pf *lst, void *tmp, size_t len, size_t index)
 	if (len == 0)
 		return ;
 	if (((lst->buff_count + len) >= BUFF_PRINTF) || len >= BUFF_PRINTF)
-		comvert_buff(lst, tmp, len);
+		convert_buff(lst, tmp, len);
 	else
 	{
 		ft_memcpy(lst->buff + lst->buff_count, tmp, len);

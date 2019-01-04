@@ -37,22 +37,22 @@ static void	conv_help2(void)
 
 static void	conv_help(void)
 {
-	ft_printf(" %{T_BLUE}\n |  	ft_printf    |\n |        by");
+	ft_printf(" %{T_BLUE}\n |    ft_printf    |\n |        by");
 	ft_printf("       |\n |  %Remi GERMAIN   |\n |        %C       ", 0x1F60E);
 	ft_printf(" |\n |  @Help_section  |\n\n");
-	ft_printf("%{T_EOC}  \n  	ft_printf(%{T_LGREY}\"string\"%{T_EOC},...)\n");
+	ft_printf("%{T_EOC}  \n    ft_printf(%{T_LGREY}\"string\"%{T_EOC},...)\n");
 	ft_printf("    ft_dprintf");
 	ft_printf("(%{T_CYAN}fd%{T_EOC}, %{T_LGREY}\"string\"%{T_EOC}");
 	ft_printf(",...)\n    ft_snprintf(%{T_RED}&wuchar_t%{T_EOC}, ");
 	ft_printf("%{T_LGREY}\"string\"%{T_EOC}),...)\n  \n");
 	ft_printf("%{T_BLUE} [conversion specifier]%{T_EOC}");
-	ft_printf("\n\n   s/S/r     for char &&   utf8 string && n");
+	ft_printf("\n\n   s/S/r     for char && utf8 string && n");
 	ft_printf("o printable string\n   c/C       for char && utf8 char\n   i/I");
 	ft_printf("/d/D   for integer\n");
-	ft_printf("\n   u/U       for unsigned integer  \n   b/B ");
+	ft_printf("   u/U       for unsigned integer  \n   b/B ");
 	ft_printf("      for unsigned binary integer\n   o/O       for unsigned o");
 	ft_printf("ctal integer\n   x/X       for unsigned hexadecimal integer\n ");
-	ft_printf("  p/P       forpointer\n   f/F       for double integer\n   ");
+	ft_printf("  p/P       for pointer\n   f/F       for double integer\n   ");
 	ft_printf("e/E       for double integer with exponent\n   ");
 	ft_printf("g/G       for double integer witout ending zero digit \n   n ");
 	ft_printf("        for assign to int* the Number of characters\n   ts   ");

@@ -18,11 +18,10 @@
 # include <stdarg.h>
 # include <stdio.h>
 
-# define BUFF_PRINTF 64
+# define BUFF_PRINTF 4096
 # define BUFF_FLOAT 256
 # define WUCHAR_T unsigned char
 # define ULONG_T unsigned long
-
 /*
 ** Macro divers
 */
@@ -121,7 +120,7 @@ int				conv_color(t_pf *lst, char *str, int index);
 **				join le str entre eux && ULONG_T itoa avec local
 **	utils_put.c
 */
-void			comvert_buff(t_pf *lst, void *tmp, size_t len);
+void			convert_buff(t_pf *lst, void *tmp, size_t len);
 void			put_buff(t_pf *lst, void *tmp, size_t len, size_t index);
 void			put_itoa(t_pf *lst, ULONG_T n);
 void			put_prefix(t_pf *lst, int len, int nb, int point);

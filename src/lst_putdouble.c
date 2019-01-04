@@ -17,7 +17,6 @@ static void	lst_putdouble_pos(t_pf *lst, long double nb, ULONG_T coef)
 {
 	while (((coef * BASE) < (ULONG_T)nb) && nb != 0)
 	{
-		dprintf(1, "ddd\n");
 		coef *= BASE;
 		EXPONENT++;
 	}
@@ -30,7 +29,6 @@ static void	lst_putdouble_neg(t_pf *lst, long double nb, ULONG_T coef)
 {
 	while (((ULONG_T)(coef * nb) <= 0) && nb != 0)
 	{
-		dprintf(1, "ddd\n");
 		coef *= BASE;
 		EXPONENT--;
 	}
