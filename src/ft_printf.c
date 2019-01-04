@@ -6,7 +6,7 @@
 /*   By: rgermain <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/01/04 16:38:22 by rgermain     #+#   ##    ##    #+#       */
-/*   Updated: 2019/01/04 16:38:23 by rgermain    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/01/04 19:49:15 by rgermain    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -28,7 +28,7 @@ static int		ftprintf_base(char *str, t_pf *lst, size_t i, size_t j)
 		j = strlen_perc(str + i, 0);
 		put_buff(lst, str + i, j, 0);
 		if (str[i + j] == '%')
-			i += find_conv(lst, (str + i + j), 1);
+			i += find_conv(lst, (str + i + j), 0);
 		i += j;
 	}
 	va_end(lst->va_lst);

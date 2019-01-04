@@ -6,7 +6,7 @@
 /*   By: rgermain <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/01/04 16:38:32 by rgermain     #+#   ##    ##    #+#       */
-/*   Updated: 2019/01/04 16:38:33 by rgermain    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/01/04 19:38:57 by rgermain    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -117,7 +117,7 @@ static int	max_calc(t_pf *lst, int max)
 	return (max);
 }
 
-int			conv_double(t_pf *lst, char *str, int index)
+void		conv_double(t_pf *lst)
 {
 	WUCHAR_T	*new;
 	int			ret;
@@ -125,7 +125,6 @@ int			conv_double(t_pf *lst, char *str, int index)
 	char		c;
 
 	max = 0;
-	lst_putoption(lst, str, index);
 	lst_putdouble(lst);
 	max = max_calc(lst, 0);
 	if (ZERO == 1)
@@ -143,5 +142,4 @@ int			conv_double(t_pf *lst, char *str, int index)
 		ret = ft_sprintf(&new, "%c%+.2d", c, EXPONENT);
 		put_buff(lst, new, ret, 1);
 	}
-	return (index + 1);
 }

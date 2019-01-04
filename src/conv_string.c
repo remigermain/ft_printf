@@ -74,12 +74,11 @@ void			pf_string(t_pf *lst, WUCHAR_T *str, wchar_t *wstr, int index)
 	put_prefix(lst, max, -FIELD, 0);
 }
 
-int				conv_string(t_pf *lst, char *str, int index)
+void			conv_string(t_pf *lst)
 {
 	WUCHAR_T	*ustr;
 	wchar_t		*wstr;
 
-	lst_putoption(lst, str, index);
 	if ((LENGHT >= 10 && LENGHT <= 20) || CONV == 'S')
 	{
 		wstr = va_arg(lst->va_copy, wchar_t*);
@@ -97,5 +96,4 @@ int				conv_string(t_pf *lst, char *str, int index)
 			ustr = ft_ustrdup(ustr);
 		pf_string(lst, ustr, NULL, (CONV == 'r' ? 0 : 1));
 	}
-	return (index + 1);
 }

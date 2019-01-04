@@ -6,7 +6,7 @@
 /*   By: rgermain <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/01/04 16:40:59 by rgermain     #+#   ##    ##    #+#       */
-/*   Updated: 2019/01/04 16:41:07 by rgermain    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/01/04 19:43:58 by rgermain    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -18,10 +18,11 @@
 # include <stdarg.h>
 # include <stdio.h>
 
-# define BUFF_PRINTF 4096
+# define BUFF_PRINTF 128
 # define BUFF_FLOAT 256
 # define WUCHAR_T unsigned char
 # define ULONG_T unsigned long
+
 /*
 ** Macro divers
 */
@@ -81,25 +82,26 @@ typedef struct	s_printf
 int				ft_printf(const char *str, ...);
 int				ft_dprintf(int fd, const char *str, ...);
 int				ft_sprintf(WUCHAR_T **dest, const char *format, ...);
-int				find_conv(t_pf *lst, char *str, int index);
+int				find_conv(t_pf *lst, char *str, int ret);
 
 /*
 ** fonctions des differentes convertion
 ** conv_*.c
 */
-int				conv_int(t_pf *lst, char *str, int index);
-int				conv_char(t_pf *lst, char *str, int index);
-int				conv_string(t_pf *lst, char *str, int index);
-int				conv_double(t_pf *lst, char *str, int index);
-int				conv_tabstring(t_pf *lst, char *str, int index);
-int				conv_other(t_pf *lst, char *str, int index);
+void			conv_void(t_pf *lst);
+void			conv_char(t_pf *lst);
+void			conv_int(t_pf *lst);
+void			conv_string(t_pf *lst);
+void			conv_double(t_pf *lst);
+void			conv_tabstring(t_pf *lst);
+void			conv_other(t_pf *lst);
 
 /*
 ** initialisation lst && fonction pour ajouter les differentes options
 ** lst_init.c && lst_base.c && lst_initnb.c
 */
 t_pf			*lst_init(void);
-void			lst_putoption(t_pf *lst, char *str, int index);
+int				lst_putoption(t_pf *lst, char *str, int index);
 void			lst_zero(t_pf *lst);
 void			lst_putdollar(t_pf *lst, int len);
 void			lst_putint(t_pf *lst);

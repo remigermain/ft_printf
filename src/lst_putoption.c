@@ -6,7 +6,7 @@
 /*   By: rgermain <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/01/04 16:26:12 by rgermain     #+#   ##    ##    #+#       */
-/*   Updated: 2019/01/04 16:26:13 by rgermain    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/01/04 19:39:12 by rgermain    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -97,15 +97,13 @@ static int	lst_putdigit(t_pf *lst, char *str, int count, int *neg)
 	return (count);
 }
 
-void		lst_putoption(t_pf *lst, char *str, int index)
+int			lst_putoption(t_pf *lst, char *str, int count)
 {
-	int		count;
 	int		neg;
 
-	count = 1;
 	neg = 1;
 	lst_zero(lst);
-	while (count <= index)
+	while (str[count] != '\0' && CONV == 0)
 	{
 		if (str[count] == '.')
 			POINT += str[count++] - 45;
@@ -124,4 +122,5 @@ void		lst_putoption(t_pf *lst, char *str, int index)
 			count = lst_putflag_conv(lst, str, count);
 	}
 	lst_base(lst);
+	return (count);
 }

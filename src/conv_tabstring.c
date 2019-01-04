@@ -6,7 +6,7 @@
 /*   By: rgermain <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/01/04 16:39:28 by rgermain     #+#   ##    ##    #+#       */
-/*   Updated: 2019/01/04 16:39:29 by rgermain    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/01/04 19:38:47 by rgermain    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -94,12 +94,11 @@ static void	pf_doublestring(t_pf *lst, char **tab, int len, int larg)
 	pf_puttab(lst, tab, len, larg);
 }
 
-int			conv_tabstring(t_pf *lst, char *str, int index)
+void		conv_tabstring(t_pf *lst)
 {
 	char		**tab;
 	WUCHAR_T	c;
 
-	lst_putoption(lst, str, index);
 	tab = va_arg(lst->va_copy, char**);
 	c = '\n';
 	if (POINT == 1)
@@ -110,5 +109,4 @@ int			conv_tabstring(t_pf *lst, char *str, int index)
 		if (*tab++ != NULL)
 			put_buff(lst, &c, 1, 0);
 	}
-	return (index + 1);
 }

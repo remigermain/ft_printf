@@ -6,7 +6,7 @@
 /*   By: rgermain <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/01/04 16:24:00 by rgermain     #+#   ##    ##    #+#       */
-/*   Updated: 2019/01/04 16:24:05 by rgermain    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/01/04 19:38:04 by rgermain    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -62,13 +62,12 @@ static void	ft_spacecalc(t_pf *lst)
 	}
 }
 
-int			conv_int(t_pf *lst, char *str, int index)
+void		conv_int(t_pf *lst)
 {
 	int len;
 	int max;
 	int sign;
 
-	lst_putoption(lst, str, index);
 	lst_putint(lst);
 	len = ulen_base(lst->ul_nb, BASE);
 	sign = sign_calc(lst);
@@ -87,5 +86,4 @@ int			conv_int(t_pf *lst, char *str, int index)
 	if (!(POINT == 1 && PRECI == 0 && lst->ul_nb == 0))
 		put_itoa(lst, lst->ul_nb);
 	put_prefix(lst, max, -FIELD, 0);
-	return (index + 1);
 }

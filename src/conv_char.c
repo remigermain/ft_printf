@@ -6,7 +6,7 @@
 /*   By: rgermain <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/01/04 16:37:51 by rgermain     #+#   ##    ##    #+#       */
-/*   Updated: 2019/01/04 16:37:52 by rgermain    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/01/04 19:38:26 by rgermain    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -38,14 +38,13 @@ static void		pf_putchar(t_pf *lst, WUCHAR_T c, WUCHAR_T *wc, int index)
 	put_prefix(lst, max, -FIELD, 0);
 }
 
-int				conv_char(t_pf *lst, char *str, int index)
+void			conv_char(t_pf *lst)
 {
 	WUCHAR_T	*wc;
 	size_t		verif;
 
-	lst_putoption(lst, str, index);
 	if (CONV != 'c' && CONV != 'C')
-		pf_putchar(lst, str[index], 0, 0);
+		pf_putchar(lst, CONV, 0, 0);
 	else
 	{
 		verif = va_arg(lst->va_copy, int);
@@ -57,5 +56,4 @@ int				conv_char(t_pf *lst, char *str, int index)
 		else
 			pf_putchar(lst, (char)verif, 0, 0);
 	}
-	return (index + 1);
 }

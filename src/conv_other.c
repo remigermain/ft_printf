@@ -64,13 +64,11 @@ static void	conv_help(void)
 	conv_help2();
 }
 
-int			conv_other(t_pf *lst, char *str, int index)
+void		conv_other(t_pf *lst)
 {
 	char	*other;
 
-	lst_putoption(lst, str, index);
 	other = va_arg(lst->va_copy, char*);
 	if (ft_strncmp(other, "help", 4) == 0)
 		conv_help();
-	return (index + 1);
 }
