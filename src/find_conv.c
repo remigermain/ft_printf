@@ -6,7 +6,7 @@
 /*   By: rgermain <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/11/11 15:09:25 by rgermain     #+#   ##    ##    #+#       */
-/*   Updated: 2019/01/04 15:38:17 by rgermain    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/01/04 19:54:49 by rgermain    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -35,7 +35,7 @@ int			find_conv(t_pf *lst, char *str, int ret)
 		conv_other(lst);
 	else if (CONV == '{')
 		conv_color(lst, str, 0 + 1);
-	else
+	else if (CONV != 0)
 		conv_char(lst);
 	return (ret);
 }
