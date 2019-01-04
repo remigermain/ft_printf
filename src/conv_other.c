@@ -13,31 +13,51 @@
 
 #include "ft_printf.h"
 
+static void conv_help2(void)
+{
+  ft_printf("%{T_DGREY} T_DGREY %{T_EOC}  %{T_LRED} T_LRED %{T_EOC} ");
+  ft_printf("%{T_LGREEN} T_LGREEN %{T_EOC}  %{T_LYELLOW} L_YELLOW %{T_EOC} ");
+  ft_printf("%{T_LBLUE} T_LBLUE %{T_EOC}  %{T_LPURPLE} T_LPURPLE %{T_EOC} ");
+  ft_printf("%{T_LCYAN} T_LCYAN %{T_EOC}");
+  ft_printf("\n\n   %%{B_COLOR} backgroud %%{B_EOC} for backgroud color\n");
+  ft_printf("    %{B_WHITE}  %{B_BLACK}  %{B_RED}  %{B_YELLOW}  %{B_BLUE}");
+  ft_printf("%{B_PURPLE}  %{B_CYAN}  %{B_GREY}  %{B_EOC}\n\n   %%{F_FORMAT}");
+  ft_printf(" FORMAT %%{F_EOC}  for special format\n");
+  ft_printf("   %{F_DEF} DEF %{F_EOC}  %{F_BOLD} BOLD %{F_EOC}");
+  ft_printf("   %{F_UDERLINE} UDERLINE %{F_EOC}  %{F_BLINK} BLINK %{F_EOC} ");
+  ft_printf(" %{F_REVERSE} REVERSE %{F_EOC}  %{F_INVISIBL} INVISIBLE %{F_EOC}");
+  ft_printf("\n\n   @  for name foction to next parameter\n\n\n");
+  ft_printf("%{T_YELLOW} [flags ]%{T_EOC} =  #, 0, -, +, \', space\n");
+  ft_printf("%{T_YELLOW} [field ]%{T_EOC} =  123456789 , *, $ \n");
+  ft_printf("%{T_YELLOW} [preci ]%{T_EOC} =  .\n%{T_YELLOW} [preci ]%{T_EOC}");
+  ft_printf(" =  123456789 , *, $ \n%{T_YELLOW} [lenght]%{T_EOC} =  h, hh, ");
+  ft_printf("l, ll, j, z, L(only for double)\n");
+}
+
 static void conv_help(void)
 {
-  ft_printf("%{blue}__________________\n|    FT_PRINTF    |\n|        by     ");
-  ft_printf("  |\n|   remi germain  |\n|                 |\n|  @Help_section ");
-  ft_printf(" |\n__________________\n%{eoc}  \nft_printf(%{grey}\"string\"");
-  ft_printf("%{eoc},...)\nft_dprintf(%{cyan}fd%{eoc}, %{grey}\"string\"%{eoc},");
-  ft_printf("...)\nft_snprintf(%{red}&wuchar_t%{eoc}, %{grey}\"string\"%{eoc}");
-  ft_printf("),...)\n  \n%{blue}[conversion specifier]%{eoc}\n\n   s/S/r     ");
-  ft_printf("for char &&   utf8 string && no printable string\n   c/C       f");
-  ft_printf("or char && utf8 char\n   i/I/d/D   for integer\n   u/U       for");
-  ft_printf(" unsigned integer  \n   b/B       for unsigned binary integer\n ");
-  ft_printf("  o/O       for unsigned octal integer\n   x/X       for unsigne");
-  ft_printf("d hexadecimal integer\n   p/P       forpointer\n   f/F       for");
-  ft_printf(" double integer\n   e/E       for double integer with exponent\n");
+  ft_printf(" %{T_BLUE}\n |    FT_PRINTF    |\n |        by");
+  ft_printf("       |\n |  %Remi GERMAIN   |\n |        %C       ", 0x1F60E);
+  ft_printf("|\n |  @Help_section  |\n\n");
+  ft_printf("%{T_EOC}  \n    ft_printf(%{T_LGREY}\"string\"%{T_EOC},...)\n");
+  ft_printf("    ft_dprintf(%{T_CYAN}fd%{T_EOC}, %{T_LGREY}\"string\"%{T_EOC}");
+  ft_printf(",...)\n    ft_snprintf(%{T_RED}&wuchar_t%{T_EOC}, ");
+  ft_printf("%{T_LGREY}\"string\"%{T_EOC}),...)\n  \n%{T_BLUE} [conversion sp");
+  ft_printf("ecifier]%{T_EOC}\n\n   s/S/r     for char &&   utf8 string && n");
+  ft_printf("o printable string\n   c/C       for char && utf8 char\n   i/I");
+  ft_printf("/d/D   for integer\n   u/U       for unsigned integer  \n   b/B ");
+  ft_printf("      for unsigned binary integer\n   o/O       for unsigned o");
+  ft_printf("ctal integer\n   x/X       for unsigned hexadecimal integer\n ");
+  ft_printf("  p/P       forpointer\n   f/F       for double integer\n   ");
+  ft_printf("e/E       for double integer with exponent\n");
   ft_printf("   g/G       for double integer witout ending zero digit \n   n ");
   ft_printf("        for assign to int* the Number of characters\n   ts      ");
-  ft_printf("  for print double char*\n\n%{blue}[extra]%{eoc}\n   %%{color} ");
-  ft_printf("%text %%{eoc}  for print color\n     %{white}white, %{black}blac");
-  ft_printf("k, %{red}red, %{green}green, %{yellow}yellow, %{blue}blue, ");
-  ft_printf("%{purple}purple, %{cyan}cyan, %{grey}grey%{eoc} \n\n   @  for na");
-  ft_printf("me foction to next parameter\n\n\n%{yellow}[flags ]%{eoc} =  #, ");
-  ft_printf("0, -, +, \', space\n%{yellow}[field ]%{eoc} =  123456789 , *, $ ");
-  ft_printf("\n%{yellow}[preci ]%{eoc} =  .\n%{yellow}[preci ]%{eoc} =  12345");
-  ft_printf("6789 , *, $ \n%{yellow}[lenght]%{eoc} =  h, hh, l, ll, j, z, L(o");
-  ft_printf("nly for double)\n");
+  ft_printf("  for print double char*\n\n%{T_BLUE} [extra]%{T_EOC}\n   ");
+  ft_printf("%%{T_COLOR} %text %%{T_EOC}  for print color\n      ");
+  ft_printf("%{T_WHITE}T_WHITE, %{T_BLACK}T_BLACK, %{T_RED}T_RED, ");
+  ft_printf("%{T_GREEN}T_GREEN, %{T_YELLOW}T_YELLOW, %{T_BLUE}T_BLUE ");
+  ft_printf("%{T_LGREY}T_PURPLE %{T_CYAN}T_CYAN %{T_LGREY}T_LGREY\n");
+  conv_help2();
 }
 
 int   conv_other(t_pf *lst, char *str, int index)

@@ -13,11 +13,9 @@
 
 #include "ft_printf.h"
 
-static size_t	ft_strlen_perc(char *str, size_t j)
+static size_t	strlen_perc(char *str)
 {
-	while (str[j] != '\0' && str[j] != '%')
-			j++;
-	return (j);
+	return ((*str && *str != '%') ? strlen_perc(str + 1) + 1 : 0);
 }
 
 static int ftprintf_base(char *str, t_pf *lst, size_t i, size_t j)
@@ -25,7 +23,7 @@ static int ftprintf_base(char *str, t_pf *lst, size_t i, size_t j)
 	va_copy(lst->va_copy, lst->va_lst);
 	while (str[i] != '\0' && lst->count != -1)
 	{
-		j = ft_strlen_perc(str + i, 0);
+		j = strlen_perc(str + i);
 		put_buff(lst, str + i, j, 0);
 		if (str[i + j] == '%')
 			i +=  find_conv(lst, (str + i + j), 1);
@@ -40,7 +38,7 @@ static int ftprintf_base(char *str, t_pf *lst, size_t i, size_t j)
 int			ft_sprintf(wuchar_t **dest, const char *format, ...)
 {
 	t_pf	*lst;
-	int			i;
+	int		i;
 
 	lst = lst_init();
 	va_start(lst->va_lst, format);
@@ -53,7 +51,7 @@ int			ft_sprintf(wuchar_t **dest, const char *format, ...)
 int			ft_dprintf(int fd, const char *format, ...)
 {
 	t_pf	*lst;
-	int			i;
+	int		i;
 
 	lst = lst_init();
 	va_start(lst->va_lst, format);
@@ -67,7 +65,7 @@ int			ft_dprintf(int fd, const char *format, ...)
 int			ft_printf(const char *format, ...)
 {
 	t_pf	*lst;
-	int			i;
+	int		i;
 
 	lst = lst_init();
 	va_start(lst->va_lst, format);

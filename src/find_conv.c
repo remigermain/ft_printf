@@ -18,18 +18,11 @@ static int	find_conv3(t_pf *lst, char *str, int index)
 	int t_index;
 
 	t_index = index;
-	if (str[index] == '+' || str[index] == '-')
-		index++;
-	else if (str[index] == ' ' || str[index] == '.')
-		index++;
-	else if (str[index] == '#' || str[index] == '$' ||
-			str[index] == '*')
-		index++;
-	else if (str[index] == 'l' || str[index] == 'h')
-		index++;
-	else if (str[index] == 'j' || str[index] == 'z')
-		index++;
-	else if (str[index] == 'L' || str[index] == 39)
+	if (str[index] == '+' || str[index] == '-' || str[index] == ' ' ||
+	str[index] == '.' || str[index] == '#' || str[index] == '$' ||
+	str[index] == '*' || str[index] == 'l' || str[index] == 'h' ||
+	str[index] == 'j' || str[index] == 'z' || str[index] == 'L' ||
+		str[index] == '\'')
 		index++;
 	while (ft_isdigit(str[index]))
 		index++;

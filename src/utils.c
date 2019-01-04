@@ -32,15 +32,7 @@ void ftprintf_error(t_pf *lst, char *str, size_t index)
 
 int	ulen_base(ulong_t nb, size_t base)
 {
-	int count;
-
-	count = 0;
-	while (nb >= base)
-	{
-		nb /= base;
-		count++;
-	}
-	return (count + 1);
+	return (1 + (nb >= base ? ulen_base(nb / base, base) : 0));
 }
 
 size_t len_pstrn(wuchar_t *str, size_t len, size_t index)
@@ -61,31 +53,4 @@ size_t len_pstrn(wuchar_t *str, size_t len, size_t index)
 		i++;
 	}
 	return (a);
-}
-
-int			conv_color(t_pf *lst, char *str, int index)
-{
-	int ret;
-
-	ret = 1;
-	if ((ft_strncmp(str + index, "white}", 6) == 0 && (ret = 6)) ||
-	(ft_strncmp(str + index, "eoc}", 4) == 0 && (ret = 4)))
-		put_buff(lst, white, ft_strlen(white), 0);
-	else if (ft_strncmp(str + index, "black}", 6) == 0 && (ret = 6))
-		put_buff(lst, black, ft_strlen(black), 0);
-	else if (ft_strncmp(str + index, "red}", 4) == 0 && (ret = 4))
-		put_buff(lst, red, ft_strlen(red), 0);
-	else if (ft_strncmp(str + index, "green}", 6) == 0 && (ret = 6))
-		put_buff(lst, green, ft_strlen(green), 0);
-	else if (ft_strncmp(str + index, "yellow}", 7) == 0 && (ret = 7))
-		put_buff(lst, yellow, ft_strlen(yellow), 0);
-	else if ((ft_strncmp(str + index, "blue}", 5) == 0) && (ret = 5))
-		put_buff(lst, blue, ft_strlen(blue), 0);
-	else if (ft_strncmp(str + index, "purple}", 7) == 0 && (ret = 7))
-		put_buff(lst, purple, ft_strlen(purple), 0);
-	else if (ft_strncmp(str + index, "cyan}", 5) == 0 && (ret = 5))
-		put_buff(lst, cyan, ft_strlen(cyan), 0);
-	else if (ft_strncmp(str + index, "grey}", 5) == 0 && (ret = 5))
-		put_buff(lst, grey, ft_strlen(grey), 0);
-	return (index + ret);
 }

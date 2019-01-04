@@ -23,6 +23,9 @@ int	main(int argc, char **argv)
 		a++;
 	if (argv[0][0] == 1)
 		a++;
-	ft_printf("%@", "help");
+ft_printf("ffffe %@  fe fe %d", "help", ft_strnlen("5651161616514", 4));
+
+
+
 	return (0);
 }

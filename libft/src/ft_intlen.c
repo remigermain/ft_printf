@@ -15,22 +15,9 @@
 
 int	ft_intlen_base(int nb, int base)
 {
-	int		count;
-	long	n;
-
-	count = 0;
-	n = (long)nb;
-	if (n < 0 && base == 10)
-	{
-		n = n * -1;
-		count++;
-	}
-	while (n >= base)
-	{
-		count++;
-		n = n / base;
-	}
-	return (count + 1);
+	if (nb < 0)
+		nb = -nb;
+	return (1 + (nb >= base ? ft_intlen_base(nb / base, base) : 0));
 }
 
 int	ft_intlen(int n)

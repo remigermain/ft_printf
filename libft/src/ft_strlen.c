@@ -15,40 +15,20 @@
 
 size_t	ft_strlen(const char *s)
 {
-	size_t count;
-
-	count = 0;
-	while (s[count] != '\0')
-		count++;
-	return (count);
+	return ((*s ? 1 + ft_strlen(s + 1) : 0));
 }
 
 size_t	ft_strnlen(const char *s, size_t max)
 {
-	size_t count;
-
-	count = 0;
-	while (s[count] != '\0' && count < max)
-		count++;
-	return (count);
+	return (((*s && max > 0) ? 1 + ft_strnlen(s + 1, max - 1) : 0));
 }
 
 size_t	ft_ustrlen(const unsigned char *s)
 {
-	size_t count;
-
-	count = 0;
-	while (s[count] != '\0')
-		count++;
-	return (count);
+	return ((*s ? 1 + ft_ustrlen(s + 1) : 0));
 }
 
 size_t	ft_ustrnlen(const unsigned char *s, size_t max)
 {
-	size_t count;
-
-	count = 0;
-	while (s[count] != '\0' && count < max)
-		count++;
-	return (count);
+	return (((*s != '\0' && max > 0) ? 1 + ft_ustrnlen(s + 1, max - 1) : 0));
 }

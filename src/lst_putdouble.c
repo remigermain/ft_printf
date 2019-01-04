@@ -40,7 +40,8 @@ static void	lst_putdouble_main(t_pf *lst, long double nb)
 {
 	if (lst->point == 0)
 		lst->preci = 6;
-	if ((lst->conv == 'f' || lst->conv == 'F') || (lst->conv == 'g' && lst->preci >= ulen_base(nb, lst->base)))
+	if ((lst->conv == 'f' || lst->conv == 'F') || (lst->conv == 'g' &&
+			lst->preci >= ulen_base(nb, lst->base)))
 	{
 		lst->ul_nb = (ulong_t)nb;
 		lst->fl_nb = nb - (ulong_t)nb;

@@ -13,6 +13,7 @@
 #ifndef FT_PRINTF_H
 # define FT_PRINTF_H
 # include "../libft/includes/libft.h"
+#include "color.h"
 # include <stdarg.h>
 # include <stdio.h>
 
@@ -24,18 +25,6 @@
 #define ABS(a)				(a < 0 ? -a : a)
 #define MAX(a, b)			(a < b ? b : a)
 #define MIN(a, b)			(a < b ? a : b)
-/*
-** color
-*/
-# define white 	"\033[0m"
-# define black  "\033[30m"
-# define red 		"\033[31m"
-# define green  "\033[32m"
-# define yellow "\033[33m"
-# define blue	  "\033[34m"
-# define purple "\033[35m"
-# define cyan	  "\033[36m"
-# define grey		"\033[37m"
 
 typedef struct	s_printf
 {
@@ -121,5 +110,5 @@ void			put_sign(t_pf *lst);
 **	debug.c
 */
 void			debug(t_pf *lst);
-void	pf_string(t_pf *lst, wuchar_t *str, wchar_t *wstr, int index);
+
 #endif
