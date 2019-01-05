@@ -23,7 +23,7 @@ static void	pf_puttab_back(t_pf *lst, int len, int b)
 	llen -= (((len % 10) == 0) ? 1 : 0);
 	if (PRECI == 1)
 	{
-		ret = ft_sprintf(&str, " {blue}%*s{eoc} |", llen, "\\0");
+		ret = ft_sprintf(&str, " %{T_BLUE}%*s%{T_EOC} |", llen, "\\0");
 		put_buff(lst, str, ret, 1);
 	}
 	while ((b + PRECI) < len)
@@ -41,7 +41,7 @@ static void	pf_puttab_end(t_pf *lst, int larg, int max)
 
 	if (PRECI == 1)
 	{
-		ret = ft_sprintf(&str, "\n[%.*d]| {blue}$NULL{eoc}", larg, max);
+		ret = ft_sprintf(&str, "\n[%.*d]| %{T_BLUE}$NULL%{T_EOC}", larg, max);
 		put_buff(lst, str, ret, 1);
 	}
 }

@@ -16,13 +16,12 @@
 # include "../libft/includes/libft.h"
 # include "color.h"
 # include <stdarg.h>
-# include <stdio.h>
+# include <errno.h>
 
 # define BUFF_PRINTF 128
 # define BUFF_FLOAT 256
 # define WUCHAR_T unsigned char
 # define ULONG_T unsigned long
-
 /*
 ** Macro divers
 */
@@ -72,7 +71,7 @@ typedef struct	s_printf
 	size_t			psign;
 	size_t			base;
 	size_t			lenght;
-	size_t			conv;
+	char 				conv;
 }				t_pf;
 
 /*
@@ -88,7 +87,6 @@ int				find_conv(t_pf *lst, char *str, int ret);
 ** fonctions des differentes convertion
 ** conv_*.c
 */
-void			conv_void(t_pf *lst);
 void			conv_char(t_pf *lst);
 void			conv_int(t_pf *lst);
 void			conv_string(t_pf *lst);
@@ -114,7 +112,7 @@ void			lst_putdouble(t_pf *lst);
 void			ftprintf_error(t_pf *lst, char *str, size_t index);
 int				ulen_base(ULONG_T nb, size_t base);
 size_t			len_pstrn(WUCHAR_T *str, size_t len, size_t index);
-int				conv_color(t_pf *lst, char *str, int index);
+int				conv_color(t_pf *lst, char *str);
 
 /*
 **	fonctions qui put les signes( - , + , 0x )

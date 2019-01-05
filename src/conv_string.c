@@ -89,7 +89,10 @@ void			conv_string(t_pf *lst)
 	}
 	else
 	{
-		ustr = (WUCHAR_T*)va_arg(lst->va_copy, char*);
+		if (CONV != 'm')
+			ustr = (WUCHAR_T*)va_arg(lst->va_copy, char*);
+		else
+			ustr = (WUCHAR_T*)strerror(errno);
 		if (ustr == NULL)
 			ustr = ft_strudup("(null)");
 		else

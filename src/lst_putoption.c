@@ -58,8 +58,6 @@ static int	lst_putflag_conv(t_pf *lst, char *str, int count)
 		LENGHT += 100;
 	else if (str[count] == 'z')
 		LENGHT += 1000;
-	else if (str[count] == 't')
-		LENGHT += 10000;
 	else if (str[count] == 'L')
 		LENGHT += 100000;
 	else

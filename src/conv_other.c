@@ -52,12 +52,13 @@ static void	conv_help(void)
 	ft_printf("   u/U       for unsigned integer  \n   b/B ");
 	ft_printf("      for unsigned binary integer\n   o/O       for unsigned o");
 	ft_printf("ctal integer\n   x/X       for unsigned hexadecimal integer\n ");
-	ft_printf("  p/P       for pointer\n   f/F       for double integer\n   ");
+	ft_printf("  p         for pointer\n   f/F       for double integer\n   ");
 	ft_printf("e/E       for double integer with exponent\n   ");
 	ft_printf("g/G       for double integer witout ending zero digit \n   n ");
-	ft_printf("        for assign to int* the Number of characters\n   ts   ");
+	ft_printf("        for assign to int* the Number of characters\n");
+	ft_printf("   m         for print errno values\n   ts   ");
 	ft_printf("     for print double char*\n\n%{T_BLUE} [extra]%{T_EOC}\n   ");
-	ft_printf("%%{T_COLOR} %text %%{T_EOC}  for print color\n      ");
+	ft_printf("%%{T_COLOR} %%text %%{T_EOC}  for print color\n      ");
 	ft_printf("%{T_WHITE}T_WHITE, %{T_BLACK}T_BLACK, %{T_RED}T_RED, ");
 	ft_printf("%{T_GREEN}T_GREEN, %{T_YELLOW}T_YELLOW, %{T_BLUE}T_BLUE ");
 	ft_printf("%{T_LGREY}T_PURPLE %{T_CYAN}T_CYAN %{T_LGREY}T_LGREY\n");

@@ -1,7 +1,8 @@
 #include "ft_printf.h"
-
+#include <stdio.h>
 int main()
 {
-  ft_printf("bonjour %#'0*.50lld apres\n", 42,4261665);
-  ft_printf("%");
+  //ft_printf("%@", "help");
+  ft_printf("%@", "help");
+  return (0);
 }
