@@ -20,14 +20,7 @@
 
 # define BUFF_PRINTF 128
 # define BUFF_FLOAT 256
-# define WUCHAR_T unsigned char
-# define ULONG_T unsigned long
-/*
-** Macro divers
-*/
-# define ABS(a)				(a < 0 ? -a : a)
-# define MAX(a, b)			(a < b ? b : a)
-# define MIN(a, b)			(a < b ? a : b)
+
 
 /*
 ** raccourcie list
@@ -52,11 +45,11 @@ typedef struct	s_printf
 	va_list			va_lst;
 	va_list			va_copy;
 	int				buff_count;
-	WUCHAR_T		buff[BUFF_PRINTF];
+	UCHAR		buff[BUFF_PRINTF];
 	int				count;
-	WUCHAR_T		*str;
-	ULONG_T			ul_nb;
-	ULONG_T			ful_nb;
+	UCHAR		*str;
+	ULONG			ul_nb;
+	ULONG			ful_nb;
 	long double		fl_nb;
 	int				exponent;
 	size_t			hash;
@@ -66,7 +59,7 @@ typedef struct	s_printf
 	size_t			local;
 	int				field;
 	size_t			point;
-	int				preci;
+	size_t			preci;
 	size_t			maj;
 	size_t			psign;
 	size_t			base;
@@ -80,7 +73,7 @@ typedef struct	s_printf
 */
 int				ft_printf(const char *str, ...);
 int				ft_dprintf(int fd, const char *str, ...);
-int				ft_sprintf(WUCHAR_T **dest, const char *format, ...);
+int				ft_sprintf(UCHAR **dest, const char *format, ...);
 int				find_conv(t_pf *lst, char *str, int ret);
 
 /*
@@ -110,19 +103,19 @@ void			lst_putdouble(t_pf *lst);
 **	utils.c
 */
 void			ftprintf_error(t_pf *lst, char *str, size_t index);
-int				ulen_base(ULONG_T nb, size_t base);
-size_t			len_pstrn(WUCHAR_T *str, size_t len, size_t index);
+int				ulen_base(ULONG nb, size_t base);
+size_t			len_pstrn(UCHAR *str, size_t len, size_t index);
 int				conv_color(t_pf *lst, char *str);
 
 /*
 **	fonctions qui put les signes( - , + , 0x )
 **			 ajoute les esapces et zero des precisions/field
-**				join le str entre eux && ULONG_T itoa avec local
+**				join le str entre eux && ULONG itoa avec local
 **	utils_put.c
 */
 void			convert_buff(t_pf *lst, void *tmp, size_t len);
 void			put_buff(t_pf *lst, void *tmp, size_t len, size_t index);
-void			put_itoa(t_pf *lst, ULONG_T n);
+void			put_itoa(t_pf *lst, ULONG n);
 void			put_prefix(t_pf *lst, int len, int nb, int point);
 void			put_sign(t_pf *lst);
 

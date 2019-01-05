@@ -13,15 +13,15 @@
 
 #include "ft_printf.h"
 
-static WUCHAR_T	*comv_pstr(t_pf *lst, WUCHAR_T *str, size_t len)
+static UCHAR	*comv_pstr(t_pf *lst, UCHAR *str, size_t len)
 {
-	WUCHAR_T	*new;
+	UCHAR	*new;
 	size_t		i;
 	size_t		j;
 
 	i = 0;
 	j = 0;
-	if (!(new = (WUCHAR_T*)malloc(sizeof(WUCHAR_T) * len + 1)))
+	if (!(new = (UCHAR*)malloc(sizeof(UCHAR) * len + 1)))
 		ftprintf_error(lst, "pf_putpstr", 1);
 	while (str[i] != '\0' && i < len)
 	{
@@ -39,22 +39,22 @@ static WUCHAR_T	*comv_pstr(t_pf *lst, WUCHAR_T *str, size_t len)
 	return (new);
 }
 
-static WUCHAR_T	*comv_wstr(t_pf *lst, wchar_t *wstr, size_t len)
+static UCHAR	*comv_wstr(t_pf *lst, wchar_t *wstr, size_t len)
 {
-	WUCHAR_T	*str;
+	UCHAR	*str;
 	size_t		i;
 	size_t		count;
 
 	i = 0;
 	count = 0;
-	if (!(str = (WUCHAR_T*)malloc(sizeof(WUCHAR_T) * nlen_wchar(wstr, len))))
+	if (!(str = (UCHAR*)malloc(sizeof(UCHAR) * nlen_wchar(wstr, len))))
 		ftprintf_error(lst, "comv_wstr", 1);
 	while (wstr[count] != '\0' && count < len && i < len)
 		convert_wchar(&str, wstr[count++], &i);
 	return (str);
 }
 
-void			pf_string(t_pf *lst, WUCHAR_T *str, wchar_t *wstr, int index)
+void			pf_string(t_pf *lst, UCHAR *str, wchar_t *wstr, int index)
 {
 	size_t	max;
 
@@ -76,7 +76,7 @@ void			pf_string(t_pf *lst, WUCHAR_T *str, wchar_t *wstr, int index)
 
 void			conv_string(t_pf *lst)
 {
-	WUCHAR_T	*ustr;
+	UCHAR	*ustr;
 	wchar_t		*wstr;
 
 	if ((LENGHT >= 10 && LENGHT <= 20) || CONV == 'S')
@@ -90,9 +90,9 @@ void			conv_string(t_pf *lst)
 	else
 	{
 		if (CONV != 'm')
-			ustr = (WUCHAR_T*)va_arg(lst->va_copy, char*);
+			ustr = (UCHAR*)va_arg(lst->va_copy, char*);
 		else
-			ustr = (WUCHAR_T*)strerror(errno);
+			ustr = (UCHAR*)strerror(errno);
 		if (ustr == NULL)
 			ustr = ft_strudup("(null)");
 		else

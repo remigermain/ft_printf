@@ -17,7 +17,7 @@ static void	pf_puttab_back(t_pf *lst, int len, int b)
 {
 	int			llen;
 	int			ret;
-	WUCHAR_T	*str;
+	UCHAR	*str;
 
 	llen = ulen_base(len, 10) + PRECI;
 	llen -= (((len % 10) == 0) ? 1 : 0);
@@ -36,7 +36,7 @@ static void	pf_puttab_back(t_pf *lst, int len, int b)
 
 static void	pf_puttab_end(t_pf *lst, int larg, int max)
 {
-	WUCHAR_T	*str;
+	UCHAR	*str;
 	int			ret;
 
 	if (PRECI == 1)
@@ -48,7 +48,7 @@ static void	pf_puttab_end(t_pf *lst, int larg, int max)
 
 static void	pf_puttab(t_pf *lst, char **tab, int len, int larg)
 {
-	WUCHAR_T	*str;
+	UCHAR	*str;
 	int			llen;
 	int			a;
 	int			b;
@@ -73,7 +73,7 @@ static void	pf_puttab(t_pf *lst, char **tab, int len, int larg)
 
 static void	pf_doublestring(t_pf *lst, char **tab, int len, int larg)
 {
-	WUCHAR_T	*str;
+	UCHAR	*str;
 	int			b;
 	int			ret;
 	int			llen;
@@ -97,7 +97,7 @@ static void	pf_doublestring(t_pf *lst, char **tab, int len, int larg)
 void		conv_tabstring(t_pf *lst)
 {
 	char		**tab;
-	WUCHAR_T	c;
+	UCHAR	c;
 
 	tab = va_arg(lst->va_copy, char**);
 	c = '\n';
@@ -105,7 +105,7 @@ void		conv_tabstring(t_pf *lst)
 		pf_doublestring(lst, tab, 0, 0);
 	while (*tab != NULL && POINT == 0)
 	{
-		put_buff(lst, (WUCHAR_T*)*tab, ft_strlen(*tab), 0);
+		put_buff(lst, (UCHAR*)*tab, ft_strlen(*tab), 0);
 		if (*tab++ != NULL)
 			put_buff(lst, &c, 1, 0);
 	}

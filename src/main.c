@@ -2,7 +2,6 @@
 #include <stdio.h>
 int main()
 {
-  //ft_printf("%@", "help");
   ft_printf("%@", "help");
   return (0);
 }

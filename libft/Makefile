@@ -30,7 +30,7 @@ SRC = ft_atoi.c ft_bzero.c ft_isalnum.c ft_isalpha.c ft_isascii.c ft_isdigit.c f
 	  ft_recursive_power.c ft_sort_integer_table.c ft_sqrt.c ft_strlcpy.c ft_strrev.c ft_swap.c ft_match.c ft_str_is_alpha.c \
 	  ft_str_is_lowercase.c ft_str_is_numeric.c  ft_str_is_printable.c ft_str_is_uppercase.c ft_strcapitalize.c ft_strlowcase.c \
 	  ft_itoa_base.c ft_isspace.c ft_isblank.c ft_iscntrl.c ft_isgraph.c ft_isxdigit.c ft_strupcase.c get_next_line.c ft_printtab.c \
-	  ft_strncpychr.c ft_strcpychr.c ft_intlen.c ft_minmax.c ft_putpstr_fd.c ft_countwchar.c
+	  ft_strncpychr.c ft_strcpychr.c ft_intlen.c ft_putpstr_fd.c ft_countwchar.c
 
 OBJ = $(SRC:.c=.o)
 

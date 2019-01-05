@@ -13,26 +13,26 @@
 
 #include "ft_printf.h"
 
-static void	lst_putdouble_pos(t_pf *lst, long double nb, ULONG_T coef)
+static void	lst_putdouble_pos(t_pf *lst, long double nb, ULONG coef)
 {
-	while (((coef * BASE) < (ULONG_T)nb) && nb != 0)
+	while (((coef * BASE) < (ULONG)nb) && nb != 0)
 	{
 		coef *= BASE;
 		EXPONENT++;
 	}
-	lst->ul_nb = (ULONG_T)nb / coef;
+	lst->ul_nb = (ULONG)nb / coef;
 	lst->ful_nb = nb - (lst->ul_nb * coef);
-	lst->fl_nb = nb - (ULONG_T)nb;
+	lst->fl_nb = nb - (ULONG)nb;
 }
 
-static void	lst_putdouble_neg(t_pf *lst, long double nb, ULONG_T coef)
+static void	lst_putdouble_neg(t_pf *lst, long double nb, ULONG coef)
 {
-	while (((ULONG_T)(coef * nb) <= 0) && nb != 0)
+	while (((ULONG)(coef * nb) <= 0) && nb != 0)
 	{
 		coef *= BASE;
 		EXPONENT--;
 	}
-	lst->ul_nb = (ULONG_T)(nb * coef);
+	lst->ul_nb = (ULONG)(nb * coef);
 	lst->fl_nb = (nb * coef) - lst->ul_nb;
 }
 
@@ -43,10 +43,10 @@ static void	lst_putdouble_main(t_pf *lst, long double nb)
 	if ((CONV == 'f' || CONV == 'F') || (CONV == 'g' &&
 			PRECI >= ulen_base(nb, BASE)))
 	{
-		lst->ul_nb = (ULONG_T)nb;
-		lst->fl_nb = nb - (ULONG_T)nb;
+		lst->ul_nb = (ULONG)nb;
+		lst->fl_nb = nb - (ULONG)nb;
 	}
-	else if ((ULONG_T)nb > 0)
+	else if ((ULONG)nb > 0)
 		lst_putdouble_pos(lst, nb, 1);
 	else
 		lst_putdouble_neg(lst, nb, 1);
@@ -69,8 +69,8 @@ void		lst_putdouble(t_pf *lst)
 	}
 	else if (nb >= 0 && SIGN == '+')
 		PSIGN = 2;
-	if ((ULONG_T)nb > 9223372036854775807)
-		lst->ul_nb = (ULONG_T)nb;
+	if ((ULONG)nb > 9223372036854775807)
+		lst->ul_nb = (ULONG)nb;
 	else
 		lst_putdouble_main(lst, nb);
 }

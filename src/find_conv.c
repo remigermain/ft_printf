@@ -12,7 +12,7 @@
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-
+#include <stdio.h>
 int			find_conv(t_pf *lst, char *str, int ret)
 {
 	ret = lst_putoption(lst, str, 1);

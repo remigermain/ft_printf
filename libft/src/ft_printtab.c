@@ -40,7 +40,7 @@ int		ft_maxlen_tab(char **tab, int index)
 	a = 0;
 	len = 0;
 	while (tab[a] != NULL)
-		len = ft_max2(len, ft_strlen(tab[a++]));
+		len = MAX(len, (int)ft_strlen(tab[a++]));
 	if (index == 1)
 		return (len);
 	return (a);

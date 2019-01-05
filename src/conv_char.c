@@ -13,19 +13,19 @@
 
 #include "ft_printf.h"
 
-static WUCHAR_T	*pf_convwchar(t_pf *lst, wchar_t wc)
+static UCHAR	*pf_convwchar(t_pf *lst, wchar_t wc)
 {
-	WUCHAR_T	*new;
+	UCHAR	*new;
 	size_t		a;
 
-	if (!(new = (WUCHAR_T*)malloc(len_wchar_single(wc) + 1)))
+	if (!(new = (UCHAR*)malloc(len_wchar_single(wc) + 1)))
 		ftprintf_error(lst, "pf_convwchar", 1);
 	a = 0;
 	convert_wchar(&new, wc, &a);
 	return (new);
 }
 
-static void		pf_putchar(t_pf *lst, WUCHAR_T c, WUCHAR_T *wc, int index)
+static void		pf_putchar(t_pf *lst, UCHAR c, UCHAR *wc, int index)
 {
 	size_t max;
 
@@ -40,7 +40,7 @@ static void		pf_putchar(t_pf *lst, WUCHAR_T c, WUCHAR_T *wc, int index)
 
 void			conv_char(t_pf *lst)
 {
-	WUCHAR_T	*wc;
+	UCHAR	*wc;
 	size_t		verif;
 
 	if (CONV != 'c' && CONV != 'C')

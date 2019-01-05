@@ -78,15 +78,12 @@ static int	lst_putdigit(t_pf *lst, char *str, int count, int *neg)
 	else if (ft_isdigit(str[count]) == 1 || str[count] == '*'
 			|| str[count] == '$')
 	{
-		if (ft_isdigit(str[count]) == 1)
-			nb_tmp = ft_atoi2(str + count, &count);
-		if (str[count] == '*' || str[count] == '$')
-		{
-			if (str[count] == '$')
-				lst_putdollar(lst, nb_tmp);
+		while (str[count] >= '0' && str[count] <= '9')
+			nb_tmp = (nb_tmp * 10) + (str[count++] - '0');
+		if (str[count] == '$')
+			lst_putdollar(lst, nb_tmp);
+		if ((str[count] == '*' || str[count] == '$') && (count++))
 			nb_tmp = va_arg(lst->va_copy, int);
-			count++;
-		}
 		if (POINT == 0)
 			FIELD = (nb_tmp * (*neg));
 		else

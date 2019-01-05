@@ -18,6 +18,11 @@
 # include <stdlib.h>
 # include <string.h>
 # define UCHAR unsigned char
+# define ULONG unsigned long
+
+# define ABS(a)				(a < 0 ? -a : a)
+# define MAX(a, b)			(a < b ? b : a)
+# define MIN(a, b)			(a < b ? a : b)
 
 typedef struct	s_list
 {
@@ -135,14 +140,9 @@ char			*ft_strcpychr(const char *str, int c);
 int				ft_intlen_base(int nb, int base);
 int				ft_intlen(int nb);
 char			**ft_createtab(int nb, char c);
-int				ft_abs(int nb);
-long int		ft_labs(long int nb);
-int				ft_max2(int nb1, int nb2);
-int				ft_min2(int nb1, int nb2);
 size_t			ft_strnlen(const char *str, size_t max);
 size_t			ft_ustrlen(const unsigned char *str);
 size_t			ft_ustrnlen(const unsigned char *str, size_t max);
-int				ft_atoi2(const char *str, int *count);
 int				len_wchar_single(wchar_t c);
 int				len_wchar(wchar_t *wstr);
 int				nlen_wchar(wchar_t *wstr, size_t len);

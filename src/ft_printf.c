@@ -36,7 +36,7 @@ static int		ftprintf_base(char *str, t_pf *lst, size_t i, size_t j)
 	return (lst->count + lst->buff_count);
 }
 
-int				ft_sprintf(WUCHAR_T **dest, const char *format, ...)
+int				ft_sprintf(UCHAR **dest, const char *format, ...)
 {
 	t_pf	*lst;
 	int		i;

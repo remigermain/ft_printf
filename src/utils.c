@@ -30,7 +30,7 @@ void	ftprintf_error(t_pf *lst, char *str, size_t index)
 	exit(0);
 }
 
-int		ulen_base(ULONG_T nb, size_t base)
+int		ulen_base(ULONG nb, size_t base)
 {
 	int count;
 
@@ -43,7 +43,7 @@ int		ulen_base(ULONG_T nb, size_t base)
 	return (count + 1);
 }
 
-size_t	len_pstrn(WUCHAR_T *str, size_t len, size_t index)
+size_t	len_pstrn(UCHAR *str, size_t len, size_t index)
 {
 	size_t i;
 	size_t a;
