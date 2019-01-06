@@ -6,7 +6,7 @@
 /*   By: rgermain <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/01/04 16:40:59 by rgermain     #+#   ##    ##    #+#       */
-/*   Updated: 2019/01/04 19:43:58 by rgermain    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/01/06 22:20:17 by rgermain    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -20,7 +20,6 @@
 
 # define BUFF_PRINTF 128
 # define BUFF_FLOAT 256
-
 
 /*
 ** raccourcie list
@@ -45,9 +44,9 @@ typedef struct	s_printf
 	va_list			va_lst;
 	va_list			va_copy;
 	int				buff_count;
-	UCHAR		buff[BUFF_PRINTF];
+	UCHAR			buff[BUFF_PRINTF];
 	int				count;
-	UCHAR		*str;
+	UCHAR			*str;
 	ULONG			ul_nb;
 	ULONG			ful_nb;
 	long double		fl_nb;
@@ -59,12 +58,12 @@ typedef struct	s_printf
 	size_t			local;
 	int				field;
 	size_t			point;
-	size_t			preci;
+	int				preci;
 	size_t			maj;
 	size_t			psign;
 	size_t			base;
 	size_t			lenght;
-	char 				conv;
+	char			conv;
 }				t_pf;
 
 /*
@@ -84,8 +83,9 @@ void			conv_char(t_pf *lst);
 void			conv_int(t_pf *lst);
 void			conv_string(t_pf *lst);
 void			conv_double(t_pf *lst);
-void			conv_tabstring(t_pf *lst);
 void			conv_other(t_pf *lst);
+int				conv_tabstring(t_pf *lst);
+int				conv_color(t_pf *lst, char *str);
 
 /*
 ** initialisation lst && fonction pour ajouter les differentes options
@@ -105,7 +105,6 @@ void			lst_putdouble(t_pf *lst);
 void			ftprintf_error(t_pf *lst, char *str, size_t index);
 int				ulen_base(ULONG nb, size_t base);
 size_t			len_pstrn(UCHAR *str, size_t len, size_t index);
-int				conv_color(t_pf *lst, char *str);
 
 /*
 **	fonctions qui put les signes( - , + , 0x )

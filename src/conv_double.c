@@ -119,7 +119,7 @@ static int	max_calc(t_pf *lst, int max)
 
 void		conv_double(t_pf *lst)
 {
-	UCHAR	*new;
+	UCHAR		*new;
 	int			ret;
 	int			max;
 	char		c;

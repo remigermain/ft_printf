@@ -6,13 +6,13 @@
 /*   By: rgermain <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/11/11 15:09:25 by rgermain     #+#   ##    ##    #+#       */
-/*   Updated: 2019/01/04 19:54:49 by rgermain    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/01/06 22:29:41 by rgermain    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-#include <stdio.h>
+
 int			find_conv(t_pf *lst, char *str, int ret)
 {
 	ret = lst_putoption(lst, str, 1);
@@ -21,9 +21,9 @@ int			find_conv(t_pf *lst, char *str, int ret)
 	else if (CONV == 'f' || CONV == 'F' || CONV == 'e' || CONV == 'E' ||
 			CONV == 'g' || CONV == 'G')
 		conv_double(lst);
-	else if (CONV == 't' && str[ret] == 's' && (ret++))
-			conv_tabstring(lst);
-	else if (CONV == 's' || CONV == 'S' || CONV == 'r' || CONV == 'm')
+	else if (CONV == 't' && str[ret] == 's')
+		ret += conv_tabstring(lst);
+	else if (CONV == 's' || CONV == 'S' || CONV == 'r')
 		conv_string(lst);
 	else if (CONV == 'd' || CONV == 'i' || CONV == 'D' || CONV == 'I' ||
 		CONV == 'x' || CONV == 'X' || CONV == 'o' || CONV == 'O' || CONV == 'u'

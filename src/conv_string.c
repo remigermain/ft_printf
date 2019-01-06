@@ -6,7 +6,7 @@
 /*   By: rgermain <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/01/04 16:38:13 by rgermain     #+#   ##    ##    #+#       */
-/*   Updated: 2019/01/04 16:38:14 by rgermain    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/01/06 22:29:25 by rgermain    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -16,8 +16,8 @@
 static UCHAR	*comv_pstr(t_pf *lst, UCHAR *str, size_t len)
 {
 	UCHAR	*new;
-	size_t		i;
-	size_t		j;
+	size_t	i;
+	size_t	j;
 
 	i = 0;
 	j = 0;
@@ -42,8 +42,8 @@ static UCHAR	*comv_pstr(t_pf *lst, UCHAR *str, size_t len)
 static UCHAR	*comv_wstr(t_pf *lst, wchar_t *wstr, size_t len)
 {
 	UCHAR	*str;
-	size_t		i;
-	size_t		count;
+	size_t	i;
+	size_t	count;
 
 	i = 0;
 	count = 0;
@@ -77,7 +77,7 @@ void			pf_string(t_pf *lst, UCHAR *str, wchar_t *wstr, int index)
 void			conv_string(t_pf *lst)
 {
 	UCHAR	*ustr;
-	wchar_t		*wstr;
+	wchar_t	*wstr;
 
 	if ((LENGHT >= 10 && LENGHT <= 20) || CONV == 'S')
 	{
@@ -91,8 +91,6 @@ void			conv_string(t_pf *lst)
 	{
 		if (CONV != 'm')
 			ustr = (UCHAR*)va_arg(lst->va_copy, char*);
-		else
-			ustr = (UCHAR*)strerror(errno);
 		if (ustr == NULL)
 			ustr = ft_strudup("(null)");
 		else

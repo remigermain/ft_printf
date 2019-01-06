@@ -6,7 +6,7 @@
 /*   By: rgermain <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/01/04 15:24:31 by rgermain     #+#   ##    ##    #+#       */
-/*   Updated: 2019/01/04 15:28:42 by rgermain    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/01/06 22:17:40 by rgermain    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -15,6 +15,7 @@
 
 static void	conv_help2(void)
 {
+	ft_printf("%{T_LGREY}T_PURPLE %{T_CYAN}T_CYAN %{T_LGREY}T_LGREY\n");
 	ft_printf("%{T_DGREY} T_DGREY %{T_EOC}  %{T_LRED} T_LRED %{T_EOC} ");
 	ft_printf("%{T_LGREEN} T_LGREEN %{T_EOC}  %{T_LYELLOW} L_YELLOW %{T_EOC} ");
 	ft_printf("%{T_LBLUE} T_LBLUE %{T_EOC}  %{T_LPURPLE} T_LPURPLE %{T_EOC} ");
@@ -61,7 +62,6 @@ static void	conv_help(void)
 	ft_printf("%%{T_COLOR} %%text %%{T_EOC}  for print color\n      ");
 	ft_printf("%{T_WHITE}T_WHITE, %{T_BLACK}T_BLACK, %{T_RED}T_RED, ");
 	ft_printf("%{T_GREEN}T_GREEN, %{T_YELLOW}T_YELLOW, %{T_BLUE}T_BLUE ");
-	ft_printf("%{T_LGREY}T_PURPLE %{T_CYAN}T_CYAN %{T_LGREY}T_LGREY\n");
 	conv_help2();
 }
 

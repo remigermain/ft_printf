@@ -6,7 +6,7 @@
 /*   By: rgermain <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/01/04 16:37:51 by rgermain     #+#   ##    ##    #+#       */
-/*   Updated: 2019/01/04 19:38:26 by rgermain    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/01/06 22:17:07 by rgermain    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -16,7 +16,7 @@
 static UCHAR	*pf_convwchar(t_pf *lst, wchar_t wc)
 {
 	UCHAR	*new;
-	size_t		a;
+	size_t	a;
 
 	if (!(new = (UCHAR*)malloc(len_wchar_single(wc) + 1)))
 		ftprintf_error(lst, "pf_convwchar", 1);
@@ -41,7 +41,7 @@ static void		pf_putchar(t_pf *lst, UCHAR c, UCHAR *wc, int index)
 void			conv_char(t_pf *lst)
 {
 	UCHAR	*wc;
-	size_t		verif;
+	size_t	verif;
 
 	if (CONV != 'c' && CONV != 'C')
 		pf_putchar(lst, CONV, 0, 0);

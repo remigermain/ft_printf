@@ -13,7 +13,7 @@
 
 #include "ft_printf.h"
 
-static size_t	strlen_perc(char *str, size_t j)
+static size_t	strlen_perc(const char *str, size_t j)
 {
 	while (str[j] != '\0' && str[j] != '%')
 		j++;
@@ -57,15 +57,10 @@ int				ft_dprintf(int fd, const char *format, ...)
 	lst = lst_init();
 	va_start(lst->va_lst, format);
 	i = ftprintf_base((char*)format, lst, 0, 0);
-	if (lst->count == 0)
-		write(fd, lst->buff, lst->buff_count);
-	else if (lst->buff_count == 0)
+	if (lst->count != 0)
 		write(fd, lst->str, lst->count);
-	else
-	{
-		write(fd, lst->str, lst->count);
+	if (lst->buff_count != 0)
 		write(fd, lst->buff, lst->buff_count);
-	}
 	if (lst->str != NULL)
 		free(lst->str);
 	free(lst->str);
@@ -81,15 +76,10 @@ int				ft_printf(const char *format, ...)
 	lst = lst_init();
 	va_start(lst->va_lst, format);
 	i = ftprintf_base((char*)format, lst, 0, 0);
-	if (lst->count == 0)
-		write(1, lst->buff, lst->buff_count);
-	else if (lst->buff_count == 0)
+	if (lst->count != 0)
 		write(1, lst->str, lst->count);
-	else
-	{
-		write(1, lst->str, lst->count);
+	if (lst->buff_count != 0)
 		write(1, lst->buff, lst->buff_count);
-	}
 	if (lst->str != NULL)
 		free(lst->str);
 	free(lst);

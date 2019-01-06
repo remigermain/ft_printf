@@ -32,15 +32,7 @@ void	ftprintf_error(t_pf *lst, char *str, size_t index)
 
 int		ulen_base(ULONG nb, size_t base)
 {
-	int count;
-
-	count = 0;
-	while (nb >= base)
-	{
-		nb /= base;
-		count++;
-	}
-	return (count + 1);
+	return (nb >= base ? ulen_base(nb / base, base) + 1 : 1);
 }
 
 size_t	len_pstrn(UCHAR *str, size_t len, size_t index)
