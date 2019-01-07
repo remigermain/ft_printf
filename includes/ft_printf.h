@@ -6,7 +6,7 @@
 /*   By: rgermain <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/01/04 16:40:59 by rgermain     #+#   ##    ##    #+#       */
-/*   Updated: 2019/01/06 22:20:17 by rgermain    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/01/07 02:35:22 by rgermain    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -16,8 +16,7 @@
 # include "../libft/includes/libft.h"
 # include "color.h"
 # include <stdarg.h>
-# include <errno.h>
-
+#include <stdio.h>
 # define BUFF_PRINTF 128
 # define BUFF_FLOAT 256
 

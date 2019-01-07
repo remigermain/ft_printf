@@ -6,7 +6,7 @@
 /*   By: rgermain <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/01/04 16:38:43 by rgermain     #+#   ##    ##    #+#       */
-/*   Updated: 2019/01/04 16:38:44 by rgermain    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/01/07 02:36:05 by rgermain    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -62,15 +62,20 @@ void		lst_putdouble(t_pf *lst)
 		nb = va_arg(lst->va_copy, long double);
 	else
 		nb = (long double)va_arg(lst->va_copy, double);
-	if (nb < 0)
+	if ((1.0 / 0.0) == nb || (-1.0 / 0.0) == nb)
+		put_buff(lst, (MAJ == 1 ? "INF" : "inf"), 3, 0);
+	else if (nb != nb)
+		put_buff(lst, (MAJ == 1 ? "NAN" : "nan"), 3, 0);
+	else 
 	{
-		nb = -nb;
-		PSIGN = 1;
-	}
-	else if (nb >= 0 && SIGN == '+')
-		PSIGN = 2;
-	if ((ULONG)nb > 9223372036854775807)
-		lst->ul_nb = (ULONG)nb;
-	else
 		lst_putdouble_main(lst, nb);
+		if (nb < 0)
+		{
+			nb = -nb;
+			PSIGN = 1;
+		}
+		else if (nb >= 0 && SIGN == '+')
+			PSIGN = 2;
+		conv_double(lst);
+	}
 }

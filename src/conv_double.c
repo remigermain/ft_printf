@@ -6,7 +6,7 @@
 /*   By: rgermain <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/01/04 16:38:32 by rgermain     #+#   ##    ##    #+#       */
-/*   Updated: 2019/01/04 19:38:57 by rgermain    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/01/07 02:35:42 by rgermain    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -102,18 +102,13 @@ static int	max_calc(t_pf *lst, int max)
 		else if (FIELD < 0)
 			FIELD++;
 	}
-	if (lst->ul_nb > 9223372036854775807)
-		max = 3;
-	else
-	{
-		if ((CONV == 'g' || CONV == 'G') && lst->ul_nb != 0)
-			PRECI = (PRECI == 0 ? 0 : PRECI - 1);
-		max = ulen_base(lst->ul_nb, BASE) + PRECI;
-		max += (PSIGN != 0 ? 1 : 0);
-		max += ((POINT == 0 || PRECI > 0) ? 1 : 0);
-		if (CONV == 'e' || CONV == 'E')
-			max += 2 + MAX(ulen_base(ABS(EXPONENT), BASE), 2);
-	}
+	if ((CONV == 'g' || CONV == 'G') && lst->ul_nb != 0)
+		PRECI = (PRECI == 0 ? 0 : PRECI - 1);
+	max = ulen_base(lst->ul_nb, BASE) + PRECI;
+	max += (PSIGN != 0 ? 1 : 0);
+	max += ((POINT == 0 || PRECI > 0) ? 1 : 0);
+	if (CONV == 'e' || CONV == 'E')
+		max += 2 + MAX(ulen_base(ABS(EXPONENT), BASE), 2);
 	return (max);
 }
 
@@ -125,17 +120,13 @@ void		conv_double(t_pf *lst)
 	char		c;
 
 	max = 0;
-	lst_putdouble(lst);
 	max = max_calc(lst, 0);
 	if (ZERO == 1)
 		put_sign(lst);
 	put_prefix(lst, max, FIELD, ZERO);
 	if (ZERO == 0)
 		put_sign(lst);
-	if (lst->ul_nb > 9223372036854775807)
-		put_buff(lst, ft_ustrdup((UCHAR*)("nan")), 3, 1);
-	else
-		assign_double(lst, 0, 0);
+	assign_double(lst, 0, 0);
 	if (CONV == 'e' || CONV == 'E')
 	{
 		c = (MAJ == 1 ? 'E' : 'e');
