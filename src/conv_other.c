@@ -6,12 +6,28 @@
 /*   By: rgermain <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/01/04 15:24:31 by rgermain     #+#   ##    ##    #+#       */
-/*   Updated: 2019/01/06 22:17:40 by rgermain    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/01/07 15:46:55 by rgermain    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
+
+static void	conv_error(t_pf *lst)
+{
+	char *name;
+	char *str;
+
+	name = va_arg(lst->va_copy, char*);
+	str = va_arg(lst->va_copy, char*);
+	ft_putstr_fd("\n  / \\    WARNING\n / | \\    ", 2);
+	ft_putstr_fd(name, 2);
+	ft_putstr_fd("\n/  o  \\\n-------\n         [", 2);
+	ft_putstr_fd(str, 2);
+	ft_putstr_fd("]     \n\n", 2);
+	if (FIELD == 1)
+		exit(0);
+}
 
 static void	conv_help2(void)
 {
@@ -72,4 +88,6 @@ void		conv_other(t_pf *lst)
 	other = va_arg(lst->va_copy, char*);
 	if (ft_strncmp(other, "help", 4) == 0)
 		conv_help();
+	else if (ft_strncmp(other, "error", 5) == 0)
+		conv_error(lst);
 }
