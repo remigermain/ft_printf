@@ -6,7 +6,7 @@
 /*   By: rgermain <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/01/04 16:38:43 by rgermain     #+#   ##    ##    #+#       */
-/*   Updated: 2019/01/07 02:36:05 by rgermain    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/01/07 04:13:37 by rgermain    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -56,7 +56,7 @@ static void	lst_putdouble_main(t_pf *lst, long double nb)
 
 void		lst_putdouble(t_pf *lst)
 {
-	long double nb;
+	long double	nb;
 
 	if (LENGHT == 100000)
 		nb = va_arg(lst->va_copy, long double);
@@ -66,7 +66,10 @@ void		lst_putdouble(t_pf *lst)
 		put_buff(lst, (MAJ == 1 ? "INF" : "inf"), 3, 0);
 	else if (nb != nb)
 		put_buff(lst, (MAJ == 1 ? "NAN" : "nan"), 3, 0);
-	else 
+	else if (PRECI >= BUFF_FLOAT ||
+			(PRECI + ulen_base((ULONG)nb, lst->base)) >= BUFF_FLOAT)
+		ERROR(lst, "can't print double , is to larg !", 2);
+	else
 	{
 		lst_putdouble_main(lst, nb);
 		if (nb < 0)
@@ -76,6 +79,6 @@ void		lst_putdouble(t_pf *lst)
 		}
 		else if (nb >= 0 && SIGN == '+')
 			PSIGN = 2;
-		conv_double(lst);
+		conv_double(lst, (lst->maj == 1 ? 'E' : 'e'), 0);
 	}
 }
