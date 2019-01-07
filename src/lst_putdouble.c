@@ -6,7 +6,7 @@
 /*   By: rgermain <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/01/04 16:38:43 by rgermain     #+#   ##    ##    #+#       */
-/*   Updated: 2019/01/07 04:13:37 by rgermain    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/01/07 04:26:10 by rgermain    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -71,7 +71,6 @@ void		lst_putdouble(t_pf *lst)
 		ERROR(lst, "can't print double , is to larg !", 2);
 	else
 	{
-		lst_putdouble_main(lst, nb);
 		if (nb < 0)
 		{
 			nb = -nb;
@@ -79,6 +78,7 @@ void		lst_putdouble(t_pf *lst)
 		}
 		else if (nb >= 0 && SIGN == '+')
 			PSIGN = 2;
+		lst_putdouble_main(lst, nb);
 		conv_double(lst, (lst->maj == 1 ? 'E' : 'e'), 0);
 	}
 }
