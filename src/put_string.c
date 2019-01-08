@@ -6,7 +6,7 @@
 /*   By: rgermain <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/01/04 16:39:10 by rgermain     #+#   ##    ##    #+#       */
-/*   Updated: 2019/01/06 22:15:34 by rgermain    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/01/08 16:39:06 by rgermain    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -24,7 +24,8 @@ void	convert_buff(t_pf *lst, void *tmp, size_t len)
 	new[lst->count + lst->buff_count + len + 1] = '\0';
 	ft_memcpy(new, lst->str, lst->count);
 	ft_memcpy(new + lst->count, lst->buff, lst->buff_count);
-	ft_memcpy(new + lst->count + lst->buff_count, tmp, len);
+	if (len > 0)
+		ft_memcpy(new + lst->count + lst->buff_count, tmp, len);
 	if (lst->str != NULL)
 		free(lst->str);
 	lst->str = new;
