@@ -6,12 +6,13 @@
 /*   By: rgermain <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/01/04 16:39:28 by rgermain     #+#   ##    ##    #+#       */
-/*   Updated: 2019/01/07 16:28:20 by rgermain    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/01/08 16:29:04 by rgermain    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
+#include <stdio.h>
 
 static void	pf_puttab_back(t_pf *lst, int len, int b)
 {
@@ -56,17 +57,20 @@ static void	pf_puttab(t_pf *lst, char **tab, int len, int larg)
 
 	llen = ulen_base(len, 10) + PRECI;
 	llen -= (((len % 10) == 0) ? 1 : 0);
-	a = -1;
-	while (tab[++a] != NULL && (b = -1))
+	a = 0;
+	while (tab[a] != NULL)
 	{
+		b = 0;
 		ret = ft_sprintf(&str, "\n[%.*d]|", larg, a);
 		put_buff(lst, str, ret, 1);
-		while (tab[a][++b] != '\0')
+		while (tab[a][b] != '\0')
 		{
 			ret = ft_sprintf(&str, " %*C |", llen, tab[a][b]);
 			put_buff(lst, str, ret, 1);
+			b++;
 		}
 		pf_puttab_back(lst, len, b);
+		a++;
 	}
 	pf_puttab_end(lst, larg, ft_maxlen_tab(tab, 0));
 }

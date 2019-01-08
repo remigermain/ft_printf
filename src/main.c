@@ -2,8 +2,8 @@
 #include "ft_printf.h"
 #include <math.h>
 
-int main()
-{
+int main(int argc, char **argv)
+{/*
 	int a = 0;
 
 long double f1 = 48656568.256479123456789123456789;
@@ -116,7 +116,8 @@ double f3 = 456.45362;
 
 
 
-
+*/
+	ft_printf("%.1ts\n", argv);
 
 
 	return (0);
