@@ -6,7 +6,7 @@
 /*   By: rgermain <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/01/04 16:38:13 by rgermain     #+#   ##    ##    #+#       */
-/*   Updated: 2019/01/07 01:55:24 by rgermain    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/01/31 15:54:22 by rgermain    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -22,7 +22,7 @@ static UCHAR	*comv_pstr(t_pf *lst, UCHAR *str, size_t len)
 	i = 0;
 	j = 0;
 	if (!(new = (UCHAR*)malloc(sizeof(UCHAR) * len + 1)))
-		ftprintf_error(lst, "pf_putpstr", 1);
+		ERROR(lst, "pf_putpstr", 1);
 	while (str[i] != '\0' && i < len)
 	{
 		if (str[i] == '\n')
@@ -48,7 +48,7 @@ static UCHAR	*comv_wstr(t_pf *lst, wchar_t *wstr, size_t len)
 	i = 0;
 	count = 0;
 	if (!(str = (UCHAR*)malloc(sizeof(UCHAR) * nlen_wchar(wstr, len))))
-		ftprintf_error(lst, "comv_wstr", 1);
+		ERROR(lst, "comv_wstr", 1);
 	while (wstr[count] != '\0' && count < len && i < len)
 		convert_wchar(&str, wstr[count++], &i);
 	return (str);
@@ -89,11 +89,16 @@ void			conv_string(t_pf *lst)
 	}
 	else
 	{
-		ustr = (UCHAR*)va_arg(lst->va_copy, char*);
-		if (ustr == NULL)
-			ustr = ft_strudup("(null)");
+		if (CONV == 'm')
+			ustr = ft_strudup(strerror(errno));
 		else
-			ustr = ft_ustrdup(ustr);
+		{
+			ustr = (UCHAR*)va_arg(lst->va_copy, char*);
+			if (ustr == NULL)
+				ustr = ft_strudup("(null)");
+			else
+				ustr = ft_ustrdup(ustr);
+		}
 		pf_string(lst, ustr, NULL, (CONV == 'r' ? 0 : 1));
 	}
 }

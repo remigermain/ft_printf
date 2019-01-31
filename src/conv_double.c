@@ -6,14 +6,14 @@
 /*   By: rgermain <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/01/04 16:38:32 by rgermain     #+#   ##    ##    #+#       */
-/*   Updated: 2019/01/07 04:14:39 by rgermain    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/01/31 18:21:49 by rgermain    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-static void	remove_zero(t_pf *lst, ULONG nb[BUFF_FLOAT], int i, size_t index)
+static void	remove_zero(t_pf *lst, ULONG *nb, int i, size_t index)
 {
 	if ((CONV == 'g' || CONV == 'G') && (index == 1 || index == 3))
 	{
@@ -40,7 +40,7 @@ static void	remove_zero(t_pf *lst, ULONG nb[BUFF_FLOAT], int i, size_t index)
 	}
 }
 
-static void	put_double(t_pf *lst, ULONG nb[BUFF_FLOAT], int i, int max)
+static void	roundup_double(t_pf *lst, ULONG *nb, int i, int max)
 {
 	remove_zero(lst, nb, 1, 3);
 	i = PRECI + 1;
@@ -58,7 +58,7 @@ static void	put_double(t_pf *lst, ULONG nb[BUFF_FLOAT], int i, int max)
 	remove_zero(lst, nb, 1, 2);
 }
 
-static void	assign_double(t_pf *lst, ULONG nb[BUFF_FLOAT], size_t i, int j)
+static void	assign_double(t_pf *lst, ULONG *nb, size_t i, int j)
 {
 	int		preci;
 	size_t	verif;
@@ -80,12 +80,12 @@ static void	assign_double(t_pf *lst, ULONG nb[BUFF_FLOAT], size_t i, int j)
 		lst->fl_nb -= (int)lst->fl_nb;
 		preci--;
 	}
-	put_double(lst, nb, 0, 0);
+	roundup_double(lst, nb, 0, 0);
 }
 
 static int	max_calc(t_pf *lst, int max)
 {
-	if (SPACE == 1 && SIGN != '+' && PSIGN == 0)
+	if (SPACE == 1 && SIGN != '+' && ft_strlen(PSIGN) == 0)
 	{
 		put_prefix(lst, 0, 1, 0);
 		if (FIELD > 0)
@@ -94,7 +94,7 @@ static int	max_calc(t_pf *lst, int max)
 			FIELD++;
 	}
 	max = ulen_base(lst->ul_nb, BASE) + PRECI;
-	max += (PSIGN != 0 ? 1 : 0);
+	max += ft_strlen(PSIGN);
 	if (!((CONV == 'g' || CONV == 'G') && PRECI == 0))
 		max += ((POINT == 0 || PRECI > 0) ? 1 : 0);
 	if (CONV == 'e' || CONV == 'E' || ((CONV == 'g' || CONV == 'G') &&
@@ -103,9 +103,8 @@ static int	max_calc(t_pf *lst, int max)
 	return (max);
 }
 
-void		conv_double(t_pf *lst, char c, int i)
+void		conv_double(t_pf *lst, ULONG *nb, int i)
 {
-	ULONG			nb[BUFF_FLOAT];
 	unsigned char	*new;
 	int				max;
 
@@ -115,10 +114,10 @@ void		conv_double(t_pf *lst, char c, int i)
 	assign_double(lst, nb, 0, 0);
 	max = max_calc(lst, 0);
 	if (ZERO == 1)
-		put_sign(lst);
+		put_buff(lst, PSIGN, ft_strlen(PSIGN), 0);
 	put_prefix(lst, max, FIELD, ZERO);
 	if (ZERO == 0)
-		put_sign(lst);
+		put_buff(lst, PSIGN, ft_strlen(PSIGN), 0);
 	put_itoa(lst, nb[i++]);
 	if (PRECI > 0)
 		put_buff(lst, ".", 1, 0);
@@ -127,7 +126,7 @@ void		conv_double(t_pf *lst, char c, int i)
 	if (CONV == 'e' || CONV == 'E' || ((CONV == 'g' || CONV == 'G') &&
 				PRECI != 0 && (EXPONENT < -4 || EXPONENT >= PRECI)))
 	{
-		i = ft_sprintf(&new, "%c%+.2d", c, EXPONENT);
+		i = ft_sprintf(&new, "%c%+.2d", (MAJ == 1 ? 'E' : 'e'), EXPONENT);
 		put_buff(lst, new, i, 1);
 	}
 }

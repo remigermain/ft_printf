@@ -6,7 +6,7 @@
 /*   By: rgermain <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/10/07 18:10:38 by rgermain     #+#   ##    ##    #+#       */
-/*   Updated: 2019/01/04 15:59:09 by rgermain    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/01/31 18:58:00 by rgermain    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -19,6 +19,8 @@
 # include <string.h>
 # define UCHAR unsigned char
 # define ULONG unsigned long
+# define MINT char
+# define MUINT unsigned char
 
 # define ABS(a)				(a < 0 ? -a : a)
 # define MAX(a, b)			(a < b ? b : a)

@@ -6,7 +6,7 @@
 /*   By: rgermain <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/01/04 16:39:10 by rgermain     #+#   ##    ##    #+#       */
-/*   Updated: 2019/01/08 16:39:06 by rgermain    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/01/31 17:54:09 by rgermain    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -20,7 +20,7 @@ void	convert_buff(t_pf *lst, void *tmp, size_t len)
 
 	len_malloc = lst->count + lst->buff_count + len + 1;
 	if ((new = (UCHAR*)ft_memalloc(len_malloc)) == NULL)
-		ftprintf_error(lst, "comvert_buff", 1);
+		ERROR(lst, "comvert_buff", 1);
 	new[lst->count + lst->buff_count + len + 1] = '\0';
 	ft_memcpy(new, lst->str, lst->count);
 	ft_memcpy(new + lst->count, lst->buff, lst->buff_count);
@@ -83,23 +83,11 @@ void	put_prefix(t_pf *lst, int len, int nb, int point)
 	if ((llen + lst->buff_count) >= BUFF_PRINTF)
 	{
 		ft_memset(tmp, (point == 1 ? '0' : ' '), llen);
-		put_buff(lst, tmp, llen, 0);
+		convert_buff(lst, tmp, llen);
 	}
 	else
 	{
 		ft_memset(lst->buff + lst->buff_count, (point == 1 ? '0' : ' '), llen);
 		lst->buff_count += llen;
 	}
-}
-
-void	put_sign(t_pf *lst)
-{
-	if (PSIGN == 1)
-		put_buff(lst, "-", 1, 0);
-	else if (PSIGN == 2)
-		put_buff(lst, "+", 1, 0);
-	else if (PSIGN == 3)
-		put_buff(lst, (MAJ == 1 ? "0X" : "0x"), 2, 0);
-	else if (PSIGN == 4)
-		put_buff(lst, ".", 1, 0);
 }

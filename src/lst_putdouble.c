@@ -6,7 +6,7 @@
 /*   By: rgermain <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/01/04 16:38:43 by rgermain     #+#   ##    ##    #+#       */
-/*   Updated: 2019/01/07 04:26:10 by rgermain    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/01/31 16:35:43 by rgermain    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -38,6 +38,13 @@ static void	lst_putdouble_neg(t_pf *lst, long double nb, ULONG coef)
 
 static void	lst_putdouble_main(t_pf *lst, long double nb)
 {
+	if (nb < 0)
+	{
+		nb = -nb;
+		PSIGN = "-";
+	}
+	else if (nb >= 0 && SIGN == '+')
+		PSIGN = "+";
 	if (POINT == 0)
 		PRECI = 6;
 	if ((CONV == 'f' || CONV == 'F') || (CONV == 'g' &&
@@ -57,6 +64,7 @@ static void	lst_putdouble_main(t_pf *lst, long double nb)
 void		lst_putdouble(t_pf *lst)
 {
 	long double	nb;
+	ULONG		*tab_nb;
 
 	if (LENGHT == 100000)
 		nb = va_arg(lst->va_copy, long double);
@@ -66,19 +74,12 @@ void		lst_putdouble(t_pf *lst)
 		put_buff(lst, (MAJ == 1 ? "INF" : "inf"), 3, 0);
 	else if (nb != nb)
 		put_buff(lst, (MAJ == 1 ? "NAN" : "nan"), 3, 0);
-	else if (PRECI >= BUFF_FLOAT ||
-			(PRECI + ulen_base((ULONG)nb, lst->base)) >= BUFF_FLOAT)
-		ERROR(lst, "can't print double , is to larg !", 2);
 	else
 	{
-		if (nb < 0)
-		{
-			nb = -nb;
-			PSIGN = 1;
-		}
-		else if (nb >= 0 && SIGN == '+')
-			PSIGN = 2;
 		lst_putdouble_main(lst, nb);
-		conv_double(lst, (lst->maj == 1 ? 'E' : 'e'), 0);
+		if (!(tab_nb = (ULONG*)ft_memalloc(sizeof(ULONG) *
+						(PRECI + 2 + ulen_base(lst->ul_nb, BASE)))))
+			ERROR(lst, "lst_putdouble", 1);
+		conv_double(lst, tab_nb, 0);
 	}
 }

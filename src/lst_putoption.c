@@ -6,7 +6,7 @@
 /*   By: rgermain <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/01/04 16:26:12 by rgermain     #+#   ##    ##    #+#       */
-/*   Updated: 2019/01/04 19:39:12 by rgermain    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/01/31 16:45:13 by rgermain    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -30,6 +30,11 @@ static void	lst_undefined(t_pf *lst)
 		LOCAL = 0;
 	if (CONV == 's' || CONV == 'S')
 		PRECI = ABS(PRECI);
+	if (HASH == 1 && (CONV == 'u' || CONV == 'U'))
+		HASH = 0;
+	if (SPACE == 1 && (CONV == 'o' || CONV == 'O' ||
+				CONV == 'x' || CONV == 'X'))
+		SPACE = 0;
 }
 
 static void	lst_base(t_pf *lst)
